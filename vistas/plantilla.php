@@ -3,6 +3,7 @@
    Se llama a la clase ControladorPagina para imprimir la información de la página web 
 **/
 $pagina_web = ControladorPagina::ctrMostrarPagina();
+
 /**
     En esta parte se colocan las secciones de cabecera de la página web
  **/
