@@ -124,6 +124,16 @@ button:focus {
     letter-spacing: 1px;
 }
 
+.btn-acopi-main {
+    color: #FFFFFF;
+    border: 2px solid transparent;
+    background-color: #152452;
+    font-size: 15px;
+    transition: all 0.5s;
+    border-radius: 3px;
+    letter-spacing: 1px;
+}
+
 .btn-outline-white:hover,
 .btn-outline-white:focus,
 .btn-outline-white:active,
@@ -364,10 +374,19 @@ button:focus {
     background-position: center center;
 }
 
-.bg-home-2-1{
+.bg-home-3{
     background-image: url(../images/vallenato.png);
     background-position: center center;
 }
+
+.bg-home-3-1{
+    background-image: url(../images/caja-agraria.png);
+    background-position: center center;
+}
+/*.bg-home-2-1{
+    background-image: url(../images/vallenato.png);
+    background-position: center center;
+}*/
 
 .bg-home-videos{
     background-image: url(../images/fondo-videos.png);
@@ -397,7 +416,7 @@ button:focus {
 
 /* start home-3 */
 
-.home-img-3 {
+/*.home-img-3 {
     position: relative;
     top: 80px;
     z-index: 1;
@@ -409,11 +428,11 @@ button:focus {
     padding-top: 50px;
     position: relative;
     background-position: center center;
-}
+}+/
 
 /* start home-3-1 */
 
-.home-img-3-1 {
+/*.home-img-3-1 {
     position: relative;
     top: 80px;
     z-index: 1;
@@ -425,7 +444,7 @@ button:focus {
     padding-top: 50px;
     position: relative;
     background-position: center center;
-}
+} */
 
 /* start home-dinamica*/
 
@@ -488,7 +507,7 @@ button:focus {
 
 
 .bg-home-7{
-     background-image: url(../images/bg-1.jpg);
+     background-image: url(../images/noticias/1.jpeg);
     background-size: cover;
     height: 100vh;
     position: relative;
@@ -1116,3 +1135,4 @@ textarea.form-control {
 .mision-desc {
     color: #000000;
 }
+

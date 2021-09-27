@@ -73,20 +73,14 @@
                     <a href="#blog">Blog</a>
                 </li>
                 <li class="has-submenu">
-                    <a href="#pages">Iniciar sesión</a>
+                    <a href="#pages">Cuenta</a>
                     <span class="menu-arrow"></span>
                     <ul class="submenu">
                         <li>
-                            <a href="about.html">About us</a>
+                            <a href="index.php?pagina=ingreso">Iniciar sesión</a>
                         </li>
                         <li>
-                            <a href="blog-standard.html">Blog standard</a>
-                        </li>
-                        <li>
-                            <a href="blog-post.html">Blog post</a>
-                        </li>
-                        <li>
-                            <a href="contact.html">Contact us</a>
+                            <a href="blog-standard.html">Solicitar cuenta.</a>
                         </li>
                     </ul>
                 </li>

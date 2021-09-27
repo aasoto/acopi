@@ -15,4 +15,13 @@ class ControladorPagina
 
 		return $respuesta;
 	}
+
+    static public function ctrMostrarConInnerJoin(){
+        $tabla1 = "categorias";
+        $tabla2 = "noticias";
+
+        $respuesta = ModeloPagina::mdlMostrarConInnerJoin($tabla1, $tabla2);
+
+        return $respuesta;
+    }
 }
