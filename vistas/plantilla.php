@@ -4,6 +4,8 @@
 **/
 $pagina_web = ControladorPagina::ctrMostrarPagina();
 $noticias = ControladorPagina::ctrMostrarConInnerJoin();
+$noticias_destacadas = ControladorPagina::ctrMostrarNoticiasDestacadas();
+//$noticias = ControladorPagina::ctrMostrarNoticias();
 
 //echo '<pre class="bg-white">'; print_r($noticias); echo '</pre>';
 /**

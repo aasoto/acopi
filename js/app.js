@@ -127,4 +127,16 @@ $('.mfp-image').magnificPopup({
 
             });
         
+/*=============================================
+PAGINACIÓN
+=============================================*/
 
+$(".pagination").twbsPagination({
+    totalPages: 10,
+    visiblePages: 4,
+    first: "Primero",
+    last: "Último",
+    prev: '<i class="fas fa-angle-left"></i>',
+    next: '<i class="fas fa-angle-right"></i>'
+
+});

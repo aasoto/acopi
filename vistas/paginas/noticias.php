@@ -1,6 +1,14 @@
 
+
+<!--=====================================
+CONTENIDO INICIO
+======================================-->
+
 <section class="section" id="features">
+<div class="container-fluid bg-white contenidoInicio pb-4">
+    
     <div class="container">
+
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="title-box text-center">
@@ -15,74 +23,69 @@
                 </div>
             </div>
         </div>
-
-        <div class="row mt-5 pt-4">
-            <div class="col-lg-4">
-                <div class="text-center mt-4">
-                    <div class="features-img-2">
-                        <img src="images/quinta.jpg" class="img-fluid" alt="">
+        <br><br><br>
+        
+        <div class="row">
+            <!-- COLUMNA IZQUIERDA -->
+            <div class="col-12 col-md-8 col-lg-9 p-0 pr-lg-5">
+                <?php foreach ($noticias as $key => $value) { ?>
+                <!-- ARTÍCULO 01 -->
+                <div class="row">
+                    <div class="col-12 col-lg-5">
+                        <a href="articulos.html"><h5 class="d-block d-lg-none py-3"><?php echo $value["titulo"]; ?></h5></a>
+                        <a href="articulos.html"><img src="<?php echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
                     </div>
-                    <h4 class="f-19 mt-4">Reactivación de los microempresarios</h4>
-                    <p class="text-muted mt-4">Debido de la situación de pandemia, muchos negocios de la ciudad vieron unas disminución en sus ventas, por lo que...</p>
+                    <div class="col-12 col-lg-7 introArticulo">
+                        <a href="articulos.html"><h4 class="title-heading"><?php echo $value["titulo"]; ?></h4></a>
+                        <p class="title-desc text-muted mt-4"><?php echo $value["descripcion_noticia"]; ?></p>
+                        <a href="articulos.html" class="float-right">Leer Más</a>
+                        <div class="fecha"><?php echo $value["fecha_noticia"]; ?></div>
+                    </div>
                 </div>
+                <hr class="mb-4 mb-lg-5" style="border: 1px solid #152452">
+                <?php } ?>
+
+                <div class="container d-none d-md-block">
+                    <ul class="pagination justify-content-center"></ul>
+                </div>
+
+                <a href="#" class="home-subtitle">Ver todas las noticias...</a>
             </div>
 
-            <div class="col-lg-4">
-                <div class="text-center mt-4">
-                    <div class="features-img">
-                        <img src="images/features/img-2.png" class="img-fluid" alt="">
-                    </div>
-                    <h4 class="f-19 mt-4">Clen Design</h4>
-                    <p class="text-muted mt-4">Sollicitudin lectus pretium suscipit quisque mood velit felis bibendum hendrerit in mollis porttitor pretium justofaucibus. </p>
-                </div>
-            </div>
+            <!-- COLUMNA DERECHA -->
 
-            <div class="col-lg-4">
-                <div class="text-center mt-4">
-                    <div class="features-img">
-                        <img src="images/features/img-3.png" class="img-fluid" alt="">
-                    </div>
-                    <h4 class="f-19 mt-4">Grid System</h4>
-                    <p class="text-muted mt-4">Phasellus quis quam ante tincidunt fringilla eget tortor proin interdum volutpat vehicula sapien tempus  tha vulputate.</p>
+            <div class="d-none d-md-block pt-md-4 pt-lg-0 col-md-4 col-lg-3">
+                <!-- SOBRE MI -->
+                <div class="sobreMi">
+                    <h4>Sobre Mi</h4>
+                    <img src="img/sobreMi.jpg" alt="Lorem ipsum dolor sit amet" class="img-fluid my-1">
+                    <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum odio, eos architecto atque numquam alias laboriosam minima beatae consectetur.</p>
                 </div>
-            </div>
-        </div>
 
-        <div class="row mt-4">
-            <div class="col-lg-4">
-                <div class="text-center mt-4">
-                    <div class="features-img">
-                        <img src="images/features/img-4.png" class="img-fluid" alt="">
+                <!-- Artículos destacados -->
+                <div class="my-4">
+                    <h4>Noticias Destacadas</h4>
+                    <?php foreach ($noticias_destacadas as $key => $value) { ?>
+                    <div class="d-flex my-3">
+                        <div class="w-100 w-xl-50 pr-3 pt-2">
+                            <a href="articulos.html">
+                                <img src="<?php echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid">
+                            </a>
+                        </div>
+                        <div>
+                            <a href="articulos.html" class="text-secondary">
+                                <p class="small"><?php echo $value["descripcion_noticia"]; ?></p>
+                            </a>
+                        </div>
                     </div>
-                    <h4 class="f-19 mt-4">Custom Development</h4>
-                    <p class="text-muted mt-4">Aenean egestas quis tellus egestas auctor ninam lorem sed tha aliquam laoreet integer maximus vitae ullamcorper vestibulum. </p>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="text-center mt-4">
-                    <div class="features-img">
-                        <img src="images/features/img-5.png" class="img-fluid" alt="">
-                    </div>
-                    <h4 class="f-19 mt-4">Risk Management</h4>
-                    <p class="text-muted mt-4">Donec feugiat lacus venenatis tha condi mentum mauris hendrerit vulputate tempus justo tellus quisque interdum fermentum.</p>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="text-center mt-4">
-                    <div class="features-img">
-                        <img src="images/features/img-6.png" class="img-fluid" alt="">
-                    </div>
-                    <h4 class="f-19 mt-4">Finance Friendly</h4>
-                    <p class="text-muted mt-4">Nulla placerat tellus lobortis dictum donec dolor neque vel tincidunt rutrum ultricies metus thay proin viverra egestas. </p>
+                    <?php } ?>
                 </div>
             </div>
         </div>
-
-
     </div>
+</div>
 </section>
+
 
 
 
