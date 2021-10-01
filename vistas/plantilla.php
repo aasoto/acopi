@@ -5,7 +5,7 @@
 $pagina_web = ControladorPagina::ctrMostrarPagina();
 $noticias = ControladorPagina::ctrMostrarConInnerJoin();
 $noticias_destacadas = ControladorPagina::ctrMostrarNoticiasDestacadas();
-//$noticias = ControladorPagina::ctrMostrarNoticias();
+//$noticias_todas = ControladorPagina::ctrMostrarNoticias();
 
 //echo '<pre class="bg-white">'; print_r($noticias); echo '</pre>';
 /**
@@ -18,8 +18,11 @@ include "navegacion.php";
     Ahora se evalua la condición del menú de navegación.
  **/
 if(isset($_GET["pagina"])){
-    if($_GET["pagina"] == "noticias"){
-        include "paginas/contenido_noticia.php";
+    if(($_GET["pagina"] == "noticias") && (isset($_GET["pestana"]))){
+        include "paginas/noticias-todas.php";
+    }
+    if(($_GET["pagina"] == "contenido_noticia") && (isset($_GET["id"]))){
+        include "paginas/".$_GET["pagina"].".php";
     }
     if($_GET["pagina"] == "info-directivos"){
          include "paginas/".$_GET["pagina"].".php";

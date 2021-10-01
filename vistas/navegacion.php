@@ -1,5 +1,5 @@
 <?php if(isset($_GET["pagina"])){
-    ?> <header id="topnav" class="defaultscroll fixed-top navbar-sticky darkheader"> <?php
+    ?> <header id="topnav" class="defaultscroll fixed-top navbar-sticky darkheader" style="background-color: #152452 !important";> <?php
 }else{
     ?> <header id="topnav" class="defaultscroll fixed-top navbar-sticky"> <?php
 } ?>
@@ -58,7 +58,7 @@
                     </ul>
                 </li>
                 <li class="has-submenu">
-                    <a href="index.php?pagina=noticias">Noticias</a>
+                    <a href="index.php?pagina=noticias&pestana=1">Noticias</a>
                 </li>
                 <li class="has-submenu">
                     <a href="index.php?pagina=productos">Productos y servicios</a>

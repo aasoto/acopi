@@ -507,7 +507,7 @@ button:focus {
 
 
 .bg-home-7{
-     background-image: url(../images/noticias/1.jpeg);
+     /*background-image: url(../images/noticias/1.jpeg);*/
     background-size: cover;
     height: 100vh;
     position: relative;

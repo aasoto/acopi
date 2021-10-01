@@ -1,7 +1,7 @@
 
 
 <!--=====================================
-CONTENIDO INICIO
+CONTENIDO NOTICIAS
 ======================================-->
 
 <section class="section" id="features">
@@ -45,11 +45,7 @@ CONTENIDO INICIO
                 <hr class="mb-4 mb-lg-5" style="border: 1px solid #152452">
                 <?php } ?>
 
-                <div class="container d-none d-md-block">
-                    <ul class="pagination justify-content-center"></ul>
-                </div>
-
-                <a href="#" class="home-subtitle">Ver todas las noticias...</a>
+                
             </div>
 
             <!-- COLUMNA DERECHA -->
@@ -81,6 +77,10 @@ CONTENIDO INICIO
                     <?php } ?>
                 </div>
             </div>
+            <div class="text-center">
+                <a href="index.php?pagina=noticias&pestana=1"><h4> Ver todas las noticias... </h4></a>
+            </div>
+            
         </div>
     </div>
 </div>

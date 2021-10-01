@@ -46,4 +46,30 @@ class ControladorPagina
 
         return $respuesta;
     }
+
+    static public function ctrContarNoticias(){
+        $tabla = "noticias";
+
+        $respuesta = ModeloPagina::mdlContar($tabla);
+
+        return $respuesta;
+    }
+
+    static public function ctrMostrarNoticiasConPaginacion($pestana, $noticias_por_pestana){
+        $tabla1 = "categorias";
+        $tabla2 = "noticias";
+
+        $respuesta = ModeloPagina::mdlMostrarNoticiasConPaginacion($pestana, $noticias_por_pestana, $tabla1, $tabla2);
+
+        return $respuesta;
+    }
+
+    static public function ctrConsultaNoticiasGeneralConID($id_noticia){
+        $tabla1 = "categorias";
+        $tabla2 = "noticias";
+
+        $respuesta = ModeloPagina::mdlConsultaGeneralConID($tabla1, $tabla2, $id_noticia);
+
+        return $respuesta;
+    }
 }
