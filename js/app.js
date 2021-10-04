@@ -128,3 +128,35 @@ $('.mfp-image').magnificPopup({
             });
         
 
+/**Subir foto temporal de interesado**/
+
+$("#fotoInteresado").change(function(){
+$(".alert").remove();
+    var imagen = this.files[0];
+    console.log("imagen", imagen);
+    /**Valicadación del formato**/
+
+    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
+        $("#fotoInteresado").val("");
+        $("#fotoInteresado").after(`
+                <div class="aler alert-danger">¡La imagen debe estar en formato JPG o PNG!</div>  
+        `)
+
+        return;
+    }else if(imagen["size"] > 3000000){
+        $("#fotoInteresado").val("");
+        $("#fotoInteresado").after(`
+                <div class="aler alert-danger">¡La imagen no debe pesar más de 3MB!</div>    
+        `)
+        return;
+    
+    }else{
+         var datosImagen = new FileReader;
+         datosImagen.readAsDataURL(imagen);
+         $(datosImagen).on("load", function(event){
+            var rutaImagen = event.target.result;
+            $(".prevFotoInteresado").attr("src", rutaImagen);
+         })
+
+    }
+})

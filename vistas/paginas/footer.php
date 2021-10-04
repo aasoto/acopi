@@ -4,22 +4,34 @@
         <div class="row">
 
             <div class="col-lg-3">
-                <form action="/action_page.php">
-                    <div class="footer-content">
-                        <h3 class="footer-title">Afiliate</h3>
-                        <br><br>
-                    </div>
+                <div class="footer-content">
+                    <h3 class="footer-title">Afiliate</h3>
+                    <br><br>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    
 
                     <label class="footer-info" for="fname">Nombre completo:</label><br>
-                    <input type="text" id="fname" name="fname" value=""><br>
+                    <input type="text" id="nombre_interesado" name="nombre_interesado" value="" required><br>
                     <label class="footer-info" for="lname">Empresa:</label><br>
-                    <input type="text" id="lname" name="lname" value=""><br>
+                    <input type="text" id="empresa_interesado" name="empresa_interesado" value="" required><br>
                     <label class="footer-info" for="fname">E-mail:</label><br>
-                    <input type="email" id="fname" name="fname" value=""><br>
+                    <input type="email" id="email_interesado" name="email_interesado" value="" required><br>
                     <label class="footer-info" for="lname">Telefono:</label><br>
-                    <input type="number" id="lname" name="lname" value=""><br><br>
-                    <input type="submit" value="Submit">
-                    <input type="reset">
+                    <input type="number" id="telefono_interesado" name="telefono_interesado" value="" required><br><br>
+                    <input type="file" name="fotoInteresado" class="d-none" id="fotoInteresado">
+                    <label for="fotoInteresado">
+                        <img src="images/subirFoto.png" class="img-fluid mt-md-3 mt-xl-2 prevFotoInteresado">
+                    </label>
+                    <br><br>
+                    <input type="submit" value="Enviar">
+                    <!--<input type="reset" value="Borrar">-->
+                    <?php 
+                        $enviarDatos = ControladorPagina::ctrEnviarDatosInteresado();
+
+                       echo '<pre>'; print_r($enviarDatos); echo '</pre>';
+
+                     ?>
               </form>
             </div>
             <div class="col-lg-3">

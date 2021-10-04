@@ -72,4 +72,99 @@ class ControladorPagina
 
         return $respuesta;
     }
+
+    /**Enviar datos interesado**/
+
+    static public function ctrEnviarDatosInteresado(){
+        if (isset($_POST["nombre_interesado"])){
+            if(preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $_POST["nombre_interesado"]) && preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/', $_POST["empresa_interesado"]) && preg_match('/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/', $_POST['email_interesado']) && preg_match('/^[0-9]+$/', $_POST['telefono_interesado'])){
+
+                /*=============================================
+                VALIDACIÓN FOTO LADO SERVIDOR
+                =============================================*/
+
+                if(isset($_FILES["fotoInteresado"]["tmp_name"]) && !empty($_FILES["fotoInteresado"]["tmp_name"])){
+
+                    /*=============================================
+                    CAPTURAR ANCHO Y ALTO ORIGINAL DE LA IMAGEN Y DEFINIR LOS NUEVOS VALORES
+                    =============================================*/
+
+                    list($ancho, $alto) = getimagesize($_FILES["fotoInteresado"]["tmp_name"]);
+
+                    $nuevoAncho = 128;
+                    $nuevoAlto = 128;
+
+                    /*=============================================
+                    CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
+                    =============================================*/
+
+                    $directorio = "images/usuarios/";
+
+                    /*=============================================
+                    DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
+                    =============================================*/
+
+                    if($_FILES["fotoInteresado"]["type"] == "image/jpeg"){
+
+                        $aleatorio = mt_rand(100, 9999);
+
+                        $ruta = $directorio.$aleatorio.".jpg";
+
+                        $origen = imagecreatefromjpeg($_FILES["fotoInteresado"]["tmp_name"]);
+
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+                        imagejpeg($destino, $ruta);
+
+
+                    }else if($_FILES["fotoInteresado"]["type"] == "image/png"){
+
+                        $aleatorio = mt_rand(100, 9999);
+
+                        $ruta = $directorio.$aleatorio.".png";
+
+                        $origen = imagecreatefrompng($_FILES["fotoInteresado"]["tmp_name"]);
+
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+
+                        imagealphablending($destino, FALSE);
+            
+                        imagesavealpha($destino, TRUE); 
+
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+
+                        imagepng($destino, $ruta);
+
+                    }else{
+
+                        return "error-formato"; 
+                    }
+
+                }else{
+
+
+                    $ruta = "images/usuarios/default.png";
+                }
+                
+
+                $tabla = "interesados";
+
+                $datos = array("nombre_interesado" => $_POST["nombre_interesado"],
+                                "empresa_interesado" => $_POST["empresa_interesado"],
+                                "email_interesado" => $_POST["email_interesado"],
+                                "telefono_interesado" => $_POST["telefono_interesado"],
+                                "foto_interesado" => $ruta );
+
+
+                $respuesta = ModeloPagina::mdlEnviarDatosInteresado($tabla, $datos);
+
+                return $respuesta;
+
+            }else{
+                return "error preg";
+            }
+        }
+    }
 }

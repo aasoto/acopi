@@ -8,7 +8,6 @@ CONTENIDO REPOSITORIO DE NOTICIAS
     $total_paginas = ceil($total_paginas);
 
     if (!$_GET['pestana']) {
-        echo 'Aquí';
         header('Location:index.php?pagina=noticias&pestana=1');
     }
 
@@ -39,21 +38,24 @@ CONTENIDO REPOSITORIO DE NOTICIAS
             <!-- COLUMNA IZQUIERDA -->
             <div class="col-12 col-md-8 col-lg-12 p-0 pr-lg-5">
                 <?php foreach ($noticias_todas as $key => $value) { ?>
-                <!-- ARTÍCULO 01 -->
+                <!-- Inicio Noticia -->
                 <div class="row">
                     <div class="col-12 col-lg-5">
-                        <a href="articulos.html"><h5 class="d-block d-lg-none py-3"><?php echo $value["titulo"]; ?></h5></a>
-                        <a href="articulos.html"><img src="<?php echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><h5 class="d-block d-lg-none py-3"><?php echo $value["titulo"]; ?></h5></a>
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><img src="<?php echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
                     </div>
                     <div class="col-12 col-lg-7 introArticulo">
                         <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><h4 class="title-heading"><?php echo $value["titulo"]; ?></h4></a>
                         <p class="title-desc text-muted mt-4"><?php echo $value["descripcion_noticia"]; ?></p>
-                        <a href="articulos.html" class="float-right">Leer Más</a>
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>" class="float-right">Leer Más</a>
                         <div class="fecha"><?php echo $value["fecha_noticia"]; ?></div>
                     </div>
                 </div>
+                <!-- Fin noticia -->
                 <hr class="mb-4 mb-lg-5" style="border: 1px solid #152452">
                 <?php } ?>
+
+                <!--Aquí empieza la paginación-->
                 <div class="justify-content-center">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
@@ -65,6 +67,7 @@ CONTENIDO REPOSITORIO DE NOTICIAS
                         </ul>
                     </nav>
                 </div>
+                <!--Fin paginación-->
             </div>
 
             

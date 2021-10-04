@@ -108,4 +108,27 @@ class ModeloPagina{
         $stmt = null;
     }
 
+    /**Ingresar Interesado**/
+
+    static public function mdlEnviarDatosInteresado($tabla, $datos){
+        $stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(nombre_interesado, empresa_interesado, email_interesado, telefono_interesado, foto_interesado) VALUES(:nombre_interesado, :empresa_interesado, :email_interesado, :telefono_interesado, :foto_interesado)");
+
+        $stmt -> bindParam(":nombre_interesado", $datos["nombre_interesado"], PDO::PARAM_STR);
+        $stmt -> bindParam(":empresa_interesado", $datos["empresa_interesado"], PDO::PARAM_STR);
+        $stmt -> bindParam(":email_interesado", $datos["email_interesado"], PDO::PARAM_STR);
+        $stmt -> bindParam(":telefono_interesado", $datos["telefono_interesado"], PDO::PARAM_STR);
+        $stmt -> bindParam(":foto_interesado", $datos["foto_interesado"], PDO::PARAM_STR);
+
+        if ($stmt -> execute()) {
+            # code...
+            return "ok";
+        }else{
+            print_r(Conexion::conectar()->errorInfo());
+        }
+
+        $stmt -> close();
+
+        $stmt = null;
+    }
+
 }

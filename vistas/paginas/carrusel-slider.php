@@ -122,55 +122,7 @@
     </div>
 </section>
 
-<?php
-/*$carrusel = json_decode($pagina_web["carrusel"], true);*/
-//echo '<pre>'; print_r($pagina_web["carrusel"]); echo '</pre>';
-/*foreach ($carrusel as $key => $value) {
 
-    echo '
-        <style type="text/css">
-                .bg-home-dinamica{
-                background-image: url('.$value["fondo"].');
-                background-size: cover;
-                padding-top: 50px;
-                position: relative;
-                background-position: center center;
-            }
-        </style>
-        <div class="carousel-item bg-home-dinamica">
-            <div class="home-center">
-                <div class="home-desc-center">
-                    <div class="bg-overlay-color"></div>
-                    <div class="container">
-                        <div class="row vertical-content">
-                            <div class="col-lg-7">
-                                <div class="home-content mt-4">
-                                    <h4 class="home-subtitle">'.$value["categoria"].'</h4>
-                                    <h2 class="home-title mt-4">'.$value["titulo"].'</h2>
-                                    <p class="home-desc mt-4 f-17">'.$value["texto"].'</p>
-
-                                    <div class="mt-4">
-                                        <a href="" class="pr-3">
-                                            <img src="'.$value["boton-1"].'" class="mt-4" height="50" alt="">
-                                        </a>
-                                        <a href="">
-                                            <img src="'.$value["boton-2"].'" class="mt-4" height="50" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 offset-lg-1">
-                                <div class="home-image text-lg-right mt-4">
-                                    <img src="'.$value["foto-delante"].'" class="img-fluid" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>';
-}*/
-?>
 
 
 <!--<div class="carousel-item bg-home-dinamica">

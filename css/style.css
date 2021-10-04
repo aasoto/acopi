@@ -447,7 +447,25 @@ button:focus {
 } */
 
 /* start home-dinamica*/
+.bg-home-dinamica{
+    background-image: url(../images/vallenato.png);
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+    background-position: center center;
+}
 
+.bg-home-dinamica-1{
+    background-position: center center;
+}
+
+.bg-home-dinamica-2{
+    background-position: center center;
+}
+
+.bg-home-dinamica-3{
+    background-position: center center;
+}
 
 /* start home-4 */
 
