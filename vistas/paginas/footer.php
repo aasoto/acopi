@@ -29,8 +29,34 @@
                     <?php 
                         $enviarDatos = ControladorPagina::ctrEnviarDatosInteresado();
 
-                       echo '<pre>'; print_r($enviarDatos); echo '</pre>';
-
+                        /**Se evalua la respuesta del controlador**/
+                       if($enviarDatos == "ok"){
+                            echo '<script>
+                                swal({
+                                    title: "¡Bien Hecho!",
+                                    text: "Te estaremos contactando en los proximos días.",
+                                    icon: "success"
+                                });
+                            </script>';
+                        }
+                        if($enviarDatos == "error preg"){
+                            echo '<script>
+                                swal({
+                                    title: "¡Error!",
+                                    text: "Está intentando ingresar caracteres no validos.",
+                                    icon: "error"
+                                });
+                            </script>';
+                        }
+                        if($enviarDatos == "error-formato"){
+                            echo '<script>
+                                swal({
+                                    title: "¡Error!",
+                                    text: "Solo se pueden subir imagenes en formato JPG o PNG.",
+                                    icon: "error"
+                                });
+                            </script>';
+                        }
                      ?>
               </form>
             </div>
