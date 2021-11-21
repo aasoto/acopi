@@ -8,7 +8,7 @@
         <!-- Logo container-->
         <div>
             <a href="index.html" class="logo">
-                    <img src="<?php echo $pagina_web["logo"]; ?>">
+                    <img src="<?php echo $pagina_web["logo_navegacion"]; ?>">
                     <?php echo $pagina_web["titulo_navegacion"]; ?>
             </a>
         </div>
