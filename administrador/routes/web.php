@@ -69,7 +69,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/pagina_web/carrusel', 'PaginaWebController');
 Route::resource('/pagina_web/entrevistas', 'PaginaWebController');
-Route::resource('/pagina_web/noticias', 'NoticiasController');
+Route::resource('/pagina_web/noticias', 'CategoriasController');
 Route::resource('/pagina_web/eventos', 'PaginaWebController');
 Route::resource('/pagina_web/footer', 'PaginaWebController');
 Route::resource('/paginas/pagina_web/interesados', 'PaginaWebController');

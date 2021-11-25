@@ -12,9 +12,9 @@ class NoticiasModel extends Model
     =            Inner Join desde el Modulo            =
     ==================================================*/
     
-    public function categorias(){
+    /*public function categorias(){
     	return $this->belongsTo('App\CategoriasModel', 'categoria', 'id_categoria');
-    }
+    }*/
     
     /*=====  End of Inner Join desde el Modulo  ======*/
 }
