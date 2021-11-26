@@ -32,8 +32,19 @@ class PaginaWebController extends Controller
 						"titulo_navegacion" => $request->input("titulo_navegacion"),
 						"descripcion" => $request->input("descripcion"),
 						"palabras_claves" => $request->input("palabras_claves"),
-						"redes_sociales"=>$request->input("redes_sociales"));
+						"redes_sociales"=>$request->input("redes_sociales"),
+						"direccion"=>$request->input("direccion"),
+						"telefono"=>$request->input("telefono"),
+						"celular"=>$request->input("celular"),
+						"email"=>$request->input("email"),
+						"logo_pestana_actual"=>$request->input("logo_pestana_actual"),
+						"logo_navegacion_actual"=>$request->input("logo_navegacion_actual"));
+		//echo '<pre>'; print_r($datos); echo '</pre>';
 
+		/*----------  Recoge imágenes  ----------*/
+		$logo_pestana = array("logo_pestana_temporal"=>$request->file("pestana"));
+		$logo_navegacion = array("logo_navegacion_temporal"=>$request->file("nav"));
+		
 		/*----------  Verificar validación  ----------*/
 		if (!empty($datos)) {
 			$validar = \Validator::make($datos, [
@@ -44,14 +55,80 @@ class PaginaWebController extends Controller
     			"titulo_navegacion" => 'required|regex:/^[-\\_\\:\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
     			"descripcion" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
     			"palabras_claves" => 'required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-    			"redes_sociales" => 'required'
+    			"redes_sociales" => 'required',
+    			"direccion" => 'required|regex:/^[+\\#\\;\\-\\_\\*\\"\\:\\,\\.\\@\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+    			"telefono" => 'required|regex:/^[+\\0-9 ]+$/i',
+    			"celular" => 'required|regex:/^[+\\0-9 ]+$/i',
+    			"email" => 'required|regex:/^[-\\_\\.\\@\\0-9a-zA-Z]+$/i',
+    			"logo_pestana_actual" => 'required',
+    			"logo_navegacion_actual" => 'required'
 			]);
+
+			/*----------  Validar imagenes  ----------*/
+			if($logo_navegacion["logo_navegacion_temporal"] != ""){
+
+                $validarLogo_navegacion = \Validator::make($logo_navegacion, [
+
+                    "logo_navegacion_temporal" => 'required|image|mimes:jpg,jpeg,png|max:2000000'
+                
+                ]);
+
+                if($validarLogo_navegacion->fails()){
+
+                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+
+                }
+
+            }
+
+            if($logo_pestana["logo_pestana_temporal"] != ""){
+
+                $validarLogo_pestana = \Validator::make($logo_pestana, [
+
+                    "logo_pestana_temporal" => 'required|image|mimes:jpg,jpeg,png|max:2000000'
+                
+                ]);
+
+                if($validarLogo_pestana->fails()){
+
+                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+
+                }
+
+            }
+
+
 
 			if ($validar->fails()) {
 				return redirect("/pagina_web/carrusel")->with("no-validacion", "");
 			}else{
-				//$paginaweb = PaginaWebModel::all();
+				/*----------  Preguntar si se está subiendo un imagen nueva de logo  ----------*/
+				//subir al servidor las imagenes
+				if($logo_pestana["logo_pestana_temporal"] != ""){
+					//unlink($datos["logo_pestana_actual"]);
+					$aleatorio = mt_rand(1000, 9999);
+					$ruta_logo_pestana = "vistas/images/pagina_web/".$aleatorio.".".$logo_pestana["logo_pestana_temporal"]->guessExtension();
+					move_uploaded_file($logo_pestana["logo_pestana_temporal"], $ruta_logo_pestana);
+				}else{
 
+                    $ruta_logo_pestana = $datos["logo_pestana_actual"];
+                }
+
+				if($logo_navegacion["logo_navegacion_temporal"] != ""){
+					//unlink($datos["logo_navegacion_actual"]);
+					$aleatorio = mt_rand(1000, 9999);
+					$ruta_logo_navegacion = "vistas/images/pagina_web/".$aleatorio.".".$logo_navegacion["logo_navegacion_temporal"]->guessExtension();
+					move_uploaded_file($logo_navegacion["logo_navegacion_temporal"], $ruta_logo_navegacion);
+				}else{
+
+                    $ruta_logo_navegacion = $datos["logo_navegacion_actual"];
+                }
+				
+				
+
+				//$paginaweb = PaginaWebModel::all();
+				$contacto = $datos["direccion"].'^'.$datos["telefono"].'^'.$datos["celular"].'^'.$datos["email"];
+				//echo '<pre>'; print_r($contacto); echo '</pre>';
     			$actualizar = array("dominio"=> $datos["dominio"],
     				                "servidor"=> $datos["servidor"],
     				                "titulo_pestana" => $datos["titulo_pestana"],
@@ -59,7 +136,10 @@ class PaginaWebController extends Controller
     				                "titulo_navegacion" => $datos["titulo_navegacion"],
     				                "descripcion" => $datos["descripcion"],
     				            	"palabras_claves" => json_encode(explode(",", $datos["palabras_claves"])),
-    				            	"redes_sociales" => $datos["redes_sociales"]);
+    				            	"redes_sociales" => $datos["redes_sociales"],
+    								"contacto" => json_encode(explode("^", $contacto)),
+    								"logo_navegacion" => $ruta_logo_navegacion,
+    								"logo_pestana" => $ruta_logo_pestana);
 
     			$paginaweb = PaginaWebModel::where("id", $id)->update($actualizar);
     			return redirect("/pagina_web/carrusel")->with("ok-editar","");

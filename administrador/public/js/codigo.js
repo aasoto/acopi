@@ -15,41 +15,24 @@ $(document).on("click", ".agregarRed", function(){
 	var nombre = $("#icono_red").val().split(",")[1];
 
 	$(".listadoRed").append(`
-
-		<div class="col-lg-12">
-      
-        <div class="input-group mb-3">
-          
-          <div class="input-group-prepend">
-            
-            <div class="input-group-text text-white" style="background:#000000">
-              
+		<div class="col-lg-12">      
+        <div class="input-group mb-3">          
+          <div class="input-group-prepend">            
+            <div class="input-group-text text-white" style="background:#000000">              
                 <i class="`+logo+`"></i>
-
             </div>
-
           </div>
-
           <input type="text" class="form-control" value="`+link+`">
-
-          <div class="input-group-prepend">
-            
-            <div class="input-group-text" style="cursor:pointer">
-              
+          <div class="input-group-prepend">            
+            <div class="input-group-text" style="cursor:pointer">              
                 <span class="bg-danger px-2 rounded-circle eliminarRed" red="`+logo+`" url="`+link+`">&times;</span>
-
             </div>
-
           </div>
-
         </div>
-
       </div>
-
 	`)
 
 	//Actualizar el registro de la BD
-
 	var listaRed = JSON.parse($("#listaRed").val());
 	//console.log("listaRed", listaRed);
 	listaRed.push({
@@ -76,19 +59,13 @@ $(document).on("click", ".eliminarRed", function(){
 
 	for(var i = 0; i < listaRed.length; i++){
 
-		if(red == listaRed[i]["icono"] && url == listaRed[i]["url"]){
-			
-			listaRed.splice(i, 1);
-			
+		if(red == listaRed[i]["logo"] && url == listaRed[i]["link"]){			
+			listaRed.splice(i, 1);			
 			$(this).parent().parent().parent().parent().remove();
-
 			$("#listaRed").val(JSON.stringify(listaRed));
-
 		}
 
 	}
-
-
 
 })
 
@@ -98,8 +75,8 @@ PREVISUALIZAR IMÁGENES TEMPORALES
 $("input[type='file']").change(function(){
 
 	var imagen = this.files[0];
+	//console.log("imagen", imagen);
 	var tipo = $(this).attr("name");
-	
 	/*=============================================
     VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
     =============================================*/
@@ -108,25 +85,21 @@ $("input[type='file']").change(function(){
 
     	$("input[type='file']").val("");
 
-    	notie.alert({
-
-		    type: 3,
-		    text: '¡La imagen debe estar en formato JPG o PNG!',
-		    time: 7
-
-		 })
+      	swal({
+      		title: "¡Error!",
+      		text: "¡La imagen debe estar en formato JPG o PNG!",
+      		icon: "error"
+      	});
 
     }else if(imagen["size"] > 2000000){
 
     	$("input[type='file']").val("");
 
-    	notie.alert({
-
-		    type: 3,
-		    text: '¡La imagen no debe pesar más de 2MB!',
-		    time: 7
-
-		 })
+    	swal({
+      		title: "¡Error!",
+      		text: "¡La imagen no debe pesar más de 2MB!",
+      		icon: "error"
+      	});
 
     }else{
 
