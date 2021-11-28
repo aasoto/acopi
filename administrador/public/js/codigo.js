@@ -4,6 +4,51 @@ CAPTURANDO LA RUTA DE MI CMS
 
 var ruta = $("#ruta").val();
 
+/*===========================================
+=            Actualizar carrusel            =
+===========================================*/
+
+$(document).on("click", ".actualizarCarrusel", function(){
+	var indice = $("#indice").val();
+	var carrusel = "[{";
+	//alert(carrusel);
+	/*----------  variables del carrusel  ----------*/
+	var categoria;
+	var titulo;
+	var texto;
+	var boton1;
+	var boton2;
+	var fotoDelante;
+	var fondo;
+
+	for (var i = 0; i <= indice ; i++) {
+
+		/*----------  inicialización de variables  ----------*/
+		categoria = $("#categoria-"+i).val();
+		titulo = $("#titulo-"+i).val();
+		texto = $("#texto-"+i).val();
+		boton1 = $("#boton-1-"+i).attr("value");
+		boton2 = $("#boton-2-"+i).attr("value");
+		fotoDelante = $("#foto-delante-"+i).attr("value");
+		fondo = $("#fondo-"+i).attr("value");
+
+		/*----------  concatenación  ----------*/
+		if (i < indice) {
+			carrusel = carrusel+'"categoria": "'+categoria+'","titulo": "'+titulo+'","texto": "'+texto+'","boton-1": "'+boton1+'","boton-2": "'+boton2+'","foto-delante": "'+fotoDelante+'","fondo": "'+fondo+'"},{';
+		}else{
+			carrusel = carrusel+'"categoria": "'+categoria+'","titulo": "'+titulo+'","texto": "'+texto+'","boton-1": "'+boton1+'","boton-2": "'+boton2+'","foto-delante": "'+fotoDelante+'","fondo": "'+fondo+'"}]';
+
+		}
+		
+	}
+	//alert(carrusel);
+	//console.log("Ruta: ", fondo);
+
+})
+
+/*=====  End of Actualizar carrusel  ======*/
+
+
 /*=============================================
 AGREGAR RED
 =============================================*/

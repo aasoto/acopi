@@ -38,9 +38,10 @@ class PaginaWebController extends Controller
 						"celular"=>$request->input("celular"),
 						"email"=>$request->input("email"),
 						"logo_pestana_actual"=>$request->input("logo_pestana_actual"),
-						"logo_navegacion_actual"=>$request->input("logo_navegacion_actual"));
-		//echo '<pre>'; print_r($datos); echo '</pre>';
-
+						"logo_navegacion_actual"=>$request->input("logo_navegacion_actual"),
+						"carrusel"=>$request->input("carrusel"));
+		/*echo '<pre>'; print_r($datos["redes_sociales"]); echo '</pre>';
+		return;*/
 		/*----------  Recoge imágenes  ----------*/
 		$logo_pestana = array("logo_pestana_temporal"=>$request->file("pestana"));
 		$logo_navegacion = array("logo_navegacion_temporal"=>$request->file("nav"));
@@ -64,45 +65,44 @@ class PaginaWebController extends Controller
     			"logo_navegacion_actual" => 'required'
 			]);
 
-			/*----------  Validar imagenes  ----------*/
+			/*==================================================================
+			=            Sección de validación de imagenes de logos            =
+			==================================================================*/
+			
+			/*----------  Validar logo navegación  ----------*/
 			if($logo_navegacion["logo_navegacion_temporal"] != ""){
-
                 $validarLogo_navegacion = \Validator::make($logo_navegacion, [
-
-                    "logo_navegacion_temporal" => 'required|image|mimes:jpg,jpeg,png|max:2000000'
-                
-                ]);
+                "logo_navegacion_temporal" => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
 
                 if($validarLogo_navegacion->fails()){
-
                     return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
-
                 }
-
             }
 
+            /*----------  Validar logo pestaña  ----------*/
             if($logo_pestana["logo_pestana_temporal"] != ""){
-
                 $validarLogo_pestana = \Validator::make($logo_pestana, [
-
-                    "logo_pestana_temporal" => 'required|image|mimes:jpg,jpeg,png|max:2000000'
-                
-                ]);
+                "logo_pestana_temporal" => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
 
                 if($validarLogo_pestana->fails()){
-
                     return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
-
                 }
-
             }
+			
+			/*=====  End of Sección de validación de imagenes de logos  ======*/
+			
+
+			
 
 
 
 			if ($validar->fails()) {
 				return redirect("/pagina_web/carrusel")->with("no-validacion", "");
 			}else{
-				/*----------  Preguntar si se está subiendo un imagen nueva de logo  ----------*/
+				/*==================================================================
+				=            Eliminar y subir imagenes nuevas al servidor            =
+				==================================================================*/
+				
 				//subir al servidor las imagenes
 				if($logo_pestana["logo_pestana_temporal"] != ""){
 					//unlink($datos["logo_pestana_actual"]);
@@ -124,11 +124,23 @@ class PaginaWebController extends Controller
                     $ruta_logo_navegacion = $datos["logo_navegacion_actual"];
                 }
 				
+				/*=====  End of Eliminar y subir imagenes nuevas al servidor  ======*/
+				
+				
+				
 				
 
 				//$paginaweb = PaginaWebModel::all();
 				$contacto = $datos["direccion"].'^'.$datos["telefono"].'^'.$datos["celular"].'^'.$datos["email"];
 				//echo '<pre>'; print_r($contacto); echo '</pre>';
+
+				/**
+				 *
+				 * En esta sección se colocan despues de la validación los datos nuevos en un array
+				 * para mandarlos a la base de datos
+				 *
+				 */
+				
     			$actualizar = array("dominio"=> $datos["dominio"],
     				                "servidor"=> $datos["servidor"],
     				                "titulo_pestana" => $datos["titulo_pestana"],
