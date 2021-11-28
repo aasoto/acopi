@@ -38,14 +38,42 @@ class PaginaWebController extends Controller
 						"celular"=>$request->input("celular"),
 						"email"=>$request->input("email"),
 						"logo_pestana_actual"=>$request->input("logo_pestana_actual"),
-						"logo_navegacion_actual"=>$request->input("logo_navegacion_actual"),
-						"carrusel"=>$request->input("carrusel"));
+						"logo_navegacion_actual"=>$request->input("logo_navegacion_actual")/*,
+						"carrusel"=>$request->input("carrusel")*/);
 		/*echo '<pre>'; print_r($datos["redes_sociales"]); echo '</pre>';
 		return;*/
-		/*----------  Recoge imágenes  ----------*/
+		/*----------  Recoge imágenes logos  ----------*/
 		$logo_pestana = array("logo_pestana_temporal"=>$request->file("pestana"));
 		$logo_navegacion = array("logo_navegacion_temporal"=>$request->file("nav"));
-		
+
+		/*----------  Recoge imágenes carrusel  ----------*/
+		$indice = array('indice' => $request->input("indice"));
+
+		/**
+		 *
+		 * Se hace una ciclo 'for' para la declaración y asignación de las diferentes define_syslog_variables
+		 * debido a que el carrusel es una estructura dinamica.
+		 *
+		 */
+		for ($i=0; $i <= $indice["indice"]; $i++) { 
+			/*----------  Declaración e inicialización de variables de texto del carrusel  ----------*/
+			${"categoria_".$i} = array('categoria-'.$i => $request->input("categoria-".$i));
+			${"titulo_".$i} = array('titulo-'.$i => $request->input("titulo-".$i));
+			${"texto_".$i} = array('texto-'.$i => $request->input("texto-".$i));
+
+			/*----------  Declaración de arrays con variables de imágenes viejas   ----------*/
+			${"boton1_actual_".$i} = array('boton-1-actual-'.$i => $request->input("boton-1-actual-".$i));
+			${"boton2_actual_".$i} = array('boton-2-actual-'.$i => $request->input("boton-2-actual-".$i));
+			${"fotoDelante_actual_".$i} = array('foto-delante-actual-'.$i => $request->input("foto-delante-actual-".$i));
+			${"fondo_actual_".$i} = array('fondo-actual-'.$i => $request->input("fondo-actual-".$i));
+
+			/*----------  Declaración de arrays con variables de imágenes nuevas   ----------*/
+			${"boton1_".$i} = array('boton-1-temporal-'.$i => $request->file("boton-1-".$i));
+			${"boton2_".$i} = array('boton-2-temporal-'.$i => $request->file("boton-2-".$i));
+			${"fotoDelante_".$i} = array('foto-delante-temporal-'.$i => $request->file("foto-delante-".$i));
+			${"fondo_".$i} = array('fondo-temporal-'.$i => $request->file("fondo-".$i));
+		}
+
 		/*----------  Verificar validación  ----------*/
 		if (!empty($datos)) {
 			$validar = \Validator::make($datos, [
@@ -91,7 +119,59 @@ class PaginaWebController extends Controller
 			
 			/*=====  End of Sección de validación de imagenes de logos  ======*/
 			
+			/*========================================================
+			=            Validación imágenes del Carrusel            =
+			========================================================*/
 
+			/**
+			 *
+			 * Se hace una ciclo 'for' para la declaración y asignación de las diferentes define_syslog_variables
+			 * debido a que el carrusel es una estructura dinamica.
+			 *
+			 */
+			for ($i=0; $i <= $indice["indice"]; $i++) { 
+				/*----------  Validación boton # 1  ----------*/
+				if(${"boton1_".$i}["boton-1-temporal-".$i] != ""){
+	                ${"validarBoton1_".$i} = \Validator::make(${"boton1_".$i}, [
+	                "boton-1-temporal-".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+
+	                if(${"validarBoton1_".$i}->fails()){
+	                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+	                }
+	            }
+
+	            /*----------  Validación boton # 2  ----------*/
+				if(${"boton2_".$i}["boton-2-temporal-".$i] != ""){
+	                ${"validarBoton2_".$i} = \Validator::make(${"boton2_".$i}, [
+	                "boton-2-temporal-".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+
+	                if(${"validarBoton2_".$i}->fails()){
+	                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+	                }
+	            }
+
+	            /*----------  Validación foto delante  ----------*/
+				if(${"fotoDelante_".$i}["foto-delante-temporal-".$i] != ""){
+	                ${"validarFotoDelante_".$i} = \Validator::make(${"fotoDelante_".$i}, [
+	                "foto-delante-temporal-".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+
+	                if(${"validarFotoDelante_".$i}->fails()){
+	                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+	                }
+	            }
+
+	            /*----------  Validación fondo(background)  ----------*/
+				if(${"fondo_".$i}["fondo-temporal-".$i] != ""){
+	                ${"validarFondo_".$i} = \Validator::make(${"fondo_".$i}, [
+	                "fondo-temporal-".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+
+	                if(${"validarFondo_".$i}->fails()){
+	                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+	                }
+	            }
+			}
+			/*=====  End of Validación imágenes del Carrusel  ======*/
+			
 			
 
 
@@ -100,7 +180,7 @@ class PaginaWebController extends Controller
 				return redirect("/pagina_web/carrusel")->with("no-validacion", "");
 			}else{
 				/*==================================================================
-				=            Eliminar y subir imagenes nuevas al servidor            =
+				=            Eliminar y subir logos nuevos al servidor            =
 				==================================================================*/
 				
 				//subir al servidor las imagenes
@@ -124,9 +204,73 @@ class PaginaWebController extends Controller
                     $ruta_logo_navegacion = $datos["logo_navegacion_actual"];
                 }
 				
-				/*=====  End of Eliminar y subir imagenes nuevas al servidor  ======*/
+				/*=====  End of Eliminar y subir logos nuevos al servidor  ======*/
 				
 				
+				/*===========================================================================
+				=            Eliminar y subir imagenes del carrusel del servidor            =
+				===========================================================================*/
+
+				/*----------  Inicialización de nuevo dato JSON del carrusel  ----------*/
+				$carrusel = "[{";
+				
+				for ($i=0; $i <= $indice["indice"]; $i++) {
+
+					/*----------  Actualizar boton # 1  ----------*/
+					if(${"boton1_".$i}["boton-1-temporal-".$i] != ""){
+		                //unlink(${"boton1_actual_".$i}["boton-1-actual-".$i]);
+						$aleatorio = mt_rand(1000, 9999);
+						${"rutaBoton_1".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"boton1_".$i}["boton-1-temporal-".$i]->guessExtension();
+						move_uploaded_file(${"boton1_".$i}["boton-1-temporal-".$i], ${"rutaBoton_1".$i});
+		            }else{
+		            	${"rutaBoton_1".$i} = ${"boton1_actual_".$i}["boton-1-actual-".$i];
+		            }
+
+		            /*----------  Actualizar boton # 2  ----------*/
+					if(${"boton2_".$i}["boton-2-temporal-".$i] != ""){
+		                //unlink(${"boton2_actual_".$i}["boton-2-actual-".$i]);
+						$aleatorio = mt_rand(1000, 9999);
+						${"rutaBoton_2".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"boton2_".$i}["boton-2-temporal-".$i]->guessExtension();
+						move_uploaded_file(${"boton2_".$i}["boton-2-temporal-".$i], ${"rutaBoton_2".$i});
+		            }else{
+		            	${"rutaBoton_2".$i} = ${"boton2_actual_".$i}["boton-2-actual-".$i];
+		            }
+
+		            /*----------  Actualizar foto delante  ----------*/
+					if(${"fotoDelante_".$i}["foto-delante-temporal-".$i] != ""){
+		                //unlink(${"fotoDelente_actual_".$i}["foto-delante-actual-".$i]);
+						$aleatorio = mt_rand(1000, 9999);
+						${"rutaFoto_Delante".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"fotoDelante_".$i}["foto-delante-temporal-".$i]->guessExtension();
+						move_uploaded_file(${"fotoDelante_".$i}["foto-delante-temporal-".$i], ${"rutaFoto_Delante".$i});
+		            }else{
+		            	${"rutaFoto_Delante".$i} = ${"fotoDelante_actual_".$i}["foto-delante-actual-".$i];
+		            }
+
+		            /*----------  Actualizar fondo(background)  ----------*/
+					if(${"fondo_".$i}["fondo-temporal-".$i] != ""){
+		                //unlink(${"fondo_actual_".$i}["fondo-actual-".$i]);
+						$aleatorio = mt_rand(1000, 9999);
+						${"rutaFondo".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"fondo_".$i}["fondo-temporal-".$i]->guessExtension();
+						move_uploaded_file(${"fondo_".$i}["fondo-temporal-".$i], ${"rutaFondo".$i});
+		            }else{
+		            	${"rutaFondo".$i} = ${"fondo_actual_".$i}["fondo-actual-".$i];
+		            }
+
+		            /**
+		             *
+		             * Se arma el carrusel con los datos actualizados
+		             *
+		             */
+		            
+		            if($i == $indice["indice"]){
+		            	$carrusel = $carrusel."\n\t".'"categoria": "'.${'categoria_'.$i}['categoria-'.$i].'",'."\n\t".'"titulo": "'.${'titulo_'.$i}['titulo-'.$i].'",'."\n\t".'"texto": "'.${'texto_'.$i}['texto-'.$i].'",'."\n\t".'"boton-1": "'.${"rutaBoton_1".$i}.'",'."\n\t".'"boton-2": "'.${"rutaBoton_2".$i}.'",'."\n\t".'"foto-delante": "'.${"rutaFoto_Delante".$i}.'",'."\n\t".'"fondo": "'.${"rutaFondo".$i}.'"'."\n".'}]';
+		            }else{
+		            	$carrusel = $carrusel."\n\t".'"categoria": "'.${'categoria_'.$i}['categoria-'.$i].'",'."\n\t".'"titulo": "'.${'titulo_'.$i}['titulo-'.$i].'",'."\n\t".'"texto": "'.${'texto_'.$i}['texto-'.$i].'",'."\n\t".'"boton-1": "'.${"rutaBoton_1".$i}.'",'."\n\t".'"boton-2": "'.${"rutaBoton_2".$i}.'",'."\n\t".'"foto-delante": "'.${"rutaFoto_Delante".$i}.'",'."\n\t".'"fondo": "'.${"rutaFondo".$i}.'"'."\n".'},{';
+		            }
+		            
+				}
+
+				/*=====  End of Eliminar y subir imagenes del carrusel del servidor  ======*/
 				
 				
 
@@ -151,7 +295,8 @@ class PaginaWebController extends Controller
     				            	"redes_sociales" => $datos["redes_sociales"],
     								"contacto" => json_encode(explode("^", $contacto)),
     								"logo_navegacion" => $ruta_logo_navegacion,
-    								"logo_pestana" => $ruta_logo_pestana);
+    								"logo_pestana" => $ruta_logo_pestana,
+    								"carrusel" => $carrusel);
 
     			$paginaweb = PaginaWebModel::where("id", $id)->update($actualizar);
     			return redirect("/pagina_web/carrusel")->with("ok-editar","");

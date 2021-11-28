@@ -274,8 +274,8 @@
               </div>
             </div>
             <div class="card-footer">
-              <button type="button" class="btn btn-primary actualizarCarrusel">
-                <i class="fas fa-check"></i> Actualizar
+              <button type="submit" class="btn btn-primary actualizarCarrusel">
+                <i class="fas fa-check"></i> Guardar
               </button>
             </div>
           </div>
