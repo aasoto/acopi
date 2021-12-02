@@ -79,4 +79,6 @@ Route::resource('/pagina_web/info/gremio', 'PaginaWebController');
 Route::resource('/pagina_web/info/productos', 'PaginaWebController');
 Route::resource('/pagina_web/info/redes', 'PaginaWebController');
 
+Route::resource('/usuarios/consultarUser', 'UsuariosController');
+
 /*=====  End of Rutas que incluyen todos los metodos HTML  ======*/

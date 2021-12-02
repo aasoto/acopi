@@ -38,8 +38,7 @@ class PaginaWebController extends Controller
 						"celular"=>$request->input("celular"),
 						"email"=>$request->input("email"),
 						"logo_pestana_actual"=>$request->input("logo_pestana_actual"),
-						"logo_navegacion_actual"=>$request->input("logo_navegacion_actual")/*,
-						"carrusel"=>$request->input("carrusel")*/);
+						"logo_navegacion_actual"=>$request->input("logo_navegacion_actual"));
 		/*echo '<pre>'; print_r($datos["redes_sociales"]); echo '</pre>';
 		return;*/
 		/*----------  Recoge imágenes logos  ----------*/
@@ -188,7 +187,32 @@ class PaginaWebController extends Controller
 					//unlink($datos["logo_pestana_actual"]);
 					$aleatorio = mt_rand(1000, 9999);
 					$ruta_logo_pestana = "vistas/images/pagina_web/".$aleatorio.".".$logo_pestana["logo_pestana_temporal"]->guessExtension();
-					move_uploaded_file($logo_pestana["logo_pestana_temporal"], $ruta_logo_pestana);
+					//move_uploaded_file($logo_pestana["logo_pestana_temporal"], $ruta_logo_pestana);
+
+					/*----------  Redimensionar imagen de logo pestaña  ----------*/
+					list($ancho, $alto) = getimagesize($logo_pestana["logo_pestana_temporal"]);
+                    $nuevoAncho = 50;
+                    $nuevoAlto = 50;
+
+                    if($logo_pestana["logo_pestana_temporal"]->guessExtension() == "jpeg"){
+
+                        $origen = imagecreatefromjpeg($logo_pestana["logo_pestana_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagejpeg($destino, $ruta_logo_pestana);
+
+                    }
+
+                    if($logo_pestana["logo_pestana_temporal"]->guessExtension() == "png"){
+
+                        $origen = imagecreatefrompng($logo_pestana["logo_pestana_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagealphablending($destino, FALSE); 
+                        imagesavealpha($destino, TRUE);
+                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagepng($destino, $ruta_logo_pestana);
+                        
+                    }
 				}else{
 
                     $ruta_logo_pestana = $datos["logo_pestana_actual"];
@@ -198,7 +222,32 @@ class PaginaWebController extends Controller
 					//unlink($datos["logo_navegacion_actual"]);
 					$aleatorio = mt_rand(1000, 9999);
 					$ruta_logo_navegacion = "vistas/images/pagina_web/".$aleatorio.".".$logo_navegacion["logo_navegacion_temporal"]->guessExtension();
-					move_uploaded_file($logo_navegacion["logo_navegacion_temporal"], $ruta_logo_navegacion);
+					//move_uploaded_file($logo_navegacion["logo_navegacion_temporal"], $ruta_logo_navegacion);
+
+					/*----------  Redimensionar imagen de logo navegación  ----------*/
+					list($ancho, $alto) = getimagesize($logo_navegacion["logo_navegacion_temporal"]);
+                    $nuevoAncho = 100;
+                    $nuevoAlto = 100;
+
+                    if($logo_navegacion["logo_navegacion_temporal"]->guessExtension() == "jpeg"){
+
+                        $origen = imagecreatefromjpeg($logo_navegacion["logo_navegacion_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagejpeg($destino, $ruta_logo_navegacion);
+
+                    }
+
+                    if($logo_navegacion["logo_navegacion_temporal"]->guessExtension() == "png"){
+
+                        $origen = imagecreatefrompng($logo_navegacion["logo_pestana_temporal"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagealphablending($destino, FALSE); 
+                        imagesavealpha($destino, TRUE);
+                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagepng($destino, $ruta_logo_navegacion);
+                        
+                    }
 				}else{
 
                     $ruta_logo_navegacion = $datos["logo_navegacion_actual"];
@@ -207,6 +256,7 @@ class PaginaWebController extends Controller
 				/*=====  End of Eliminar y subir logos nuevos al servidor  ======*/
 				
 				
+
 				/*===========================================================================
 				=            Eliminar y subir imagenes del carrusel del servidor            =
 				===========================================================================*/
@@ -221,7 +271,32 @@ class PaginaWebController extends Controller
 		                //unlink(${"boton1_actual_".$i}["boton-1-actual-".$i]);
 						$aleatorio = mt_rand(1000, 9999);
 						${"rutaBoton_1".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"boton1_".$i}["boton-1-temporal-".$i]->guessExtension();
-						move_uploaded_file(${"boton1_".$i}["boton-1-temporal-".$i], ${"rutaBoton_1".$i});
+						//move_uploaded_file(${"boton1_".$i}["boton-1-temporal-".$i], ${"rutaBoton_1".$i});
+						list($ancho, $alto) = getimagesize(${"boton1_".$i}["boton-1-temporal-".$i]);
+	                    $nuevoAncho = 400;
+	                    $nuevoAlto = 118;
+
+	                    /*----------  Redimensionar imagenes de boton # 1  ----------*/
+	                    
+	                    if((${"boton1_".$i}["boton-1-temporal-".$i]->guessExtension() == "jpeg") || ${"boton1_".$i}["boton-1-temporal-".$i]->guessExtension() == "jpg"){
+
+	                        $origen = imagecreatefromjpeg(${"boton1_".$i}["boton-1-temporal-".$i]);
+	                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+	                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+	                        imagejpeg($destino, ${"rutaBoton_1".$i});
+
+	                    }
+
+	                    if(${"boton1_".$i}["boton-1-temporal-".$i]->guessExtension() == "png"){
+
+	                        $origen = imagecreatefrompng(${"boton1_".$i}["boton-1-temporal-".$i]);
+	                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+	                        imagealphablending($destino, FALSE); 
+	                        imagesavealpha($destino, TRUE);
+	                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+	                        imagepng($destino, ${"rutaBoton_1".$i});
+	                        
+	                    }
 		            }else{
 		            	${"rutaBoton_1".$i} = ${"boton1_actual_".$i}["boton-1-actual-".$i];
 		            }
@@ -231,7 +306,32 @@ class PaginaWebController extends Controller
 		                //unlink(${"boton2_actual_".$i}["boton-2-actual-".$i]);
 						$aleatorio = mt_rand(1000, 9999);
 						${"rutaBoton_2".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"boton2_".$i}["boton-2-temporal-".$i]->guessExtension();
-						move_uploaded_file(${"boton2_".$i}["boton-2-temporal-".$i], ${"rutaBoton_2".$i});
+						//move_uploaded_file(${"boton2_".$i}["boton-2-temporal-".$i], ${"rutaBoton_2".$i});
+
+						/*----------  Redimensionar imagenes de boton # 2  ----------*/
+						list($ancho, $alto) = getimagesize(${"boton2_".$i}["boton-2-temporal-".$i]);
+	                    $nuevoAncho = 400;
+	                    $nuevoAlto = 118;
+
+	                    if((${"boton2_".$i}["boton-2-temporal-".$i]->guessExtension() == "jpeg") || (${"boton2_".$i}["boton-2-temporal-".$i]->guessExtension() == "jpg")){
+
+	                        $origen = imagecreatefromjpeg(${"boton2_".$i}["boton-2-temporal-".$i]);
+	                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+	                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+	                        imagejpeg($destino, ${"rutaBoton_2".$i});
+
+	                    }
+
+	                    if(${"boton2_".$i}["boton-2-temporal-".$i]->guessExtension() == "png"){
+
+	                        $origen = imagecreatefrompng(${"boton2_".$i}["boton-2-temporal-".$i]);
+	                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+	                        imagealphablending($destino, FALSE); 
+	                        imagesavealpha($destino, TRUE);
+	                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+	                        imagepng($destino, ${"rutaBoton_2".$i});
+	                        
+	                    }
 		            }else{
 		            	${"rutaBoton_2".$i} = ${"boton2_actual_".$i}["boton-2-actual-".$i];
 		            }
@@ -241,7 +341,31 @@ class PaginaWebController extends Controller
 		                //unlink(${"fotoDelente_actual_".$i}["foto-delante-actual-".$i]);
 						$aleatorio = mt_rand(1000, 9999);
 						${"rutaFoto_Delante".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"fotoDelante_".$i}["foto-delante-temporal-".$i]->guessExtension();
-						move_uploaded_file(${"fotoDelante_".$i}["foto-delante-temporal-".$i], ${"rutaFoto_Delante".$i});
+						//move_uploaded_file(${"fotoDelante_".$i}["foto-delante-temporal-".$i], ${"rutaFoto_Delante".$i});
+						list($ancho, $alto) = getimagesize(${"fotoDelante_".$i}["foto-delante-temporal-".$i]);
+	                    $nuevoAncho = 600;
+	                    $nuevoAlto = 500;
+
+	                    /*----------  Redimensionar imagenes de foto delante  ----------*/
+	                    if((${"fotoDelante_".$i}["foto-delante-temporal-".$i]->guessExtension() == "jpeg") || ${"fotoDelante_".$i}["foto-delante-temporal-".$i]->guessExtension() == "jpg"){
+
+	                        $origen = imagecreatefromjpeg(${"fotoDelante_".$i}["foto-delante-temporal-".$i]);
+	                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+	                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+	                        imagejpeg($destino, ${"rutaFoto_Delante".$i});
+
+	                    }
+
+	                    if(${"fotoDelante_".$i}["foto-delante-temporal-".$i]->guessExtension() == "png"){
+
+	                        $origen = imagecreatefrompng(${"fotoDelante_".$i}["foto-delante-temporal-".$i]);
+	                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+	                        imagealphablending($destino, FALSE); 
+	                        imagesavealpha($destino, TRUE);
+	                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+	                        imagepng($destino, ${"rutaFoto_Delante".$i});
+	                        
+	                    }
 		            }else{
 		            	${"rutaFoto_Delante".$i} = ${"fotoDelante_actual_".$i}["foto-delante-actual-".$i];
 		            }
@@ -251,7 +375,32 @@ class PaginaWebController extends Controller
 		                //unlink(${"fondo_actual_".$i}["fondo-actual-".$i]);
 						$aleatorio = mt_rand(1000, 9999);
 						${"rutaFondo".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"fondo_".$i}["fondo-temporal-".$i]->guessExtension();
-						move_uploaded_file(${"fondo_".$i}["fondo-temporal-".$i], ${"rutaFondo".$i});
+						//move_uploaded_file(${"fondo_".$i}["fondo-temporal-".$i], ${"rutaFondo".$i});
+
+						/*----------  Redimensionar imagenes de fondo(background)  ----------*/
+						list($ancho, $alto) = getimagesize(${"fondo_".$i}["fondo-temporal-".$i]);
+	                    $nuevoAncho = 2000;
+	                    $nuevoAlto = 1333;
+
+	                    if((${"fondo_".$i}["fondo-temporal-".$i]->guessExtension() == "jpeg") || (${"fondo_".$i}["fondo-temporal-".$i]->guessExtension() == "jpg")){
+
+	                        $origen = imagecreatefromjpeg(${"fondo_".$i}["fondo-temporal-".$i]);
+	                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+	                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+	                        imagejpeg($destino, ${"rutaFondo".$i});
+
+	                    }
+
+	                    if(${"fondo_".$i}["fondo-temporal-".$i]->guessExtension() == "png"){
+
+	                        $origen = imagecreatefrompng(${"fondo_".$i}["fondo-temporal-".$i]);
+	                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+	                        imagealphablending($destino, FALSE); 
+	                        imagesavealpha($destino, TRUE);
+	                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+	                        imagepng($destino, ${"rutaFondo".$i});
+	                        
+	                    }
 		            }else{
 		            	${"rutaFondo".$i} = ${"fondo_actual_".$i}["fondo-actual-".$i];
 		            }
@@ -270,9 +419,8 @@ class PaginaWebController extends Controller
 		            
 				}
 
+				
 				/*=====  End of Eliminar y subir imagenes del carrusel del servidor  ======*/
-				
-				
 
 				//$paginaweb = PaginaWebModel::all();
 				$contacto = $datos["direccion"].'^'.$datos["telefono"].'^'.$datos["celular"].'^'.$datos["email"];
