@@ -101,6 +101,7 @@
       <excludeFolder url="file://$MODULE_DIR$/administrador/vendor/ramsey/uuid" />
       <excludeFolder url="file://$MODULE_DIR$/administrador/vendor/scrivo/highlight.php" />
       <excludeFolder url="file://$MODULE_DIR$/administrador/vendor/vlucas/phpdotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/administrador/vendor/yajra/laravel-datatables-oracle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

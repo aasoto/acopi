@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\UsuariosModel;
 use App\RolesModel;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
@@ -13,9 +14,33 @@ class UsuariosController extends Controller
 	===============================================================*/
 	
 	public function index(){
-    	$usuarios = UsuariosModel::all();
 
-    	return view("paginas.usuarios.consultarUser", array("usuarios" => $usuarios));
+    	/*return view("paginas.usuarios.consultarUser", array("usuarios" => $usuarios));*/
+    	if (request()->ajax()) {
+    		return datatables()->of(UsuariosModel::all()) 
+    		->addColumn('acciones', function($data){
+
+			$acciones = '<div class="btn-group">
+									
+							<a href="'.url()->current().'/'.$data->id.'" class="btn btn-warning btn-sm">
+								<i class="fas fa-pencil-alt text-white"></i>
+							</a>
+
+							<button class="btn btn-danger btn-sm eliminarRegistro" action="'.url()->current().'/'.$data->id.'" method="DELETE" pagina="usuarios/consultarUser" token="'.csrf_token().'">
+							<i class="fas fa-trash-alt"></i>
+							</button>
+
+		  				</div>';
+
+				return $acciones;
+			})
+			  ->rawColumns(['acciones'])
+			  -> make(true);
+
+		}
+    	//$roles = RolesModel::all();
+    	$usuarios = UsuariosModel::all();
+    	return view("paginas.usuarios.consultarUser");
     }
 	
 	/*=====  End of Mostrar todos los registros en la tabla  ======*/

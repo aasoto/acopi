@@ -1,7 +1,9 @@
 @extends('plantilla')
 
 @section('content')
-<div class="content-wrapper" style="min-height: 243px;">
+
+@if (Auth::user()->rol == 'Administrador')
+  <div class="content-wrapper" style="min-height: 243px;">
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <div class="container-fluid">
@@ -59,7 +61,7 @@
               </tr>
               </thead>
               <tbody>
-                @foreach ($usuarios as $key => $value)
+                {{--@foreach ($usuarios as $key => $value)
                   <tr>
                     <td>{{($key+1)}}</td>
                     <td>{{$value["name"]}}</td>
@@ -67,8 +69,16 @@
                     <td class="text-center">
                       @if (isset($value['foto']))
                         <img src="{{ url('/') }}/{{$value['foto']}}" width="25px" height="25px"></td>
+                      @else
+                        <img src="{{ url('/') }}/vistas/images/usuarios/unknown.png" width="25px" height="25px"></td>
                       @endif
-                    <td>{{$value["rol"]}}</td>
+                    <td>
+                       @if (isset($value['foto']))
+                        {{$value["rol"]}}
+                       @else
+                        <i>Sin verificar</i>
+                       @endif
+                    </td>
                     <td class="text-center">
                       <div class="btn-group">
                         <a href="{{url('/')}}/usuarios/consultarUser/{{$value["id"]}}" class="btn btn-warning btn-sm">
@@ -77,7 +87,7 @@
                         <button class="btn btn-danger btn-sm eliminarRegistro" action="{{url('/')}}/usuarios/consultarUser/{{$value["id"]}}" method="DELETE" pagina="usuarios/consultarUser">
                           @csrf 
                           <i class="fas fa-trash-alt"></i>
-                        </button>
+                        </button>--}}
                         {{--<form method="post" action="{{url('/')}}/usuarios/consultarUser/{{$value["id"]}}">
                           <input type="hidden" name="_method" value="DELETE">
                           @csrf
@@ -85,10 +95,10 @@
                             <i class="fas fa-trash-alt text-white"></i>
                           </button>
                         </form>--}} 
-                      </div>
+                      {{--</div>
                     </td>
                   </tr>
-                @endforeach
+                @endforeach--}}
               </tbody>
               <tfoot>
               <tr>
@@ -351,6 +361,8 @@
 @endif
 
 <!--=====  End of Editar administrador  ======-->
+@endif
+
 
 <!--==========================================
 =            Sección de alertas            =

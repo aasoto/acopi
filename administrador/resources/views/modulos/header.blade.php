@@ -9,10 +9,17 @@
   <!-- Right navbar links -->
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-        Hola, {{ Auth::user()->rol }} 
-        <!-- Este botón se usará para brindar información acerca del tipo de usuario. -->
-      </a>
+      @if (Auth::user()->rol == '')
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          Hola, por favor verifique su usuario.
+          <!-- Este botón se usará para brindar información acerca del tipo de usuario. -->
+        </a>
+      @else
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          Hola, {{ Auth::user()->rol }} 
+          <!-- Este botón se usará para brindar información acerca del tipo de usuario. -->
+        </a>
+      @endif 
     </li>
     <li class="nav-item">
       <a class="nav-link" data-widget="fullscreen" href="#" role="button">
