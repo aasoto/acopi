@@ -37,83 +37,102 @@
                   </button>
                 </div>
               </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Titulo</label>
-                      <input type="text" class="form-control" name="titulo" value="" required>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Categoria</label>
-                      <select class="form-control select2" style="width: 100%;">
-                        <option selected="selected">General</option>
-                        @foreach ($categorias as $key => $value)
-                          <option>{{ $value["nombre_categoria"] }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group text-center">
-                      <label for="exampleInputFile">Imagen de portada</label>
-                      <div class="input-group">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="exampleInputFile">
-                          <label class="custom-file-label" for="exampleInputFile">Archivo</label>
-                        </div>
-                        <div class="input-group-append">
-                          <span class="input-group-text">Subir</span>
+              <form action="{{url('/')}}/pagina_web/noticias" method="post" enctype="multipart/form-data">
+                @csrf
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Titulo</label>
+                          <input type="text" class="form-control" name="titulo" value="" required>
                         </div>
                       </div>
-                      <br>
-                      <img src="{{url('/')}}/vistas/images/9.jpg" class="img-fluid py-2 bg-secondary previsualizarImg_logo">
-                      <p class="help-block small mt-3">Dimensiones: 700px * 200px | Peso Max. 2MB | Formato: JPG o PNG</p>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Categoria</label>
+                          <select class="form-control select2" style="width: 100%;" name="categoria" required>
+                            <option selected="selected">Seleccionar...</option>
+                            @foreach ($categorias as $key => $value)
+                              <option value="{{ $value['id_categoria']}}">{{ $value["nombre_categoria"] }}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="form-group text-center">
+                          <label for="exampleInputFile">Imagen de portada</label>
+                          <!--<div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="exampleInputFile" name="portada_noticia">
+                              <label class="custom-file-label" for="exampleInputFile">Archivo</label>
+                            </div>
+                            <div class="input-group-append">
+                              <span class="input-group-text">Subir</span>
+                            </div>
+                          </div>-->
+                          <div class="form-group my-2 text-center">
+                            
+                              <div class="btn btn-default btn-file">
+                               
+                                <i class="fas fa-paperclip"></i> Adjuntar Imagen de portada
+                              
+                                <input type="file" name="portada_noticia" required>
+
+                              </div>
+
+                              <img class="previsualizarImg_portada_noticia img-fluid py-2">
+
+                              <p class="help-block small">Dimensiones: 1024px * 250px | Peso Max. 2MB | Formato: JPG o PNG</p>
+                          </div>
+                          <br>
+                          <!--<img class="img-fluid py-2 bg-secondary previsualizarImg_portada_noticia">
+                          <p class="help-block small mt-3">Dimensiones: 700px * 200px | Peso Max. 2MB | Formato: JPG o PNG</p>-->
+                        </div>
+                      </div>
+                      
+                      
+                      <!--Foreach para ver innerjoin de noticias-->
+                      {{--@foreach ($noticias as $key => $value)
+                        <h3>{{ $value["titulo"] }}</h3>
+                        <h5>{{ $value->categorias["nombre_categoria"] }}</h5>
+                      @endforeach--}}
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Descripción</label>
+                          <textarea class="form-control" rows="6" name="descripcion" required>
+                          </textarea>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Palabras claves</label>
+                          <input type="text" class="form-control" name="palabras_claves" data-role="tagsinput" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Ruta</label>
+                          <input type="text" class="form-control inputRuta" name="ruta" value="" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="nameEditor">Contenido noticia</label>
+                          <textarea class="form-control summernote-sm" name="contenido_noticia" rows="10">
+                          Noticia</textarea>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  
-                  
-                  <!--Foreach para ver innerjoin de noticias-->
-                  {{--@foreach ($noticias as $key => $value)
-                    <h3>{{ $value["titulo"] }}</h3>
-                    <h5>{{ $value->categorias["nombre_categoria"] }}</h5>
-                  @endforeach--}}
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Descripción</label>
-                      <textarea class="form-control" rows="6" name="descripcion" required>
-                      </textarea>
-                    </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fas fa-check"></i> Guardar
+                    </button>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Palabras claves</label>
-                      <input type="text" class="form-control" name="palabras_claves" data-role="tagsinput" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputPassword1">Ruta</label>
-                      <input type="text" class="form-control" name="ruta" value="" required>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="nameEditor">Contenido noticia</label>
-                      <textarea class="form-control summernote-sm" name="contenido_noticia" rows="10">
-                      Noticia</textarea>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                Footer
-              </div>
+              </form>
               <!-- /.card-footer-->
             </div>
             <!-- /.card -->
@@ -124,4 +143,32 @@
     <!-- /.content -->
   </div>
 
-  @endsection
+  @if (Session::has("no-validacion"))
+    <script>
+      swal({
+          title: "¡Cuidado!",
+          text: "Está intentando ingresar caracteres no validos.",
+          icon: "warning"
+      });
+    </script>
+  @endif
+  @if (Session::has("ok-crear"))
+    <script>
+      swal({
+          title: "¡Bien Hecho!",
+          text: "Información actualizada.",
+          icon: "success"
+      });
+    </script>
+  @endif
+  @if (Session::has("error"))
+    <script>
+      swal({
+          title: "¡Error!",
+          text: "Error al intentar actualizar.",
+          icon: "error"
+      });
+    </script>
+  @endif
+  
+@endsection

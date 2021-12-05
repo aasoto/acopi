@@ -79,6 +79,7 @@
 			</div>
 			<input type="hidden" id="ruta" value="{{ url('/') }}">
 			<script src="{{url('/')}}/js/codigo.js"></script>
+			<script src="{{url('/')}}/js/ownDatatables.js"></script>
 		</body>
 	@else
 		@include('paginas.pagina_web.login')

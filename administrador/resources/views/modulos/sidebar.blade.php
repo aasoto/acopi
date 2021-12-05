@@ -61,13 +61,13 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ url('pagina_web/noticias') }}" class="nav-link">
+                  <a href="{{ url('pagina_web/consultarNoticia') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Noticias</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ url('pagina_web/interesados') }}" class="nav-link">
+                  <a href="{{ url('pagina_web/noticias') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Interesados</p>
                   </a>
