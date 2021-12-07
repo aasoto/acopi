@@ -96,7 +96,7 @@ class NoticiasController extends Controller
 
                 foreach($origen as $fichero){
 
-                    copy($fichero, "vistas/images/noticias/contenido".substr($fichero, 19));
+                    copy($fichero, "vistas/images/noticias/contenido/".substr($fichero, 19));
                     unlink($fichero);
 
                 }

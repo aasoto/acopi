@@ -33,7 +33,7 @@ CONTENIDO NOTICIAS
                 <div class="row">
                     <div class="col-12 col-lg-5">
                         <a href="articulos.html"><h5 class="d-block d-lg-none py-3"><?php echo $value["titulo"]; ?></h5></a>
-                        <a href="articulos.html"><img src="<?php echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+                        <a href="articulos.html"><img src="<?php echo $pagina_web["servidor"]; echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
                     </div>
                     <div class="col-12 col-lg-7 introArticulo">
                         <a href="articulos.html"><h4 class="title-heading"><?php echo $value["titulo"]; ?></h4></a>
@@ -65,7 +65,7 @@ CONTENIDO NOTICIAS
                     <div class="d-flex my-3">
                         <div class="w-100 w-xl-50 pr-3 pt-2">
                             <a href="articulos.html">
-                                <img src="<?php echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid">
+                                <img src="<?php echo $pagina_web["servidor"]; echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid">
                             </a>
                         </div>
                         <div>

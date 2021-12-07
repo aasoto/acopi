@@ -6,25 +6,24 @@
             <div class="col-lg-3">
                 <div class="footer-content">
                     <h3 class="footer-title">Afiliate</h3>
-                    <br><br>
+                    <br>
                 </div>
                 <form method="post" enctype="multipart/form-data">
                     
-
-                    <label class="footer-info" for="fname">Nombre completo:</label><br>
-                    <input type="text" id="nombre_interesado" name="nombre_interesado" value="" required><br>
-                    <label class="footer-info" for="lname">Empresa:</label><br>
-                    <input type="text" id="empresa_interesado" name="empresa_interesado" value="" required><br>
-                    <label class="footer-info" for="fname">E-mail:</label><br>
-                    <input type="email" id="email_interesado" name="email_interesado" value="" required><br>
-                    <label class="footer-info" for="lname">Telefono:</label><br>
-                    <input type="number" id="telefono_interesado" name="telefono_interesado" value="" required><br><br>
-                    <input type="file" name="fotoInteresado" class="d-none" id="fotoInteresado">
-                    <label for="fotoInteresado">
-                        <img src="images/subirFoto.png" class="img-fluid mt-md-3 mt-xl-2 prevFotoInteresado">
-                    </label>
-                    <br><br>
-                    <input type="submit" value="Enviar">
+                    <div class="custom-form mt-4">
+                        <input type="text" class="form-control" id="nombre_interesado" name="nombre_interesado" value="" placeholder="Nombre completo" required><br>
+                        <input type="text" class="form-control" id="empresa_interesado" name="empresa_interesado" value="" placeholder="Empresa" required><br>
+                        <input type="email" class="form-control" id="email_interesado" name="email_interesado" value="" placeholder="E-mail" required><br>
+                        <input type="number" class="form-control" id="telefono_interesado" name="telefono_interesado" value="" placeholder="Telefono" required><br>
+                        <!--<input type="file" name="fotoInteresado" class="d-none" id="fotoInteresado">-->
+                        <!--<label for="fotoInteresado">
+                            <img src="images/subirFoto.png" class="img-fluid mt-md-3 mt-xl-2 prevFotoInteresado">
+                        </label>-->
+                        <div class="justify-content-center align-items-center">
+                            <input type="submit" class="submitBnt btn btn-custom" value="Enviar">
+                        </div>
+                    </div>
+                    
                     <!--<input type="reset" value="Borrar">-->
                     <?php 
                         $enviarDatos = ControladorPagina::ctrEnviarDatosInteresado();
@@ -124,7 +123,7 @@
 
         </div>
         <div class="text-center mt-5">
-            <p class="footer-alt mb-0 f-15">2018 © Aparax. All Rights Reserved</p>
+            <p class="footer-alt mb-0 f-15"><?php echo date("Y"); ?> © ACOPI - Cesar. Todos los derechos reservados</p>
         </div>
     </div>
 </footer>

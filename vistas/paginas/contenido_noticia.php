@@ -1,7 +1,9 @@
-<?php $noticia = ControladorPagina::ctrConsultaNoticiasGeneralConID($_GET["id"]); ?>
+<?php $noticia = ControladorPagina::ctrConsultaNoticiasGeneralConID($_GET["id"]); 
+$pagina_web = ControladorPagina::ctrMostrarPagina();
+?>
 
 <!-- START HOME -->
-<section class="section bg-home-7" id="home" style="background-image: url(<?php echo $noticia["portada_noticia"]; ?>);">
+<section class="section bg-home-7" id="home" style="background-image: url(<?php echo $pagina_web["servidor"]; echo $noticia["portada_noticia"]; ?>);">
     <div class="bg-overlay-color"></div>
     <div class="home-center">
         <div class="home-desc-center">

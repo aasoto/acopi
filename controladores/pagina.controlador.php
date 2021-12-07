@@ -83,26 +83,17 @@ class ControladorPagina
                 VALIDACIÓN FOTO LADO SERVIDOR
                 =============================================*/
 
-                if(isset($_FILES["fotoInteresado"]["tmp_name"]) && !empty($_FILES["fotoInteresado"]["tmp_name"])){
+              /*  if(isset($_FILES["fotoInteresado"]["tmp_name"]) && !empty($_FILES["fotoInteresado"]["tmp_name"])){
 
-                    /*=============================================
-                    CAPTURAR ANCHO Y ALTO ORIGINAL DE LA IMAGEN Y DEFINIR LOS NUEVOS VALORES
-                    =============================================*/
+                    
 
                     list($ancho, $alto) = getimagesize($_FILES["fotoInteresado"]["tmp_name"]);
 
                     $nuevoAncho = 128;
                     $nuevoAlto = 128;
 
-                    /*=============================================
-                    CREAMOS EL DIRECTORIO DONDE VAMOS A GUARDAR LA FOTO DEL USUARIO
-                    =============================================*/
 
                     $directorio = "images/usuarios/";
-
-                    /*=============================================
-                    DE ACUERDO AL TIPO DE IMAGEN APLICAMOS LAS FUNCIONES POR DEFECTO DE PHP
-                    =============================================*/
 
                     if($_FILES["fotoInteresado"]["type"] == "image/jpeg"){
 
@@ -155,8 +146,14 @@ class ControladorPagina
                                 "empresa_interesado" => $_POST["empresa_interesado"],
                                 "email_interesado" => $_POST["email_interesado"],
                                 "telefono_interesado" => $_POST["telefono_interesado"],
-                                "foto_interesado" => $ruta );
+                                "foto_interesado" => $ruta );*/
 
+                $tabla = "interesados";
+
+                $datos = array("nombre_interesado" => $_POST["nombre_interesado"],
+                                "empresa_interesado" => $_POST["empresa_interesado"],
+                                "email_interesado" => $_POST["email_interesado"],
+                                "telefono_interesado" => $_POST["telefono_interesado"]);
 
                 $respuesta = ModeloPagina::mdlEnviarDatosInteresado($tabla, $datos);
 

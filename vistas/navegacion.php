@@ -8,8 +8,8 @@
         <!-- Logo container-->
         <div>
             <a href="index.html" class="logo">
-                    <img src="<?php echo 'administrador/public/'.$pagina_web["logo_navegacion"]; ?>">
-                    <?php echo $pagina_web["titulo_navegacion"]; ?>
+                    <img src="<?php echo 'administrador/public/'.$pagina_web["logo_navegacion"]; ?>" width="162px" height="60px">
+                    <?php //echo $pagina_web["titulo_navegacion"]; ?>
             </a>
         </div>
         <!-- End Logo container-->
@@ -77,7 +77,7 @@
                     <span class="menu-arrow"></span>
                     <ul class="submenu">
                         <li>
-                            <a href="index.php?pagina=ingreso">Iniciar sesión</a>
+                            <a href="<?php echo $pagina_web['servidor'];?>">Iniciar sesión</a>
                         </li>
                         <li>
                             <a href="blog-standard.html">Solicitar cuenta.</a>

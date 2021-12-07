@@ -226,7 +226,7 @@ class PaginaWebController extends Controller
 
 					/*----------  Redimensionar imagen de logo navegación  ----------*/
 					list($ancho, $alto) = getimagesize($logo_navegacion["logo_navegacion_temporal"]);
-                    $nuevoAncho = 100;
+                    $nuevoAncho = 270;
                     $nuevoAlto = 100;
 
                     if($logo_navegacion["logo_navegacion_temporal"]->guessExtension() == "jpeg"){
@@ -240,7 +240,7 @@ class PaginaWebController extends Controller
 
                     if($logo_navegacion["logo_navegacion_temporal"]->guessExtension() == "png"){
 
-                        $origen = imagecreatefrompng($logo_navegacion["logo_pestana_temporal"]);
+                        $origen = imagecreatefrompng($logo_navegacion["logo_navegacion_temporal"]);
                         $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                         imagealphablending($destino, FALSE); 
                         imagesavealpha($destino, TRUE);

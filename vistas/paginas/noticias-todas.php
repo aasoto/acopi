@@ -6,6 +6,7 @@ CONTENIDO REPOSITORIO DE NOTICIAS
     $total_noticias = ControladorPagina::ctrContarNoticias();
     $total_paginas =$total_noticias/$noticias_por_pagina;
     $total_paginas = ceil($total_paginas);
+    $pagina_web = ControladorPagina::ctrMostrarPagina();
 
     if (!$_GET['pestana']) {
         header('Location:index.php?pagina=noticias&pestana=1');
@@ -42,7 +43,7 @@ CONTENIDO REPOSITORIO DE NOTICIAS
                 <div class="row">
                     <div class="col-12 col-lg-5">
                         <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><h5 class="d-block d-lg-none py-3"><?php echo $value["titulo"]; ?></h5></a>
-                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><img src="<?php echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><img src="<?php echo $pagina_web["servidor"]; echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
                     </div>
                     <div class="col-12 col-lg-7 introArticulo">
                         <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><h4 class="title-heading"><?php echo $value["titulo"]; ?></h4></a>
