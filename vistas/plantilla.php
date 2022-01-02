@@ -5,6 +5,7 @@
 $pagina_web = ControladorPagina::ctrMostrarPagina();
 $noticias = ControladorPagina::ctrMostrarConInnerJoin();
 $noticias_destacadas = ControladorPagina::ctrMostrarNoticiasDestacadas();
+$videos_entrevistas = ControladorPagina::ctrMostrarEntrevistas();
 //$noticias_todas = ControladorPagina::ctrMostrarNoticias();
 
 //echo '<pre class="bg-white">'; print_r($noticias); echo '</pre>';

@@ -92,6 +92,60 @@ $(document).on("click", ".agregarRed", function(){
 
 })
 
+/*========================================================
+=            Agregar item carrusel a la lista            =
+========================================================*/
+
+$(document).on("click", ".agregarCarrusel", function(){
+
+	/*var link = $("#url_red").val();
+	var logo = $("#icono_red").val().split(",")[0];
+	var nombre = $("#icono_red").val().split(",")[1];*/
+
+	var categoria = $("#categoria").val();
+	var titulo = $("#titulo").val();
+	var texto = $("#texto").val();
+	var boton_1 = $("#boton-1").val();
+	var boton_2 = $("#boton-2").val();
+	var foto_delante = $("#foto-delante").val();
+	var fondo = $("#fondo").val();
+
+	console.log("titulo", titulo);
+
+
+	$(".listadoCarrusel").append(`
+		<tr><td><i>Nuevo</i></td>
+		<td>`+categoria+`</td>
+		<td>`+titulo+`</td>
+		<td>`+texto+`</td>
+		<td>`+fondo+`</td>
+		<td></td></tr>
+	`)
+
+	//Actualizar el registro de la BD
+	var listaCarrusel = JSON.parse($("#listaCarrusel").val());
+	//console.log("listaRed", listaRed);
+	listaCarrusel.push({
+
+		"categoria": categoria,
+		"titulo": titulo,
+		"texto": texto,
+		"boton-1": boton_1,
+		"boton-2": boton_2,
+		"foto-delante": foto_delante,
+		"fondo": fondo
+
+	})
+
+	$("#listaCarrusel").val(JSON.stringify(listaCarrusel));
+
+	console.log("Lista carrusel:", listaCarrusel);
+
+})
+
+/*=====  End of Agregar item carrusel a la lista  ======*/
+
+
 /*=============================================
 ELIMINAR RED
 =============================================*/
@@ -113,6 +167,53 @@ $(document).on("click", ".eliminarRed", function(){
 	}
 
 })
+
+/*==============================================
+=            Eliminar item carrusel            =
+==============================================*/
+
+/*$(document).on("click", ".eliminarItem", function(){
+
+	var listaCarrusel = JSON.parse($("#listaCarrusel").val());
+	var titulo = $(this).attr("titulo");
+	var texto = $(this).attr("texto");
+	var boton_1 = $(this).attr("boton-1");
+	var boton_2 = $(this).attr("boton-2");
+	var foto_delante = $(this).attr("foto-delante");
+	var fondo = $(this).attr("fondo");
+	console.log("fondo: ", fondo, foto_delante, boton_1, boton_2);
+
+	var datos = "boton_1="+boton_1+"&boton_2="+boton_2+"&foto_delante="+foto_delante+"&fondo="+fondo;
+	$.ajax({
+		url: ruta+"/ajax/carrusel.php",
+		method: "POST",
+		data: datos,
+
+	}).done(function(respuesta){
+		console.log("Hecho");
+	}).fail(function(){
+		console.log("Error");
+	}).always(function(){
+		console.log("Completado");
+	});
+
+	for(var i = 0; i < listaCarrusel.length; i++){
+
+		if(titulo == listaCarrusel[i]["titulo"] && texto == listaCarrusel[i]["texto"]){			
+			
+			listaCarrusel.splice(i, 1);
+			
+			
+			$(this).parent().parent().parent().remove();
+			$("#listaCarrusel").val(JSON.stringify(listaCarrusel));
+		}
+
+	}
+
+})*/
+
+/*=====  End of Eliminar item carrusel  ======*/
+
 
 /*=============================================
 PREVISUALIZAR IMÁGENES TEMPORALES
@@ -337,6 +438,200 @@ $(document).on("click", ".eliminarRegistro", function(){
 
 })
 
+/*===========================================
+=            Eliminar entrevista            =
+===========================================*/
+
+$(document).on("click", ".eliminarEntrevista", function(){
+
+	var action = $(this).attr("action"); 
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	//var token = $(this).children("[name='_token']").attr("value");
+  	var token = $(this).attr("token");
+
+
+  	swal({
+  		 title: '¿Está seguro de eliminar esta entrevista?',
+  		 text: "¡Si no lo está puede cancelar la acción!",
+  		 type: 'warning',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Si, eliminar entrevista!'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var datos = new FormData();
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡La entrevista ha sido eliminado!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+			                    
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina; 
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+/*=====  End of Eliminar entrevista  ======*/
+
+
+/*=================================================================
+=            Preguntar antes de eliminar Item Carrusel            =
+=================================================================*/
+
+$(document).on("click", ".eliminarItem", function(){
+
+	var action = $(this).attr("action"); 
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	//var token = $(this).children("[name='_token']").attr("value");
+  	var token = $(this).attr("token");
+
+  	var titulo = $(this).attr("titulo");
+	var texto = $(this).attr("texto");
+	var boton_1 = $(this).attr("boton-1");
+	var boton_2 = $(this).attr("boton-2");
+	var foto_delante = $(this).attr("foto-delante");
+	var fondo = $(this).attr("fondo");
+
+	$(this).parent().parent().parent().remove();
+
+
+  	swal({
+  		 title: '¿Está seguro de eliminar este registro?',
+  		 text: "¡Si no lo está puede cancelar la acción!",
+  		 type: 'warning',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Si, eliminar registro!'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var listaCarrusel = JSON.parse($("#listaCarrusel").val());
+			console.log("fondo: ", titulo, foto_delante, boton_1, boton_2);
+			var datos = "boton_1="+boton_1+"&boton_2="+boton_2+"&foto_delante="+foto_delante+"&fondo="+fondo;
+			$.ajax({
+				url: ruta+"/ajax/carrusel.php",
+				method: "POST",
+				data: datos,
+
+			}).done(function(respuesta){
+				console.log("Hecho");
+			}).fail(function(){
+				console.log("Error");
+			}).always(function(){
+				console.log("Completado");
+			});
+
+			for(var i = 0; i < listaCarrusel.length; i++){
+
+				if(titulo == listaCarrusel[i]["titulo"] && texto == listaCarrusel[i]["texto"]){
+					listaCarrusel.splice(i, 1);
+					$("#listaCarrusel").val(JSON.stringify(listaCarrusel));
+					console.log("Carrusel: ", listaCarrusel);
+				}
+
+			}
+
+			var datos = new FormData();
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡El registro ha sido eliminado!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+			                    
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina; 
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}else{
+  			location.reload();
+  		}
+
+  	})
+
+	
+
+
+})
+
+/*=====  End of Preguntar antes de eliminar Item Carrusel  ======*/
+
+
 
 /*=====================================
 =            LIMPIAR RUTAS            =
@@ -368,3 +663,6 @@ $(document).on("keyup", ".inputRuta", function(){
 })
 
 /*=====  End of LIMPIAR RUTAS  ======*/
+
+
+

@@ -73,6 +73,16 @@ class ControladorPagina
         return $respuesta;
     }
 
+    static public function ctrMostrarEntrevistas()
+    {
+        #se le manda el nombre de la tabla al modelo blog para que esta nos de la respuesta
+        $tabla = "entrevistas";
+
+        $respuesta = ModeloPagina::mdlMostrarEntrevistas($tabla);
+
+        return $respuesta;
+    }
+
     /**Enviar datos interesado**/
 
     static public function ctrEnviarDatosInteresado(){

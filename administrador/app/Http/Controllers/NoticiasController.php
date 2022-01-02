@@ -15,7 +15,35 @@ class NoticiasController extends Controller
     	$categorias = CategoriasModel::all();
 
     	return view("paginas.pagina_web.noticias", array("noticias" => $noticias, "categorias" => $categorias));
+        /*if (request()->ajax()) {
+            return datatables()->of(NoticiasModel::all()) 
+            ->addColumn('acciones', function($data){
+
+            $acciones = '<div class="btn-group">
+                                    
+                            <a href="'.url()->current().'/'.$data->id.'" class="btn btn-warning btn-sm">
+                                <i class="fas fa-pencil-alt text-white"></i>
+                            </a>
+
+                            <button class="btn btn-danger btn-sm eliminarNoticia" action="'.url()->current().'/'.$data->id.'" method="DELETE" pagina="usuarios/consultarNoticia" token="'.csrf_token().'">
+                            <i class="fas fa-trash-alt"></i>
+                            </button>
+
+                        </div>';
+
+                return $acciones;
+            })
+              ->rawColumns(['acciones'])
+              -> make(true);
+
+        }
+
+        $noticias = NoticiasModel::all();
+        $categorias = CategoriasModel::all();
+        return view("paginas.pagina_web.noticias", array("noticias" => $noticias, "categorias" => $categorias));*/
     }
+
+    
 
     /*===========================================
     =            Crear nueva noticia            =

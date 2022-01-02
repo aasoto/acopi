@@ -101,8 +101,7 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="exampleInputPassword1">Descripción</label>
-                          <textarea class="form-control" rows="6" name="descripcion" required>
-                          </textarea>
+                          <textarea class="form-control" rows="6" name="descripcion" required></textarea>
                         </div>
                       </div>
                       <div class="col-md-6">
@@ -120,8 +119,7 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <label for="nameEditor">Contenido noticia</label>
-                          <textarea class="form-control summernote-sm" name="contenido_noticia" rows="10">
-                          Noticia</textarea>
+                          <textarea class="form-control summernote-sm" name="contenido_noticia" rows="10"></textarea>
                         </div>
                       </div>
                     </div>

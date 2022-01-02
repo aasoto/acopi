@@ -96,6 +96,4 @@
 if(isset($_GET["pagina"])){?>
     <br>
     <br>
-    <br>
-    <br>
 <?php }

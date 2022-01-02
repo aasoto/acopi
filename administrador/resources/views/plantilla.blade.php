@@ -24,6 +24,10 @@
 	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/tagsinput.css">
 	{{-- SUMMERNOTE --}}
 	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/summernote.css">
+	<!--Slider-->
+    <link rel="stylesheet" href="{{ url('/') }}/css/plugins/owl.carousel.css" />
+    <link rel="stylesheet" href="{{ url('/') }}/css/plugins/owl.theme.css" />
+    <link rel="stylesheet" href="{{ url('/') }}/css/plugins/owl.transitions.css" />
 	<!-- SweetAlert2 -->
   	{{--<link rel="stylesheet" href="{{ url('/') }}/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">--}}
   	<!-- Theme style | CSS de AdminLTE -->
@@ -63,6 +67,8 @@
 	<!-- Sweetalert-->
 	{{--<script src="{{ url('/') }}/js/plugins/sweetalert.min.js"></script>--}}
 	<script src="{{ url('/') }}/js/plugins/sweetalert.js"></script>
+	<!-- owl-carousel -->
+    <script src="{{ url('/') }}/js/plugins/owl.carousel.min.js"></script>
 	<!-- SweetAlert2 -->
 	{{--<script src="{{ url('/') }}/js/plugins/sweetalert2/sweetalert2.min.js"></script>--}}
 	<!--=====  End of Plugins JavaScript  ======-->
@@ -72,7 +78,7 @@
 	@auth
 		<body class="hold-transition sidebar-mini layout-fixed">
 			<div class="wrapper">
-				@include('modulos.preloading')
+				{{--@include('modulos.preloading')--}}
 				@include('modulos.header')
 				@include('modulos.sidebar')
 				@yield('content')

@@ -68,7 +68,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 =================================================================*/
 
 Route::resource('/pagina_web/carrusel', 'PaginaWebController');
-Route::resource('/pagina_web/entrevistas', 'PaginaWebController');
+Route::resource('/pagina_web/ingresarCarrusel', 'CarruselController');
+Route::resource('/pagina_web/eliminarCarrusel', 'EliminarCarruselController');
+Route::resource('/pagina_web/entrevistas', 'EntrevistasController');
 Route::resource('/pagina_web/noticias', 'NoticiasController');
 Route::resource('/pagina_web/consultarNoticia', 'ConsultarNoticiaController');
 Route::resource('/pagina_web/eventos', 'PaginaWebController');
