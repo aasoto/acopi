@@ -22,39 +22,191 @@
 
     <!-- Main content -->
     <section class="content">
-
+      @foreach ($paginaweb as $element) @endforeach
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <!-- Default box -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Title</h3>
-
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i class="fas fa-times"></i>
-                  </button>
+        <!--=====================================================
+        =            Consultar productos y servicios            =
+        ======================================================-->
+        <form action="{{url('/')}}/pagina_web/info/productos/{{$element->id}}" method="post" enctype="multipart/form-data">
+          @method('PUT')
+          @csrf
+          @php
+          echo '<div class="row">';
+            $contador = json_decode($element->productos, true);
+            $total_productos = 0;
+            foreach ($contador as $key => $value){
+              $total_productos++;
+            }
+            $contador = 0;
+            $filas = round($total_productos/2);
+            //echo '<pre>'; print_r($total_productos); echo '</pre>';
+            $productos = json_decode($element->productos, true);
+            $indice = 0;
+            $numero_producto = 0;
+            foreach ($productos as $key => $value){
+              if($numero_producto < $filas){
+                echo '
+                <div class="col-md-6">
+                  <div class="card card-primary collapsed-card">
+                    <div class="card-header">
+                      <h3 class="card-title">'.$value["num"].' - '.$value["nombre"].'</h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Número</label>
+                            <input type="text" class="form-control" name="numero-'.$indice.'" value="'.$value["num"].'" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Nombre</label>
+                            <input type="text" class="form-control" name="nombre-'.$indice.'" value="'.$value["nombre"].'" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Descripción</label>
+                            <textarea class="form-control" rows="5" name="descripcion-'.$indice.'" required>'.$value["descripcion"].'</textarea>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Guardar
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="card-body">
-                Start creating your amazing application!
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                Footer
-              </div>
-              <!-- /.card-footer-->
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
+                  
+                ';
+              }else{
+                echo '
+                <div class="col-md-6">
+                  <div class="card card-primary collapsed-card">
+                    <div class="card-header">
+                      <h3 class="card-title">'.$value["num"].' - '.$value["nombre"].'</h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Número</label>
+                            <input type="text" class="form-control" name="numero-'.$indice.'" value="'.$value["num"].'" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Nombre</label>
+                            <input type="text" class="form-control" name="nombre-'.$indice.'" value="'.$value["nombre"].'" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Descripción</label>
+                            <textarea class="form-control" rows="5" name="descripcion-'.$indice.'" required>'.$value["descripcion"].'</textarea>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Guardar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                ';
+              }
+              $indice++;
+            }
+            echo '
+                <div class="col-md-6">
+                  <div class="card card-success collapsed-card">
+                    <div class="card-header">
+                      <h3 class="card-title">Agregar nuevo producto</h3>
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                          <div class="form-group">
+                            <input type="text" class="form-control" name="numero-'.$indice.'" value="" placeholder="Número">
+                          </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control" name="nombre-'.$indice.'" value="" placeholder="Nombre">
+                          </div>
+                          <div class="form-group">
+                            <textarea class="form-control" rows="5" name="descripcion-'.$indice.'" placeholder="Descripción"></textarea>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-success">
+                        <i class="fas fa-check"></i> Guardar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                ';
+            $indice--;
+            echo '<input type="hidden" name="indice" value="'.$indice.'" id="indice">';
+            /*==============================================
+            =            Agregar nuevo producto            =
+            ==============================================*/
+            
+           
+            
+            /*=====  End of Agregar nuevo producto  ======*/
+            
+          echo '</div>';
+          @endphp
+        </form>
+        
+        
+        <!--====  End of Consultar productos y servicios  ====-->
+        
       </div>
     </section>
     <!-- /.content -->
   </div>
-
+@if (Session::has("no-validacion"))
+    <script>
+      swal({
+          title: "¡Cuidado!",
+          text: "Está intentando ingresar caracteres no validos.",
+          icon: "warning"
+      });
+    </script>
+  @endif
+  @if (Session::has("ok-editar"))
+    <script>
+      swal({
+          title: "¡Bien Hecho!",
+          text: "Información actualizada.",
+          icon: "success"
+      });
+    </script>
+  @endif
+  @if (Session::has("error"))
+    <script>
+      swal({
+          title: "¡Error!",
+          text: "Error al intentar actualizar.",
+          icon: "error"
+      });
+    </script>
+  @endif
+  @if (Session::has("no-validacion-imagen"))
+    <script>
+      swal({
+          title: "¡Error!",
+          text: "Formato incorrecto de imagen.",
+          icon: "error"
+      });
+    </script>
+  @endif
   @endsection

@@ -55,9 +55,27 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ url('pagina_web/carrusel') }}" class="nav-link">
+                  <a href="{{ url('pagina_web/datosg?ver=datosg') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Datos Generales</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('pagina_web/logos?ver=logos') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Logos</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('pagina_web/carrusel?ver=carrusel') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Carrusel</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('pagina_web/footer?ver=footer') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Pie de Página</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -76,18 +94,6 @@
                   <a href="{{ url('pagina_web/entrevistas') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Entrevistas</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ url('pagina_web/eventos') }}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Eventos</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ url('pagina_web/footer') }}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pie de Página</p>
                   </a>
                 </li>
                 <li class="nav-item">

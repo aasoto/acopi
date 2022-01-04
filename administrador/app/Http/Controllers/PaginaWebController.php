@@ -14,7 +14,7 @@ class PaginaWebController extends Controller
 	public function index(){
     	$paginaweb = PaginaWebModel::all();
 
-    	return view("paginas.pagina_web.carrusel", array("paginaweb" => $paginaweb));
+    	return view("paginas.pagina_web.general", array("paginaweb" => $paginaweb));
     }
 	
 	/*=====  End of Mostrar todos los registros en la tabla  ======*/
@@ -102,7 +102,7 @@ class PaginaWebController extends Controller
                 "logo_navegacion_temporal" => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
 
                 if($validarLogo_navegacion->fails()){
-                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+                    return redirect("/pagina_web/general?ver=logos")->with("no-validacion-imagen", "");
                 }
             }
 
@@ -112,7 +112,7 @@ class PaginaWebController extends Controller
                 "logo_pestana_temporal" => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
 
                 if($validarLogo_pestana->fails()){
-                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+                    return redirect("/pagina_web/general?ver=logos")->with("no-validacion-imagen", "");
                 }
             }
 			
@@ -135,7 +135,7 @@ class PaginaWebController extends Controller
 	                "boton-1-temporal-".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
 
 	                if(${"validarBoton1_".$i}->fails()){
-	                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+	                    return redirect("/pagina_web/general?ver=carrusel")->with("no-validacion-imagen", "");
 	                }
 	            }
 
@@ -145,7 +145,7 @@ class PaginaWebController extends Controller
 	                "boton-2-temporal-".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
 
 	                if(${"validarBoton2_".$i}->fails()){
-	                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+	                    return redirect("/pagina_web/general?ver=carrusel")->with("no-validacion-imagen", "");
 	                }
 	            }
 
@@ -155,7 +155,7 @@ class PaginaWebController extends Controller
 	                "foto-delante-temporal-".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
 
 	                if(${"validarFotoDelante_".$i}->fails()){
-	                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+	                    return redirect("/pagina_web/general?ver=carrusel")->with("no-validacion-imagen", "");
 	                }
 	            }
 
@@ -165,7 +165,7 @@ class PaginaWebController extends Controller
 	                "fondo-temporal-".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
 
 	                if(${"validarFondo_".$i}->fails()){
-	                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+	                    return redirect("/pagina_web/general?ver=carrusel")->with("no-validacion-imagen", "");
 	                }
 	            }
 			}
@@ -176,7 +176,7 @@ class PaginaWebController extends Controller
 
 
 			if ($validar->fails()) {
-				return redirect("/pagina_web/carrusel")->with("no-validacion", "");
+				return redirect("/pagina_web/general?ver=ninguna")->with("no-validacion", "");
 			}else{
 				/*==================================================================
 				=            Eliminar y subir logos nuevos al servidor            =
@@ -447,10 +447,10 @@ class PaginaWebController extends Controller
     								"carrusel" => $carrusel);
 
     			$paginaweb = PaginaWebModel::where("id", $id)->update($actualizar);
-    			return redirect("/pagina_web/carrusel")->with("ok-editar","");
+    			return redirect("/pagina_web/general?ver=ninguna")->with("ok-editar","");
 			}
 		}else{
-			return redirect("/pagina_web/carrusel")->with("error","");
+			return redirect("/pagina_web/general?ver=ninguna")->with("error","");
 		}
 		
 	}

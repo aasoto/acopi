@@ -67,19 +67,23 @@ Route::get('/home', 'HomeController@index')->name('home');
 =            Rutas que incluyen todos los metodos HTML            =
 =================================================================*/
 
+/*----------  Página general  ----------*/
+Route::resource('/pagina_web/general', 'PaginaWebController');
 Route::resource('/pagina_web/carrusel', 'PaginaWebController');
+Route::resource('/pagina_web/logos', 'PaginaWebController');
+Route::resource('/pagina_web/footer', 'PaginaWebController');
+
 Route::resource('/pagina_web/ingresarCarrusel', 'CarruselController');
 Route::resource('/pagina_web/eliminarCarrusel', 'EliminarCarruselController');
 Route::resource('/pagina_web/entrevistas', 'EntrevistasController');
 Route::resource('/pagina_web/noticias', 'NoticiasController');
 Route::resource('/pagina_web/consultarNoticia', 'ConsultarNoticiaController');
 Route::resource('/pagina_web/eventos', 'PaginaWebController');
-Route::resource('/pagina_web/footer', 'PaginaWebController');
 Route::resource('/paginas/pagina_web/interesados', 'PaginaWebController');
 Route::resource('/pagina_web/info/contacto', 'PaginaWebController');
 Route::resource('/pagina_web/info/estatutos', 'PaginaWebController');
 Route::resource('/pagina_web/info/gremio', 'PaginaWebController');
-Route::resource('/pagina_web/info/productos', 'PaginaWebController');
+Route::resource('/pagina_web/info/productos', 'ProductosController');
 Route::resource('/pagina_web/info/redes', 'PaginaWebController');
 
 Route::resource('/usuarios/consultarUser', 'UsuariosController');
