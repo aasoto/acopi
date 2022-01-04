@@ -168,6 +168,38 @@ $(document).on("click", ".eliminarRed", function(){
 
 })
 
+/*=============================================
+ELIMINAR PRODUCTO
+=============================================*/
+$(document).on("click", ".eliminarProducto", function(){
+
+	var listaProductos = JSON.parse($("#listaProductos").val());
+
+	var num = $(this).attr("num");
+	var nombre = $(this).attr("nombre");
+	var descripcion = $(this).attr("descripcion");
+
+	for(var i = 0; i < listaProductos.length; i++){
+
+		if(num == listaProductos[i]["num"] && nombre == listaProductos[i]["nombre"] && descripcion == listaProductos[i]["descripcion"]){			
+			listaProductos.splice(i, 1);			
+			$(this).parent().parent().parent().remove();
+			$("#listaProductos").val(JSON.stringify(listaProductos));
+			$("#eliminar").val("si");
+		}
+
+	}
+
+	$(".listadoProductos").append(`
+		<div class="col-md-12">      
+        	<button type="submit" class="btn btn-danger col-md-12">
+            	<i class="fas fa-save"></i> Guardar cambios de elementos eliminados
+          	</button>
+      	</div>
+	`)
+
+})
+
 /*==============================================
 =            Eliminar item carrusel            =
 ==============================================*/

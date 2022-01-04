@@ -30,8 +30,10 @@
         <form action="{{url('/')}}/pagina_web/info/productos/{{$element->id}}" method="post" enctype="multipart/form-data">
           @method('PUT')
           @csrf
+          <input type="hidden" name="listaProductos" id="listaProductos" value="{{$element->productos}}">
+          <input type="hidden" name="eliminar" id="eliminar" value="no">
           @php
-          echo '<div class="row">';
+          echo '<div class="row listadoProductos">';
             $contador = json_decode($element->productos, true);
             $total_productos = 0;
             foreach ($contador as $key => $value){
@@ -72,9 +74,12 @@
                           </div>
                         </div>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer justify-content-between">
                       <button type="submit" class="btn btn-primary">
                         <i class="fas fa-check"></i> Guardar
+                      </button>
+                      <button type="button" class="btn btn-danger eliminarProducto" num="'.$value["num"].'" nombre="'.$value["nombre"].'" descripcion="'.$value["descripcion"].'">
+                        <i class="fas fa-trash"></i> Eliminar
                       </button>
                     </div>
                   </div>
@@ -109,9 +114,12 @@
                           </div>
                         </div>
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer justify-content-between">
                       <button type="submit" class="btn btn-primary">
                         <i class="fas fa-check"></i> Guardar
+                      </button>
+                      <button type="button" class="btn btn-danger eliminarProducto">
+                        <i class="fas fa-trash"></i> Eliminar
                       </button>
                     </div>
                   </div>
