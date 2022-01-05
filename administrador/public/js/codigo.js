@@ -200,6 +200,92 @@ $(document).on("click", ".eliminarProducto", function(){
 
 })
 
+/*=============================================
+ELIMINAR ALIADO
+=============================================*/
+var logoEliminar;
+$(document).on("click", ".eliminarAliado", function(){
+
+	var listaAliados = JSON.parse($("#listaAliados").val());
+
+	var nombre = $(this).attr("nombre");
+	var link = $(this).attr("link");
+	var logo = $(this).attr("logo");
+	logoEliminar = logo;
+
+	document.getElementById('guardar').disabled=true;
+
+	for(var i = 0; i < listaAliados.length; i++){
+
+		if(nombre == listaAliados[i]["nombre"] && link == listaAliados[i]["link"] && logo == listaAliados[i]["logo"]){			
+			listaAliados.splice(i, 1);			
+			$(this).parent().parent().parent().parent().parent().parent().parent().parent().remove();
+			$("#listaAliados").val(JSON.stringify(listaAliados));
+			$("#eliminar").val("si");
+		}
+
+	}
+
+	$(".listadoAliados").append(`
+		<div class="row">
+			<div class="col-md-1"></div>
+
+			<div class="col-md-10">
+				<div class="form-group text-center" >
+					<i class="fas fa-ban" style="color: #E60026; font-size: 100px;"></i>
+				</div>
+				
+				<div class="form-group text-center">
+					<label for="exampleInputEmail1"><h2>¿Desea eliminar este aliado?</h2></label>
+				</div>
+				
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<button type="button" class="btn btn-lg btn-default float-left cancelarEliminarAliado">
+	                Cancelar
+	            </button>
+	            <button type="submit" class="btn btn-lg btn-danger float-right confirmacionEliminarAliado">
+	                <i class="fas fa-trash"></i> Eliminar
+	            </button>
+	        </div>
+	        <div class="col-md-4"></div>
+		</div>
+		
+	`)
+
+})
+
+/*================================================
+=            Acciones Eliminar Aliado            =
+================================================*/
+
+$(document).on("click", ".cancelarEliminarAliado", function(){
+	window.location.reload();
+})
+
+$(document).on("click", ".confirmacionEliminarAliado", function(){
+	var datos = "logo="+logoEliminar;
+	$.ajax({
+		url: ruta+"/ajax/aliados.php",
+		method: "POST",
+		data: datos,
+
+	}).done(function(respuesta){
+		console.log("Hecho");
+	}).fail(function(){
+		console.log("Error");
+	}).always(function(){
+		console.log("Completado");
+	});
+})
+
+/*=====  End of Acciones Eliminar Aliado  ======*/
+
+
 /*==============================================
 =            Eliminar item carrusel            =
 ==============================================*/

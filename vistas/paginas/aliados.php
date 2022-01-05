@@ -27,73 +27,11 @@
                                         <a class="mfp-image" href="'.$value["link"].'" title=""></a>
                                     </div>
                                     <div class="screenshot-img">
-                                        <img src="'.$value["logo"].'" class="img-fluid" alt="">
+                                        <img src="'.$pagina_web["servidor"].''.$value["logo"].'" class="img-fluid" alt="">
                                     </div>
                                 </div>';
                         }
                     ?>
-
-                    <!--<div class="item mt-4">
-                        <div class="screenshot-overlay">
-                            <a class="mfp-image" href="http://www.unicesar.edu.co/" title=""></a>
-                        </div>
-                        <div class="screenshot-img">
-                            <img src="images/aliados/aliados-upc.png" class="img-fluid" alt="">
-                        </div>
-                    </div>
-
-                    <div class="item mt-4">
-                        <div class="screenshot-overlay">
-                            <a class="mfp-image" href="images/aliados/aliados-udes.png" title=""></a>
-                        </div>
-                        <div class="screenshot-img">
-                            <img src="images/aliados/aliados-udes.png" class="img-fluid" alt="">
-                        </div>
-                    </div>
-
-                    <div class="item mt-4">
-                        <div class="screenshot-overlay">
-                            <a class="mfp-image" href="images/aliados/aliados-areandina.png" title=""></a>
-                        </div>
-                        <div class="screenshot-img">
-                            <img src="images/aliados/aliados-areandina.png" class="img-fluid" alt="">
-                        </div>
-                    </div>
-
-                    <div class="item mt-4">
-                        <div class="screenshot-overlay">
-                            <a class="mfp-image" href="images/aliados/aliados-sena.png" title=""></a>
-                        </div>
-                        <div class="screenshot-img">
-                            <img src="images/aliados/aliados-sena.png" class="img-fluid" alt="">
-                        </div>
-                    </div>-->
-                    <!--<div class="item mt-4">
-                        <div class="screenshot-overlay">
-                            <a class="mfp-image" href="images/screenshot/img-alt-5.png" title=""></a>
-                        </div>
-                        <div class="screenshot-img">
-                            <img src="images/screenshot/img-5.png" class="img-fluid" alt="">
-                        </div>
-                    </div>
-
-                    <div class="item mt-4">
-                        <div class="screenshot-overlay">
-                            <a class="mfp-image" href="images/screenshot/img-alt-6.png" title=""></a>
-                        </div>
-                        <div class="screenshot-img">
-                            <img src="images/screenshot/img-6.png" class="img-fluid" alt="">
-                        </div>
-                    </div>
-
-                    <div class="item mt-4">
-                        <div class="screenshot-overlay">
-                            <a class="mfp-image" href="images/screenshot/img-alt-7.png" title=""></a>
-                        </div>
-                        <div class="screenshot-img">
-                            <img src="images/screenshot/img-7.png" class="img-fluid" alt="">
-                        </div>
-                    </div>-->
                 </div>
             </div>
 

@@ -69,10 +69,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 /*----------  Página general  ----------*/
 Route::resource('/pagina_web/general', 'PaginaWebController');
+Route::resource('/pagina_web/datosg', 'PaginaWebController');
 Route::resource('/pagina_web/carrusel', 'PaginaWebController');
 Route::resource('/pagina_web/logos', 'PaginaWebController');
 Route::resource('/pagina_web/footer', 'PaginaWebController');
 
+Route::resource('/pagina_web/aliados', 'AliadosController');
 Route::resource('/pagina_web/ingresarCarrusel', 'CarruselController');
 Route::resource('/pagina_web/eliminarCarrusel', 'EliminarCarruselController');
 Route::resource('/pagina_web/entrevistas', 'EntrevistasController');
