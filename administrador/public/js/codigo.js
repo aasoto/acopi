@@ -290,18 +290,82 @@ $(document).on("click", ".confirmacionEliminarAliado", function(){
 =            Eliminar item carrusel            =
 ==============================================*/
 
-/*$(document).on("click", ".eliminarItem", function(){
+var boton_1_Eliminar;
+var boton_2_Eliminar;
+var foto_Delante_Eliminar;
+var fondo_Eliminar;
+$(document).on("click", ".eliminarCarrusel", function(){
 
 	var listaCarrusel = JSON.parse($("#listaCarrusel").val());
+
+	var categoria = $(this).attr("categoria");
 	var titulo = $(this).attr("titulo");
 	var texto = $(this).attr("texto");
 	var boton_1 = $(this).attr("boton-1");
 	var boton_2 = $(this).attr("boton-2");
 	var foto_delante = $(this).attr("foto-delante");
 	var fondo = $(this).attr("fondo");
-	console.log("fondo: ", fondo, foto_delante, boton_1, boton_2);
+	boton_1_Eliminar = boton_1;
+	boton_2_Eliminar = boton_2;
+	foto_Delante_Eliminar = foto_delante;
+	fondo_Eliminar = fondo;
 
-	var datos = "boton_1="+boton_1+"&boton_2="+boton_2+"&foto_delante="+foto_delante+"&fondo="+fondo;
+	document.getElementById('guardar').disabled = true;
+
+	for(var i = 0; i < listaCarrusel.length; i++){
+
+		if(categoria == listaCarrusel[i]["categoria"] && titulo == listaCarrusel[i]["titulo"] && texto == listaCarrusel[i]["texto"] && boton_1 == listaCarrusel[i]["boton-1"] && boton_2 == listaCarrusel[i]["boton-2"] && foto_delante == listaCarrusel[i]["foto-delante"] && fondo == listaCarrusel[i]["fondo"]){			
+			listaCarrusel.splice(i, 1);			
+			$(this).parent().parent().parent().parent().parent().parent().parent().remove();
+			$("#listaCarrusel").val(JSON.stringify(listaCarrusel));
+			$("#eliminar").val("si");
+		}
+
+	}
+
+	$(".listadoCarrusel").append(`
+		<div class="row">
+			<div class="col-md-1"></div>
+
+			<div class="col-md-10">
+				<div class="form-group text-center" >
+					<i class="fas fa-ban" style="color: #E60026; font-size: 100px;"></i>
+				</div>
+				
+				<div class="form-group text-center">
+					<label for="exampleInputEmail1"><h2>¿Desea eliminar este item del carrusel?</h2></label>
+				</div>
+				
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<button type="button" class="btn btn-lg btn-default float-left cancelarEliminarItemCarrusel">
+	                Cancelar
+	            </button>
+	            <button type="submit" class="btn btn-lg btn-danger float-right confirmacionEliminarItemCarrusel">
+	                <i class="fas fa-trash"></i> Eliminar
+	            </button>
+	        </div>
+	        <div class="col-md-4"></div>
+		</div>
+		
+	`)
+
+})
+
+/*================================================
+=            Acciones Eliminar Item Carrusel            =
+================================================*/
+
+$(document).on("click", ".cancelarEliminarItemCarrusel", function(){
+	window.location.reload();
+})
+
+$(document).on("click", ".confirmacionEliminarItemCarrusel", function(){
+	var datos = "boton_1="+boton_1_Eliminar+"&boton_2="+boton_2_Eliminar+"&foto_delante="+foto_Delante_Eliminar+"&fondo="+fondo_Eliminar;
 	$.ajax({
 		url: ruta+"/ajax/carrusel.php",
 		method: "POST",
@@ -314,21 +378,9 @@ $(document).on("click", ".confirmacionEliminarAliado", function(){
 	}).always(function(){
 		console.log("Completado");
 	});
+})
 
-	for(var i = 0; i < listaCarrusel.length; i++){
-
-		if(titulo == listaCarrusel[i]["titulo"] && texto == listaCarrusel[i]["texto"]){			
-			
-			listaCarrusel.splice(i, 1);
-			
-			
-			$(this).parent().parent().parent().remove();
-			$("#listaCarrusel").val(JSON.stringify(listaCarrusel));
-		}
-
-	}
-
-})*/
+/*=====  End of Acciones item carrusel  ======*/
 
 /*=====  End of Eliminar item carrusel  ======*/
 

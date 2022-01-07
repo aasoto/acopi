@@ -24,10 +24,10 @@
                                                         <p class="home-desc mt-4 f-17">'.$value["texto"].'</p>
 
                                                         <div class="mt-4">
-                                                            <a href="" class="pr-3">
+                                                            <a href="'.$value["url-boton-1"].'" class="pr-3">
                                                                 <img src="administrador/public/'.$value["boton-1"].'" class="mt-4" height="50" alt="">
                                                             </a>
-                                                            <a href="">
+                                                            <a href="'.$value["url-boton-2"].'">
                                                                 <img src="administrador/public/'.$value["boton-2"].'" class="mt-4" height="50" alt="">
                                                             </a>
                                                         </div>
@@ -62,10 +62,10 @@
                                                         <p class="home-desc mt-4 f-17">'.$value["texto"].'</p>
 
                                                         <div class="mt-4">
-                                                            <a href="" class="pr-3">
+                                                            <a href="'.$value["url-boton-1"].'" class="pr-3">
                                                                 <img src="administrador/public/'.$value["boton-1"].'" class="mt-4" height="50" alt="">
                                                             </a>
-                                                            <a href="">
+                                                            <a href="'.$value["url-boton-2"].'">
                                                                 <img src="administrador/public/'.$value["boton-2"].'" class="mt-4" height="50" alt="">
                                                             </a>
                                                         </div>

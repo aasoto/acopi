@@ -25,233 +25,280 @@ class CarruselController extends Controller
      *
      */
     
-    public function update($id, Request $request){
 
-    	$datos = array("categoria" => $request->input("categoria"),
-					   	"titulo" => $request->input("titulo"),
-						"texto" => $request->input("texto"),
-						"boton-1" => $request->file("boton-1"),
-						"boton-2" => $request->file("boton-2"),
-						"foto-delante" => $request->file("foto-delante"),
-						"fondo" => $request->file("fondo"));
-    	/*echo '<pre>'; print_r($datos["carrusel"]); echo '</pre>';
-    	return;*/
+    public function update($id, Request $request) {
 
-    	$carrusel_actual = array('carrusel' => $request->input("carrusel"));
+        $eliminar = array('eliminar' => $request->input("eliminar"));
+        $carrusel = array('listaCarrusel' => $request->input("listaCarrusel"));
 
-    	if (!empty($datos)) {
-    		/*======================================================
-    		=            Sección de validación de datos            =
-    		======================================================*/
+        /*echo '<pre>'; print_r($eliminar["eliminar"]); echo '</pre>';
+        echo '<pre>'; print_r($carrusel['listaCarrusel']); echo '</pre>';
+        return; */
 
-    		/*----------  validación de datos alfanumericos y datos requeridos  ----------*/
-    		$validar = \Validator::make($datos, [
-    			"categoria" => 'required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-    			"titulo" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-    			"texto" => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
-    			"fondo" => 'required'
-			]);
-    		
-    		/*----------  validación de imagenes  ----------*/
-    		if($datos["boton-1"] != ""){
-                $validarboton_1 = \Validator::make($datos, [
-                "boton-1" => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+        /*----------  Se evalua el valor de la variable para ver si la actualización fue un eliminar  ----------*/
+        if ($eliminar['eliminar'] == "si") {
+            $carrusel = array('listaCarrusel' => $request->input("listaCarrusel"));
+            $actualizar = array('carrusel' => $carrusel['listaCarrusel']);
+            $paginaweb = PaginaWebModel::where("id", $id)->update($actualizar);
+            return redirect("/pagina_web/ingresarCarrusel")->with("ok-editar", "");
+        }
 
-                if($validarboton_1->fails()){
-                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
-                }
+        $indice = array('indice' => $request->input("indice"));
+
+        $categoria_Nuevo = array('categoria' => $request->input("categoria-".($indice['indice']+1)));
+        $titulo_Nuevo = array('titulo' => $request->input("titulo-".($indice['indice']+1)));
+        $texto_Nuevo = array('texto' => $request->input("texto-".($indice['indice']+1)));
+        $boton_1_Nuevo = array('boton_1' => $request->input("boton-1-".($indice['indice']+1)));
+        $url_Boton_1_Nuevo = array('url_Boton_1' => $request->input("url-boton-1-".($indice['indice']+1)));
+        $boton_2_Nuevo = array('boton_2_Nuevo' => $request->input("boton-2-".($indice['indice']+1)));
+        $url_Boton_2_Nuevo = array('url_Boton_2' => $request->input("url-boton-2-".($indice['indice']+1)));
+        $foto_Delante_Nuevo = array('foto_Delante' => $request->input("foto-delante-".($indice['indice']+1)));
+        $fondo_Nuevo = array('fondo' => $request->file("fondo-".($indice['indice']+1)));
+
+        if (!empty($categoria_Nuevo["categoria"]) && !empty($titulo_Nuevo["titulo"]) && !empty($texto_Nuevo["texto"]) && !empty($fondo_Nuevo["fondo"])) {
+            $indice['indice'] = $indice['indice'] + 1; /*se incrementa la variable indice para agregar el nuevo indice*/
+        }
+
+        
+        for ($i=0; $i <= $indice['indice']; $i++) { 
+
+            ${"categoria_".$i} = array('categoria_'.$i => $request->input("categoria-".$i));
+            ${"titulo_".$i} = array('titulo_'.$i => $request->input("titulo-".$i));
+            ${"texto_".$i} = array('texto_'.$i => $request->input("texto-".$i));
+            ${"boton_1_Actual_".$i} = array('boton_1_'.$i => $request->input("boton-1-actual-".$i));
+            ${"url_Boton_1_".$i} = array('url_Boton_1_'.$i => $request->input("url-boton-1-".$i));
+            ${"boton_2_Actual_".$i} = array('boton_2_'.$i => $request->input("boton-2-actual-".$i));
+            ${"url_Boton_2_".$i} = array('url_Boton_2_'.$i => $request->input("url-boton-2-".$i));
+            ${"foto_Delante_Actual_".$i} = array('foto_Delante_'.$i => $request->input("foto-delante-actual-".$i));
+            ${"fondo_Actual_".$i} = array('fondo_'.$i => $request->input("fondo-actual-".$i));
+
+            /*----------  Imagenes temporales  ----------*/
+            ${"boton_1_Temporal_".$i} = array('boton_1_'.$i => $request->file("boton-1-".$i));
+            ${"boton_2_Temporal_".$i} = array('boton_2_'.$i => $request->file("boton-2-".$i));
+            ${"foto_Delante_Temporal_".$i} = array('foto_Delante_'.$i => $request->file("foto-delante-".$i));
+            ${"fondo_Temporal_".$i} = array('fondo_'.$i => $request->file("fondo-".$i));
+
+        }
+
+        $carrusel = "[{";
+
+        for ($i=0; $i <= $indice['indice']; $i++) { 
+            ${"validar_Categoria_".$i} = \Validator::make(${"categoria_".$i}, [ "categoria_".$i => 'required|regex:/^[,\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i']);
+            ${"validar_Titulo_".$i} = \Validator::make(${"titulo_".$i}, ["titulo_".$i => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i']);
+            ${"validar_Texto_".$i} = \Validator::make(${"texto_".$i}, ["texto_".$i => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i']);
+
+            if (${"validar_Categoria_".$i}->fails() || ${"validar_Titulo_".$i}->fails() || ${"validar_Texto_".$i}->fails()) {
+                return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
             }
 
-            if($datos["boton-2"] != ""){
-                $validarboton_2 = \Validator::make($datos, [
-                "boton-2" => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
-
-                if($validarboton_2->fails()){
-                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+            if (!empty(${"boton_1_Actual_".$i}["boton_1_".$i])) {
+                ${"validar_Boton_1_Actual_".$i} = \Validator::make(${"boton_1_Actual_".$i}, [ "boton_1_".$i => 'required|regex:/^[=\\&\\$\\-\\_\\?\\!\\:\\.\\0-9a-zA-Z]+$/i']);
+                if (${"validar_Boton_1_Actual_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
                 }
             }
-
-            if($datos["foto-delante"] != ""){
-                $validarfoto_delante = \Validator::make($datos, [
-                "foto-delante" => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
-
-                if($validarfoto_delante->fails()){
-                    return redirect("/pagina_web/carrusel")->with("no-validacion-imagen", "");
+            if (!empty(${"url_Boton_1_".$i}["url_Boton_1_".$i])) {
+                ${"validar_Url_Boton_1_Actual_".$i} = \Validator::make(${"url_Boton_1_".$i}, [ "url_Boton_1_".$i => 'required|regex:/^[=\\&\\$\\-\\_\\?\\!\\:\\.\\0-9a-zA-Z]+$/i']);
+                if (${"validar_Url_Boton_1_Actual_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
                 }
             }
-
-            if($datos["fondo"] != ""){
-                $validarfondo = \Validator::make($datos, [
-                "fondo" => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
-
-                if($validarfondo->fails()){
-                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion-imagen", "");
+            if (!empty(${"boton_2_Actual_".$i}["boton_2_".$i])) {
+                ${"validar_Boton_2_Actual_".$i} = \Validator::make(${"boton_2_Actual_".$i}, [ "boton_2_".$i => 'required|regex:/^[=\\&\\$\\-\\_\\?\\!\\:\\.\\0-9a-zA-Z]+$/i']);
+                if (${"validar_Boton_2_Actual_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
                 }
             }
-    		/*=====  End of Sección de validación de datos  ======*/
+            if (!empty(${"url_Boton_2_".$i}["url_Boton_2_".$i])) {
+                ${"validar_Url_Boton_2_Actual_".$i} = \Validator::make(${"url_Boton_2_".$i}, [ "url_Boton_2_".$i => 'required|regex:/^[=\\&\\$\\-\\_\\?\\!\\:\\.\\0-9a-zA-Z]+$/i']);
+                if (${"validar_Url_Boton_2_Actual_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
+                }      
+            }
+            if (!empty(${"foto_Delante_Actual".$i}["foto_Delante_".$i])) {
+                ${"validar_Foto_Delante_Actual_".$i} = \Validator::make(${"foto_Delante_Actual_".$i}, [ "foto_Delante_".$i => 'required|regex:/^[=\\&\\$\\-\\_\\?\\!\\:\\.\\0-9a-zA-Z]+$/i']);
+                if (${"validar_Foto_Delante_Actual_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
+                }
+            }
+            if (!empty(${"fondo_Actual_".$i}["fondo_".$i])) {
+                ${"validar_Fondo_Actual_".$i} = \Validator::make(${"fondo_Actual_".$i}, [ "fondo_".$i => 'required|regex:/^[=\\&\\$\\-\\_\\?\\!\\:\\.\\0-9a-zA-Z]+$/i']);
+                if (${"validar_Fondo_Actual_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
+                }
+            }
+            if (!empty(${"boton_1_Temporal_".$i}["boton_1_".$i])) {
+                ${"validar_Boton_1_Temporal_".$i} = \Validator::make(${"boton_1_Temporal_".$i}, [ "boton_1_".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+                if (${"validar_Boton_1_Temporal_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
+                } else {
+                    if (!empty(${"boton_2_Actual_".$i}["boton_2_".$i])) {
+                        unlink(${"boton_1_Actual_".$i}["boton_1_".$i]);
+                    }
 
-    		/*=========================================================
-    		=            Subir imagenes nuevas al servidor            =
-    		=========================================================*/
-    		
-    		if ($validar->fails()) {
-				return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
-			}else{
-				if($datos["boton-1"] != ""){
-					$aleatorio = mt_rand(1000, 9999);
-					$ruta_boton_1 = "vistas/images/pagina_web/carrusel/".$aleatorio.".".$datos["boton-1"]->guessExtension();
+                    $aleatorio = mt_rand(10000, 99999);
+                    ${"ruta_Boton_1_".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"boton_1_Temporal_".$i}["boton_1_".$i]->guessExtension();
 
-					/*----------  Redimensionar imagen  ----------*/
-					list($ancho, $alto) = getimagesize($datos["boton-1"]);
+                    /*----------  Redimensionar imagen  ----------*/
+                    list($ancho, $alto) = getimagesize(${"boton_1_Temporal_".$i}["boton_1_".$i]);
                     $nuevoAncho = 400;
                     $nuevoAlto = 118;
 
-                    if(($datos["boton-1"]->guessExtension() == "jpeg") || ($datos["boton-1"]->guessExtension() == "jpg")){
+                    if((${"boton_1_Temporal_".$i}["boton_1_".$i]->guessExtension() == "jpeg") || (${"boton_1_Temporal_".$i}["boton_1_".$i]->guessExtension() == "jpg")){
 
-                        $origen = imagecreatefromjpeg($datos["boton-1"]);
+                        $origen = imagecreatefromjpeg(${"boton_1_Temporal_".$i}["boton_1_".$i]);
                         $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                         imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagejpeg($destino, $ruta_boton_1);
+                        imagejpeg($destino, ${"ruta_Boton_1_".$i});
 
                     }
 
-                    if($datos["boton-1"]->guessExtension() == "png"){
+                    if(${"boton_1_Temporal_".$i}["boton_1_".$i]->guessExtension() == "png"){
 
-                        $origen = imagecreatefrompng($datos["boton-1"]);
+                        $origen = imagecreatefrompng(${"boton_1_Temporal_".$i}["boton_1_".$i]);
                         $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                         imagealphablending($destino, FALSE); 
                         imagesavealpha($destino, TRUE);
                         imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagepng($destino, $ruta_boton_1);
+                        imagepng($destino, ${"ruta_Boton_1_".$i});
                         
                     }
-				}else{
-					$ruta_boton_1 = "";
-				}
+                }
+            } else {
+                ${"ruta_Boton_1_".$i} = ${"boton_1_Actual_".$i}["boton_1_".$i];
+            }
+            if (!empty(${"boton_2_Temporal_".$i}["boton_2_".$i])) {
+                ${"validar_Boton_2_Temporal_".$i} = \Validator::make(${"boton_2_Temporal_".$i}, [ "boton_2_".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+                if (${"validar_Boton_2_Temporal_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
+                } else {
+                    if (!empty(${"boton_2_Actual_".$i}["boton_2_".$i])) {
+                        unlink(${"boton_2_Actual_".$i}["boton_2_".$i]);
+                    }
 
-				if($datos["boton-2"] != ""){
-					$aleatorio = mt_rand(1000, 9999);
-					$ruta_boton_2 = "vistas/images/pagina_web/carrusel/".$aleatorio.".".$datos["boton-2"]->guessExtension();
-					
-					/*----------  Redimensionar imagen  ----------*/
-					list($ancho, $alto) = getimagesize($datos["boton-2"]);
+                    $aleatorio = mt_rand(10000, 99999);
+                    ${"ruta_Boton_2_".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"boton_2_Temporal_".$i}["boton_2_".$i]->guessExtension();
+
+                    /*----------  Redimensionar imagen  ----------*/
+                    list($ancho, $alto) = getimagesize(${"boton_2_Temporal_".$i}["boton_2_".$i]);
                     $nuevoAncho = 400;
                     $nuevoAlto = 118;
 
-                    if(($datos["boton-2"]->guessExtension() == "jpeg") || ($datos["boton-2"]->guessExtension() == "jpg")){
+                    if((${"boton_2_Temporal_".$i}["boton_2_".$i]->guessExtension() == "jpeg") || (${"boton_2_Temporal_".$i}["boton_2_".$i]->guessExtension() == "jpg")){
 
-                        $origen = imagecreatefromjpeg($datos["boton-2"]);
+                        $origen = imagecreatefromjpeg(${"boton_2_Temporal_".$i}["boton_2_".$i]);
                         $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                         imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagejpeg($destino, $ruta_boton_2);
+                        imagejpeg($destino, ${"ruta_Boton_2_".$i});
 
                     }
 
-                    if($datos["boton-2"]->guessExtension() == "png"){
+                    if(${"boton_2_Temporal_".$i}["boton_2_".$i]->guessExtension() == "png"){
 
-                        $origen = imagecreatefrompng($datos["boton-2"]);
+                        $origen = imagecreatefrompng(${"boton_2_Temporal_".$i}["boton_2_".$i]);
                         $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                         imagealphablending($destino, FALSE); 
                         imagesavealpha($destino, TRUE);
                         imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagepng($destino, $ruta_boton_2);
+                        imagepng($destino, ${"ruta_Boton_2_".$i});
                         
                     }
-				}else{
-					$ruta_boton_2 = "";
-				}
+                }
+            } else {
+                ${"ruta_Boton_2_".$i} = ${"boton_2_Actual_".$i}["boton_2_".$i];
+            }
+            if (!empty(${"foto_Delante_Temporal_".$i}["foto_Delante_".$i])) {
+                ${"validar_Foto_Delante_Temporal_".$i} = \Validator::make(${"foto_Delante_Temporal_".$i}, [ "foto_Delante_".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+                if (${"validar_Foto_Delante_Temporal_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
+                } else {
+                    if (!empty(${"foto_Delante_Actual_".$i}["foto_Delante_".$i])) {
+                        unlink(${"foto_Delante_Actual_".$i}["foto_Delante_".$i]);
+                    }
 
-				if($datos["foto-delante"] != ""){
-					$aleatorio = mt_rand(1000, 9999);
-					$ruta_foto_delante = "vistas/images/pagina_web/carrusel/".$aleatorio.".".$datos["foto-delante"]->guessExtension();
-					
-					/*----------  Redimensionar imagen  ----------*/
-					list($ancho, $alto) = getimagesize($datos["foto-delante"]);
-                    $nuevoAncho = 500;
+                    $aleatorio = mt_rand(10000, 99999);
+                    ${"ruta_Foto_Delante_".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"foto_Delante_Temporal_".$i}["foto_Delante_".$i]->guessExtension();
+
+                    /*----------  Redimensionar imagen  ----------*/
+                    list($ancho, $alto) = getimagesize(${"foto_Delante_Temporal_".$i}["foto_Delante_".$i]);
+                    $nuevoAncho = 600;
                     $nuevoAlto = 500;
 
-                    if(($datos["foto-delante"]->guessExtension() == "jpeg") || ($datos["foto-delante"]->guessExtension() == "jpg")){
+                    if((${"foto_Delante_Temporal_".$i}["foto_Delante_".$i]->guessExtension() == "jpeg") || (${"foto_Delante_Temporal_".$i}["foto_Delante_".$i]->guessExtension() == "jpg")){
 
-                        $origen = imagecreatefromjpeg($datos["foto-delante"]);
+                        $origen = imagecreatefromjpeg(${"".$i}["".$i]);
                         $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                         imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagejpeg($destino, $ruta_foto_delante);
+                        imagejpeg($destino, ${"ruta_Foto_Delante_".$i});
 
                     }
 
-                    if($datos["foto-delante"]->guessExtension() == "png"){
+                    if(${"foto_Delante_Temporal_".$i}["foto_Delante_".$i]->guessExtension() == "png"){
 
-                        $origen = imagecreatefrompng($datos["foto-delante"]);
+                        $origen = imagecreatefrompng(${"foto_Delante_Temporal_".$i}["foto_Delante_".$i]);
                         $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                         imagealphablending($destino, FALSE); 
                         imagesavealpha($destino, TRUE);
                         imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagepng($destino, $ruta_foto_delante);
+                        imagepng($destino, ${"ruta_Foto_Delante_".$i});
                         
                     }
-				}else{
-					$ruta_foto_delante = "";
-				}
+                }
+            } else {
+                ${"ruta_Foto_Delante_".$i} = ${"foto_Delante_Actual_".$i}["foto_Delante_".$i];
+            }
+            if (!empty(${"fondo_Temporal_".$i}["fondo_".$i])) {
+                ${"validar_Fondo_Temporal_".$i} = \Validator::make(${"fondo_Temporal_".$i}, [ "fondo_".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+                if (${"validar_Fondo_Temporal_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
+                } else {
+                    if (!empty(${"fondo_Actual_".$i}["fondo_".$i])) {
+                        unlink(${"fondo_Actual_".$i}["fondo_".$i]);
+                    }
 
-				if($datos["fondo"] != ""){
-					$aleatorio = mt_rand(1000, 9999);
-					$ruta_fondo = "vistas/images/pagina_web/carrusel/".$aleatorio.".".$datos["fondo"]->guessExtension();
-					
-					/*----------  Redimensionar imagen  ----------*/
-					list($ancho, $alto) = getimagesize($datos["fondo"]);
+                    $aleatorio = mt_rand(10000, 99999);
+                    ${"ruta_Fondo_".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"fondo_Temporal_".$i}["fondo_".$i]->guessExtension();
+
+                    /*----------  Redimensionar imagen  ----------*/
+                    list($ancho, $alto) = getimagesize(${"fondo_Temporal_".$i}["fondo_".$i]);
                     $nuevoAncho = 2000;
                     $nuevoAlto = 1333;
 
-                    if(($datos["fondo"]->guessExtension() == "jpeg") || ($datos["fondo"]->guessExtension() == "jpg")){
+                    if((${"fondo_Temporal_".$i}["fondo_".$i]->guessExtension() == "jpeg") || (${"fondo_Temporal_".$i}["fondo_".$i]->guessExtension() == "jpg")){
 
-                        $origen = imagecreatefromjpeg($datos["fondo"]);
+                        $origen = imagecreatefromjpeg(${"fondo_Temporal_".$i}["fondo_".$i]);
                         $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                         imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagejpeg($destino, $ruta_fondo);
+                        imagejpeg($destino, ${"ruta_Fondo_".$i});
 
                     }
 
-                    if($datos["fondo"]->guessExtension() == "png"){
+                    if(${"fondo_Temporal_".$i}["fondo_".$i]->guessExtension() == "png"){
 
-                        $origen = imagecreatefrompng($datos["fondo"]);
+                        $origen = imagecreatefrompng(${"fondo_Temporal_".$i}["fondo_".$i]);
                         $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
                         imagealphablending($destino, FALSE); 
                         imagesavealpha($destino, TRUE);
                         imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagepng($destino, $ruta_fondo);
+                        imagepng($destino, ${"ruta_Fondo_".$i});
                         
                     }
-				}else{
-					$ruta_fondo = "";
-				}
-			}
-    		
-    		/*=====  End of Subir imagenes nuevas al servidor  ======*/
+                }
+            } else {
+                ${"ruta_Fondo_".$i} = ${"fondo_Actual_".$i}["fondo_".$i];
+            }
 
-    		/*===========================================
-    		=            Agregar al carrusel            =
-    		===========================================*/
-    		
-    		$carrusel_actual["carrusel"] = substr($carrusel_actual["carrusel"], 0, -1);
+            if($i == $indice["indice"]){
+                $carrusel = $carrusel."\n\t".'"categoria": "'.${'categoria_'.$i}['categoria_'.$i].'",'."\n\t".'"titulo": "'.${'titulo_'.$i}['titulo_'.$i].'",'."\n\t".'"texto": "'.${'texto_'.$i}['texto_'.$i].'",'."\n\t".'"boton-1": "'.${"ruta_Boton_1_".$i}.'",'."\n\t".'"url-boton-1": "'.${"url_Boton_1_".$i}["url_Boton_1_".$i].'",'."\n\t".'"boton-2": "'.${"ruta_Boton_2_".$i}.'",'."\n\t".'"url-boton-2": "'.${"url_Boton_2_".$i}["url_Boton_2_".$i].'",'."\n\t".'"foto-delante": "'.${"ruta_Foto_Delante_".$i}.'",'."\n\t".'"fondo": "'.${"ruta_Fondo_".$i}.'"'."\n".'}]';
+            }else{
+                $carrusel = $carrusel."\n\t".'"categoria": "'.${'categoria_'.$i}['categoria_'.$i].'",'."\n\t".'"titulo": "'.${'titulo_'.$i}['titulo_'.$i].'",'."\n\t".'"texto": "'.${'texto_'.$i}['texto_'.$i].'",'."\n\t".'"boton-1": "'.${"ruta_Boton_1_".$i}.'",'."\n\t".'"url-boton-1": "'.${"url_Boton_1_".$i}["url_Boton_1_".$i].'",'."\n\t".'"boton-2": "'.${"ruta_Boton_2_".$i}.'",'."\n\t".'"url-boton-2": "'.${"url_Boton_2_".$i}["url_Boton_2_".$i].'",'."\n\t".'"foto-delante": "'.${"ruta_Foto_Delante_".$i}.'",'."\n\t".'"fondo": "'.${"ruta_Fondo_".$i}.'"'."\n".'},{';
+            }
+        }
 
-    		$carrusel_actual["carrusel"] = $carrusel_actual["carrusel"].',{'."\n\t".'"categoria": "'.$datos["categoria"].'",'."\n\t".'"titulo": "'.$datos["titulo"].'",'."\n\t".'"texto": "'.$datos["texto"].'",'."\n\t".'"boton-1": "'.$ruta_boton_1.'",'."\n\t".'"boton-2": "'.$ruta_boton_2.'",'."\n\t".'"foto-delante": "'.$ruta_foto_delante.'",'."\n\t".'"fondo": "'.$ruta_fondo.'"'."\n".'}]';
+        $actualizar = array('carrusel' => $carrusel);
+        $paginaweb = PaginaWebModel::where("id", $id)->update($actualizar);
+        return redirect("/pagina_web/ingresarCarrusel")->with("ok-editar","");
 
-    		/*=====  End of Agregar al carrusel  ======*/
-    		
-    		/*======================================================
-    		=            Guardar actualización carrusel            =
-    		======================================================*/
-    		
-    		$actualizar = array('carrusel' => $carrusel_actual["carrusel"]);
-    		$paginaweb = PaginaWebModel::where("id", $id)->update($actualizar);
-    		return redirect("/pagina_web/ingresarCarrusel")->with("ok-editar","");
-    		
-    		/*=====  End of Guardar actualización carrusel  ======*/
-    		
-    		
-    	}else{
-    		return redirect("/pagina_web/ingresarCarrusel")->with("error", "");
-    	}
 
     }
     
