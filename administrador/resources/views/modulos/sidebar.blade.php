@@ -67,7 +67,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ url('pagina_web/carrusel?ver=carrusel') }}" class="nav-link">
+                  <a href="{{ url('pagina_web/ingresarCarrusel') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Carrusel</p>
                   </a>
@@ -85,7 +85,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ url('pagina_web/ingresarCarrusel') }}" class="nav-link">
+                  <a href="{{ url('pagina_web/interesados') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Interesados</p>
                   </a>

@@ -81,7 +81,7 @@ Route::resource('/pagina_web/entrevistas', 'EntrevistasController');
 Route::resource('/pagina_web/noticias', 'NoticiasController');
 Route::resource('/pagina_web/consultarNoticia', 'ConsultarNoticiaController');
 Route::resource('/pagina_web/eventos', 'PaginaWebController');
-Route::resource('/paginas/pagina_web/interesados', 'PaginaWebController');
+Route::resource('/pagina_web/interesados', 'InteresadoController');
 Route::resource('/pagina_web/info/contacto', 'PaginaWebController');
 Route::resource('/pagina_web/info/estatutos', 'PaginaWebController');
 Route::resource('/pagina_web/info/gremio', 'PaginaWebController');

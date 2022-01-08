@@ -39,7 +39,7 @@ $(document).on("click", ".actualizarCarrusel", function(){
 			carrusel = carrusel+'"categoria": "'+categoria+'","titulo": "'+titulo+'","texto": "'+texto+'","boton-1": "'+boton1+'","boton-2": "'+boton2+'","foto-delante": "'+fotoDelante+'","fondo": "'+fondo+'"}]';
 
 		}
-		
+
 	}
 	//alert(carrusel);
 	//console.log("Ruta: ", fondo);
@@ -60,16 +60,16 @@ $(document).on("click", ".agregarRed", function(){
 	var nombre = $("#icono_red").val().split(",")[1];
 
 	$(".listadoRed").append(`
-		<div class="col-lg-12">      
-        <div class="input-group mb-3">          
-          <div class="input-group-prepend">            
-            <div class="input-group-text text-white" style="background:#000000">              
+		<div class="col-lg-12">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text text-white" style="background:#000000">
                 <i class="`+logo+`"></i>
             </div>
           </div>
           <input type="text" class="form-control" value="`+link+`">
-          <div class="input-group-prepend">            
-            <div class="input-group-text" style="cursor:pointer">              
+          <div class="input-group-prepend">
+            <div class="input-group-text" style="cursor:pointer">
                 <span class="bg-danger px-2 rounded-circle eliminarRed" red="`+logo+`" url="`+link+`">&times;</span>
             </div>
           </div>
@@ -158,8 +158,8 @@ $(document).on("click", ".eliminarRed", function(){
 
 	for(var i = 0; i < listaRed.length; i++){
 
-		if(red == listaRed[i]["logo"] && url == listaRed[i]["link"]){			
-			listaRed.splice(i, 1);			
+		if(red == listaRed[i]["logo"] && url == listaRed[i]["link"]){
+			listaRed.splice(i, 1);
 			$(this).parent().parent().parent().parent().remove();
 			$("#listaRed").val(JSON.stringify(listaRed));
 		}
@@ -181,8 +181,8 @@ $(document).on("click", ".eliminarProducto", function(){
 
 	for(var i = 0; i < listaProductos.length; i++){
 
-		if(num == listaProductos[i]["num"] && nombre == listaProductos[i]["nombre"] && descripcion == listaProductos[i]["descripcion"]){			
-			listaProductos.splice(i, 1);			
+		if(num == listaProductos[i]["num"] && nombre == listaProductos[i]["nombre"] && descripcion == listaProductos[i]["descripcion"]){
+			listaProductos.splice(i, 1);
 			$(this).parent().parent().parent().remove();
 			$("#listaProductos").val(JSON.stringify(listaProductos));
 			$("#eliminar").val("si");
@@ -191,7 +191,7 @@ $(document).on("click", ".eliminarProducto", function(){
 	}
 
 	$(".listadoProductos").append(`
-		<div class="col-md-12">      
+		<div class="col-md-12">
         	<button type="submit" class="btn btn-danger col-md-12">
             	<i class="fas fa-save"></i> Guardar cambios de elementos eliminados
           	</button>
@@ -217,8 +217,8 @@ $(document).on("click", ".eliminarAliado", function(){
 
 	for(var i = 0; i < listaAliados.length; i++){
 
-		if(nombre == listaAliados[i]["nombre"] && link == listaAliados[i]["link"] && logo == listaAliados[i]["logo"]){			
-			listaAliados.splice(i, 1);			
+		if(nombre == listaAliados[i]["nombre"] && link == listaAliados[i]["link"] && logo == listaAliados[i]["logo"]){
+			listaAliados.splice(i, 1);
 			$(this).parent().parent().parent().parent().parent().parent().parent().parent().remove();
 			$("#listaAliados").val(JSON.stringify(listaAliados));
 			$("#eliminar").val("si");
@@ -234,11 +234,11 @@ $(document).on("click", ".eliminarAliado", function(){
 				<div class="form-group text-center" >
 					<i class="fas fa-ban" style="color: #E60026; font-size: 100px;"></i>
 				</div>
-				
+
 				<div class="form-group text-center">
 					<label for="exampleInputEmail1"><h2>¿Desea eliminar este aliado?</h2></label>
 				</div>
-				
+
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -254,7 +254,7 @@ $(document).on("click", ".eliminarAliado", function(){
 	        </div>
 	        <div class="col-md-4"></div>
 		</div>
-		
+
 	`)
 
 })
@@ -314,8 +314,8 @@ $(document).on("click", ".eliminarCarrusel", function(){
 
 	for(var i = 0; i < listaCarrusel.length; i++){
 
-		if(categoria == listaCarrusel[i]["categoria"] && titulo == listaCarrusel[i]["titulo"] && texto == listaCarrusel[i]["texto"] && boton_1 == listaCarrusel[i]["boton-1"] && boton_2 == listaCarrusel[i]["boton-2"] && foto_delante == listaCarrusel[i]["foto-delante"] && fondo == listaCarrusel[i]["fondo"]){			
-			listaCarrusel.splice(i, 1);			
+		if(categoria == listaCarrusel[i]["categoria"] && titulo == listaCarrusel[i]["titulo"] && texto == listaCarrusel[i]["texto"] && boton_1 == listaCarrusel[i]["boton-1"] && boton_2 == listaCarrusel[i]["boton-2"] && foto_delante == listaCarrusel[i]["foto-delante"] && fondo == listaCarrusel[i]["fondo"]){
+			listaCarrusel.splice(i, 1);
 			$(this).parent().parent().parent().parent().parent().parent().parent().remove();
 			$("#listaCarrusel").val(JSON.stringify(listaCarrusel));
 			$("#eliminar").val("si");
@@ -331,11 +331,11 @@ $(document).on("click", ".eliminarCarrusel", function(){
 				<div class="form-group text-center" >
 					<i class="fas fa-ban" style="color: #E60026; font-size: 100px;"></i>
 				</div>
-				
+
 				<div class="form-group text-center">
 					<label for="exampleInputEmail1"><h2>¿Desea eliminar este item del carrusel?</h2></label>
 				</div>
-				
+
 			</div>
 			<div class="col-md-1"></div>
 		</div>
@@ -351,7 +351,7 @@ $(document).on("click", ".eliminarCarrusel", function(){
 	        </div>
 	        <div class="col-md-4"></div>
 		</div>
-		
+
 	`)
 
 })
@@ -483,7 +483,7 @@ SUBIR IMAGEN AL SERVIDOR
 
 function upload_sm(file){
 
-	var datos = new FormData();	
+	var datos = new FormData();
 	datos.append('file', file, file.name);
 	datos.append("ruta", ruta);
 	console.log("ruta: ", ruta);
@@ -510,7 +510,7 @@ function upload_sm(file){
 
 function upload_smc(file){
 
-	var datos = new FormData();	
+	var datos = new FormData();
 	datos.append('file', file, file.name);
 	datos.append("ruta", ruta);
 
@@ -540,7 +540,7 @@ Preguntar antes de Eliminar Registro
 
 $(document).on("click", ".eliminarRegistro", function(){
 
-	var action = $(this).attr("action"); 
+	var action = $(this).attr("action");
   	var method = $(this).attr("method");
   	var pagina = $(this).attr("pagina");
   	//var token = $(this).children("[name='_token']").attr("value");
@@ -581,12 +581,12 @@ $(document).on("click", ".eliminarRegistro", function(){
 		                    title: "¡El registro ha sido eliminado!",
 		                    showConfirmButton: true,
 		                    confirmButtonText: "Cerrar"
-			                    
+
 			             }).then(function(result){
 
 			             	if(result.value){
 
-			             		window.location = ruta+'/'+pagina; 
+			             		window.location = ruta+'/'+pagina;
 
 			             	}
 
@@ -614,7 +614,7 @@ $(document).on("click", ".eliminarRegistro", function(){
 
 $(document).on("click", ".eliminarEntrevista", function(){
 
-	var action = $(this).attr("action"); 
+	var action = $(this).attr("action");
   	var method = $(this).attr("method");
   	var pagina = $(this).attr("pagina");
   	//var token = $(this).children("[name='_token']").attr("value");
@@ -655,12 +655,12 @@ $(document).on("click", ".eliminarEntrevista", function(){
 		                    title: "¡La entrevista ha sido eliminado!",
 		                    showConfirmButton: true,
 		                    confirmButtonText: "Cerrar"
-			                    
+
 			             }).then(function(result){
 
 			             	if(result.value){
 
-			             		window.location = ruta+'/'+pagina; 
+			             		window.location = ruta+'/'+pagina;
 
 			             	}
 
@@ -691,7 +691,7 @@ $(document).on("click", ".eliminarEntrevista", function(){
 
 $(document).on("click", ".eliminarItem", function(){
 
-	var action = $(this).attr("action"); 
+	var action = $(this).attr("action");
   	var method = $(this).attr("method");
   	var pagina = $(this).attr("pagina");
   	//var token = $(this).children("[name='_token']").attr("value");
@@ -767,12 +767,12 @@ $(document).on("click", ".eliminarItem", function(){
 		                    title: "¡El registro ha sido eliminado!",
 		                    showConfirmButton: true,
 		                    confirmButtonText: "Cerrar"
-			                    
+
 			             }).then(function(result){
 
 			             	if(result.value){
 
-			             		window.location = ruta+'/'+pagina; 
+			             		window.location = ruta+'/'+pagina;
 
 			             	}
 
@@ -794,13 +794,164 @@ $(document).on("click", ".eliminarItem", function(){
 
   	})
 
-	
+
 
 
 })
 
 /*=====  End of Preguntar antes de eliminar Item Carrusel  ======*/
 
+/*============================================
+=            Contactar interesado            =
+============================================*/
+
+$(document).on("click", ".contactarInteresado", function(){
+
+	var action = $(this).attr("action");
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	//var token = $(this).children("[name='_token']").attr("value");
+  	var token = $(this).attr("token");
+
+  	swal({
+  		 title: '¿Está seguro de ya haber contactado a este interesado?',
+  		 text: "¡Si no lo está puede cancelar la acción!",
+  		 type: 'warning',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Sí, ya lo contacté!'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var datos = new FormData();
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡El estado de interesado cambió!",
+		                    text: "Ahora aparecerá como interesado contactado.",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina;
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+/*=====  End of Contactar interesado  ======*/
+
+/*===========================================
+=            Eliminar interesado            =
+===========================================*/
+
+$(document).on("click", ".eliminarInteresado", function(){
+
+	var action = $(this).attr("action");
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	//var token = $(this).children("[name='_token']").attr("value");
+  	var token = $(this).attr("token");
+
+
+  	swal({
+  		 title: '¿Está seguro de eliminar este interesado?',
+  		 text: "¡Si no lo está puede cancelar la acción!",
+  		 type: 'warning',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Sí, eliminar interesado!'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var datos = new FormData();
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡El interesado ha sido eliminado!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina;
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+/*=====  End of Eliminar interesado  ======*/
 
 
 /*=====================================

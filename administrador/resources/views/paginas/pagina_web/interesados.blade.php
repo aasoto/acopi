@@ -27,25 +27,47 @@
         <div class="row">
           <div class="col-12">
             <!-- Default box -->
-            <div class="card">
+            <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Title</h3>
+                <h3 class="card-title">Consultar Interesados</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                     <i class="fas fa-minus"></i>
                   </button>
-                  <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                    <i class="fas fa-times"></i>
-                  </button>
                 </div>
               </div>
               <div class="card-body">
-                Start creating your amazing application!
+                <table id="tablaInteresados" class="table table-bordered table-hover dt-responsive">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>Nombre</th>
+                      <th>Empresa</th>
+                      <th>Correo Electronico</th>
+                      <th>Telefono</th>
+                      <th>Estado</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>No.</th>
+                      <th>Nombre</th>
+                      <th>Empresa</th>
+                      <th>Correo Electronico</th>
+                      <th>Telefono</th>
+                      <th>Estado</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </tfoot>
+                </table>
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                Footer
+                
               </div>
               <!-- /.card-footer-->
             </div>
@@ -56,5 +78,25 @@
     </section>
     <!-- /.content -->
   </div>
+
+
+@if (Session::has("ok-editar"))
+<script>
+  swal({
+    title: "¡Bien Hecho!",
+    text: "El interesado ha sido contactado.",
+    type: "success"
+  });
+</script>
+@endif
+@if (Session::has("no-editar"))
+<script>
+  swal({
+    title: "¡Error!",
+    text: "El interesado no se encontró.",
+    type: "error"
+  });
+</script>
+@endif
 
   @endsection
