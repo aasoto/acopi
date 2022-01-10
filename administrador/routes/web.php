@@ -90,4 +90,7 @@ Route::resource('/pagina_web/info/redes', 'PaginaWebController');
 
 Route::resource('/usuarios/consultarUser', 'UsuariosController');
 
+/*----------  Afiliados  ----------*/
+Route::resource('/afiliados/general', 'AfiliadosController');
+
 /*=====  End of Rutas que incluyen todos los metodos HTML  ======*/

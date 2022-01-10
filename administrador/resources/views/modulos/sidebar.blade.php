@@ -67,15 +67,15 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ url('pagina_web/ingresarCarrusel') }}" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Carrusel</p>
-                  </a>
-                </li>
-                <li class="nav-item">
                   <a href="{{ url('pagina_web/footer?ver=footer') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Pie de Página</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('pagina_web/ingresarCarrusel') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Carrusel</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -183,7 +183,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('afiliados/consultar') }}" class="nav-link">
+                    <a href="{{ url('afiliados/general') }}" class="nav-link">
                       <i class="nav-icon fas fa-list-alt"></i>
                       <p>Consultar</p>
                     </a>

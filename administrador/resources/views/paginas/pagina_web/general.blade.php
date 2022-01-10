@@ -200,301 +200,6 @@
             <!--=====  End of Sección cambio de logos  ======-->
           @endif
           
-          @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Asistente de dirección'))
-
-            <!--========================================================================
-            =            Sección amigable del carrusel de evento y noticias            =
-            =========================================================================-->
-            
-              @php
-                if($_GET['ver'] == "carrusel"){
-                  echo '<div class="card card-primary">';
-                }else{
-                  echo '<div class="card card-primary collapsed-card">';
-                }
-              @endphp
-              <div class="card-header">
-                <h3 class="card-title">Carrusel de eventos y noticias</h3>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    @php
-                      if($_GET['ver'] == "carrusel"){
-                        echo '<i class="fas fa-minus"></i>';
-                      }else{
-                        echo '<i class="fas fa-plus"></i>';
-                      }
-                    @endphp
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-                  <div class="carousel-indicators">
-                    @php
-                      $contador = json_decode($element->carrusel, true);
-                      $active = true;
-                      $indice = 0;
-                      foreach ($contador as $key => $value){
-                        if($active){
-                          echo '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'.$indice.'" class="active" aria-current="true" aria-label="Slide '.$value["titulo"].'"></button>';
-                          $active = false;
-                        }else{
-                          echo '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'.$indice.'" aria-label="Slide '.$value["titulo"].'"></button>';
-                        }
-                        $indice++;
-                      }
-                    @endphp
-                  </div>
-                  <div class="carousel-inner">
-                    @php
-                    $servidor = $element->servidor;
-                    $carrousel = json_decode($element->carrusel, true);
-                    $indice = 0;
-                    $active = true;
-                    foreach ($carrousel as $key => $value){
-                      if ($active) {
-                        echo '
-                        <div class="carousel-item active">
-                          <div class="card" style="background-color:#DCDCDC">
-                            <div class="row">
-                              <div class="col-md-2">
-                              </div>
-
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="labelCategoria">Categoria</label>
-                                  <select class="form-control select2" name="categoria-'.$indice.'" id="categoria-'.$indice.'" style="width: 100%;" required>
-                                    <option selected="selected">'.$value["categoria"].'</option>
-                                    <option>Noticias</option>
-                                    <option>Eventos</option>
-                                    <option>Otros</option>
-                                  </select>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Titulo</label>
-                                  <input type="text" class="form-control" name="titulo-'.$indice.'" id="titulo-'.$indice.'" value="'.$value["titulo"].'" required>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputPassword1">Texto</label>
-                                  <textarea class="form-control" rows="8" name="texto-'.$indice.'" id="texto-'.$indice.'" required>'.$value["texto"].'</textarea>
-                                </div>
-                              </div>
-                              
-                              <div class="col-md-4">
-                                <div class="form-group my-2 text-center">
-                                  <label for="exampleInputPassword1">Botón número 1</label><br>
-                                  <div class="btn btn-default btn-file mb-3">
-                                    <i class="fas fa-paperclip"></i> Adjuntar Imagen del botón
-                                    <input type="file" name="boton-1-'.$indice.'" id="boton-1-'.$indice.'" value="'.$value["boton-1"].'">
-                                    <input type="hidden" name="boton-1-actual-'.$indice.'" value="'.$value["boton-1"].'">
-                                  </div>
-                                  <br>';
-                                  if ($value["boton-1"] == "") {
-                                    echo '<img src="'.$servidor.'vistas/images/pagina_web/carrusel/sin-imagen.jpg" class="img-fluid py-2 bg-secondary previsualizarImg_boton-1-'.$indice.'" width="100px" height="72px">';
-                                  }else{
-                                    echo '<img src="'.$servidor.''.$value["boton-1"].'" class="img-fluid py-2 bg-secondary previsualizarImg_boton-1-'.$indice.'" width="100px" height="72px">';
-                                  }
-                                  echo '<p class="help-block small mt-3">Dimensiones: 400px * 118px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                                </div>
-                                <div class="form-group my-2 text-center">
-                                  <label for="exampleInputPassword1">Botón número 2</label><br>
-                                  <div class="btn btn-default btn-file mb-3">
-                                    <i class="fas fa-paperclip"></i> Adjuntar Imagen del botón
-                                    <input type="file" name="boton-2-'.$indice.'" id="boton-2-'.$indice.'" value="'.$value["boton-2"].'">
-                                    <input type="hidden" name="boton-2-actual-'.$indice.'" value="'.$value["boton-2"].'">
-                                  </div>
-                                  <br>';
-                                  if ($value["boton-2"] == "") {
-                                    echo '<img src="'.$servidor.'vistas/images/pagina_web/carrusel/sin-imagen.jpg" class="img-fluid py-2 bg-secondary previsualizarImg_boton-2-'.$indice.'" width="100px" height="72px">';
-                                  }else{
-                                    echo '<img src="'.$servidor.''.$value["boton-2"].'" class="img-fluid py-2 bg-secondary previsualizarImg_boton-2-'.$indice.'" width="100px" height="72px">';
-                                  }
-                                  echo '<p class="help-block small mt-3">Dimensiones: 400px * 118px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                                </div>
-                              </div>
-
-                              <div class="col-md-2">
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-2">
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group my-2 text-center">
-                                  <label for="exampleInputPassword1">Imagen delantera</label><br>
-                                  <div class="btn btn-default btn-file mb-3">
-                                    <i class="fas fa-paperclip"></i> Ad. Img. delantera
-                                    <input type="file" name="foto-delante-'.$indice.'" id="foto-delante-'.$indice.'" value="'.$value["foto-delante"].'">
-                                    <input type="hidden" name="foto-delante-actual-'.$indice.'" value="'.$value["foto-delante"].'">
-                                  </div>
-                                  <br>';
-                                  if ($value["foto-delante"] == "") {
-                                    echo '<img src="'.$servidor.'vistas/images/pagina_web/carrusel/sin-imagen.jpg" class="img-fluid py-2 bg-secondary previsualizarImg_foto-delante-'.$indice.'" width="100px" height="72px">';
-                                  }else{
-                                    echo '<img src="'.$servidor.''.$value["foto-delante"].'" class="img-fluid py-2 bg-secondary previsualizarImg_foto-delante-'.$indice.'" width="100px" height="100px">';
-                                  }
-                                  echo '<p class="help-block small mt-3">Dimensiones: 500px * 500px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group my-2 text-center">
-                                  <label for="exampleInputPassword1">Imagen de fondo (background)</label><br>
-                                  <div class="btn btn-default btn-file mb-3">
-                                    <i class="fas fa-paperclip"></i> Ad. Img. de fondo
-                                    <input type="file" name="fondo-'.$indice.'" id="fondo-'.$indice.'" value="'.$value["fondo"].'">
-                                    <input type="hidden" name="fondo-actual-'.$indice.'" value="'.$value["fondo"].'" required>
-                                  </div>
-                                  <br>';
-                                  if ($value["fondo"] == "") {
-                                    echo '<img src="'.$servidor.'vistas/images/pagina_web/carrusel/sin-imagen.jpg" class="img-fluid py-2 bg-secondary previsualizarImg_fondo-'.$indice.'" width="100px" height="72px">';
-                                  }else{
-                                    echo '<img src="'.$servidor.''.$value["fondo"].'" class="img-fluid py-2 bg-secondary previsualizarImg_fondo-'.$indice.'" width="200px" height="133px">';
-                                  }
-                                  echo '<p class="help-block small mt-3">Dimensiones: 2000px * 1333px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                                </div>
-                              </div>
-                              <div class="col-md-2">
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ';
-                     
-                        $active = false;
-                        $indice++;
-                      }else{
-                        echo '<div class="carousel-item">
-                          <div class="card" style="background-color:#DCDCDC">
-                            <div class="row">
-                              <div class="col-md-2">
-                              </div>
-
-                              <div class="col-md-4">
-                                <div class="form-group">
-                                  <label for="labelCategoria">Categoria</label>
-                                  <select class="form-control select2" name="categoria-'.$indice.'" id="categoria-'.$indice.'" style="width: 100%;" required>
-                                    <option selected="selected">'.$value["categoria"].'</option>
-                                    <option>Noticias</option>
-                                    <option>Eventos</option>
-                                    <option>Otros</option>
-                                  </select>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputEmail1">Titulo</label>
-                                  <input type="text" class="form-control" name="titulo-'.$indice.'" id="titulo-'.$indice.'" value="'.$value["titulo"].'" required>
-                                </div>
-                                <div class="form-group">
-                                  <label for="exampleInputPassword1">Texto</label>
-                                  <textarea class="form-control" rows="8" name="texto-'.$indice.'" id="texto-'.$indice.'" required>'.$value["texto"].'</textarea>
-                                </div>
-                              </div>
-                              
-                              <div class="col-md-4">
-                                <div class="form-group my-2 text-center">
-                                  <label for="exampleInputPassword1">Botón número 1</label><br>
-                                  <div class="btn btn-default btn-file mb-3">
-                                    <i class="fas fa-paperclip"></i> Adjuntar Imagen del botón
-                                    <input type="file" name="boton-1-'.$indice.'" id="boton-1-'.$indice.'" value="'.$value["boton-1"].'">
-                                    <input type="hidden" name="boton-1-actual-'.$indice.'" value="'.$value["boton-1"].'">
-                                  </div>
-                                  <br>';
-                                  if ($value["boton-1"] == "") {
-                                    echo '<img src="'.$servidor.'vistas/images/pagina_web/carrusel/sin-imagen.jpg" class="img-fluid py-2 bg-secondary previsualizarImg_boton-1-'.$indice.'" width="100px" height="72px">';
-                                  }else{
-                                    echo '<img src="'.$servidor.''.$value["boton-1"].'" class="img-fluid py-2 bg-secondary previsualizarImg_boton-1-'.$indice.'" width="100px" height="72px">';
-                                  }
-                                  echo '<p class="help-block small mt-3">Dimensiones: 400px * 118px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                                </div>
-                                <div class="form-group my-2 text-center">
-                                  <label for="exampleInputPassword1">Botón número 2</label><br>
-                                  <div class="btn btn-default btn-file mb-3">
-                                    <i class="fas fa-paperclip"></i> Adjuntar Imagen del botón
-                                    <input type="file" name="boton-2-'.$indice.'" id="boton-2-'.$indice.'" value="'.$value["boton-2"].'">
-                                    <input type="hidden" name="boton-2-actual-'.$indice.'" value="'.$value["boton-2"].'">
-                                  </div>
-                                  <br>';
-                                  if ($value["boton-2"] == "") {
-                                    echo '<img src="'.$servidor.'vistas/images/pagina_web/carrusel/sin-imagen.jpg" class="img-fluid py-2 bg-secondary previsualizarImg_boton-2-'.$indice.'" width="100px" height="72px">';
-                                  }else{
-                                    echo '<img src="'.$servidor.''.$value["boton-2"].'" class="img-fluid py-2 bg-secondary previsualizarImg_boton-2-'.$indice.'" width="100px" height="72px">';
-                                  }
-                                  echo '<p class="help-block small mt-3">Dimensiones: 400px * 118px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                                </div>
-                              </div>
-
-                              <div class="col-md-2">
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-2">
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group my-2 text-center">
-                                  <label for="exampleInputPassword1">Imagen delantera</label><br>
-                                  <div class="btn btn-default btn-file mb-3">
-                                    <i class="fas fa-paperclip"></i> Ad. Img. delantera
-                                    <input type="file" name="foto-delante-'.$indice.'" id="foto-delante-'.$indice.'" value="'.$value["foto-delante"].'">
-                                    <input type="hidden" name="foto-delante-actual-'.$indice.'" value="'.$value["foto-delante"].'">
-                                  </div>
-                                  <br>';
-                                  if ($value["foto-delante"] == "") {
-                                    echo '<img src="'.$servidor.'vistas/images/pagina_web/carrusel/sin-imagen.jpg" class="img-fluid py-2 bg-secondary previsualizarImg_foto-delante-'.$indice.'" width="100px" height="72px">';
-                                  }else{
-                                    echo '<img src="'.$servidor.''.$value["foto-delante"].'" class="img-fluid py-2 bg-secondary previsualizarImg_foto-delante-'.$indice.'" width="100px" height="100px">';
-                                  }
-                                  echo '<p class="help-block small mt-3">Dimensiones: 500px * 500px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                                </div>
-                              </div>
-                              <div class="col-md-4">
-                                <div class="form-group my-2 text-center">
-                                  <label for="exampleInputPassword1">Imagen de fondo (background)</label><br>
-                                  <div class="btn btn-default btn-file mb-3">
-                                    <i class="fas fa-paperclip"></i> Ad. Img. de fondo
-                                    <input type="file" name="fondo-'.$indice.'" id="fondo-'.$indice.'" value="'.$value["fondo"].'">
-                                    <input type="hidden" name="fondo-actual-'.$indice.'" value="'.$value["fondo"].'" required>
-                                  </div>
-                                  <br>';
-                                  if ($value["fondo"] == "") {
-                                    echo '<img src="'.$servidor.'vistas/images/pagina_web/carrusel/sin-imagen.jpg" class="img-fluid py-2 bg-secondary previsualizarImg_fondo-'.$indice.'" width="100px" height="72px">';
-                                  }else{
-                                    echo '<img src="'.$servidor.''.$value["fondo"].'" class="img-fluid py-2 bg-secondary previsualizarImg_fondo-'.$indice.'" width="200px" height="133px">';
-                                  }
-                                  echo '<p class="help-block small mt-3">Dimensiones: 2000px * 1333px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                                </div>
-                              </div>
-                              <div class="col-md-2">
-                              </div>
-                            </div>
-                          </div>
-                        </div>';
-                        $indice++;
-                      }
-                    }
-                    $indice--;
-                    echo '<input type="hidden" name="indice" value="'.$indice.'" id="indice">';
-                    @endphp
-
-                  </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
-                </div>
-              </div>
-              <div class="card-footer">
-                <button type="submit" class="btn btn-primary actualizarCarrusel">
-                  <i class="fas fa-check"></i> Guardar
-                </button>
-              </div>
-            </div>
-            
-            <!--====  End of Sección amigable del carrusel de evento y noticias  ====-->
-            
-          @endif
           
           @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos'))
             <!--======================================
@@ -684,7 +389,7 @@
       swal({
           title: "¡Cuidado!",
           text: "Está intentando ingresar caracteres no validos.",
-          icon: "warning"
+          type: "warning"
       });
     </script>
   @endif
@@ -693,7 +398,7 @@
       swal({
           title: "¡Bien Hecho!",
           text: "Información actualizada.",
-          icon: "success"
+          type: "success"
       });
     </script>
   @endif
@@ -702,7 +407,7 @@
       swal({
           title: "¡Error!",
           text: "Error al intentar actualizar.",
-          icon: "error"
+          type: "error"
       });
     </script>
   @endif
@@ -711,7 +416,7 @@
       swal({
           title: "¡Error!",
           text: "Formato incorrecto de imagen.",
-          icon: "error"
+          type: "error"
       });
     </script>
   @endif

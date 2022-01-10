@@ -82,7 +82,7 @@
 	@auth
 		<body class="hold-transition sidebar-mini layout-fixed">
 			<div class="wrapper">
-				{{--@include('modulos.preloading')--}}
+				@include('modulos.preloading')
 				@include('modulos.header')
 				@include('modulos.sidebar')
 				@yield('content')

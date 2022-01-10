@@ -208,7 +208,7 @@
   swal({
     title: "¡Error!",
     text: "¡Hay campos no válidos en el formulario!",
-    icon: "error"
+    type: "error"
   });
 </script>
 
@@ -220,7 +220,7 @@
   swal({
     title: "¡Error!",
     text: "No hay datos en el formulario.",
-    icon: "error"
+    type: "error"
   });
 </script>
 
@@ -232,7 +232,7 @@
     swal({
       title: "¡Bien Hecho!",
       text: "Información actualizada.",
-      icon: "success"
+      type: "success"
     });
  </script>
 
@@ -244,7 +244,7 @@
   swal({
     title: "¡Error!",
     text: "Esta noticia no se puede eliminar.",
-    icon: "error"
+    type: "error"
   });
 </script>
 
@@ -256,7 +256,7 @@
     swal({
       title: "¡Bien Hecho!",
       text: "Noticia eliminado.",
-      icon: "success"
+      type: "success"
     });
  </script>
 

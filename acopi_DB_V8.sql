@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-01-2022 a las 02:34:04
+-- Tiempo de generación: 10-01-2022 a las 02:41:19
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.25
 
@@ -40,6 +40,54 @@ INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`) VALUES
 (1, 'Noticias'),
 (2, 'Capacitación'),
 (3, 'Otros');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empleados_afiliados`
+--
+
+CREATE TABLE `empleados_afiliados` (
+  `id_empleado_afiliado` int(11) NOT NULL,
+  `cc_empleado_afiliado` text COLLATE utf8_spanish_ci NOT NULL,
+  `primer_nombre` text COLLATE utf8_spanish_ci NOT NULL,
+  `segundo_nombre` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `primer_apellido` text COLLATE utf8_spanish_ci NOT NULL,
+  `segundo_apellido` text COLLATE utf8_spanish_ci NOT NULL,
+  `cargo_empleado_afiliado` text COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `id_empresa_afiliado` int(11) NOT NULL,
+  `imagen_cedula` text COLLATE utf8_spanish_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresas`
+--
+
+CREATE TABLE `empresas` (
+  `id_empresa` int(11) NOT NULL,
+  `nit_empresa` text COLLATE utf8_spanish_ci NOT NULL,
+  `razon_social` text COLLATE utf8_spanish_ci NOT NULL,
+  `cc_rprt_legal` text COLLATE utf8_spanish_ci NOT NULL,
+  `num_empleados` int(11) NOT NULL,
+  `direccion_empresa` text COLLATE utf8_spanish_ci NOT NULL,
+  `telefono_empresa` text COLLATE utf8_spanish_ci NOT NULL,
+  `fax_empresa` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `celular_empresa` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email_empresa` text COLLATE utf8_spanish_ci NOT NULL,
+  `id_sector_empresa` int(11) NOT NULL,
+  `productos_empresa` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ciudad_empresa` text COLLATE utf8_spanish_ci NOT NULL,
+  `estado_afiliacion_empresa` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `numero_pagos_atrasados` int(11) DEFAULT NULL,
+  `fecha_afiliacion_empresa` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -217,7 +265,7 @@ CREATE TABLE `pagina_web` (
 --
 
 INSERT INTO `pagina_web` (`id`, `dominio`, `servidor`, `titulo_pestana`, `titulo_pagina`, `logo_navegacion`, `logo_pestana`, `titulo_navegacion`, `descripcion`, `palabras_claves`, `carrusel`, `proyectos`, `noticias_intro`, `aliados`, `videos`, `productos`, `redes_sociales`, `contacto`, `updated_at`) VALUES
-(1, 'http://localhost/acopi/', 'http://localhost/acopi/administrador/public/', 'ACOPI - Cesar', 'ACOPI - Cesar', 'vistas/images/pagina_web/8804.png', 'vistas/images/pagina_web/7536.png', 'ACOPI - CESAR', 'Página oficial de la asociación de las medianas y pequeñas industrias del Cesar, aquí encontrarás toda la información de nuestra agremiación.', '[\"acopi\",\"cesar\",\"acopicesar\",\"valledupar\",\"agremiacion\",\"agremiados\",\"microempresarios\",\"pymes\",\"colombia\",\"citas\"]', '[{\"categoria\":\"Noticias\",\"titulo\":\"¡LLEGA EL 2022 Y ES MOMENTO DE PONERTE AL DÍA!\",\"texto\":\"Comienza la transformación de los microempresarios en el departamento del Cesar.<b>¡Reactivate de inmediato!</b>\",\"boton-1\":\"vistas/images/pagina_web/carrusel/6153.png\",\"url-boton-1\":\"https://www.google.com/\",\"boton-2\":\"\",\"url-boton-2\":\"https://www.google.com/\",\"foto-delante\":\"\",\"fondo\":\"vistas/images/pagina_web/carrusel/quinta.jpg\"},{\"categoria\":\"Capacitación\",\"titulo\":\"¡Ya comienza el festival! y es hora de planear.\",\"texto\":\"Capacitación sobre como aprovechar la afluencia masiva de turistas (sector hotelero) y como incrementar las ventas (sector comercial). Dictado por la Doctora Alexandra Márquez.\",\"boton-1\":\"vistas/images/pagina_web/carrusel/1450.png\",\"url-boton-1\":\"https://www.google.com/\",\"boton-2\":\"vistas/images/pagina_web/carrusel/6082.png\",\"url-boton-2\":\"\",\"foto-delante\":\"vistas/images/pagina_web/carrusel/2423.jpg\",\"fondo\":\"vistas/images/pagina_web/carrusel/9693.jpg\"},{\"categoria\":\"Noticias\",\"titulo\":\"Descarga la App de la DIAN en Android o iPhone\",\"texto\":\"Invitamos a todos nuestro agremiados a descargar la aplicación de la DIAN en todos sus dispositivos moviles y así matenerse actualizados de todas las novedades tributarias del momento.\",\"boton-1\":\"vistas/images/pagina_web/carrusel/1947.png\",\"url-boton-1\":\"https://www.google.com/\",\"boton-2\":\"vistas/images/pagina_web/carrusel/4590.png\",\"url-boton-2\":\"https://www.google.com/\",\"foto-delante\":\"vistas/images/pagina_web/carrusel/2703.png\",\"fondo\":\"vistas/images/pagina_web/carrusel/7085.jpg\"},{\"categoria\":\"Noticias\",\"titulo\":\"¡EMPIEZA EL AÑO 2022!\",\"texto\":\"Este año tus ingresos crecerán.\",\"boton-1\":\"vistas/images/pagina_web/carrusel/27088.png\",\"url-boton-1\":\"https://www.google.com/\",\"boton-2\":\"vistas/images/pagina_web/carrusel/98408.png\",\"url-boton-2\":\"\",\"foto-delante\":\"\",\"fondo\":\"vistas/images/pagina_web/carrusel/31551.jpg\"},{\"categoria\":\"Capacitación\",\"titulo\":\"¿CÓMO TENER UN PÁGINA WEB?\",\"texto\":\"Capacitación sobre como poner acceder a la sistematización de procesos empresariales.\",\"boton-1\":\"vistas/images/pagina_web/carrusel/80489.png\",\"url-boton-1\":\"\",\"boton-2\":\"vistas/images/pagina_web/carrusel/68333.png\",\"url-boton-2\":\"\",\"foto-delante\":\"vistas/images/pagina_web/carrusel/89315.png\",\"fondo\":\"vistas/images/pagina_web/carrusel/31967.jpg\"},{\"categoria\":\"Noticias\",\"titulo\":\"AUMENTO EN EL PIB NACIONAL\",\"texto\":\"Al final del 2021 se registró un alza del 10% en el PIB del país.\",\"boton-1\":\"vistas/images/pagina_web/carrusel/93388.png\",\"url-boton-1\":\"\",\"boton-2\":\"\",\"url-boton-2\":\"\",\"foto-delante\":\"\",\"fondo\":\"vistas/images/pagina_web/carrusel/64137.png\"},{\"categoria\":\"Otros\",\"titulo\":\"PRUEBA VENDER EN LINEA\",\"texto\":\"A través de las ventas en línea y promoción de productos por medio de las redes sociales puedes atraer nuevos clientes.\",\"boton-1\":\"\",\"url-boton-1\":\"\",\"boton-2\":\"vistas/images/pagina_web/carrusel/72023.png\",\"url-boton-2\":\"\",\"foto-delante\":\"\",\"fondo\":\"vistas/images/pagina_web/carrusel/97296.jpg\"}]', '[{\"imagen\": \"images/proyectos/agromercado.png\", \"fecha_dia\": \"14\", \"fecha_mes\": \"Abril\", \"categoria\": \"Sector Agroindustríal\", \"nombre\": \"AgroMercado\", \"info\": \"Este proyecto busca mejorar las condiciones de los campesinos mediante el mejoramiento o adecuación de vias, para que estos puedan sacar sus productos facilmente al mercado. Proyecto realizado en conjunto con la Gobernación del Cesar.\"\r\n},{\"imagen\": \"images/proyectos/textiles.png\", \"fecha_dia\": \"15\", \"fecha_mes\": \"Abril\", \"categoria\": \"Sector Comercial\", \"nombre\": \"La Tercera Transformación\", \"info\": \"Proyecto que consiste en la evaluación para la aprobación de creditos, dandole la oportunidad a los microempresarios de crecer y superar la reciente crisis economica. En colaboración con Bancoldex.\"},{\"imagen\": \"images/proyectos/taxes.png\", \"fecha_dia\": \"16\", \"fecha_mes\": \"Abril\", \"categoria\": \"Comunidad en general\", \"nombre\": \"Taxes al día\", \"info\": \"Consiste en asegurarse que todos los microempresarios estén al tanto de cuales son sus compromisos tributarios.\" }]\r\n', 'En esta sesión encontraras las  noticias más recientes de nuestra agremiación, solo cliquea sobre el recuadro para ver más.', '[{\"nombre\":\"Universidad Popular del Cesar\",\"logo\":\"vistas/images/pagina_web/aliados/4547.png\",\"link\":\"http://www.unicesar.edu.co\"},{\"nombre\":\"Universidad de Santander UDES\",\"logo\":\"vistas/images/pagina_web/aliados/aliados-udes.png\",\"link\":\"http://www.unicesar.edu.co\"},{\"nombre\":\"Fundación Universitaria del Área Andina\",\"logo\":\"vistas/images/pagina_web/aliados/8706.png\",\"link\":\"http://www.unicesar.edu.co\"},{\"nombre\":\"Servicio Nacional de Aprendizaje\",\"logo\":\"vistas/images/pagina_web/aliados/aliados-sena.png\",\"link\":\"http://www.unicesar.edu.co\"}]', '[\"https://www.youtube.com/embed/qJ7Kpfm6DXM\", \"https://www.youtube.com/embed/TYvtmPZ6YS8\", \"https://www.youtube.com/embed/jEVKFNZU4EI\"]', '[{\n	\"num\": \"01.\", \n	\"nombre\": \"Representación y liderazgo gremial.\", \n	\"descripcion\": \"Defendemos los intereses del sector ante las entidades gubernamentales y no gubernamentales, nacionales y/o extranjeras.\"\n},{\n	\"num\": \"02.\", \n	\"nombre\": \"Convenios de cooperación interinstitucional.\", \n	\"descripcion\": \"Suscritos con diversas entidades para desarrollar programas que contribuyan al fomentos de la pequeña y mediana empresa.\"\n},{\n	\"num\": \"03.\", \n	\"nombre\": \"Alianzas estrategicas.\", \n	\"descripcion\": \"Promovemos la asociación entre empresas afines para propocionar la transferencia de bienes y servicios buscando la ampliacion de sus mercados y la disminución de sus costos.\"\n},{\n	\"num\": \"04.\", \n	\"nombre\": \"Capacitación.\", \n	\"descripcion\": \"Programamos conferencias, talleres, cursos y seminarios especializados en diversas áreas administrativas y técnicas, orientadas a resolver las necesidades de capacitación del sector industrial, con tarifas especiales para afiliados.\"\n},{\n	\"num\": \"05.\", \n	\"nombre\": \"Asesorías.\", \n	\"descripcion\": \"Nuestros afiliados pueden obtener asesorías en las siguientes áreas:\"\n},{\n	\"num\": \"06.\", \n	\"nombre\": \"Información y divulgación.\", \n	\"descripcion\": \"Es nuestro interes mantener una cordial y permanente comunicación con nuestro gremio que nos permite hacerle llegar información especializada del sector y conocer sus inquietudes y necesidades.\"\n},{\n	\"num\": \"07.\", \n	\"nombre\": \"Eventos especiales.\", \n	\"descripcion\": \"Con el propósito de promocionar e integrar a nuestro afiliados, buscando ampliar sus horizontes, organizamos y apoyamos la realización de encuentros empresariales, muestras y ferias como Expocesar, Con la participación de entidades como PROEXPORT organizamos misiones a otros países con la intención de establecer contactos para importación y Exportación.\"\n},{\n	\"num\": \"08.\", \n	\"nombre\": \"Eventos institucionales.\", \n	\"descripcion\": \"Asamblea General de Afiliados, Convención Nacional, Congreso Nacional.\"\n},{\n	\"num\": \"09.\", \n	\"nombre\": \"Practicas empresariales.\", \n	\"descripcion\": \"Mediante Convenios con las universidades, estamos en la posibilidad de facilitar a nuestros afiliados practicantes calificados que les apoyen en la implantación de procesos hacia una mayor productividad, para lo cual se ha conformado un COMITÉ INTERDISCIPLINARIO.\"\n},{\n	\"num\": \"10.\", \n	\"nombre\": \"Fortalecimiento y desarrollo Sectorial.\", \n	\"descripcion\": \"A traves de los programas de desarrollo sectorial PRODES, se implementan actividades asociativas, orientadas al mejoramiento de la gestión y competividad con el objetivo final incorporar a las PYMES de la región en la corriente de los negocios internacionales.\"\n},{\n	\"num\": \"11.\", \n	\"nombre\": \"Centros de conciliación y arbitraje.\", \n	\"descripcion\": \"Al servicio de nuestros afiliados para disminuir conflictos por la via de la conciliación.\"\n}]', '[{\"nombre\":\"facebook\",\"logo\":\"fab fa-facebook-f\",\"link\":\"https://www.facebook.com\"},{\"nombre\":\"linkeln\",\"logo\":\"fab fa-linkedin-in\",\"link\":\"https://www.linkeln.com\"},{\"nombre\":\"twitter\",\"logo\":\"fab fa-twitter\",\"link\":\"https://www.twitter.com\"},{\"nombre\":\" tiktok\",\"logo\":\"fab fa-tiktok\",\"link\":\"https://www.tiktok.com\"},{\"nombre\":\" youtube\",\"logo\":\"fab fa-youtube\",\"link\":\"https://www.youtube.com\"},{\"nombre\":\" pinterest\",\"logo\":\"fab fa-pinterest-p\",\"link\":\"https://www.pinterest.com\"}]', '[\"Calle 15 # 4-33, oficina 401.\",\"574 9216\",\"+57 315 651 6647\",\"acopicesar07@hotmail.com\"]', '2022-01-07 22:21:03');
+(1, 'http://localhost/acopi/', 'http://localhost/acopi/administrador/public/', 'ACOPI - Cesar', 'ACOPI - Cesar', 'vistas/images/pagina_web/8804.png', 'vistas/images/pagina_web/7536.png', 'ACOPI - CESAR', 'Página oficial de la asociación de las medianas y pequeñas industrias del Cesar, aquí encontrarás toda la información de nuestra agremiación.', '[\"acopi\",\"cesar\",\"acopicesar\",\"valledupar\",\"agremiacion\",\"agremiados\",\"microempresarios\",\"pymes\",\"colombia\",\"citas\"]', '[{\"categoria\":\"Noticias\",\"titulo\":\"¡LLEGA EL 2022 Y ES MOMENTO DE PONERTE AL DÍA!\",\"texto\":\"Comienza la transformación de los microempresarios en el departamento del Cesar.<b>¡Reactivate de inmediato!</b>\",\"boton-1\":\"vistas/images/pagina_web/carrusel/6153.png\",\"url-boton-1\":\"https://www.google.com/\",\"boton-2\":\"\",\"url-boton-2\":\"https://www.google.com/\",\"foto-delante\":\"\",\"fondo\":\"vistas/images/pagina_web/carrusel/quinta.jpg\"},{\"categoria\":\"Capacitación\",\"titulo\":\"¡Ya comienza el festival! y es hora de planear.\",\"texto\":\"Capacitación sobre como aprovechar la afluencia masiva de turistas (sector hotelero) y como incrementar las ventas (sector comercial). Dictado por la Doctora Alexandra Márquez.\",\"boton-1\":\"vistas/images/pagina_web/carrusel/1450.png\",\"url-boton-1\":\"https://www.google.com/\",\"boton-2\":\"vistas/images/pagina_web/carrusel/6082.png\",\"url-boton-2\":\"\",\"foto-delante\":\"vistas/images/pagina_web/carrusel/2423.jpg\",\"fondo\":\"vistas/images/pagina_web/carrusel/9693.jpg\"},{\"categoria\":\"Noticias\",\"titulo\":\"Descarga la App de la DIAN en Android o iPhone\",\"texto\":\"Invitamos a todos nuestro agremiados a descargar la aplicación de la DIAN en todos sus dispositivos moviles y así matenerse actualizados de todas las novedades tributarias del momento.\",\"boton-1\":\"vistas/images/pagina_web/carrusel/1947.png\",\"url-boton-1\":\"https://www.google.com/\",\"boton-2\":\"vistas/images/pagina_web/carrusel/4590.png\",\"url-boton-2\":\"https://www.google.com/\",\"foto-delante\":\"vistas/images/pagina_web/carrusel/2703.png\",\"fondo\":\"vistas/images/pagina_web/carrusel/7085.jpg\"},{\"categoria\":\"Noticias\",\"titulo\":\"¡EMPIEZA EL AÑO 2022!\",\"texto\":\"Este año tus ingresos crecerán.\",\"boton-1\":\"vistas/images/pagina_web/carrusel/27088.png\",\"url-boton-1\":\"https://www.google.com/\",\"boton-2\":\"vistas/images/pagina_web/carrusel/98408.png\",\"url-boton-2\":\"\",\"foto-delante\":\"\",\"fondo\":\"vistas/images/pagina_web/carrusel/31551.jpg\"},{\"categoria\":\"Capacitación\",\"titulo\":\"¿CÓMO TENER UN PÁGINA WEB?\",\"texto\":\"Capacitación sobre como poner acceder a la sistematización de procesos empresariales.\",\"boton-1\":\"vistas/images/pagina_web/carrusel/80489.png\",\"url-boton-1\":\"\",\"boton-2\":\"vistas/images/pagina_web/carrusel/68333.png\",\"url-boton-2\":\"\",\"foto-delante\":\"vistas/images/pagina_web/carrusel/89315.png\",\"fondo\":\"vistas/images/pagina_web/carrusel/31967.jpg\"},{\"categoria\":\"Noticias\",\"titulo\":\"AUMENTO EN EL PIB NACIONAL\",\"texto\":\"Al final del 2021 se registró un alza del 10% en el PIB del país.\",\"boton-1\":\"vistas/images/pagina_web/carrusel/93388.png\",\"url-boton-1\":\"\",\"boton-2\":\"\",\"url-boton-2\":\"\",\"foto-delante\":\"\",\"fondo\":\"vistas/images/pagina_web/carrusel/64137.png\"},{\"categoria\":\"Otros\",\"titulo\":\"PRUEBA VENDER EN LINEA\",\"texto\":\"A través de las ventas en línea y promoción de productos por medio de las redes sociales puedes atraer nuevos clientes.\",\"boton-1\":\"\",\"url-boton-1\":\"\",\"boton-2\":\"vistas/images/pagina_web/carrusel/72023.png\",\"url-boton-2\":\"\",\"foto-delante\":\"\",\"fondo\":\"vistas/images/pagina_web/carrusel/97296.jpg\"}]', '[{\"imagen\": \"images/proyectos/agromercado.png\", \"fecha_dia\": \"14\", \"fecha_mes\": \"Abril\", \"categoria\": \"Sector Agroindustríal\", \"nombre\": \"AgroMercado\", \"info\": \"Este proyecto busca mejorar las condiciones de los campesinos mediante el mejoramiento o adecuación de vias, para que estos puedan sacar sus productos facilmente al mercado. Proyecto realizado en conjunto con la Gobernación del Cesar.\"\r\n},{\"imagen\": \"images/proyectos/textiles.png\", \"fecha_dia\": \"15\", \"fecha_mes\": \"Abril\", \"categoria\": \"Sector Comercial\", \"nombre\": \"La Tercera Transformación\", \"info\": \"Proyecto que consiste en la evaluación para la aprobación de creditos, dandole la oportunidad a los microempresarios de crecer y superar la reciente crisis economica. En colaboración con Bancoldex.\"},{\"imagen\": \"images/proyectos/taxes.png\", \"fecha_dia\": \"16\", \"fecha_mes\": \"Abril\", \"categoria\": \"Comunidad en general\", \"nombre\": \"Taxes al día\", \"info\": \"Consiste en asegurarse que todos los microempresarios estén al tanto de cuales son sus compromisos tributarios.\" }]\r\n', 'En esta sesión encontraras las  noticias más recientes de nuestra agremiación, solo cliquea sobre el recuadro para ver más.', '[{\"nombre\":\"Universidad Popular del Cesar\",\"logo\":\"vistas/images/pagina_web/aliados/4547.png\",\"link\":\"http://www.unicesar.edu.co\"},{\"nombre\":\"Universidad de Santander UDES\",\"logo\":\"vistas/images/pagina_web/aliados/aliados-udes.png\",\"link\":\"http://www.unicesar.edu.co\"},{\"nombre\":\"Fundación Universitaria del Área Andina\",\"logo\":\"vistas/images/pagina_web/aliados/8706.png\",\"link\":\"http://www.unicesar.edu.co\"},{\"nombre\":\"Servicio Nacional de Aprendizaje\",\"logo\":\"vistas/images/pagina_web/aliados/aliados-sena.png\",\"link\":\"http://www.unicesar.edu.co\"}]', '[\"https://www.youtube.com/embed/qJ7Kpfm6DXM\", \"https://www.youtube.com/embed/TYvtmPZ6YS8\", \"https://www.youtube.com/embed/jEVKFNZU4EI\"]', '[{\n	\"num\": \"01.\", \n	\"nombre\": \"Representación y liderazgo gremial.\", \n	\"descripcion\": \"Defendemos los intereses del sector ante las entidades gubernamentales y no gubernamentales, nacionales y/o extranjeras.\"\n},{\n	\"num\": \"02.\", \n	\"nombre\": \"Convenios de cooperación interinstitucional.\", \n	\"descripcion\": \"Suscritos con diversas entidades para desarrollar programas que contribuyan al fomentos de la pequeña y mediana empresa.\"\n},{\n	\"num\": \"03.\", \n	\"nombre\": \"Alianzas estrategicas.\", \n	\"descripcion\": \"Promovemos la asociación entre empresas afines para propocionar la transferencia de bienes y servicios buscando la ampliacion de sus mercados y la disminución de sus costos.\"\n},{\n	\"num\": \"04.\", \n	\"nombre\": \"Capacitación.\", \n	\"descripcion\": \"Programamos conferencias, talleres, cursos y seminarios especializados en diversas áreas administrativas y técnicas, orientadas a resolver las necesidades de capacitación del sector industrial, con tarifas especiales para afiliados.\"\n},{\n	\"num\": \"05.\", \n	\"nombre\": \"Asesorías.\", \n	\"descripcion\": \"Nuestros afiliados pueden obtener asesorías en las siguientes áreas:\"\n},{\n	\"num\": \"06.\", \n	\"nombre\": \"Información y divulgación.\", \n	\"descripcion\": \"Es nuestro interes mantener una cordial y permanente comunicación con nuestro gremio que nos permite hacerle llegar información especializada del sector y conocer sus inquietudes y necesidades.\"\n},{\n	\"num\": \"07.\", \n	\"nombre\": \"Eventos especiales.\", \n	\"descripcion\": \"Con el propósito de promocionar e integrar a nuestro afiliados, buscando ampliar sus horizontes, organizamos y apoyamos la realización de encuentros empresariales, muestras y ferias como Expocesar, Con la participación de entidades como PROEXPORT organizamos misiones a otros países con la intención de establecer contactos para importación y Exportación.\"\n},{\n	\"num\": \"08.\", \n	\"nombre\": \"Eventos institucionales.\", \n	\"descripcion\": \"Asamblea General de Afiliados, Convención Nacional, Congreso Nacional.\"\n},{\n	\"num\": \"09.\", \n	\"nombre\": \"Practicas empresariales.\", \n	\"descripcion\": \"Mediante Convenios con las universidades, estamos en la posibilidad de facilitar a nuestros afiliados practicantes calificados que les apoyen en la implantación de procesos hacia una mayor productividad, para lo cual se ha conformado un COMITÉ INTERDISCIPLINARIO.\"\n},{\n	\"num\": \"10.\", \n	\"nombre\": \"Fortalecimiento y desarrollo Sectorial.\", \n	\"descripcion\": \"A traves de los programas de desarrollo sectorial PRODES, se implementan actividades asociativas, orientadas al mejoramiento de la gestión y competividad con el objetivo final incorporar a las PYMES de la región en la corriente de los negocios internacionales.\"\n},{\n	\"num\": \"11.\", \n	\"nombre\": \"Centros de conciliación y arbitraje.\", \n	\"descripcion\": \"Al servicio de nuestros afiliados para disminuir conflictos por la via de la conciliación.\"\n}]', '[{\"nombre\":\"facebook\",\"logo\":\"fab fa-facebook-f\",\"link\":\"https://www.facebook.com\"},{\"nombre\":\"linkeln\",\"logo\":\"fab fa-linkedin-in\",\"link\":\"https://www.linkeln.com\"},{\"nombre\":\"twitter\",\"logo\":\"fab fa-twitter\",\"link\":\"https://www.twitter.com\"},{\"nombre\":\" tiktok\",\"logo\":\"fab fa-tiktok\",\"link\":\"https://www.tiktok.com\"},{\"nombre\":\" youtube\",\"logo\":\"fab fa-youtube\",\"link\":\"https://www.youtube.com\"},{\"nombre\":\" pinterest\",\"logo\":\"fab fa-pinterest-p\",\"link\":\"https://www.pinterest.com\"}]', '[\"Calle 15 # 4-33, oficina 401.\",\"574 9216\",\"+57 315 651 6647\",\"acopicesar07@hotmail.com\"]', '2022-01-08 07:23:52');
 
 -- --------------------------------------------------------
 
@@ -259,6 +307,42 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `representante_empresa`
+--
+
+CREATE TABLE `representante_empresa` (
+  `id_rprt_legal` int(11) NOT NULL,
+  `tipo_documento_rprt` text COLLATE utf8_spanish_ci NOT NULL,
+  `cc_rprt_legal` text COLLATE utf8_spanish_ci NOT NULL,
+  `primer_nombre` text COLLATE utf8_spanish_ci NOT NULL,
+  `segundo_nombre` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `primer_apellido` text COLLATE utf8_spanish_ci NOT NULL,
+  `segundo_apellido` text COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `sexo_rprt` text COLLATE utf8_spanish_ci NOT NULL,
+  `email_rprt` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono_rprt` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `foto_rprt` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `foto_cedula_rprt` text COLLATE utf8_spanish_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `representante_empresa`
+--
+
+INSERT INTO `representante_empresa` (`id_rprt_legal`, `tipo_documento_rprt`, `cc_rprt_legal`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `fecha_nacimiento`, `sexo_rprt`, `email_rprt`, `telefono_rprt`, `foto_rprt`, `foto_cedula_rprt`, `created_at`, `updated_at`) VALUES
+(1, 'cedula', '1065832567', 'Hernandez', 'Gómez', 'José', 'Cristobal', '1987-01-10', 'm', 'jhernandez@gmail.com', '5723945', 'vistas/images/afiliados/fotos/35032.png', 'vistas/images/afiliados/documentos/2762.png', NULL, '2022-01-10 04:05:39'),
+(2, 'cedula', '1065831073', 'Andrés', 'Alfredo', 'Soto', 'Suárez', '1997-02-13', 'm', 'andresalfredosotosuarez@gmail.com', '3045395221', 'vistas/images/afiliados/fotos/95299.jpg', 'vistas/images/afiliados/documentos/490861.jpg', '2022-01-09 07:22:33', '2022-01-09 07:22:33'),
+(3, 'cedula', '10658327539', 'Sandra', 'María', 'Gonzalez', 'Pereira', '1981-04-23', 'f', 'mgonzalez@gmail.com', '3004568234', 'vistas/images/afiliados/fotos/14378.jpg', 'vistas/images/afiliados/documentos/49086.jpg', '2022-01-09 07:26:16', '2022-01-10 03:54:13'),
+(4, 'cedula', '1065831483', 'Helena', 'María', 'Troya', 'Pereira', '1967-12-31', 'f', 'edetroya@gmail.com', '3204394523', 'vistas/images/afiliados/fotos/73089.jpg', 'vistas/images/afiliados/documentos/90553.jpg', '2022-01-09 20:24:54', '2022-01-09 20:24:54'),
+(5, 'cedula', '1065920394', 'Mariana', 'Sofia', 'De Austria', 'y Borbon', '1984-09-07', 'f', 'msdeaustria@gmail.com', '3205483275', 'vistas/images/afiliados/fotos/41223.jpg', 'vistas/images/afiliados/documentos/13185.png', '2022-01-10 01:03:01', '2022-01-10 06:12:49'),
+(6, 'cedula', '10658392', 'Andrea', 'Martina', 'Ortiz', 'Almaza', '1970-04-04', 'f', 'aortiz@gmail.com', '3048457294', 'vistas/images/afiliados/fotos/46193.jpg', 'vistas/images/afiliados/documentos/27621.png', '2022-01-10 03:51:42', '2022-01-10 03:51:42');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `roles`
 --
 
@@ -281,6 +365,28 @@ INSERT INTO `roles` (`id`, `rol`, `created_at`, `updated_at`) VALUES
 (5, 'Subdirector juridico', NULL, NULL),
 (6, 'Subdirector de comunicaciones y eventos', NULL, NULL),
 (7, 'Asistente de dirección', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sector_empresa`
+--
+
+CREATE TABLE `sector_empresa` (
+  `id_sector` int(11) NOT NULL,
+  `nombre_sector` text COLLATE utf8_spanish_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `sector_empresa`
+--
+
+INSERT INTO `sector_empresa` (`id_sector`, `nombre_sector`, `created_at`, `updated_at`) VALUES
+(1, 'Agroindustrial', NULL, NULL),
+(2, 'Prestación de servicios', NULL, NULL),
+(3, 'Industria Textil', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -327,6 +433,18 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `fo
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`);
+
+--
+-- Indices de la tabla `empleados_afiliados`
+--
+ALTER TABLE `empleados_afiliados`
+  ADD PRIMARY KEY (`id_empleado_afiliado`);
+
+--
+-- Indices de la tabla `empresas`
+--
+ALTER TABLE `empresas`
+  ADD PRIMARY KEY (`id_empresa`);
 
 --
 -- Indices de la tabla `entrevistas`
@@ -380,10 +498,22 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indices de la tabla `representante_empresa`
+--
+ALTER TABLE `representante_empresa`
+  ADD PRIMARY KEY (`id_rprt_legal`);
+
+--
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `sector_empresa`
+--
+ALTER TABLE `sector_empresa`
+  ADD PRIMARY KEY (`id_sector`);
 
 --
 -- Indices de la tabla `users`
@@ -401,6 +531,18 @@ ALTER TABLE `users`
 --
 ALTER TABLE `categorias`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `empleados_afiliados`
+--
+ALTER TABLE `empleados_afiliados`
+  MODIFY `id_empleado_afiliado` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `empresas`
+--
+ALTER TABLE `empresas`
+  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `entrevistas`
@@ -445,10 +587,22 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `representante_empresa`
+--
+ALTER TABLE `representante_empresa`
+  MODIFY `id_rprt_legal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `sector_empresa`
+--
+ALTER TABLE `sector_empresa`
+  MODIFY `id_sector` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

@@ -178,7 +178,7 @@
 	swal({
 		title: "¡Cuidado!",
 		text: "Está intentando ingresar caracteres no validos.",
-		icon: "warning"
+		type: "warning"
 	});
 </script>
 @endif
@@ -187,7 +187,7 @@
 	swal({
 		title: "¡Bien Hecho!",
 		text: "Información actualizada.",
-		icon: "success"
+		type: "success"
 	});
 </script>
 @endif
@@ -196,7 +196,7 @@
 	swal({
 		title: "¡Error!",
 		text: "Error al intentar actualizar.",
-		icon: "error"
+		type: "error"
 	});
 </script>
 @endif
@@ -206,7 +206,7 @@
 	swal({
 		title: "¡Error!",
 		text: "Link del video invalido.",
-		icon: "error"
+		type: "error"
 	});
 </script>
 @endif

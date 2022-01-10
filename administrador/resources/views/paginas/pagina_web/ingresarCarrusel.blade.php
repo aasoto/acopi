@@ -376,7 +376,7 @@
 							=            Tarjeta de ingresar carrusel            =
 							===================================================-->
 							
-							<div class="card card-primary collapsed-card">
+							<div class="card card-success collapsed-card">
 								<div class="card-header">
 									<h3 class="card-title">Nuevo Item Carrusel</h3>
 
@@ -489,7 +489,7 @@
       swal({
           title: "¡Cuidado!",
           text: "Está intentando ingresar caracteres no validos.",
-          icon: "warning"
+          type: "warning"
       });
     </script>
   @endif
@@ -498,7 +498,7 @@
       swal({
           title: "¡Bien Hecho!",
           text: "Información actualizada.",
-          icon: "success"
+          type: "success"
       });
     </script>
   @endif
@@ -507,7 +507,7 @@
       swal({
           title: "¡Error!",
           text: "Error al intentar actualizar.",
-          icon: "error"
+          type: "error"
       });
     </script>
   @endif
@@ -516,7 +516,7 @@
       swal({
           title: "¡Error!",
           text: "Formato incorrecto de imagen.",
-          icon: "error"
+          type: "error"
       });
     </script>
   @endif
