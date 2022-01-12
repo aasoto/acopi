@@ -1050,176 +1050,85 @@ $(document).on("click", ".eliminarInteresado", function(){
 
 $(document).on("click", ".crearAfiliado", function(){
 
-	$(".ingresarAfiliado").append(`
-		
-		<div class="card card-success">
-                <div class="card-header">
-                  <div class="card-title">Agregar Afiliado</div>
-                  <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                      <i class="fas fa-minus"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <select class="form-control select2" name="tipo_documento" id="tipo_documento" style="width: 100%;" required>
-                          <option selected="sin verificar"><i>Seleccionar tipo de documento...</i></option>
-                          <option value="cedula">Cédula de Ciudadanía</option>
-                          <option value="pasaporte">Pasaporte</option>
-                          <option value="otro">Otro</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="number" class="form-control" name="numero_documento" placeholder="Número de documento" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="primer_nombre" placeholder="Primer nombre" required>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="segundo_nombre" placeholder="Segundo nombre">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="primer_apellido" placeholder="Primer apellido" required>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="text" class="form-control" name="segundo_apellido" placeholder="Segundo apellido" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <select class="form-control select2" name="sexo" id="sexo" style="width: 100%;" required>
-                          <option selected="sin verificar"><i>Seleccionar sexo...</i></option>
-                          <option value="m">Masculino</option>
-                          <option value="f">Femenino</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="date" class="form-control" name="fecha_nacimiento" placeholder="Fecha de nacimiento" required>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="email" class="form-control" name="correo_electronico" placeholder="Correo electronico">
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <input type="number" class="form-control" name="telefono" placeholder="Telefono o celular">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      
-                      <div class="form-group my-2 text-center">
-                        <label for="exampleInputPassword1">Foto afiliado</label><br>
-                        <div class="btn btn-default btn-file mb-3">
-                          <i class="fas fa-paperclip"></i> Adjuntar foto
-                          <input type="file" name="foto">
-                        </div>
-                        <br>
-                        <img src="`+ruta+`/vistas/images/afiliados/unknown.png" class="img-fluid py-2 bg-secondary previsualizarImg_foto">
-                        <p class="help-block small mt-3">Dimensiones: 700px * 200px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      
-                      <div class="form-group my-2 text-center">
-                        <label for="exampleInputPassword1">Foto o PDF de documento de identidad</label><br>
-                        <div class="btn btn-default btn-file mb-3">
-                          <i class="fas fa-paperclip"></i> Adjuntar documento
-                          <input type="file" name="archivo_documento" required>
-                        </div>
-                        <br>
-                        <img src="`+ruta+`/vistas/images/afiliados/address-card.png" class="img-fluid py-2 bg-secondary previsualizarImg_archivo_documento">
-                        <p class="help-block small mt-3">Dimensiones: 700px * 200px para imagenes | Peso Max. 2MB | Formato: JPG, PNG o PDF</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class="col-md-12 text-center">
-                    <button type="submit" class="btn btn-success col-md-6">
-                      <i class="fas fa-check"></i> Guardar nuevo afiliado
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <script type="text/javascript">
-              	$("input[type='file']").change(function(){
-
-					var imagen = this.files[0];
-					//console.log("imagen", imagen);
-					var tipo = $(this).attr("name");
-					
-				    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
-
-				    	$("input[type='file']").val("");
-
-				      	swal({
-				      		title: "¡Error!",
-				      		text: "¡La imagen debe estar en formato JPG o PNG!",
-				      		icon: "error"
-				      	});
-
-				    }else if(imagen["size"] > 2000000){
-
-				    	$("input[type='file']").val("");
-
-				    	swal({
-				      		title: "¡Error!",
-				      		text: "¡La imagen no debe pesar más de 2MB!",
-				      		icon: "error"
-				      	});
-
-				    }else{
-
-				    	var datosImagen = new FileReader;
-				    	datosImagen.readAsDataURL(imagen);
-
-				    	$(datosImagen).on("load", function(event){
-
-				    		var rutaImagen = event.target.result;
-
-				    		$(".previsualizarImg_"+tipo).attr("src", rutaImagen);
-
-				    	})
-
-				    }
-
-
-				})
-              </script>
-	`)
-	$(this).parent().parent().parent().parent().remove();
+	document.getElementById("ingresarAfiliado").style.visibility="";
+	$(this).parent().parent().parent().parent().parent().remove();
 })
 
 /*=====  End of Mostrar agregar nuevo afiliado  ======*/
 
+/*================================================
+=            Exportar datos afiliados            =
+================================================*/
 
+$(document).on("click", ".tablaExportar", function(){
+
+	
+	$(this).parent().parent().parent().parent().parent().parent().remove();
+})
+
+/*=====  End of Exportar datos afiliados  ======*/
+
+
+/*====================================
+=            Ver afiliado            =
+====================================*/
+
+$(document).on("click", ".verMasAfiliado", function(){
+	var estoy = $(this).attr("estoy");
+	var tipo_documento_rprt = $(this).attr("tipo_documento_rprt");
+	var cc_rprt_legal = $(this).attr("cc_rprt_legal");
+	var primer_nombre = $(this).attr("primer_nombre");
+	var segundo_nombre = $(this).attr("segundo_nombre");
+	var primer_apellido = $(this).attr("primer_apellido");
+	var segundo_apellido = $(this).attr("segundo_apellido");
+	var fecha_nacimiento = $(this).attr("fecha_nacimiento");
+	var sexo_rprt = $(this).attr("sexo_rprt");
+	var email_rprt = $(this).attr("email_rprt");
+	var telefono_rprt = $(this).attr("telefono_rprt");
+	var foto_rprt = $(this).attr("foto_rprt");
+
+	document.getElementById("consultaAfiliado").style.visibility="";
+
+    var tipo_documento;
+    if (tipo_documento_rprt == "cedula") {
+    	tipo_documento = "Cédula de ciudadanía";
+    } else {
+    	if (tipo_documento_rprt == "pasaporte") {
+    		tipo_documento = "Pasaporte";
+    	} else {
+    		if (tipo_documento_rprt == "otro") {
+    			tipo_documento = "Otro";
+    		} else {
+    			tipo_documento = "Sin verificar";
+    		}
+    	}
+    }
+
+    var genero;
+    if (sexo_rprt == "m") {
+    	genero = "Masculino";
+    } else {
+    	if (sexo_rprt == "f") {
+    		genero = "Femenino";
+    	} else {
+    		genero = "Sin especificar";
+    	}
+    }
+    foto = ruta+"/"+foto_rprt;
+    document.getElementById("foto").src = foto;
+    
+	$("#tipo_documento").val(tipo_documento);
+	$("#num_cedula").val(cc_rprt_legal);
+	$("#nombre_completo").val(primer_apellido+" "+segundo_apellido+" "+primer_nombre+" "+segundo_nombre);
+	$("#genero").val(genero);
+	$("#fecha_nacimiento").val(fecha_nacimiento);
+	$("#email").val(email_rprt);
+	$("#telefono").val(telefono_rprt);
+
+	$(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().remove();
+})
+
+/*=====  End of Ver afiliado  ======*/
 
 
 

@@ -7,14 +7,62 @@ use App\EmpresasModel;
 use App\RepresentanteEmpresaModel;
 use App\EmpleadosAfiliadosModel;
 use App\SectorEmpresaModel;
+use App\PaginaWebModel;
+//Libería para hacer inner join
+use Illuminate\Support\Facades\DB;
 
 class AfiliadosController extends Controller
 {
     /*===============================================================
 	=            Mostrar todos los registros de la tabla            =
 	===============================================================*/
+
+	public function index() {
+		if (request()->ajax()) {
+    		return datatables()->of(RepresentanteEmpresaModel::all()) 
+    		->addColumn('nombre', function($data){
+    			
+    				$nombre = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre;
+
+			
+
+				return $nombre;
+			})
+
+
+			->addColumn('acciones', function($data){
+    				$acciones = '
+    				<div class="btn-group">
+						<a estoy="'.url()->current().'/" tipo_documento_rprt="'.$data->tipo_documento_rprt.'" cc_rprt_legal="'.$data->cc_rprt_legal.'" primer_nombre="'.$data->primer_nombre.'" segundo_nombre="'.$data->segundo_nombre.'" primer_apellido="'.$data->primer_apellido.'" segundo_apellido="'.$data->segundo_apellido.'" fecha_nacimiento="'.$data->fecha_nacimiento.'" sexo_rprt="'.$data->sexo_rprt.'" email_rprt="'.$data->email_rprt.'" telefono_rprt="'.$data->telefono_rprt.'" foto_rprt="'.$data->foto_rprt.'" title="Ver más" class="btn btn-primary btn-sm verMasAfiliado">
+							<i class="fas fa-eye"></i>
+						</a>
+						<a href="http://localhost/acopi/administrador/public/afiliados/empresas/'.$data->id_rprt_legal.'" title="Agregar nueva empresa" class="btn btn-success btn-sm">
+							<i class="fas fa-plus"></i>
+						</a>
+						<a href="'.url()->current().'/'.$data->id_rprt_legal.'" title="Editar" class="btn btn-warning btn-sm editarAfiliado">
+							<i class="fas fa-pencil-alt text-white"></i>
+						<a>
+						<button class="btn btn-danger btn-sm eliminarAfiliado" title="Eliminar" action="'.url()->current().'/'.$data->id_rprt_legal.'" method="DELETE" foto="'.$data->foto_rprt.'" cedula="'.$data->foto_cedula_rprt.'" pagina="afiliados/general" token="'.csrf_token().'">
+						<i class="fas fa-trash-alt"></i>
+						</button>
+
+	  				</div>';
+    			
+				return $acciones;
+			})
+
+			  ->rawColumns(['nombre', 'acciones'])
+			  -> make(true);
+
+		}
+
+    	$afiliados = RepresentanteEmpresaModel::all();
+    	return view("paginas.afiliados.general", array("afiliados"=>$afiliados));
+	}
 	
-	public function index(){
+	/* public function index(){
+
+		$join = DB::table('empresas')->join('representante_empresa','empresas.cc_rprt_legal','=','representante_empresa.cc_rprt_legal')->select('empresas.razon_social','representante_empresa.*')->get();   
 
     	if (request()->ajax()) {
     		return datatables()->of(RepresentanteEmpresaModel::all()) 
@@ -38,6 +86,16 @@ class AfiliadosController extends Controller
 				return $sexo_rprt;
 			})
 
+    		->addColumn('empresas', function($data){
+    			
+    			$empresas = " ";
+    				//$empresas = $id->razon_social;
+
+			
+
+				return $empresas;
+			})
+
 			->addColumn('acciones', function($data){
     				$acciones = '
     				<div class="btn-group">
@@ -46,7 +104,7 @@ class AfiliadosController extends Controller
 							<i class="fas fa-pencil-alt text-white"></i>
 						</a>
 
-						<button class="btn btn-danger btn-sm eliminarAfiliado" action="'.url()->current().'/'.$data->id.'" method="DELETE" foto="'.$data->foto_rprt.'" cedula="'.$data->foto_cedula_rprt.'" pagina="afiliados/general" token="'.csrf_token().'">
+						<button class="btn btn-danger btn-sm eliminarAfiliado" action="'.url()->current().'/'.$data->id_rprt_legal.'" method="DELETE" foto="'.$data->foto_rprt.'" cedula="'.$data->foto_cedula_rprt.'" pagina="afiliados/general" token="'.csrf_token().'">
 						<i class="fas fa-trash-alt"></i>
 						</button>
 
@@ -54,14 +112,23 @@ class AfiliadosController extends Controller
     			
 				return $acciones;
 			})
-			  ->rawColumns(['nombre','sexo_rprt','acciones'])
+
+			->addColumn('nueva_empresa', function($data){
+    				$nueva_empresa = '
+						<a href="http://localhost/acopi/administrador/public/afiliados/empresas/'.$data->id_rprt_legal.'" class="btn btn-success">
+							<i class="fas fa-plus"></i> Agregar empresa
+						</a>';
+    			
+				return $nueva_empresa;
+			})
+			  ->rawColumns(['nombre','sexo_rprt','empresas','acciones', 'nueva_empresa'])
 			  -> make(true);
 
 		}
 
     	$afiliados = RepresentanteEmpresaModel::all();
     	return view("paginas.afiliados.general");
-    }
+    } */
 	
 	/*=====  End of Mostrar todos los registros de la tabla  ======*/
 
