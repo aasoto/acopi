@@ -93,5 +93,8 @@ Route::resource('/usuarios/consultarUser', 'UsuariosController');
 /*----------  Afiliados  ----------*/
 Route::resource('/afiliados/general', 'AfiliadosController');
 Route::resource('/afiliados/empresas', 'EmpresasController');
+Route::resource('/afiliados/exportar', 'ExportarController');
+Route::resource('/afiliados/consultarEmpresas', 'EmpresasController');
+Route::resource('/afiliados/exportarEmpresas', 'ExportarController');
 
 /*=====  End of Rutas que incluyen todos los metodos HTML  ======*/

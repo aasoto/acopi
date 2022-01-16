@@ -57,7 +57,8 @@ class AfiliadosController extends Controller
 		}
 
     	$afiliados = RepresentanteEmpresaModel::all();
-    	return view("paginas.afiliados.general", array("afiliados"=>$afiliados));
+    	$pagina_web = PaginaWebModel::all();
+    	return view("paginas.afiliados.general", array("afiliados"=>$afiliados, "pagina_web"=>$pagina_web));
 	}
 	
 	/* public function index(){
@@ -278,14 +279,15 @@ class AfiliadosController extends Controller
 
         $afiliado = RepresentanteEmpresaModel::where("id_rprt_legal", $id)->get();
         $afiliados = RepresentanteEmpresaModel::all();
+        $pagina_web = PaginaWebModel::all();
         
         if(count($afiliado) != 0){
 
-            return view("paginas.afiliados.general", array("status"=>200, "afiliado"=>$afiliado, "afiliados"=>$afiliados));
+            return view("paginas.afiliados.general", array("status"=>200, "afiliado"=>$afiliado, "afiliados"=>$afiliados, "pagina_web"=>$pagina_web));
         
         }else{ 
 
-            return view("paginas.afiliados.general", array("status"=>404, "afiliados"=>$afiliados));
+            return view("paginas.afiliados.general", array("status"=>404, "afiliados"=>$afiliados, "pagina_web"=>$pagina_web));
         }
     }
     

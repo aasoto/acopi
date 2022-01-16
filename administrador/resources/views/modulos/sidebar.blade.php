@@ -177,17 +177,18 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url('afiliados/agregar') }}" class="nav-link">
-                      <i class="nav-icon fas fa-plus-circle"></i>
-                      <p>Agregar</p>
+                    <a href="{{ url('afiliados/general') }}" class="nav-link">
+                      <i class="nav-icon fas fa-list-alt"></i>
+                      <p>Consultar Afliados</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('afiliados/general') }}" class="nav-link">
-                      <i class="nav-icon fas fa-list-alt"></i>
-                      <p>Consultar</p>
+                    <a href="{{ url('afiliados/consultarEmpresas') }}" class="nav-link">
+                      <i class="nav-icon fas fa-plus-circle"></i>
+                      <p>Consultar empresas</p>
                     </a>
                   </li>
+                  
                   <li class="nav-item">
                     <a href="{{ url('afiliados/modificar') }}" class="nav-link">
                       <i class="nav-icon fas fa-pen-square"></i>

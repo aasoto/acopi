@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestión Afiliado</h1>
+            <h1>Gestión Afiliados</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -24,6 +24,7 @@
     <section class="content">
 
       <div class="container-fluid">
+        @foreach ($pagina_web as $element) @endforeach
         <div class="row">
           <div class="col-12">
             <!-- Default box -->
@@ -41,16 +42,20 @@
                   </div>
                   <div class="card-body">
                     <div class="row">
-                      <div class="col-6">
-                        <button type="button" class="btn btn-success crearAfiliado">
+                      <div class="col-md-12 text-center">
+                        <button type="button" class="btn btn-success col-md-5 crearAfiliado">
                           <i class="fas fa-plus"></i> Agregar nuevo afiliado
                         </button>
+                        
+                        <a href="{{$element["servidor"]}}afiliados/exportar">
+                          <button type="button" class="btn btn-primary col-md-5 tablaExportar" id="botonExportar" name="botonExportar" action="'.$url.'">
+                            <i class="fas fa-table"></i> Exportar datos
+                          </button>
+                        </a>
                       </div>
-                      <div class="col-6">
-                        <button type="button" class="btn btn-primary tablaExportar">
-                          <i class="fas fa-table"></i> Exportar datos
-                        </button>
-                      </div>
+                    </div>
+                    <div class="row">
+                      <br>
                     </div>
                     <table id="tablaAfiliados" class="table table-bordered table-hover dt-responsive">
                       <thead>
@@ -84,10 +89,13 @@
                 </div>
                 <!-- /.card -->
                 <div id="consultaAfiliado" name="consultaAfiliado" style="visibility: hidden;">
-                  <div class="card card-primary">
+                  <div class="card card-primary collapsed-card" id="tarjetaInformacionAfiliado">
                     <div class="card-header">
                       <h3 class="card-title">Consultar Afiliado</h3>
                       <div class="card-tools">
+                        <button type="button" title="Regresar" class="btn btn-tool verTablaEmpresas">
+                          <i class="fas fa-arrow-left"></i>
+                        </button>
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                           <i class="fas fa-minus"></i>
                         </button>
@@ -133,10 +141,13 @@
               <div class="ingresarAfiliado" id="ingresarAfiliado" name="ingresarAfiliado" style="visibility: hidden;">
                 <form action="{{url('/')}}/afiliados/general" method="post" enctype="multipart/form-data">
                   @csrf
-                  <div class="card card-success">
+                  <div class="card card-success collapsed-card" id="tarjetaIngresarAfiliado">
                     <div class="card-header">
                       <div class="card-title">Agregar Afiliado</div>
                       <div class="card-tools">
+                        <button type="button" title="Regresar" class="btn btn-tool verTablaEmpresas">
+                          <i class="fas fa-arrow-left"></i>
+                        </button>
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                           <i class="fas fa-minus"></i>
                         </button>
@@ -262,89 +273,7 @@
                 </form>
               </div>
             </div>
-
-            <div class="exportar">
-              
-            </div>
-            <div class="card card-primary">
-              <div class="card-header">
-                <div class="card-title">Tabla para exportar datos</div>
-                <div class="card-tools">
-                  <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Tipo documento</th>
-                      <th>Número documento</th>
-                      <th>Nombre completo</th>
-                      <th>F. nacimiento</th>
-                      <th>Genero</th>
-                      <th>Correo electronico</th>
-                      <th>Telefono o celular</th>
-                      <th>Foto</th>
-                      <th>Documento</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach ($afiliados as $key => $value)
-                    <tr>
-                      <td>{{$value["id_rprt_legal"]}}</td>
-                      <td>
-                        @if ($value["tipo_documento_rprt"] == "cedula")
-                          Cédula
-                        @elseif ($value["tipo_documento_rprt"] == "pasaporte")
-                          Pasaporte
-                        @elseif ($value["tipo_documento_rprt"] == "otro")
-                          Otro
-                        @else
-                          Sin especificar
-                        @endif
-                      </td>
-                      <td>{{$value["cc_rprt_legal"]}}</td>
-                      <td>{{$value["primer_apellido"]}} {{$value["segundo_apellido"]}} {{$value["primer_nombre"]}} {{$value["segundo_nombre"]}}</td>
-                      <td>{{$value["fecha_nacimiento"]}}</td>
-                      <td>
-                        @if ($value["sexo_rprt"] == "m")
-                          Másculino
-                        @elseif ($value["sexo_rprt"] == "f")
-                          Femenino
-                        @else
-                          Sin especificar
-                        @endif
-                      </td>
-                      <td>{{$value["email_rprt"]}}</td>
-                      <td>{{$value["telefono_rprt"]}}</td>
-                      <td><img src="{{ url('/') }}/{{$value["foto_rprt"]}}"></td>
-                      <td><img src="{{ url('/') }}/{{$value["foto_cedula_rprt"]}}"></td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th>ID</th>
-                      <th>Tipo documento</th>
-                      <th>Número documento</th>
-                      <th>Nombre completo</th>
-                      <th>F. nacimiento</th>
-                      <th>Genero</th>
-                      <th>Correo electronico</th>
-                      <th>Telefono o celular</th>
-                      <th>Foto</th>
-                      <th>Documento</th>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <div class="card-footer">
-                
-              </div>
-            </div>
+ 
           </div>
         </div>
       </div>

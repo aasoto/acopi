@@ -1052,21 +1052,12 @@ $(document).on("click", ".crearAfiliado", function(){
 
 	document.getElementById("ingresarAfiliado").style.visibility="";
 	$(this).parent().parent().parent().parent().parent().remove();
+	document.getElementById("tarjetaIngresarAfiliado").classList.remove("collapsed-card");
 })
 
 /*=====  End of Mostrar agregar nuevo afiliado  ======*/
 
-/*================================================
-=            Exportar datos afiliados            =
-================================================*/
 
-$(document).on("click", ".tablaExportar", function(){
-
-	
-	$(this).parent().parent().parent().parent().parent().parent().remove();
-})
-
-/*=====  End of Exportar datos afiliados  ======*/
 
 
 /*====================================
@@ -1126,10 +1117,156 @@ $(document).on("click", ".verMasAfiliado", function(){
 	$("#telefono").val(telefono_rprt);
 
 	$(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().remove();
+	document.getElementById("tarjetaInformacionAfiliado").classList.remove("collapsed-card");
 })
 
 /*=====  End of Ver afiliado  ======*/
 
+/*===================================
+=            Ver empresa            =
+===================================*/
+
+$(document).on("click", ".verMasEmpresa", function(){
+	var nit = $(this).attr("nit");
+	var razon_social = $(this).attr("razon_social");
+	var representante = $(this).attr("representante");
+	var num_empleados = $(this).attr("num_empleados");
+	var direccion = $(this).attr("direccion");
+	var telefono = $(this).attr("telefono");
+	var fax = $(this).attr("fax");
+	var celular = $(this).attr("celular");
+	var email = $(this).attr("email");
+	var id_sector = $(this).attr("id_sector");
+	var productos = JSON.parse($(this).attr("productos"));
+	var ciudad = $(this).attr("ciudad");
+	var estado_afiliacion = $(this).attr("estado_afiliacion");
+	var numero_pagos_atrasados = $(this).attr("numero_pagos_atrasados");
+	var fecha_afiliacion = $(this).attr("fecha_afiliacion");
+
+	var sector_empresa = JSON.parse($("#sectores").val());
+	
+	/*console.log(sector_empresa);
+	for (x of sector_empresa){
+		console.log(x.nombre_sector);
+	}*/
+
+	document.getElementById("descripcionEmpresa").style.visibility="";
+
+	var sector = "Sin especificar";
+	for (value of sector_empresa) {
+		if (value.id_sector == id_sector) {
+			sector = value.nombre_sector;
+		}
+	}
+	var lista_productos;
+	for (value of productos) {
+		lista_productos = lista_productos+", "+value;
+	}
+	$("#nit").val(nit);
+	$("#razon_social").val(razon_social);
+	$("#representante").val(representante);
+	$("#numero_empleados").val(num_empleados);
+	$("#direccion").val(direccion);
+	$("#telefono").val(telefono);
+	$("#fax").val(fax);
+	$("#celular").val(celular);
+	$("#correo_electronico").val(email);
+	$("#sector").val(sector);
+	$("#productos").val(lista_productos);
+	$("#ciudad").val(ciudad);
+	$("#estado").val(estado_afiliacion);
+	$("#pagos_atrasados").val(numero_pagos_atrasados);
+	$("#fecha_afiliacion").val(fecha_afiliacion);
+
+	$(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().remove();
+	/*----------  Quitar y añadir clases  ----------*/
+	document.getElementById("tarjetaDescripcion").classList.remove('collapsed-card');
+	//document.getElementById("tarjetaDescripcion").classList.add('collapsed-card');
+})
+
+/*----------  Regresar  ----------*/
+$(document).on("click", ".verTablaEmpresas", function(){
+	window.location.reload();
+	
+})
+
+/*=====  End of Ver empresa  ======*/
+
+/*========================================
+=            Eliminar empresa            =
+========================================*/
+
+$(document).on("click", ".eliminarEmpresa", function(){
+
+	var action = $(this).attr("action");
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	//var token = $(this).children("[name='_token']").attr("value");
+  	var token = $(this).attr("token");
+
+
+  	swal({
+  		 title: '¿Está seguro de eliminar esta empresa?',
+  		 text: "¡Si no lo está puede cancelar la acción!",
+  		 type: 'warning',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Sí, eliminar empresa!'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var datos = new FormData();
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡La empresa ha sido eliminada!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina;
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+/*=====  End of Eliminar empresa  ======*/
 
 
 /*=====================================
