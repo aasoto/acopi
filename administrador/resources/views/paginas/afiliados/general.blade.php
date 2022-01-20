@@ -250,7 +250,7 @@
                         <div class="col-md-6">
                           
                           <div class="form-group my-2 text-center">
-                            <label for="exampleInputPassword1">Foto o PDF de documento de identidad</label><br>
+                            <label for="exampleInputPassword1">Foto de documento de identidad</label><br>
                             <div class="btn btn-default btn-file mb-3">
                               <i class="fas fa-paperclip"></i> Adjuntar documento
                               <input type="file" name="archivo_documento" required>

@@ -96,5 +96,6 @@ Route::resource('/afiliados/empresas', 'EmpresasController');
 Route::resource('/afiliados/exportar', 'ExportarController');
 Route::resource('/afiliados/consultarEmpresas', 'EmpresasController');
 Route::resource('/afiliados/exportarEmpresas', 'ExportarController');
-
+Route::resource('/afiliados/afiliadosEmpleados', 'EmpresasController');
+Route::resource('/afiliados/birthday', 'EmpresasController');
 /*=====  End of Rutas que incluyen todos los metodos HTML  ======*/

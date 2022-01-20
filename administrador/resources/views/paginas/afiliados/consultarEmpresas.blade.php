@@ -41,6 +41,11 @@
               </div>
               <div class="card-body">
                 <div class="col-md-12 text-center">
+                  <a href="{{$element["servidor"]}}afiliados/afiliadosEmpleados">
+                    <button type="button" class="btn btn-primary col-md-5" id="botonAfiliadosEmpleados" name="botonAfiliadosEmpleados">
+                      <i class="fas fa-user"></i> Ver empleados
+                    </button>
+                  </a>
                    <a href="{{$element["servidor"]}}afiliados/exportarEmpresas">
                     <button type="button" class="btn btn-primary col-md-5 tablaExportar" id="botonExportar" name="botonExportar" action="'.$url.'">
                       <i class="fas fa-table"></i> Exportar datos
@@ -154,6 +159,107 @@
       
     </div>
   </section>
+</div>
+
+<div class="modal" id="nuevoEmpleado">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header bg-success">
+        <h4 class="modal-title">Agregar empleados de afiliados </h4>
+        <h4 class="modal-title" name="titulo_modal" id="titulo_modal"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{url('/')}}/afiliados/consultarEmpresas" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="modal-body">
+          <input type="hidden" name="accion" id="accion" value="agregarEmpleadoAfiliado">
+          <input type="hidden" name="id_empresa" id="id_empresa" value="">
+          <input type="hidden" name="nit_empresa" id="nit_empresa" value="">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Tipo de documento</label>
+                <select class="form-control select2" name="tipo_documento" id="tipo_documento" style="width: 100%;" required>
+                  <option selected="sin verificar"><i>Seleccionar tipo de documento...</i></option>
+                  <option value="cedula">Cédula de Ciudadanía</option>
+                  <option value="pasaporte">Pasaporte</option>
+                  <option value="otro">Otro</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Número de documento</label>
+                <input type="number" class="form-control" name="numero_documento" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Primer nombre</label>
+                <input type="texto" class="form-control" name="primer_nombre" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Segundo nombre</label>
+                <input type="texto" class="form-control" name="segundo_nombre">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Primer apellido</label>
+                <input type="texto" class="form-control" name="primer_apellido" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Segundo apellido</label>
+                <input type="texto" class="form-control" name="segundo_apellido" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Cargo del empleado</label>
+                <input type="texto" class="form-control" name="cargo_empleado" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Fecha de nacimiento</label>
+                <input type="date" class="form-control" name="fecha_nacimiento" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group my-2 text-center">
+                <label for="exampleInputPassword1">Foto de documento de identidad</label><br>
+                <div class="btn btn-default btn-file mb-3">
+                  <i class="fas fa-paperclip"></i> Adjuntar documento
+                  <input type="file" name="archivo_documento" required>
+                </div>
+                <br>
+                <img src="{{ url('/') }}/vistas/images/afiliados/address-card.png" class="img-fluid py-2 bg-secondary previsualizarImg_archivo_documento">
+                <p class="help-block small mt-3">Dimensiones: 700px * 200px para imagenes | Peso Max. 2MB | Formato: JPG, PNG o PDF</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default bg-danger" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 
 @if (isset($status))
@@ -315,22 +421,7 @@
   @endif
 @endif
 
-@if (isset($empresa_existe))
-  @if ($empresa_existe == "si")
-  <script>
-    swal({
-      title: "¡Este usuario ya tiene una empresa registrada!",
-      text: "¿Desea registrarle una otra empresa? Si no lo desea puede cancelar esta acción.",
-      type: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      cancelButtonText: "Cancelar",
-      confirmButtonText: "Sí, registrar otra empresa!"
-    });
-  </script>
-  @endif
-@endif
+
 
 @if (Session::has("no-validacion"))
 <script>
@@ -346,6 +437,15 @@
   swal({
     title: "¡Bien Hecho!",
     text: "Información actualizada correctamente.",
+    type: "success"
+  });
+</script>
+@endif
+@if (Session::has("ok-crear-empleado"))
+<script>
+  swal({
+    title: "¡Bien Hecho!",
+    text: "El empleado fuero ingresado correctamente al sistema.",
     type: "success"
   });
 </script>

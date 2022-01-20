@@ -1269,6 +1269,37 @@ $(document).on("click", ".eliminarEmpresa", function(){
 /*=====  End of Eliminar empresa  ======*/
 
 
+/*===================================================
+=            Agregar empleados afiliados            =
+===================================================*/
+
+$(document).on("click", ".agregarEmpleado", function(){
+	var nit_empresa = $(this).attr("nit_empresa");
+	var id_empresa = $(this).attr("id_empresa");
+	var titulo_modal = $(this).attr("razon_social");
+	
+	document.getElementById("titulo_modal").innerHTML = " - "+titulo_modal;
+	$("#id_empresa").val(id_empresa);
+	$("#nit_empresa").val(nit_empresa);
+
+})
+
+/*=====  End of Agregar empleados afiliados  ======*/
+
+/*============================================
+=            Consultar cumpleaños            =
+============================================*/
+
+$(document).on("click", ".consultarBirthday", function(){
+	var fecha_birthday = $("#fecha_birthday").val();
+	var redirigir = ruta+"/afiliados/birthday/"+fecha_birthday;
+	window.location = redirigir;
+
+})
+
+/*=====  End of Consultar cumpleaños  ======*/
+
+
 /*=====================================
 =            LIMPIAR RUTAS            =
 =====================================*/
