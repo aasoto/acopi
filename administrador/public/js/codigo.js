@@ -200,6 +200,20 @@ $(document).on("click", ".eliminarProducto", function(){
 
 })
 
+/*====================================================
+=            Mostrar agregar nuevo aliado            =
+====================================================*/
+
+$(document).on("click", ".botonAgregarAliado", function(){
+
+	document.getElementById("ingresarAliado").style.visibility="";
+	$(this).parent().parent().parent().remove();
+	document.getElementById("tarjetaIngresarAliado").classList.remove("collapsed-card");
+})
+
+/*=====  End of Mostrar agregar nuevo aliado  ======*/
+
+
 /*=============================================
 ELIMINAR ALIADO
 =============================================*/
@@ -214,6 +228,7 @@ $(document).on("click", ".eliminarAliado", function(){
 	logoEliminar = logo;
 
 	document.getElementById('guardar').disabled=true;
+	document.getElementById('botonAgregarAliado').disabled=true;
 
 	for(var i = 0; i < listaAliados.length; i++){
 
@@ -311,7 +326,7 @@ $(document).on("click", ".eliminarCarrusel", function(){
 	fondo_Eliminar = fondo;
 
 	document.getElementById('guardar').disabled = true;
-
+	document.getElementById('botonAgregarItemCarrusel').disabled = true;
 	for(var i = 0; i < listaCarrusel.length; i++){
 
 		if(categoria == listaCarrusel[i]["categoria"] && titulo == listaCarrusel[i]["titulo"] && texto == listaCarrusel[i]["texto"] && boton_1 == listaCarrusel[i]["boton-1"] && boton_2 == listaCarrusel[i]["boton-2"] && foto_delante == listaCarrusel[i]["foto-delante"] && fondo == listaCarrusel[i]["fondo"]){
@@ -683,6 +698,20 @@ $(document).on("click", ".eliminarEntrevista", function(){
 })
 
 /*=====  End of Eliminar entrevista  ======*/
+
+/*=====================================================
+=            Mostrar agregar item carrusel            =
+=====================================================*/
+
+$(document).on("click", ".botonAgregarItemCarrusel", function(){
+
+	document.getElementById("agregarItemCarrusel").style.visibility="";
+	$(this).parent().parent().parent().remove();
+	document.getElementById("tarjetaAgregarItemCarrusel").classList.remove("collapsed-card");
+})
+
+/*=====  End of Mostrar agregar item carrusel  ======*/
+
 
 
 /*=================================================================
@@ -1332,4 +1361,85 @@ $(document).on("keyup", ".inputRuta", function(){
 /*=====  End of LIMPIAR RUTAS  ======*/
 
 
+/*=====================================
+=            Modo nocturno            =
+=====================================*/
+
+$(document).on("click", ".modoNocturno", function(){
+	var action = $(this).attr("action");
+	action = ruta+"/modoNocturno/"+action;
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	//var token = $(this).children("[name='_token']").attr("value");
+  	var token = $(this).attr("token");
+
+  	var datos = new FormData();
+	datos.append("_method", method);
+	datos.append("_token", token);
+
+	$.ajax({
+
+		url: action,
+		method: "POST",
+		data: datos,
+		cache: false,
+		contentType: false,
+		processData: false,
+		success:function(respuesta){
+
+			if(respuesta == "nocturno") {
+		 		swal({
+                    type:"success",
+                    title: "¡Bienvenido al modo nocturno!",
+                    text: "Para volver al modo normal pulsa en el sol.",
+                    background: '#343a40',
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar"
+	            }).then(function(result){
+	             	if(result.value){
+	             		window.location = pagina;
+	             	}
+	            })
+			}
+
+			if(respuesta == "diurno") {
+		 		swal({
+                    type:"success",
+                    title: "¡Bienvenido al modo diurno!",
+                    text: "Para volver al modo normal pulsa en la luna.",
+                    background: '#fff',
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar"
+	            }).then(function(result){
+	             	if(result.value){
+	             		window.location = pagina;
+	             	}
+	            })
+			}
+
+			if(respuesta == "vacio") {
+		 		swal({
+                    type:"error",
+                    title: "¡Ha ocurrido un error!",
+                    text: "No se puedo cambiar el modo nocturno/diurno.",
+                    showConfirmButton: true,
+                    confirmButtonText: "Cerrar"
+	            }).then(function(result){
+	             	if(result.value){
+	             		window.location = pagina;
+	             	}
+	            })
+			}
+
+		},
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(textStatus + " " + errorThrown);
+        }
+
+	})
+
+  	
+})
+
+/*=====  End of Modo nocturno  ======*/
 

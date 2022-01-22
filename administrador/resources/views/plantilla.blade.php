@@ -23,9 +23,25 @@
   	<!-- overlayScrollbars -->
   	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   	{{-- TAGS INPUT --}}
-	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/tagsinput.css">
-	{{-- SUMMERNOTE --}}
-	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/summernote.css">
+  	@if (Route::has('login'))
+  		@auth
+  		@if (Auth::user()->modo == 'Nocturno')
+	  		<link rel="stylesheet" href="{{ url('/') }}/css/plugins/tagsinput-dark.css">
+	  		{{-- SUMMERNOTE --}}
+			<link rel="stylesheet" href="{{ url('/') }}/css/plugins/summernote-dark.css">
+		@else
+	  		<link rel="stylesheet" href="{{ url('/') }}/css/plugins/tagsinput.css">
+	  		{{-- SUMMERNOTE --}}
+			<link rel="stylesheet" href="{{ url('/') }}/css/plugins/summernote.css">
+	  	@endif
+  	@else
+  		<link rel="stylesheet" href="{{ url('/') }}/css/plugins/tagsinput.css">
+  		{{-- SUMMERNOTE --}}
+		<link rel="stylesheet" href="{{ url('/') }}/css/plugins/summernote.css">
+		@endauth
+  	@endif
+	
+	
 	<!--Slider-->
     <link rel="stylesheet" href="{{ url('/') }}/css/plugins/owl.carousel.css" />
     <link rel="stylesheet" href="{{ url('/') }}/css/plugins/owl.theme.css" />
@@ -70,7 +86,19 @@
 	<script src="{{ url('/') }}/js/plugins/adminlte/demo.js"></script>
 	<!-- Sweetalert-->
 	{{--<script src="{{ url('/') }}/js/plugins/sweetalert.min.js"></script>--}}
-	<script src="{{ url('/') }}/js/plugins/sweetalert.js"></script>
+	@if (Route::has('login'))
+		@auth
+		@if (Auth::user()->modo == 'Nocturno')
+			<script src="{{ url('/') }}/js/plugins/sweetalert-dark.js"></script>
+		@else
+			<script src="{{ url('/') }}/js/plugins/sweetalert.js"></script>
+		@endif
+	@else
+		<script src="{{ url('/') }}/js/plugins/sweetalert.js"></script>
+		@endauth
+	@endif
+	
+	
 	<!-- owl-carousel -->
     <script src="{{ url('/') }}/js/plugins/owl.carousel.min.js"></script>
 	<!-- SweetAlert2 -->
@@ -80,7 +108,7 @@
 </head>
 @if (Route::has('login'))
 	@auth
-		<body class="hold-transition sidebar-mini layout-fixed">
+		<body class="hold-transition sidebar-mini layout-fixed" id="cuerpoPagina">
 			<div class="wrapper">
 				@include('modulos.preloading')
 				@include('modulos.header')
@@ -91,6 +119,9 @@
 			<input type="hidden" id="ruta" value="{{ url('/') }}">
 			<script src="{{url('/')}}/js/codigo.js"></script>
 			<script src="{{url('/')}}/js/ownDatatables.js"></script>
+			@if (Auth::user()->modo == 'Nocturno')
+				<script src="{{url('/')}}/js/modoNocturno.js"></script>
+			@endif
 		</body>
 	@else
 		@include('paginas.pagina_web.login')

@@ -52,6 +52,7 @@
                     </button>
                   </a>
                 </div>
+                <br>
                 <table id="tablaEmpresas" class="table table-bordered table-hover dt-responsive">
                   <thead>
                     <tr>

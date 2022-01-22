@@ -11,8 +11,9 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a><li>
-              <li class="breadcrumb-item active">Información</li>
+              <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio /</a><li>
+              <li class="breadcrumb-item"><a href="#">Información</a></li>
+              <li class="breadcrumb-item active"></li>
             </ol>
           </div>
         </div>
@@ -47,7 +48,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                ACOPIsoft - 2021
+                ACOPIsoft - @php echo date("Y"); @endphp
               </div>
               <!-- /.card-footer-->
             </div>
@@ -59,4 +60,15 @@
     <!-- /.content -->
   </div>
 
+@if (Session::has("no-editar"))
+
+<script>
+  swal({
+    title: "¡Error!",
+    text: "No se pudo cambiar el modo.",
+    type: "error"
+  });
+</script>
+
+@endif
   @endsection

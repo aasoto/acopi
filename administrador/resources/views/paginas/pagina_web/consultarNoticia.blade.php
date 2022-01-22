@@ -7,14 +7,13 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1>Noticias</h1>
+					<h1>Gestión noticias</h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
 						<li class="breadcrumb-item"><a href="#">Página web</a></li>
-						<li class="breadcrumb-item"><a href="#">Noticias</a></li>
-						<li class="breadcrumb-item active">Consultar</li>
+						<li class="breadcrumb-item active">Consultar noticias</li>
 					</ol>
 				</div>
 			</div>
@@ -36,6 +35,14 @@
 							</div>
 						</div>
 						<div class="card-body">
+							<div class="col-md-12 text-center">
+								<a href="{{ url('/') }}/pagina_web/noticias">
+									<button type="submit" class="btn btn-success col-md-5">
+										<i class="fas fa-plus"></i> Nueva Noticia
+				                    </button>
+			                	</a>
+							</div>
+							<br>
 							<table id="tablaNoticias" class="table table-bordered table-striped dt-responsive">
 								<thead>
 									<tr>
@@ -62,11 +69,7 @@
 							</table>
 						</div>
 						<div class="card-footer">
-							<a href="{{ url('/') }}/pagina_web/noticias">
-								<button type="submit" class="btn btn-primary">
-									<i class="fas fa-plus"></i> Nueva Noticia
-			                    </button>
-		                	</a>
+							
 						</div>
 					</div>
 				</div>
@@ -127,7 +130,8 @@
 	                               				<i class="fas fa-paperclip"></i> Adjuntar Imagen de portada
 		                              			<input type="file" name="portada_noticia">
 											</div>
-											<img src="{{url('/')}}/{{$value["portada_noticia"]}}" class="previsualizarImg_portada_noticia img-fluid py-2">
+											<br>
+											<img src="{{url('/')}}/{{$value["portada_noticia"]}}" class="previsualizarImg_portada_noticia img-fluid py-2" width="200" height="133">
 											<p class="help-block small">Dimensiones: 2000px * 1333px | Peso Max. 2MB | Formato: JPG o PNG</p>
 											<input type="hidden" name="portada_noticia_actual" value="{{$value["portada_noticia"]}}" required>
 										</div>
@@ -146,7 +150,7 @@
 	                        		<div class="form-group">
 	                          			<label for="exampleInputPassword1">Palabras claves</label>
 	                          			@php
-					                        $tags = json_decode($value["p_claves_noticia"] , true);
+					                        $tags = json_decode($value["p_claves_noticia"], true);
 					                        $palabras_claves = "";
 					                        foreach ($tags as $key => $consulta) {
 					                          $palabras_claves .= $consulta.",";
@@ -169,13 +173,9 @@
 	                      		</div>
 	                    	</div>
 		    			</div>
-		    			<div class="modal-footer justify-content-between">
-		    				<div>
-		    					<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-			                </div>
-			                <div>
-			                	<button type="submit" class="btn btn-primary">Guardar</button>
-			                </div>
+		    			<div class="modal-footer col-md-12 justify-content-between">
+	    					<button type="button" class="btn btn-danger col-md-5" data-dismiss="modal">Cerrar</button>
+		                	<button type="submit" class="btn btn-primary col-md-5">Guardar</button>
 		    			</div>
               		</form>	
     			</div>

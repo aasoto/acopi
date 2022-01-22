@@ -127,7 +127,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="{{ url('pagina_web/info/redes') }}" class="nav-link">
+                        <a href="{{ url('pagina_web/footer?ver=footer') }}" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Redes sociales</p>
                         </a>
@@ -139,7 +139,7 @@
                         </a>
                       </li>
                       <li class="nav-item">
-                        <a href="{{ url('pagina_web/info/contacto') }}" class="nav-link">
+                        <a href="{{ url('pagina_web/footer?ver=footer') }}" class="nav-link">
                           <i class="far fa-circle nav-icon"></i>
                           <p>Información de contacto</p>
                         </a>
@@ -178,27 +178,14 @@
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="{{ url('afiliados/general') }}" class="nav-link">
-                      <i class="nav-icon fas fa-list-alt"></i>
+                      <i class="nav-icon far fa-circle"></i>
                       <p>Consultar Afliados</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a href="{{ url('afiliados/consultarEmpresas') }}" class="nav-link">
-                      <i class="nav-icon fas fa-plus-circle"></i>
+                      <i class="nav-icon far fa-circle"></i>
                       <p>Consultar empresas</p>
-                    </a>
-                  </li>
-                  
-                  <li class="nav-item">
-                    <a href="{{ url('afiliados/modificar') }}" class="nav-link">
-                      <i class="nav-icon fas fa-pen-square"></i>
-                      <p>Modificar</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('afiliados/eliminar') }}" class="nav-link">
-                      <i class="nav-icon fas fa-trash"></i>
-                      <p>Eliminar</p>
                     </a>
                   </li>
                 </ul>
@@ -214,39 +201,12 @@
             ======================================-->
             @if (Auth::user()->rol == 'Administrador')
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ url('usuarios/consultarUser') }}" class="nav-link">
                   <i class="nav-icon fas fa-users"></i>
                   <p>
                     Usuarios
-                    <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('usuarios/agregar') }}" class="nav-link">
-                      <i class="nav-icon fas fa-plus-circle"></i>
-                      <p>Agregar</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('usuarios/consultarUser') }}" class="nav-link">
-                      <i class="nav-icon fas fa-list-alt"></i>
-                      <p>Consultar</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('usuarios/modificar') }}" class="nav-link">
-                      <i class="nav-icon fas fa-pen-square"></i>
-                      <p>Modificar</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('usuarios/eliminar') }}" class="nav-link">
-                      <i class="nav-icon fas fa-trash"></i>
-                      <p>Eliminar</p>
-                    </a>
-                  </li>
-                </ul>
               </li>
             @endif
             

@@ -6,13 +6,13 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1>Eventos</h1>
+					<h1>Gestión entrevistas</h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
 						<li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
 			            <li class="breadcrumb-item"><a href="#">Página web</a></li>
-			            <li class="breadcrumb-item active">Eventos</li>
+			            <li class="breadcrumb-item active">Entrevistas</li>
 					</ol>
 				</div>
 			</div>
@@ -34,12 +34,17 @@
 							</div>
 						</div>
 						<div class="card-body">
+							<div class="col-md-12 text-center">
+								<button class="btn btn-success col-md-6" data-toggle="modal" data-target="#crearEntrevista">
+									<i class="fas fa-plus"></i> Nueva Entrevista
+			                    </button>
+							</div>
 							<table id="tablaEntrevistas" class="table table-bordered table-hover dt-responsive">
 								<thead>
 									<tr>
 										<th>No.</th>
-										<th>Titulo</th>
-										<th>Descripción</th>
+										<th style="width: 200px;">Titulo</th>
+										<th style="width: 500px;">Descripción</th>
 										<th>Acciones</th>
 										<th>Video</th>
 									</tr>
@@ -49,8 +54,8 @@
 								<tfoot>
 									<tr>
 										<th>No.</th>
-										<th>Titulo</th>
-										<th>Descripción</th>
+										<th style="width: 200px;">Titulo</th>
+										<th style="width: 500px;">Descripción</th>				
 										<th>Acciones</th>
 										<th>Video</th>
 									</tr>
@@ -58,9 +63,7 @@
 							</table>
 						</div>
 						<div class="card-footer">
-							<button class="btn btn-primary" data-toggle="modal" data-target="#crearEntrevista">
-								<i class="fas fa-plus"></i> Nueva Entrevista
-		                    </button>
+							
 						</div>
 					</div>
 				</div>
@@ -73,7 +76,7 @@
 <div class="modal" id="crearEntrevista">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<div class="modal-header bg-primary">
+			<div class="modal-header bg-success">
 				<h4 class="modal-title">Crear Entrevista</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -99,9 +102,9 @@
                 		</div>
                 	</div>
 				</div>
-				<div class="modal-footer justify-content-between">
-					<button type="button" class="btn btn-default bg-danger" data-dismiss="modal">Cerrar</button>
-					<button type="submit" class="btn btn-primary">Guardar</button>
+				<div class="modal-footer col-md-12 justify-content-between">
+					<button type="button" class="btn btn-default col-md-5 bg-danger" data-dismiss="modal">Cerrar</button>
+					<button type="submit" class="btn col-md-5 btn-success">Guardar</button>
 				</div>
             </form>
 		</div>
@@ -148,9 +151,9 @@
 			                		</div>
 			                	</div>
 							</div>
-							<div class="modal-footer justify-content-between">
-								<button type="button" class="btn btn-default bg-danger" data-dismiss="modal">Cerrar</button>
-								<button type="submit" class="btn btn-primary">Guardar</button>
+							<div class="modal-footer col-md-12 justify-content-between">
+								<button type="button" class="btn btn-default col-md-5 bg-danger" data-dismiss="modal">Cerrar</button>
+								<button type="submit" class="btn btn-primary col-md-5">Guardar</button>
 							</div>
 			            </form>
 					</div>

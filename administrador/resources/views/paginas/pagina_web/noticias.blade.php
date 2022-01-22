@@ -7,13 +7,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Noticias</h1>
+            <h1>Gestión noticias</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
               <li class="breadcrumb-item"><a href="#">Página web</a></li>
-              <li class="breadcrumb-item active">Noticias</li>
+              <li class="breadcrumb-item active">Agregar noticias</li>
             </ol>
           </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="row">
           <div class="col-12">
             <!-- Default box -->
-            <div class="card card-primary">
+            <div class="card card-success">
               <div class="card-header">
                 <h3 class="card-title">Agregar noticia</h3>
 
@@ -126,9 +126,11 @@
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">
-                      <i class="fas fa-check"></i> Guardar
-                    </button>
+                    <div class="col-md-12 text-center">
+                      <button type="submit" class="btn btn-success col-md-6">
+                        <i class="fas fa-check"></i> Guardar
+                      </button>
+                    </div>
                   </div>
               </form>
               <!-- /.card-footer-->

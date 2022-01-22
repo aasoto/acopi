@@ -74,13 +74,15 @@
                           </div>
                         </div>
                     </div>
-                    <div class="card-footer justify-content-between">
-                      <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-check"></i> Guardar
-                      </button>
-                      <button type="button" class="btn btn-danger eliminarProducto" num="'.$value["num"].'" nombre="'.$value["nombre"].'" descripcion="'.$value["descripcion"].'">
-                        <i class="fas fa-trash"></i> Eliminar
-                      </button>
+                    <div class="card-footer">
+                      <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-primary col-md-5">
+                          <i class="fas fa-check"></i> Guardar
+                        </button>
+                        <button type="button" class="btn btn-danger col-md-5 eliminarProducto" num="'.$value["num"].'" nombre="'.$value["nombre"].'" descripcion="'.$value["descripcion"].'">
+                          <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -115,12 +117,14 @@
                         </div>
                     </div>
                     <div class="card-footer justify-content-between">
-                      <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-check"></i> Guardar
-                      </button>
-                      <button type="button" class="btn btn-danger eliminarProducto">
-                        <i class="fas fa-trash"></i> Eliminar
-                      </button>
+                      <div class="col-md-12 text-justify">
+                        <button type="submit" class="btn btn-primary col-md-5">
+                          <i class="fas fa-check"></i> Guardar
+                        </button>
+                        <button type="button" class="btn btn-danger col-md-5 eliminarProducto">
+                          <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -153,9 +157,12 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                      <button type="submit" class="btn btn-success">
-                        <i class="fas fa-check"></i> Guardar
-                      </button>
+                      <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-success col-md-10">
+                          <i class="fas fa-check"></i> Guardar
+                        </button>
+                      </div>
+                      
                     </div>
                   </div>
                 </div>

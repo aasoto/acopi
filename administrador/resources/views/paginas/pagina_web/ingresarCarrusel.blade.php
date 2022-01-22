@@ -51,6 +51,12 @@
 									</div>
 								</div>
 				            		<div class="card-body">
+				            			<div class="col-md-12 text-center">
+						                  <button type="button" class="btn btn-success col-md-6 botonAgregarItemCarrusel" id="botonAgregarItemCarrusel">
+						                    <i class="fas fa-image"></i> Agregar nuevo item
+						                  </button>
+						                </div>
+						                <br>
 				            			<div class="listadoCarrusel">
 					            			<div id="carouselExampleIndicators" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
 					            				<div class="carousel-indicators">
@@ -81,7 +87,7 @@
 					            						if ($active) {
 					            							echo '
 										            		<div class="carousel-item active">
-										            			<div class="card" style="background-color:#DCDCDC">
+										            			<div class="card" style="background-color:#DCDCDC" id="carruselActivo">
 										            				<div class="row">
 										            					<div class="col-md-1">
 										            					</div>
@@ -217,7 +223,7 @@
 												        }else{
 												           	echo '
 												           		<div class="carousel-item">
-												            		<div class="card" style="background-color:#DCDCDC">
+												            		<div class="card" style="background-color:#DCDCDC" id="carruselSegundario">
 												            			<div class="row">
 												            				<div class="col-md-1">
 												            				</div>
@@ -375,106 +381,111 @@
 							<!--==================================================
 							=            Tarjeta de ingresar carrusel            =
 							===================================================-->
-							
-							<div class="card card-success collapsed-card">
-								<div class="card-header">
-									<h3 class="card-title">Nuevo Item Carrusel</h3>
+							<div id="agregarItemCarrusel" name="agregarItemCarrusel" style="visibility: hidden;">
+								<div class="card card-success collapsed-card" id="tarjetaAgregarItemCarrusel" name="tarjetaAgregarItemCarrusel">
+									<div class="card-header">
+										<h3 class="card-title">Nuevo Item Carrusel</h3>
 
-									<div class="card-tools">
-										<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-				                    		<i class="fas fa-minus"></i>
-				                  		</button>
-									</div>
-								</div>
-								@php
-									echo '<div class="card-body">
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label for="labelCategoria">Categoria</label>
-												<select class="form-control select2" name="categoria-'.$id_nuevo.'" id="categoria-'.$id_nuevo.'" style="width: 100%;">
-													<option selected="selected">Seleccionar...</option>';
-						                            foreach ($categorias as $key => $value) {
-						                              echo '<option value="'.$value['nombre_categoria'].'">'.$value["nombre_categoria"].'</option>';
-						                            }
-												echo '</select>
-											</div>
-											<div class="form-group">
-												<label for="exampleInputEmail1">Titulo</label>
-												<input type="text" class="form-control" name="titulo-'.$id_nuevo.'" id="titulo-'.$id_nuevo.'">
-											</div>
-											<div class="form-group">
-												<label for="exampleInputPassword1">Texto</label>
-												<textarea class="form-control" rows="8" name="texto-'.$id_nuevo.'" id="texto-'.$id_nuevo.'"></textarea>
-											</div>
+										<div class="card-tools">
+											<button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+					                    		<i class="fas fa-minus"></i>
+					                  		</button>
 										</div>
+									</div>
+									@php
+										echo '<div class="card-body">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label for="labelCategoria">Categoria</label>
+													<select class="form-control select2" name="categoria-'.$id_nuevo.'" id="categoria-'.$id_nuevo.'" style="width: 100%;">
+														<option selected="selected">Seleccionar...</option>';
+							                            foreach ($categorias as $key => $value) {
+							                              echo '<option value="'.$value['nombre_categoria'].'">'.$value["nombre_categoria"].'</option>';
+							                            }
+													echo '</select>
+												</div>
+												<div class="form-group">
+													<label for="exampleInputEmail1">Titulo</label>
+													<input type="text" class="form-control" name="titulo-'.$id_nuevo.'" id="titulo-'.$id_nuevo.'">
+												</div>
+												<div class="form-group">
+													<label for="exampleInputPassword1">Texto</label>
+													<textarea class="form-control" rows="8" name="texto-'.$id_nuevo.'" id="texto-'.$id_nuevo.'"></textarea>
+												</div>
+											</div>
 
-										<div class="col-md-6">
-											<div class="form-group text-center">
-												<label for="exampleInputPassword1">Botón número 1</label><br>
-												<div class="form-group">
-													<input type="text" class="form-control" name="url-boton-1-'.$id_nuevo.'" id="url-boton-1-'.$id_nuevo.'" placeholder="URL Botón Número 1">
+											<div class="col-md-6">
+												<div class="form-group text-center">
+													<label for="exampleInputPassword1">Botón número 1</label><br>
+													<div class="form-group">
+														<input type="text" class="form-control" name="url-boton-1-'.$id_nuevo.'" id="url-boton-1-'.$id_nuevo.'" placeholder="URL Botón Número 1">
+													</div>
+													<div class="btn btn-default btn-file mb-3">
+														<i class="fas fa-paperclip"></i> Adjuntar Imagen del botón
+														<input type="file" name="boton-1-'.$id_nuevo.'" id="boton-1-'.$id_nuevo.'">
+													</div>
+													<br>
+													<img src="" class="img-fluid py-2 bg-secondary previsualizarImg_boton-1-'.$id_nuevo.'">
+													<p class="help-block small mt-3">Dimensiones: 400px * 118px | Peso Max. 2MB | Formato: JPG o PNG</p>
 												</div>
-												<div class="btn btn-default btn-file mb-3">
-													<i class="fas fa-paperclip"></i> Adjuntar Imagen del botón
-													<input type="file" name="boton-1-'.$id_nuevo.'" id="boton-1-'.$id_nuevo.'">
+												<div class="form-group my-2 text-center">
+													<label for="exampleInputPassword1">Botón número 2</label><br>
+													<div class="form-group">
+														<input type="text" class="form-control" name="url-boton-2-'.$id_nuevo.'" id="url-boton-2-'.$id_nuevo.'" placeholder="URL Botón Número 2">
+													</div>
+													<div class="btn btn-default btn-file mb-3">
+														<i class="fas fa-paperclip"></i> Adjuntar Imagen del botón
+														<input type="file" name="boton-2-'.$id_nuevo.'" id="boton-2-'.$id_nuevo.'">
+													</div>
+													<br>
+													<img src="" class="img-fluid py-2 bg-secondary previsualizarImg_boton-2-'.$id_nuevo.'">
+													<p class="help-block small mt-3">Dimensiones: 400px * 118px | Peso Max. 2MB | Formato: JPG o PNG</p>
 												</div>
-												<br>
-												<img src="" class="img-fluid py-2 bg-secondary previsualizarImg_boton-1-'.$id_nuevo.'">
-												<p class="help-block small mt-3">Dimensiones: 400px * 118px | Peso Max. 2MB | Formato: JPG o PNG</p>
+											</div> 
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group my-2 text-center">
+													<label for="exampleInputPassword1">Imagen delantera</label><br>
+													<div class="btn btn-default btn-file mb-3">
+														<i class="fas fa-paperclip"></i> Ad. Img. delantera
+														<input type="file" name="foto-delante-'.$id_nuevo.'" id="foto-delante-'.$id_nuevo.'" value="">
+													</div>
+													<br>
+													<img src="" class="img-fluid py-2 bg-secondary previsualizarImg_foto-delante-'.$id_nuevo.'">
+													<p class="help-block small mt-3">Dimensiones: 500px * 500px | Peso Max. 2MB | Formato: JPG o PNG</p>
+												</div>
 											</div>
-											<div class="form-group my-2 text-center">
-												<label for="exampleInputPassword1">Botón número 2</label><br>
-												<div class="form-group">
-													<input type="text" class="form-control" name="url-boton-2-'.$id_nuevo.'" id="url-boton-2-'.$id_nuevo.'" placeholder="URL Botón Número 2">
+											<div class="col-md-6">
+												<div class="form-group my-2 text-center">
+													<label for="exampleInputPassword1">Imagen de fondo (background)</label><br>
+													<div class="btn btn-default btn-file mb-3">
+														<i class="fas fa-paperclip"></i> Ad. Img. de fondo
+														<input type="file" name="fondo-'.$id_nuevo.'" id="fondo-'.$id_nuevo.'">
+													</div>
+													<br>
+													<img src="" class="img-fluid py-2 bg-secondary previsualizarImg_fondo-'.$id_nuevo.'">
+													<p class="help-block small mt-3">Dimensiones: 2000px * 1333px | Peso Max. 2MB | Formato: JPG o PNG</p>
 												</div>
-												<div class="btn btn-default btn-file mb-3">
-													<i class="fas fa-paperclip"></i> Adjuntar Imagen del botón
-													<input type="file" name="boton-2-'.$id_nuevo.'" id="boton-2-'.$id_nuevo.'">
-												</div>
-												<br>
-												<img src="" class="img-fluid py-2 bg-secondary previsualizarImg_boton-2-'.$id_nuevo.'">
-												<p class="help-block small mt-3">Dimensiones: 400px * 118px | Peso Max. 2MB | Formato: JPG o PNG</p>
-											</div>
-										</div> 
-									</div>
-									<div class="row">
-										<div class="col-md-6">
-											<div class="form-group my-2 text-center">
-												<label for="exampleInputPassword1">Imagen delantera</label><br>
-												<div class="btn btn-default btn-file mb-3">
-													<i class="fas fa-paperclip"></i> Ad. Img. delantera
-													<input type="file" name="foto-delante-'.$id_nuevo.'" id="foto-delante-'.$id_nuevo.'" value="">
-												</div>
-												<br>
-												<img src="" class="img-fluid py-2 bg-secondary previsualizarImg_foto-delante-'.$id_nuevo.'">
-												<p class="help-block small mt-3">Dimensiones: 500px * 500px | Peso Max. 2MB | Formato: JPG o PNG</p>
 											</div>
 										</div>
-										<div class="col-md-6">
-											<div class="form-group my-2 text-center">
-												<label for="exampleInputPassword1">Imagen de fondo (background)</label><br>
-												<div class="btn btn-default btn-file mb-3">
-													<i class="fas fa-paperclip"></i> Ad. Img. de fondo
-													<input type="file" name="fondo-'.$id_nuevo.'" id="fondo-'.$id_nuevo.'">
-												</div>
-												<br>
-												<img src="" class="img-fluid py-2 bg-secondary previsualizarImg_fondo-'.$id_nuevo.'">
-												<p class="help-block small mt-3">Dimensiones: 2000px * 1333px | Peso Max. 2MB | Formato: JPG o PNG</p>
-											</div>
-										</div>
-									</div>
-					                
-								</div>';
-								@endphp
+						                
+									</div>';
+									@endphp
+									
 								
-							
-								<div class="card-footer">
-									<button type="submit" class="btn btn-primary actualizarCarrusel">
-					                  	<i class="fas fa-check"></i> Guardar todo
-					                </button>
-								</div>							
+									<div class="card-footer">
+										<div class="col-md-12 text-center">
+											<button type="submit" class="btn btn-primary col-md-6 actualizarCarrusel">
+							                  	<i class="fas fa-check"></i> Guardar todo
+							                </button>
+										</div>
+										
+									</div>							
+								</div>
 							</div>
+							
 							<!--====  End of Tarjeta de ingresar carrusel  ====-->
 						</div>
 					</div>

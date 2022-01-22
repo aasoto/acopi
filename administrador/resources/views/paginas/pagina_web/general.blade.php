@@ -112,7 +112,7 @@
                           $palabras_claves .= $value.",";
                         }
                       @endphp
-                      <input type="text" class="form-control" name="palabras_claves" value="{{$palabras_claves}}" data-role="tagsinput" required>
+                      <input type="text" class="form-control dark-mode" name="palabras_claves" id="palabras_claves" value="{{$palabras_claves}}" data-role="tagsinput" required>
                     </div>
                   </div>
                 </div>
@@ -123,9 +123,11 @@
               =            Boton formulario            =
               ==============================================-->
               <div class="card-footer">
-                <button type="submit" class="btn btn-primary">
-                  <i class="fas fa-check"></i> Guardar
-                </button>
+                <div class="col-md-12 text-center">
+                  <button type="submit" class="btn btn-primary col-md-6">
+                    <i class="fas fa-check"></i> Guardar
+                  </button>
+                </div>
               </div>
               <!--=====  End of Boton formulario  ======-->
 
@@ -192,9 +194,11 @@
                 </div>
               </div>
               <div class="card-footer">
-                <button type="submit" class="btn btn-primary">
-                  <i class="fas fa-check"></i> Guardar
-                </button>
+                <div class="col-md-12 text-center">
+                  <button type="submit" class="btn btn-primary col-md-6">
+                    <i class="fas fa-check"></i> Guardar
+                  </button>
+                </div>
               </div>
             </div>
             <!--=====  End of Sección cambio de logos  ======-->
@@ -360,9 +364,11 @@
               ==============================================-->
 
               <div class="card-footer">
-                <button type="submit" class="btn btn-primary">
-                  <i class="fas fa-check"></i> Guardar
-                </button>
+                <div class="col-md-12 text-center">
+                  <button type="submit" class="btn btn-primary col-md-6">
+                    <i class="fas fa-check"></i> Guardar
+                  </button>
+                </div>
               </div>
 
               <!--=====  End of Botón del final del formulario  ======-->

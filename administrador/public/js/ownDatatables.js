@@ -260,11 +260,11 @@ var tablaEntrevistas = $("#tablaEntrevistas").DataTable({
 
 	    		if(data == null){
 
-	    			return '<iframe width="560" height="315" src="https://www.youtube.com/embed/qJ7Kpfm6DXM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+	    			return '<iframe width="336" height="189" src="https://www.youtube.com/embed/qJ7Kpfm6DXM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 
 	    		}else{
 
-	    			return '<iframe width="560" height="315" src="'+data+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+	    			return '<iframe width="336" height="189" src="'+data+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
 	    		}
 
 	    	},

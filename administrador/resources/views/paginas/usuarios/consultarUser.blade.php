@@ -49,6 +49,11 @@
           ==============================-->
           
           <div class="card-body">
+            <div class="col-md-12 text-center">
+              <button class="btn btn-success col-md-6" data-toggle="modal" data-target="#crearUsuario">
+                <i class="fas fa-user-plus"></i> Agregar nuevo
+              </button>
+            </div>
             <table id="tablaUsuarios" class="table table-bordered table-striped dt-responsive">
               <thead>
               <tr>
@@ -120,9 +125,7 @@
           =====================================-->
           
           <div class="card-footer">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#crearUsuario">
-              <i class="fas fa-user-plus"></i> Agregar nuevo
-            </button>
+            
           </div>
           
           <!--====  End of Pie de pagina  ======-->
@@ -148,7 +151,7 @@
       <form method="POST" action="{{ route('register') }}">
         @csrf 
 
-        <div class="modal-header bg-primary">          
+        <div class="modal-header bg-success">          
           <h4 class="modal-title">Crear Usuario</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
@@ -204,12 +207,10 @@
         </div>
 
         <div class="modal-footer d-flex justify-content-between">          
-          <div>
-            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-window-close"></i> Cerrar</button>
-          </div>
-          <div>
-            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
-          </div>
+          
+            <button type="button" class="btn btn-danger col-md-5" data-dismiss="modal"><i class="fas fa-window-close"></i> Cerrar</button>
+            <button type="submit" class="btn btn-success col-md-5"><i class="fas fa-save"></i> Guardar</button>
+          
         </div>
       </form>
     </div> 

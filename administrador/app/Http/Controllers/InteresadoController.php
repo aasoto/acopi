@@ -18,10 +18,10 @@ class InteresadoController extends Controller
     		->addColumn('estado', function($data){
     			if ($data->estado_interesado == "contactado") {
     				$estado = '
-    				<div class="btn-group tex">
+    				<div class="btn-group">
 
 						<a href="'.url()->current().'/'.$data->id.'" class="btn btn-success btn-sm descontactarInteresado">
-							<i class="fas fa-plus text-white"></i> Contactado
+							<i class="fas fa-check text-white"></i> Contactado
 						</a>
 
 	  				</div>';
@@ -30,7 +30,7 @@ class InteresadoController extends Controller
 	  				$estado = '
     				<div class="btn-group">
 
-						<button class="btn btn-danger btn-sm contactarInteresado" action="'.url()->current().'/'.$data->id.'" method="PUT" pagina="pagina_web/interesados" token="'.csrf_token().'">
+						<button class="btn btn-warning btn-sm text-white contactarInteresado" action="'.url()->current().'/'.$data->id.'" method="PUT" pagina="pagina_web/interesados" token="'.csrf_token().'">
 							<i class="fas fa-pencil-alt text-white"></i> Sin contactar
 						</button>
 
@@ -47,7 +47,7 @@ class InteresadoController extends Controller
     				$acciones = '
     				<div class="btn-group">	
 
-						<button class="btn btn-default btn-sm eliminarInteresado" action="'.url()->current().'/'.$data->id.'" method="DELETE" pagina="pagina_web/interesados" token="'.csrf_token().'">
+						<button class="btn btn-danger btn-sm eliminarInteresado" action="'.url()->current().'/'.$data->id.'" method="DELETE" pagina="pagina_web/interesados" token="'.csrf_token().'">
 						<i class="fas fa-trash-alt"></i>
 						</button>
 

@@ -6,7 +6,7 @@
 		<div class="container-fluid">
 			<div class="row mb-2">
 				<div class="col-sm-6">
-					<h1>Productos y Servicios</h1>
+					<h1>Gestión de aliados</h1>
 				</div>
 				<div class="col-sm-6">
 					<ol class="breadcrumb float-sm-right">
@@ -41,8 +41,13 @@
 					</div>
 					
 					<div class="card-body">
+						<div class="col-md-12 text-center">
+	                        <button type="button" class="btn btn-success col-md-5 botonAgregarAliado" id="botonAgregarAliado">
+	                          <i class="fas fa-plus"></i> Agregar nuevo aliado
+	                        </button>
+	                    </div>
+	                    <br>
 						<div class="row listadoAliados">
-						
 							<div id="carouselExampleIndicators" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
 		              			<div class="carousel-indicators">
 		              				@php
@@ -70,7 +75,7 @@
 				                		if ($active) {
 				                			echo '
 				                			<div class="carousel-item active">
-				                				<div class="card" style="background-color:#DCDCDC">
+				                				<div class="card" style="background-color:#DCDCDC" id="aliadosActivo">
 				                					<br>
 				                					<div>
 				                						<div class="row">
@@ -125,7 +130,7 @@
 				                		}else{
 				                			echo '
 				                			<div class="carousel-item">
-				                				<div class="card" style="background-color:#DCDCDC">
+				                				<div class="card" style="background-color:#DCDCDC" id="aliadosSegundario">
 				                					<br>
 				                					<div>
 				                						<div class="row">
@@ -194,9 +199,11 @@
 			            </div>
 					</div>
 					<div class="card-footer">
-						<button type="submit" class="btn btn-primary" name="guardar" id="guardar">
-	                  		<i class="fas fa-check"></i> Guardar
-	                	</button>
+						<div class="col-md-12 text-center">
+							<button type="submit" class="btn btn-primary col-md-6" name="guardar" id="guardar">
+		                  		<i class="fas fa-check"></i> Guardar
+		                	</button>
+						</div>
 					</div>
 				</div>
 				
@@ -206,54 +213,59 @@
 				=            Ingresar nuevo aliado            =
 				============================================-->
 				
-					
-				<div class="card card-success collapsed-card">
-					<div class="card-header">
-						<h3 class="card-title">Agregar nuevo aliado</h3>
-						<div class="card-tools">
-							<button type="button" class="btn btn-tool" data-card-widget="collapse">
-								<i class="fas fa-plus"></i>
-							</button>
-						</div>
-					</div>
-					@php
-					echo '<div class="card-body">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<input type="text" class="form-control" name="nombre-'.$id_agregar.'" value="" placeholder="Nombre">
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<input type="text" class="form-control" name="link-'.$id_agregar.'" value="" placeholder="Link">
-								</div>
+				<div id="ingresarAliado" style="visibility: hidden;">
+					<div class="card card-success collapsed-card" id="tarjetaIngresarAliado">
+						<div class="card-header">
+							<h3 class="card-title">Agregar nuevo aliado</h3>
+							<div class="card-tools">
+								<button type="button" class="btn btn-tool" data-card-widget="collapse">
+									<i class="fas fa-plus"></i>
+								</button>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group my-2 text-center">
-									<label for="exampleInputPassword1">Logo Aliado</label>
-									<br>
-									<div class="btn btn-default btn-file mb-3">
-										<i class="fas fa-paperclip"></i> Adjuntar Imagen de Logo
-										<input type="file" name="logo-'.$id_agregar.'" id="logo-'.$id_agregar.'">
-										<input type="hidden" name="logo_actual-'.$id_agregar.'" value="'.$servidor.'">
+						@php
+						echo '<div class="card-body">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="text" class="form-control" name="nombre-'.$id_agregar.'" value="" placeholder="Nombre">
 									</div>
-									<br>
-									<img src="'.$servidor.'" class="img-fluid py-2 bg-secondary previsualizarImg_logo-'.$id_agregar.'">
-									<p class="help-block small mt-3">Dimensiones: 293px * 100px | Peso Max. 2MB | Formato: JPG o PNG</p>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="text" class="form-control" name="link-'.$id_agregar.'" value="" placeholder="Link">
+									</div>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group my-2 text-center">
+										<label for="exampleInputPassword1">Logo Aliado</label>
+										<br>
+										<div class="btn btn-default btn-file mb-3">
+											<i class="fas fa-paperclip"></i> Adjuntar Imagen de Logo
+											<input type="file" name="logo-'.$id_agregar.'" id="logo-'.$id_agregar.'">
+											<input type="hidden" name="logo_actual-'.$id_agregar.'" value="'.$servidor.'">
+										</div>
+										<br>
+										<img src="'.$servidor.'" class="img-fluid py-2 bg-secondary previsualizarImg_logo-'.$id_agregar.'">
+										<p class="help-block small mt-3">Dimensiones: 293px * 100px | Peso Max. 2MB | Formato: JPG o PNG</p>
+									</div>
+								</div>
+							</div>
+						</div>';
+						@endphp
+						<div class="card-footer">
+							<div class="col-md-12 text-center">
+								<button type="submit" class="btn btn-success col-md-6">
+			                    	<i class="fas fa-check"></i> Guardar
+			                     </button>
+							</div>
+							
 						</div>
-					</div>';
-					@endphp
-					<div class="card-footer">
-						<button type="submit" class="btn btn-success">
-	                    	<i class="fas fa-check"></i> Guardar
-	                     </button>
 					</div>
-				</div>
+				</div>	
+				
 				
 				<!--====  End of Ingresar nuevo aliado  ====-->
 			</form>	

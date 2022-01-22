@@ -66,6 +66,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 /*=================================================================
 =            Rutas que incluyen todos los metodos HTML            =
 =================================================================*/
+/*----------  Modo Nocturno  ----------*/
+Route::resource('/modoNocturno', 'ModoNocturnoController');
 
 /*----------  Página general  ----------*/
 Route::resource('/pagina_web/general', 'PaginaWebController');
