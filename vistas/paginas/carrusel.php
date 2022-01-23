@@ -12,18 +12,22 @@
                                 <div class="carousel-item active" style="background-image: url(administrador/public/'.$value["fondo"].');
                                 background-position: center center;">
                                 <div class="home-center">
-                                    <div class="home-desc-center">
-                                        <div class="bg-overlay-color"></div>
-                                        <div class="container">
+                                    <div class="home-desc-center">';
+                                    if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
+                                        echo '<div class="bg-overlay-color"></div>'; }
+                                        echo '<div class="container">
                                             <div class="row vertical-content">
 
                                                 <div class="col-lg-7">
-                                                    <div class="home-content mt-4">
-                                                        <h4 class="home-subtitle">'.$value["categoria"].'</h4>
-                                                        <h2 class="home-title mt-4">'.$value["titulo"].'</h2>
-                                                        <p class="home-desc mt-4 f-17">'.$value["texto"].'</p>
+                                                    <div class="home-content mt-4">';
+                                                        if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
+                                                            echo '
+                                                            <h4 class="home-subtitle">'.$value["categoria"].'</h4>
+                                                            <h2 class="home-title mt-4">'.$value["titulo"].'</h2>
+                                                            <p class="home-desc mt-4 f-17">'.$value["texto"].'</p>';
+                                                        }
 
-                                                        <div class="mt-4">
+                                                        echo '<div class="mt-4">
                                                             <a href="'.$value["url-boton-1"].'" class="pr-3">
                                                                 <img src="administrador/public/'.$value["boton-1"].'" class="mt-4" height="50" alt="">
                                                             </a>
@@ -50,18 +54,22 @@
                                 <div class="carousel-item" style="background-image: url(administrador/public/'.$value["fondo"].');
                                 background-position: center center;">
                                 <div class="home-center">
-                                    <div class="home-desc-center">
-                                        <div class="bg-overlay-color"></div>
-                                        <div class="container">
+                                    <div class="home-desc-center">';
+                                        if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
+                                        echo '<div class="bg-overlay-color"></div>'; }
+                                        echo '<div class="container">
                                             <div class="row vertical-content">
 
                                                 <div class="col-lg-7">
-                                                    <div class="home-content mt-4">
+                                                    <div class="home-content mt-4">';
+                                                    if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
+                                                        echo '
                                                         <h4 class="home-subtitle">'.$value["categoria"].'</h4>
                                                         <h2 class="home-title mt-4">'.$value["titulo"].'</h2>
-                                                        <p class="home-desc mt-4 f-17">'.$value["texto"].'</p>
+                                                        <p class="home-desc mt-4 f-17">'.$value["texto"].'</p>';
+                                                    }
 
-                                                        <div class="mt-4">
+                                                        echo '<div class="mt-4">
                                                             <a href="'.$value["url-boton-1"].'" class="pr-3">
                                                                 <img src="administrador/public/'.$value["boton-1"].'" class="mt-4" height="50" alt="">
                                                             </a>

@@ -30,6 +30,7 @@ class CarruselController extends Controller
 
         $eliminar = array('eliminar' => $request->input("eliminar"));
         $carrusel = array('listaCarrusel' => $request->input("listaCarrusel"));
+        $imagenExterna = array('imagenExterna' => $request->input("imagenExterna"));
 
         /*echo '<pre>'; print_r($eliminar["eliminar"]); echo '</pre>';
         echo '<pre>'; print_r($carrusel['listaCarrusel']); echo '</pre>';
@@ -44,7 +45,8 @@ class CarruselController extends Controller
         }
 
         $indice = array('indice' => $request->input("indice"));
-
+        /*echo '<pre>'; print_r($indice['indice']); echo '</pre>';
+        return;*/
         $categoria_Nuevo = array('categoria' => $request->input("categoria-".($indice['indice']+1)));
         $titulo_Nuevo = array('titulo' => $request->input("titulo-".($indice['indice']+1)));
         $texto_Nuevo = array('texto' => $request->input("texto-".($indice['indice']+1)));
@@ -55,16 +57,27 @@ class CarruselController extends Controller
         $foto_Delante_Nuevo = array('foto_Delante' => $request->input("foto-delante-".($indice['indice']+1)));
         $fondo_Nuevo = array('fondo' => $request->file("fondo-".($indice['indice']+1)));
 
+        
+
         if (!empty($categoria_Nuevo["categoria"]) && !empty($titulo_Nuevo["titulo"]) && !empty($texto_Nuevo["texto"]) && !empty($fondo_Nuevo["fondo"])) {
             $indice['indice'] = $indice['indice'] + 1; /*se incrementa la variable indice para agregar el nuevo indice*/
+        }elseif ($imagenExterna['imagenExterna']=="si") {
+            $indice['indice'] = $indice['indice'] + 1;
         }
 
         
-        for ($i=0; $i <= $indice['indice']; $i++) { 
+        for ($i=0; $i <= $indice['indice']; $i++) {
 
-            ${"categoria_".$i} = array('categoria_'.$i => $request->input("categoria-".$i));
-            ${"titulo_".$i} = array('titulo_'.$i => $request->input("titulo-".$i));
-            ${"texto_".$i} = array('texto_'.$i => $request->input("texto-".$i));
+            if (($imagenExterna['imagenExterna']=="si") && ($i == $indice['indice'])) {
+                ${"categoria_".$i} = array('categoria_'.$i => "undefined");
+                ${"titulo_".$i} = array('titulo_'.$i => "undefined");
+                ${"texto_".$i} = array('texto_'.$i => "undefined");
+            }else{
+                ${"categoria_".$i} = array('categoria_'.$i => $request->input("categoria-".$i));
+                ${"titulo_".$i} = array('titulo_'.$i => $request->input("titulo-".$i));
+                ${"texto_".$i} = array('texto_'.$i => $request->input("texto-".$i));
+            }
+            
             ${"boton_1_Actual_".$i} = array('boton_1_'.$i => $request->input("boton-1-actual-".$i));
             ${"url_Boton_1_".$i} = array('url_Boton_1_'.$i => $request->input("url-boton-1-".$i));
             ${"boton_2_Actual_".$i} = array('boton_2_'.$i => $request->input("boton-2-actual-".$i));

@@ -207,7 +207,9 @@ $(document).on("click", ".eliminarProducto", function(){
 $(document).on("click", ".botonAgregarAliado", function(){
 
 	document.getElementById("ingresarAliado").style.visibility="";
-	$(this).parent().parent().parent().remove();
+	document.getElementById("tarjetaVerAliados").classList.add("collapsed-card");
+	document.getElementById("tarjetaVerAliados").style.visibility="hidden";
+	//$(this).parent().parent().parent().remove();
 	document.getElementById("tarjetaIngresarAliado").classList.remove("collapsed-card");
 })
 
@@ -703,11 +705,52 @@ $(document).on("click", ".eliminarEntrevista", function(){
 =            Mostrar agregar item carrusel            =
 =====================================================*/
 
-$(document).on("click", ".botonAgregarItemCarrusel", function(){
+$(document).on("click", ".botonAgregarItemCarrusel", async function(){
+	var tipo_carrusel = "";
+	await swal({
+	  title: 'Tipo de item carrusel',
+	  input: 'select',
+	  inputOptions: {
+	    'imagen': 'Imagen externa',
+	    'hacer': 'Elaborar item'
+	  },
+	  inputPlaceholder: 'Seleccionar un tipo',
+	  showCancelButton: true
+	  
+	}).then(function(result){
 
-	document.getElementById("agregarItemCarrusel").style.visibility="";
-	$(this).parent().parent().parent().remove();
-	document.getElementById("tarjetaAgregarItemCarrusel").classList.remove("collapsed-card");
+  		if(result.value){
+  			if (result.value == "imagen") {
+  				tipo_carrusel = result.value;
+  			}
+  			if (result.value == "hacer") {
+  				tipo_carrusel = result.value;
+  			}
+  		}
+  	})
+
+	if (tipo_carrusel == "hacer") {
+		var id_nuevo = $("#id_nuevo").val();
+		document.getElementById("tarjetaEditarCarrusel").classList.add("collapsed-card");
+		document.getElementById("editarCarrusel").style.visibility="hidden";
+		document.getElementById("agregarItemCarrusel").style.visibility="";
+		document.getElementById("tarjetaAgregarItemCarrusel").classList.remove("collapsed-card");
+
+	}
+
+	if (tipo_carrusel == "imagen") {
+		$("#imagenExterna").val("si");
+		var id_nuevo = $("#id_nuevo").val();
+
+		document.getElementById("tarjetaEditarCarrusel").classList.add("collapsed-card");
+		document.getElementById("editarCarrusel").style.visibility="hidden";
+		document.getElementById("agregarItemCarrusel").style.visibility="";
+
+		document.getElementById("tarjetaAgregarItemCarrusel").classList.remove("collapsed-card");
+		document.getElementById("complementosIngresarCarrusel").style ="";
+		document.getElementById("desplegableComplementos").style.display ="none";
+		
+	}
 })
 
 /*=====  End of Mostrar agregar item carrusel  ======*/
