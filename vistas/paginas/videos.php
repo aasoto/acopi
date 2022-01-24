@@ -12,13 +12,15 @@
                                 <div class="home-center">
                                     <div class="home-desc-center">
                                         <div class="bg-overlay-color"></div>
-                                        <div class="container">
+                                        <div class="container px-2">
                                             <div class="row vertical-content">
 
-                                                <div class="col-lg-7">
-                                                    <div class="home-content mt-4">
-                                                        <iframe width="560" height="315" src="'.$value["video_entrevista"].'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                    </div>
+                                                <div class="col-lg-7 ">
+                                                    
+                                                        <div class="videoWrapper">
+                                                            <iframe  src="'.$value["video_entrevista"].'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                        </div>
+                                                   
                                                 </div>
 
                                                 <div class="col-lg-4 offset-lg-1">
@@ -39,12 +41,12 @@
                                 <div class="home-center">
                                     <div class="home-desc-center">
                                         <div class="bg-overlay-color"></div>
-                                        <div class="container">
+                                        <div class="container px-2">
                                             <div class="row vertical-content">
 
-                                                <div class="col-lg-7">
-                                                    <div class="home-content mt-4">
-                                                        <iframe width="560" height="315" src="'.$value["video_entrevista"].'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                <div class="col-lg-7 ">
+                                                    <div class=" videoWrapper" >
+                                                        <iframe  src="'.$value["video_entrevista"].'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                                     </div>
                                                 </div>
 

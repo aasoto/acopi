@@ -392,7 +392,19 @@ button:focus {
     background-image: url(../images/fondo-videos.png);
     background-position: center center;
 }
-
+.videoWrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    margin-top: ;
+}
+.videoWrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
 .home-slider {
     position: relative;
@@ -801,6 +813,10 @@ button:focus {
     line-height: 10px;
 }
 
+.blog-content .read-more{
+    margin-top: auto;
+}
+
 /*******************************
         15. FOOTER
 *******************************/
@@ -1119,21 +1135,29 @@ textarea.form-control {
       height: auto;
     }
 
-        .home-slider .carousel-item,
-.home-slider .carousel{
-    height:auto;
-}
-.home-subtitle{
-    margin-top: 110px;
-}
-.home-content{
-    padding-inline:1rem ;
-}
+    .home-slider .carousel-item,
+    .home-slider .carousel{
+        height:auto;
+    }
+    .slider-principal .home-subtitle{
+        margin-top: 110px;
+    }
+    .home-content{
+        padding-inline:1rem ;
+    }
 
-.bg-home-6{
-    height: auto;
-}
-
+    .bg-home-6{
+        height: auto;
+    }
+    .videoWrapper{
+        margin-top: 40px;
+    }
+    .footer-title{
+        margin-top: 30px;
+    }
+    .section.bg-footer{
+        padding-top: 30px;
+    }
     
 
     

@@ -19,7 +19,7 @@
                                             <div class="row vertical-content">
 
                                                 <div class="col-lg-6">
-                                                    <div class="home-content mt-4">';
+                                                    <div class="home-content mt-4 slider-principal">';
                                                         if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
                                                             echo '
                                                             <h4 class="home-subtitle">'.$value["categoria"].'</h4>
@@ -61,7 +61,7 @@
                                             <div class="row vertical-content">
 
                                                 <div class="col-lg-7">
-                                                    <div class="home-content mt-4">';
+                                                    <div class="home-content mt-4 slider-principal">';
                                                     if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
                                                         echo '
                                                         <h4 class="home-subtitle">'.$value["categoria"].'</h4>
