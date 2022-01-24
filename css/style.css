@@ -400,7 +400,7 @@ button:focus {
 
 .home-slider .carousel-control-next,
 .carousel-control-prev {
-    width: 6%;
+    width: 8%;
 }
 
 .home-slider .carousel-item,
@@ -412,7 +412,14 @@ button:focus {
 .home-slider .carousel-item {
     background-size: cover;
 }
-
+.btn-slider-item{
+    text-align: center;
+    font-weight: 500;
+    padding: 15px 15px ;
+    min-width: 150px;
+    margin-block:2rem ;
+    border-radius: 8px;
+}
 
 /* start home-3 */
 
@@ -1115,6 +1122,12 @@ textarea.form-control {
         .home-slider .carousel-item,
 .home-slider .carousel{
     height:auto;
+}
+.home-subtitle{
+    margin-top: 110px;
+}
+.home-content{
+    padding-inline:1rem ;
 }
 
 .bg-home-6{

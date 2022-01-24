@@ -18,30 +18,30 @@
                                         echo '<div class="container">
                                             <div class="row vertical-content">
 
-                                                <div class="col-lg-7">
+                                                <div class="col-lg-6">
                                                     <div class="home-content mt-4">';
                                                         if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
                                                             echo '
                                                             <h4 class="home-subtitle">'.$value["categoria"].'</h4>
-                                                            <h2 class="home-title mt-4">'.$value["titulo"].'</h2>
+                                                            <h2 class="home-title my-4">'.$value["titulo"].'</h2>
                                                             <p class="home-desc mt-4 f-17">'.$value["texto"].'</p>';
                                                         }
 
                                                         echo '<div class="mt-4">
-                                                            <a href="'.$value["url-boton-1"].'" class="pr-3">
-                                                                <img src="administrador/public/'.$value["boton-1"].'" class="mt-4" height="50" alt="">
+                                                            <a href="'.$value["url-boton-1"].'" class="pr-3 btn btn-primary btn-slider-item">
+                                                                Ver más
                                                             </a>
-                                                            <a href="'.$value["url-boton-2"].'">
-                                                                <img src="administrador/public/'.$value["boton-2"].'" class="mt-4" height="50" alt="">
-                                                            </a>
+//                                                            <!--<a href="'.$value["url-boton-2"].'">
+//                                                                <img src="administrador/public/'.$value["boton-2"].'" class="mt-4" height="50" alt="">
+//                                                            </a>-->
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-lg-4 offset-lg-1">
-                                                    <div class="home-image text-lg-right mt-4">
+                                                    <!--<div class="home-image text-lg-right mt-4">
                                                         <img src="administrador/public/'.$value["foto-delante"].'" class="img-fluid" alt="">
-                                                    </div>
+                                                    </div>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -70,21 +70,19 @@
                                                     }
 
                                                         echo '<div class="mt-4">
-                                                            <a href="'.$value["url-boton-1"].'" class="pr-3">
-                                                                <img src="administrador/public/'.$value["boton-1"].'" class="mt-4" height="50" alt="">
+                                                            <a href="'.$value["url-boton-1"].'" class="pr-3 btn btn-primary btn-slider-item">
+                                                                Ver más
                                                             </a>
-                                                            <a href="'.$value["url-boton-2"].'">
-                                                                <img src="administrador/public/'.$value["boton-2"].'" class="mt-4" height="50" alt="">
-                                                            </a>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-lg-4 offset-lg-1">
+                                                <!--<div class="col-lg-4 offset-lg-1">
                                                     <div class="home-image text-lg-right mt-4">
                                                         <img src="administrador/public/'.$value["foto-delante"].'" class="img-fluid" alt="">
                                                     </div>
-                                                </div>
+                                                </div>-->
                                             </div>
                                         </div>
                                     </div>
