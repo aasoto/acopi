@@ -18,7 +18,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="#">Página web</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('pagina_web/inicio') }}">Página web</a></li>
               <li class="breadcrumb-item active">Editar</li>
             </ol>
           </div>

@@ -54,6 +54,9 @@ if (document.getElementById("descripcionEmpresa")) {
 if (document.getElementById("tablaExportarEmpresas")) {
 	document.getElementById("tablaExportarEmpresas").classList.remove('table-striped');
 }
+if (document.getElementById("tablaUsuarios")) {
+	document.getElementById("tablaUsuarios").classList.remove('table-striped');
+}
 if (document.getElementById("tablaAfiliadosEmpleados")) {
 	document.getElementById("tablaAfiliadosEmpleados").classList.remove('table-hover');
 }

@@ -1486,3 +1486,15 @@ $(document).on("click", ".modoNocturno", function(){
 
 /*=====  End of Modo nocturno  ======*/
 
+/*================================================
+=            Ver información genereal            =
+================================================*/
+
+$(document).on("click", ".verInfoGral", function(){
+	document.getElementById("opcionesInfoGral").style = "display: block; height: 599.562px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;";
+	document.getElementById("arbolInfoGral").style.visibility = "";
+})
+
+/*=====  End of Ver información genereal  ======*/
+
+

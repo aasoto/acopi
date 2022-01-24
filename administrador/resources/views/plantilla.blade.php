@@ -108,11 +108,11 @@
 </head>
 @if (Route::has('login'))
 	@auth
-		<body class="hold-transition sidebar-mini layout-fixed" id="cuerpoPagina">
+		<body class="hold-transition sidebar-mini sidebar-collapse layout-fixed" id="cuerpoPagina">
 			<div class="wrapper">
 				@include('modulos.preloading')
 				@include('modulos.header')
-				@include('modulos.sidebar')
+				@include('modulos.collapsed-sidebar')
 				@yield('content')
 				@include('modulos.footer')
 			</div>

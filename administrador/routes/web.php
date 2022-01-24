@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Route::view('/', 'paginas.inicio');
+Route::view('/pagina_web/inicio', 'paginas.pagina_web.inicio');
+Route::view('/afiliados/inicio', 'paginas.afiliados.inicio');
 
 /*==================================================
 =            Rutas de módulo página web            =
@@ -70,6 +72,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/modoNocturno', 'ModoNocturnoController');
 
 /*----------  Página general  ----------*/
+//Route::resource('/pagina_web/inicio', 'PaginaWebController');
 Route::resource('/pagina_web/general', 'PaginaWebController');
 Route::resource('/pagina_web/datosg', 'PaginaWebController');
 Route::resource('/pagina_web/carrusel', 'PaginaWebController');

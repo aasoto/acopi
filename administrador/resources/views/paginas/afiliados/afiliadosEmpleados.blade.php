@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="#">Afiliados</a></li>
+              <li class="breadcrumb-item"><a href="{{ url('afiliados/inicio') }}">Afiliados</a></li>
               <li class="breadcrumb-item active">Consultar empleados de afiliados</li>
             </ol>
           </div>
