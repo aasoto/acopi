@@ -1,8 +1,11 @@
 <?php
-    include "../head.html";
-    include "../navegacion.php";
+    include __DIR__."/../head.html";
+    include __DIR__."/../navegacion.php";
     include "directivos.php";
-    include "footer.php";
-    include "../end-head.html";
+    /*
+     * ya son llamados en plantilla.php
+     /*include "footer.php";
+    include __DIR__."/../end-head.html";*/
+
 
  

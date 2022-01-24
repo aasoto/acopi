@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-2">
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-8 my-5">
             <h1 class="mision-title text-center" >Quienes somos</h1>
             <p class= "text-justify">Es la organización gremial de Colombia que agrupa a las Micro empresas formales y a las pequeñas y medianas Empresas
                 de los diferentes sextores productivos.</p>

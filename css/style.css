@@ -529,14 +529,21 @@ button:focus {
 
 /* start home-6 */
 
-.bg-home-6{
-   background-image: url(../images/organigrama/organigrama-acopi.png);
-    background-size: cover;
-    height: 100vh;
-    position: relative;
-    background-position: center center; 
-}
+/*.bg-home-6{*/
+/*   background-image: url(../images/organigrama/organigrama-acopi.png);*/
+/*    background-size: cover;*/
+/*    height: 100vh !important;*/
+/*    position: relative;*/
+/*    background-position: center center; */
+/*}*/
 
+.bg-organigrama{
+    background-image: url(../images/organigrama/organigrama-acopi.png);
+    background-size: cover;
+    height: 150vh !important;
+    position: relative;
+    background-position: center center;
+}
 .slidero {
     position: relative;
     z-index: 1;

@@ -43,6 +43,7 @@ if(isset($_GET["pagina"])){
     if($_GET["pagina"] == "ingreso"){
         include "paginas/".$_GET["pagina"].".php";
     }
+
 }else{
     include "paginas/carrusel.php";
     include "paginas/noticias.php";
