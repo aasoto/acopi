@@ -50,6 +50,18 @@
 								</div>
 							</a>
 						</div>
+						<div class="col-md-3 col-sm-6 col-12">
+								<div class="info-box shadow" data-toggle="dropdown">
+									<span class="info-box-icon bg-primary"><i class="fas fa-edit"></i></span>
+									<div class="info-box-content">
+										<span class="info-box-number">Editar datos predeterminados</span>
+									</div>
+								</div>
+								<div class="dropdown-menu" role="menu">
+			                      <a class="dropdown-item" href="{{ url('afiliados/municipios') }}">Editar municipios del departamento</a>
+			                      <a class="dropdown-item" href="{{ url('afiliados/sectorempresas') }}">Editar categoría empresariales</a>
+			                    </div>
+						</div>
 					</div>
 				</div>
 			</div>

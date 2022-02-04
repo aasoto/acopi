@@ -137,10 +137,9 @@
                               <label>Ciudad</label>
                               <select class="form-control select2" name="ciudad" id="ciudad" style="width: 100%;">
                                 <option value="">Seleccionar...</option>
-                                <option value="Valledupar">Valledupar</option>
-                                <option value="La paz">La Paz</option>
-                                <option value="Agustín Codazzi">Agustín Codazzi</option>
-                                <option value="Aguachica">Aguachica</option>
+                                @foreach ($municipios as $key => $municipio)
+                                  <option value="{{$municipio["abreviatura"]}}">{{$municipio["nombre"]}}</option>
+                                @endforeach
                               </select>
                             </div>
                           </div>

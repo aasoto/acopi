@@ -63,3 +63,9 @@ if (document.getElementById("tablaAfiliadosEmpleados")) {
 if (document.getElementById("tablaBirthdayAfiliadosEmpleados")) {
 	document.getElementById("tablaBirthdayAfiliadosEmpleados").classList.remove('table-hover');
 }
+if (document.getElementById("tablaPagos")) {
+	document.getElementById("tablaPagos").classList.remove('table-striped');
+}
+if (document.getElementById("tablaEmpresasInactivas")) {
+	document.getElementById("tablaEmpresasInactivas").classList.remove('table-striped');
+}

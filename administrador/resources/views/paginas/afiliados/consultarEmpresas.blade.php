@@ -40,17 +40,19 @@
                 </div>
               </div>
               <div class="card-body">
-                <div class="col-md-12 text-center">
-                  <a href="{{$element["servidor"]}}afiliados/afiliadosEmpleados">
-                    <button type="button" class="btn btn-primary col-md-5" id="botonAfiliadosEmpleados" name="botonAfiliadosEmpleados">
-                      <i class="fas fa-user"></i> Ver empleados
+                <div class="col-md-12 text-right">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-flat">Más opciones</button>
+                    <button type="button" class="btn btn-primary btn-flat dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                      <span class="sr-only">Toggle Dropdown</span>
                     </button>
-                  </a>
-                   <a href="{{$element["servidor"]}}afiliados/exportarEmpresas">
-                    <button type="button" class="btn btn-primary col-md-5 tablaExportar" id="botonExportar" name="botonExportar" action="'.$url.'">
-                      <i class="fas fa-table"></i> Exportar datos
-                    </button>
-                  </a>
+                    <div class="dropdown-menu" role="menu">
+                      <a class="dropdown-item" href="{{$element["servidor"]}}afiliados/afiliadosEmpleados">Ver empleados</a>
+                      <a class="dropdown-item" href="{{$element["servidor"]}}afiliados/empresasInactivas">Ver empresas inactivas</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{{$element["servidor"]}}afiliados/exportarEmpresas">Exportar datos</a>
+                    </div>
+                  </div>
                 </div>
                 <br>
                 <table id="tablaEmpresas" class="table table-bordered table-hover dt-responsive">
@@ -61,6 +63,7 @@
                       <th>NIT</th>
                       <th>Razón social</th>
                       <th>Representante</th>
+                      <th>Estado</th>
                       <th>Telefonos</th>
                     </tr>
                   </thead>
@@ -73,6 +76,7 @@
                       <th>NIT</th>
                       <th>Razón social</th>
                       <th>Representante</th>
+                      <th>Estado</th>
                       <th>Telefonos</th>
                     </tr>
                   </tfoot>

@@ -76,7 +76,7 @@
               <div class="icon">
                 <i class="fas fa-money-bill-alt"></i>
               </div>
-              <a href="#" class="small-box-footer"><h7 style="color: white;">Gestionar </h7><i class="fas fa-arrow-circle-right" style="color: white;"></i></a>
+              <a href="{{ url('pagos/general') }}" class="small-box-footer"><h7 style="color: white;">Gestionar </h7><i class="fas fa-arrow-circle-right" style="color: white;"></i></a>
             </div>
           </div>
         </div>

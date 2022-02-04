@@ -545,6 +545,10 @@ var tablaEmpresas = $("#tablaEmpresas").DataTable({
 	    	name: 'representante'
 	  	},
 	  	{
+	  		data: 'estado_afiliacion_empresa',
+	  		name: 'estado_afiliacion_empresa'
+	  	},
+	  	{
 	  		data: "acciones",
 	    	name: "acciones"
 	  	}
@@ -675,6 +679,347 @@ tablaAfiliadosEmpleados.on('order.dt search.dt', function(){
 }).draw();
 
 /*=====  End of Datatable empleados afiliados  ======*/
+
+/*=================================================
+=            Datatable Recibos de pago            =
+=================================================*/
+
+var tablaPagos = $("#tablaPagos").DataTable({
+	processing: true,
+  	serverSide: true,
+
+  	ajax:{
+  		url: ruta+"/pagos/general"		
+  	},
+
+  	"columnDefs":[{
+  		"searchable": true,
+  		"orderable": true,
+  		"targets": 0
+  	}],
+
+  	"order":[[0, "desc"]],
+
+  	columns: [
+	  	{
+	    	data: 'id',
+	    	name: 'id'
+	  	},
+	  	{
+	  		data: 'codigo_recibo',
+	    	name: 'codigo_recibo'
+	  	},
+	  	{
+	  		data: 'representante',
+	    	name: 'representante'
+	  	},
+	  	{
+	  		data: 'razon_social',
+	    	name: 'razon_social'
+	  	},
+	  	{
+	  		data: 'mes_recibo',
+	    	name: 'mes_recibo'
+	  	},
+	  	{
+	  		data: 'estado',
+	    	name: 'estado'
+	  	},
+	  	{
+	  		data: 'valor_deuda',
+	    	name: 'valor_deuda'
+	  	},
+	  	{
+	  		data: 'valor_mes',
+	    	name: 'valor_mes'
+	  	},
+	  	{
+	  		data: 'valor_recibo',
+	    	name: 'valor_recibo'
+	  	},
+	  	{
+	  		data: 'fecha_limite',
+	    	name: 'fecha_limite'
+	  	},
+	  	{
+	  		data: 'procedimientos',
+	    	name: 'procedimientos'
+	  	}
+
+	],
+	"responsive": true, "lengthChange": true, "autoWidth": false,
+	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+	"language": {
+
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		},
+	    "oAria": {
+	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+	}
+});
+
+tablaPagos.on('order.dt search.dt', function(){
+
+	tablaPagos.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+
+
+}).draw();
+
+/*=====  End of Datatable Recibos de pago  ======*/
+
+/*====================================================
+=            Datatable Empresas inactivas            =
+====================================================*/
+
+var tablaEmpresasInactivas = $("#tablaEmpresasInactivas").DataTable({
+	processing: true,
+  	serverSide: true,
+
+  	ajax:{
+  		url: ruta+"/afiliados/empresasInactivas"		
+  	},
+
+  	"columnDefs":[{
+  		"searchable": true,
+  		"orderable": true,
+  		"targets": 0
+  	}],
+
+  	"order":[[0, "desc"]],
+
+  	columns: [
+	  	{
+	    	data: 'id_empresa',
+	    	name: 'id_empresa'
+	  	},
+	  	{
+	  		data: 'nit_empresa',
+	    	name: 'nit_empresa'
+	  	},
+	  	{
+	  		data: 'razon_social',
+	    	name: 'razon_social'
+	  	},
+	  	{
+	  		data: 'representante',
+	    	name: 'representante'
+	  	},
+	  	{
+	  		data: 'telefonos',
+	    	name: 'telefonos'
+	  	},
+	  	{
+	  		data: 'procedimientos',
+	    	name: 'procedimientos'
+	  	}
+
+	],
+	"responsive": true, "lengthChange": true, "autoWidth": false,
+	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+	"language": {
+
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		},
+	    "oAria": {
+	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+	}
+});
+
+tablaEmpresasInactivas.on('order.dt search.dt', function(){
+
+	tablaEmpresasInactivas.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+
+
+}).draw();
+
+/*=====  End of Datatable Empresas inactivas  ======*/
+
+/*============================================
+=            Datatable municipios            =
+============================================*/
+
+var tablaMunicipios = $("#tablaMunicipios").DataTable({
+	processing: true,
+  	serverSide: true,
+
+  	ajax:{
+  		url: ruta+"/afiliados/municipios"		
+  	},
+
+  	"columnDefs":[{
+  		"searchable": true,
+  		"orderable": true,
+  		"targets": 0
+  	}],
+
+  	"order":[[0, "desc"]],
+
+  	columns: [
+	  	{
+	    	data: 'id',
+	    	name: 'id'
+	  	},
+	  	{
+	  		data: 'abreviatura',
+	    	name: 'abreviatura'
+	  	},
+	  	{
+	  		data: 'nombre',
+	    	name: 'nombre'
+	  	},
+	  	{
+	  		data: 'procedimientos',
+	    	name: 'procedimientos'
+	  	}
+
+	],
+	"responsive": true, "lengthChange": true, "autoWidth": false,
+	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+	"language": {
+
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		},
+	    "oAria": {
+	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+	}
+});
+
+tablaMunicipios.on('order.dt search.dt', function(){
+
+	tablaMunicipios.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+
+
+}).draw();
+
+/*==========================================
+=            Datatable Sectores            =
+==========================================*/
+
+var tablaSectoresEmpresas = $("#tablaSectoresEmpresas").DataTable({
+	processing: true,
+  	serverSide: true,
+
+  	ajax:{
+  		url: ruta+"/afiliados/sectorempresas"		
+  	},
+
+  	"columnDefs":[{
+  		"searchable": true,
+  		"orderable": true,
+  		"targets": 0
+  	}],
+
+  	"order":[[0, "desc"]],
+
+  	columns: [
+	  	{
+	    	data: 'id_sector',
+	    	name: 'id_sector'
+	  	},
+	  	{
+	  		data: 'nombre_sector',
+	    	name: 'nombre_sector'
+	  	},
+	  	{
+	  		data: 'procedimientos',
+	    	name: 'procedimientos'
+	  	}
+
+	],
+	"responsive": true, "lengthChange": true, "autoWidth": false,
+	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+	"language": {
+
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		},
+	    "oAria": {
+	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+	}
+});
+
+tablaSectoresEmpresas.on('order.dt search.dt', function(){
+
+	tablaSectoresEmpresas.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+
+
+}).draw();
+
+/*=====  End of Datatable Sectores  ======*/
+
+
+/*=====  End of Datatable municipios  ======*/
 
 
 /*var tablaAfiliados = $("#tablaAfiliados").DataTable({

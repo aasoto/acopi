@@ -222,7 +222,7 @@
             =====================================-->
             @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector administrativo y financiero'))
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ url('pagos/general') }}" class="nav-link">
                   <i class="nav-icon fas fa-money-bill-alt"></i>
                   <p>
                     Pagos

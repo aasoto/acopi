@@ -1371,6 +1371,389 @@ $(document).on("click", ".consultarBirthday", function(){
 
 /*=====  End of Consultar cumpleaños  ======*/
 
+/*==============================================
+=            Cambiar estado de pago            =
+==============================================*/
+
+$(document).on("click", ".pagarRecibo", function(){
+
+	var reporta = $(this).attr("reporta");
+	var empresa = $(this).attr("empresa");
+	var action = $(this).attr("action");
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	var token = $(this).attr("token");
+
+  	swal({
+  		 title: '¿Está pago este recibo?',
+  		 text: "¡Si no lo está puede cancelar la acción!",
+  		 type: 'question',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Sí, está pago!'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var datos = new FormData();
+  			datos.append("accion", "pagar");
+  			datos.append("empresa", empresa);
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡Recibo pago!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina;
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+/*----------  Abonar a la deuda  ----------*/
+
+$(document).on("click", ".abonarRecibo", async function(){
+
+	var cantidad = "";
+	var action = $(this).attr("action");
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	var token = $(this).attr("token");
+
+  	await swal({
+		title: '¿Desea abonar a la deuda?',
+		text: "¡Si no lo está puede cancelar la acción!",
+		type: 'question',
+		input: 'number',
+		inputLabel: 'Cantidad de abonar',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		cancelButtonText: 'Cancelar',
+		confirmButtonText: 'Abonar'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var datos = new FormData();
+  			datos.append("accion", "abonar");
+  			datos.append("cantidad", result.value);
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			console.log("Datos: ", result.value);
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡Abono exitoso!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina;
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+/*=====  End of Cambiar estado de pago  ======*/
+
+/*=========================================
+=            Reactivar empresa            =
+=========================================*/
+
+$(document).on("click", ".reactivarEmpresa", function(){
+
+	var recibo = $(this).attr("recibo");
+	var action = $(this).attr("action");
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	var token = $(this).attr("token");
+  	console.log("recibo: ", recibo);
+
+  	swal({
+  		 title: '¿Se encuentra esta empresa al día?',
+  		 text: "Aceptar esta opción significa que la empresa afiliada saldó todas sus deudas con la agremiación y por lo tanto pasará a estar activa de nuevo.",
+  		 type: 'question',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Sí, la empresa está al día'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var datos = new FormData();
+  			datos.append("recibo", recibo);
+  			datos.append("accion", "reactivar");
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡Empresa reactivada!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina;
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+/*=====  End of Reactivar empresa  ======*/
+
+/*==========================================
+=            Eliminar municipio            =
+==========================================*/
+
+$(document).on("click", ".eliminarMunicipio", function(){
+
+	var action = $(this).attr("action");
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	var token = $(this).attr("token");
+
+
+  	swal({
+  		 title: '¿Está seguro de eliminar este municipio?',
+  		 text: "¡Si no lo está puede cancelar la acción!",
+  		 type: 'warning',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Sí, eliminar municipio!'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var datos = new FormData();
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡El municipio ha sido eliminado!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina;
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+/*=====  End of Eliminar municipio  ======*/
+
+/*=======================================
+=            Eliminar sector            =
+=======================================*/
+
+$(document).on("click", ".eliminarSectorEmpresa", function(){
+
+	var action = $(this).attr("action");
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	var token = $(this).attr("token");
+
+
+  	swal({
+  		 title: '¿Está seguro de eliminar este sector?',
+  		 text: "¡Si no lo está puede cancelar la acción!",
+  		 type: 'warning',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Sí, eliminar sector!'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var datos = new FormData();
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡El sector ha sido eliminado!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina;
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+
+/*=====  End of Eliminar sector  ======*/
+
 
 /*=====================================
 =            LIMPIAR RUTAS            =

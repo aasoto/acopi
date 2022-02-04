@@ -103,4 +103,12 @@ Route::resource('/afiliados/consultarEmpresas', 'EmpresasController');
 Route::resource('/afiliados/exportarEmpresas', 'ExportarController');
 Route::resource('/afiliados/afiliadosEmpleados', 'EmpresasController');
 Route::resource('/afiliados/birthday', 'EmpresasController');
+Route::resource('/afiliados/empresasInactivas', 'EmpresasController');
+Route::resource('/afiliados/reactivarEmpresa', 'EmpresasController');
+Route::resource('/afiliados/municipios', 'MunicipiosController');
+Route::resource('/afiliados/sectorempresas', 'SectorEmpresaController');
+
+/*----------  Pagos  ----------*/
+Route::resource('/pagos/general', 'PagosController');
+
 /*=====  End of Rutas que incluyen todos los metodos HTML  ======*/

@@ -8,6 +8,8 @@ use App\RepresentanteEmpresaModel;
 use App\SectorEmpresaModel;
 use App\PaginaWebModel;
 use App\EmpleadosAfiliadosModel;
+use App\PagosModel;
+use App\MunicipiosModel;
 //Libería para hacer inner join
 use Illuminate\Support\Facades\DB;
 
@@ -18,6 +20,57 @@ class EmpresasController extends Controller
         $paginaweb = PaginaWebModel::all();
 
         foreach ($paginaweb as $key => $web) {}
+
+        /*if (url()->current() == ($web["servidor"]."afiliados/reactivarEmpresa")) {
+
+        }*/
+
+        if (url()->current() == ($web["servidor"]."afiliados/empresasInactivas")) {
+            $join = DB::table('representante_empresa')->join('empresas','representante_empresa.cc_rprt_legal','=','empresas.cc_rprt_legal')->select('representante_empresa.*','empresas.*')->where("estado_afiliacion_empresa", "inactiva")->get(); 
+            if(request()->ajax()){
+ 
+                return datatables()->of($join)
+
+                ->addColumn('representante', function($data){
+
+                    $representante = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre;
+                   
+                    return $representante;
+
+                })
+
+                ->addColumn('telefonos', function($data){
+
+                    $telefonos = $data->telefono_empresa.' - '.$data->celular_empresa;
+                   
+                    return $telefonos;
+
+                })
+                
+                ->addColumn('procedimientos', function($data){
+
+                    $procedimientos = '
+                        <div class="text-center">
+                            <div class="btn-group">
+                                <a href="'.url()->current().'/'.$data->id_empresa.'" class="btn btn-warning btn-sm text-white">
+                                    <i class="far fa-life-ring"></i> Rescatar
+                                </a>
+                            </div>
+                        </div>
+                    ';
+                   
+                    return $procedimientos;
+
+                })
+                ->rawColumns(['representante','telefonos','procedimientos'])
+                ->make(true);
+
+            }
+
+
+            return view("paginas.afiliados.empresasInactivas");
+        }
+
         if (url()->current() == ($web["servidor"]."afiliados/afiliadosEmpleados")) {
             $join = DB::table('empresas')->join('empleados_afiliados','empresas.nit_empresa','=','empleados_afiliados.nit_empresa_afiliado')->select('empresas.razon_social','empleados_afiliados.*')->get(); 
 
@@ -81,6 +134,7 @@ class EmpresasController extends Controller
             ->addColumn('telefonos', function($data){
                     
                     $representante = $data->primer_apellido." ".$data->segundo_apellido." ".$data->primer_nombre." ".$data->segundo_nombre;
+                    $ciudad = MunicipiosModel::where("abreviatura", $data->ciudad_empresa)->get();
                     /*$telefonos = '<div class="btn-group">
                         <a nit="'.$data->nit_empresa.'" razon_social="'.$data->razon_social.'" representante="'.$representante.'" num_empleados="'.$data->num_empleados.'" direccion="'.$data->direccion_empresa.'" telefono="'.$data->telefono_empresa.'" fax="'.$data->fax_empresa.'" celular="'.$data->celular_empresa.'" email="'.$data->email_empresa.'" id_sector="'.$data->id_sector_empresa.'" productos="'.$data->productos_empresa.'" ciudad="'.$data->ciudad_empresa.'" estado_afiliacion="'.$data->estado_afiliacion_empresa.'" numero_pagos_atrasados="'.$data->numero_pagos_atrasados.'" fecha_afiliacion="'.$data->fecha_afiliacion_empresa.'" title="Ver más" class="btn btn-primary btn-sm verMasEmpresa">
                             <i class="fas fa-eye"></i>
@@ -96,7 +150,7 @@ class EmpresasController extends Controller
                     </div>';*/
 
                     $telefonos = "<div class='btn-group'>
-                        <a nit='".$data->nit_empresa."' razon_social='".$data->razon_social."' representante='".$representante."' num_empleados='".$data->num_empleados."' direccion='".$data->direccion_empresa."' telefono='".$data->telefono_empresa."' fax='".$data->fax_empresa."' celular='".$data->celular_empresa."' email='".$data->email_empresa."' id_sector='".$data->id_sector_empresa."' productos='".$data->productos_empresa."' ciudad='".$data->ciudad_empresa."' estado_afiliacion='".$data->estado_afiliacion_empresa."' numero_pagos_atrasados='".$data->numero_pagos_atrasados."' fecha_afiliacion='".$data->fecha_afiliacion_empresa."' title='Ver más' id='verMasEmpresa' name='verMasEmpresa' class='btn btn-primary btn-sm verMasEmpresa'>
+                        <a nit='".$data->nit_empresa."' razon_social='".$data->razon_social."' representante='".$representante."' num_empleados='".$data->num_empleados."' direccion='".$data->direccion_empresa."' telefono='".$data->telefono_empresa."' fax='".$data->fax_empresa."' celular='".$data->celular_empresa."' email='".$data->email_empresa."' id_sector='".$data->id_sector_empresa."' productos='".$data->productos_empresa."' ciudad='".$ciudad[0]["nombre"]."' estado_afiliacion='".$data->estado_afiliacion_empresa."' numero_pagos_atrasados='".$data->numero_pagos_atrasados."' fecha_afiliacion='".$data->fecha_afiliacion_empresa."' title='Ver más' id='verMasEmpresa' name='verMasEmpresa' class='btn btn-primary btn-sm verMasEmpresa'>
                             <i class='fas fa-eye'></i>
                         </a>
                         <button title='Agregar empleado' class='btn btn-success btn-sm agregarEmpleado' id_empresa='".$data->id_empresa."' nit_empresa='".$data->nit_empresa."' razon_social='".$data->razon_social."' data-toggle='modal' data-target='#nuevoEmpleado'>
@@ -140,6 +194,15 @@ class EmpresasController extends Controller
         $paginaweb = PaginaWebModel::all();
         foreach ($paginaweb as $key => $web) {}
 
+        if (url()->current() == ($web["servidor"]."afiliados/empresasInactivas/".$id)) {
+            $deuda = PagosModel::where("id_empresa", $id)->get();
+            if (count($deuda) != 0) {
+                return view("paginas.afiliados.empresasInactivas", array("status"=>200, "deuda"=>$deuda));
+            } else {
+                return view("paginas.afiliados.empresasInactivas", array("status"=>404));
+            }
+        }
+
         if (url()->current() == ($web["servidor"]."afiliados/birthday/".$id)) {
             $fecha_birthday = date("m-d", strtotime($id));
 
@@ -160,20 +223,21 @@ class EmpresasController extends Controller
             $afiliado = RepresentanteEmpresaModel::where("id_rprt_legal", $id)->get();
             $afiliados = RepresentanteEmpresaModel::all();
             $sectores = SectorEmpresaModel::all();
+            $municipios = MunicipiosModel::all();
             $empresa = EmpresasModel::where("cc_rprt_legal", $afiliado[0]["cc_rprt_legal"])->get();
 
             if (count($empresa) != 0) {
                 
                 $empresa_existe = "si";
                 if (count($afiliado) != 0) {
-                    return view("paginas.afiliados.empresas", array("status"=>200, "afiliado"=>$afiliado, "sectores"=>$sectores, "empresa_existe"=>$empresa_existe));
+                    return view("paginas.afiliados.empresas", array("status"=>200, "afiliado"=>$afiliado, "sectores"=>$sectores, "municipios"=>$municipios, "empresa_existe"=>$empresa_existe));
                 } else {
                     return view("paginas.afiliados.general", array("status"=>404, "afiliados"=>$afiliados));
                 }
                 
             } else {
                 if (count($afiliado) != 0) {
-                    return view("paginas.afiliados.empresas", array("status"=>200, "afiliado"=>$afiliado, "sectores"=>$sectores));
+                    return view("paginas.afiliados.empresas", array("status"=>200, "afiliado"=>$afiliado, "sectores"=>$sectores, "municipios"=>$municipios));
                 } else {
                     return view("paginas.afiliados.general", array("status"=>404, "afiliados"=>$afiliados));
                 }
@@ -358,6 +422,7 @@ class EmpresasController extends Controller
                     $empresa->id_sector_empresa = $datos["sector_empresa"];
                     $empresa->productos_empresa = json_encode(explode(",", $datos["productos"]));
                     $empresa->ciudad_empresa = $datos["ciudad"];
+                    $empresa->estado_afiliacion_empresa = "nueva";
                     $empresa->fecha_afiliacion_empresa = $datos["fecha_afiliacion"];
 
                     $empresa->save();
@@ -376,6 +441,32 @@ class EmpresasController extends Controller
     }
 
     public function update($id, Request $request) {
+
+        if ($_POST["accion"] == "reactivar") {
+            $actualizar = array(
+                'estado' => 'pagado'
+            );
+            $pagado = PagosModel::where("id", $_POST["recibo"])->update($actualizar);
+            
+            $recibos_vencidos = PagosModel::where("id_empresa", $id)->get();
+            $total_recibos = count($recibos_vencidos);
+            for ($i=0; $i < $total_recibos; $i++) { 
+                if ($recibos_vencidos[$i]["estado"] == "vencido") {
+                    $actualizar = array(
+                        'estado' => 'negoceado'
+                    );
+                    $negoceado = PagosModel::where("id", $recibos_vencidos[$i]["id"])->update($actualizar);
+                }
+            }
+
+            $actualizar = array(
+                'estado_afiliacion_empresa' => "activa",
+                'numero_pagos_atrasados' => 0
+            );
+            $activada = EmpresasModel::where("id_empresa", $id)->update($actualizar);
+            return "ok";
+        }
+
         $datos = array(
             'cedula' => $request->input("cedula"),
             'nit' => $request->input("nit"),
