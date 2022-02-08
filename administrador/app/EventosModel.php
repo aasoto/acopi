@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventosModel extends Model
 {
-    //
+    protected $table = "eventos";
 }

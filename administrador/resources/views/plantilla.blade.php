@@ -50,6 +50,8 @@
   	{{--<link rel="stylesheet" href="{{ url('/') }}/css/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">--}}
   	<!-- Theme style | CSS de AdminLTE -->
   	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/css/adminlte.min.css">
+  	<!-- FullCalendar -->
+  	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/fullcalendar/main.css">
 	<!--====  End of Plugins HTML  ====-->
 	
 	<!--==========================================
@@ -101,6 +103,11 @@
 	
 	<!-- owl-carousel -->
     <script src="{{ url('/') }}/js/plugins/owl.carousel.min.js"></script>
+    <!-- Moment -->
+    <script src="{{ url('/') }}/js/plugins/moment/moment.min.js"></script>
+    <!-- FullCalendar -->
+    <script src="{{ url('/') }}/js/plugins/fullcalendar/main.js"></script>
+    <script src="{{ url('/') }}/js/plugins/fullcalendar/locales/es.js"></script>
 	<!-- SweetAlert2 -->
 	{{--<script src="{{ url('/') }}/js/plugins/sweetalert2/sweetalert2.min.js"></script>--}}
 	<!--=====  End of Plugins JavaScript  ======-->
@@ -119,6 +126,7 @@
 			<input type="hidden" id="ruta" value="{{ url('/') }}">
 			<script src="{{url('/')}}/js/codigo.js"></script>
 			<script src="{{url('/')}}/js/ownDatatables.js"></script>
+			<script src="{{url('/')}}/js/calendarios.js"></script>
 			@if (Auth::user()->modo == 'Nocturno')
 				<script src="{{url('/')}}/js/modoNocturno.js"></script>
 			@endif

@@ -111,4 +111,7 @@ Route::resource('/afiliados/sectorempresas', 'SectorEmpresaController');
 /*----------  Pagos  ----------*/
 Route::resource('/pagos/general', 'PagosController');
 
+/*----------  Eventos  ----------*/
+Route::resource('/eventos/general', 'EventosController');
+
 /*=====  End of Rutas que incluyen todos los metodos HTML  ======*/

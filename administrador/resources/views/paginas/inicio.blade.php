@@ -120,7 +120,7 @@
               <div class="icon">
                 <i class="fas fa-glass-cheers"></i>
               </div>
-              <a href="#" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('eventos/general') }}" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
