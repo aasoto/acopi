@@ -8,7 +8,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Consultar Usuarios</h1>
+          <h1>Consultar Pagos</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -35,10 +35,13 @@
         </div>
         
         <div class="card-body">
-          <div class="col-md-12 text-center">
-            <button class="btn btn-success col-md-6" data-toggle="modal" data-target="#generarPagos">
-              <i class="fas fa-user-plus"></i> Generar pagos de este mes
-            </button>
+          <div class="col-md-12 text-right">
+              <button class="btn btn-success col-md-6" data-toggle="modal" data-target="#generarPagos">
+                <i class="fas fa-user-plus"></i> Generar pagos de este mes
+              </button>
+              <a href="{{ url('pagos/parametros') }}" title="Configurar parametros para generación de pagos" class="btn btn-default col-md-3">
+                <i class="fas fa-cogs"></i> Parametros
+              </a>
           </div>
           <br>
           <table id="tablaPagos" class="table table-bordered table-striped dt-responsive">
@@ -148,7 +151,7 @@
 <script>
   swal({
     title: "¡Error!",
-    text: "No es pudo reportar el pago.",
+    text: "No se pudo reportar el pago.",
     type: "error"
   });
 </script>

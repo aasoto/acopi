@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-02-2022 a las 02:49:48
+-- Tiempo de generación: 12-02-2022 a las 21:07:15
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.25
 
@@ -40,6 +40,40 @@ INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`) VALUES
 (1, 'Noticias'),
 (2, 'Capacitación'),
 (3, 'Otros');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `citas`
+--
+
+CREATE TABLE `citas` (
+  `id` int(11) NOT NULL,
+  `tipo_usuario_cita` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `id_empresa` int(11) DEFAULT NULL,
+  `cc_rprt_legal` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cc_interesado` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre_interesado` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_cita` date NOT NULL,
+  `hora_cita` time NOT NULL,
+  `area` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `estado_cita` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `color` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `citas`
+--
+
+INSERT INTO `citas` (`id`, `tipo_usuario_cita`, `id_empresa`, `cc_rprt_legal`, `cc_interesado`, `nombre_interesado`, `fecha_cita`, `hora_cita`, `area`, `estado_cita`, `color`, `created_at`, `updated_at`) VALUES
+(1, 'afiliado', 13, '77345723', NULL, NULL, '2022-02-15', '08:00:00', 'Director ejecutivo', 'pendiente', '#ffc107', '2022-02-10 02:18:10', '2022-02-11 02:18:27'),
+(3, 'interesado', NULL, NULL, '1065856913', 'María Belén Atehortúa Álvarez', '2022-02-14', '09:00:00', 'Subdirector juridico', 'atendida', '#28a745', '2022-02-10 03:07:04', '2022-02-12 02:53:30'),
+(4, 'afiliado', 15, '49548329', NULL, NULL, '2022-02-14', '16:00:00', 'Director ejecutivo', 'pendiente', '#ffc107', '2022-02-10 03:09:16', '2022-02-12 03:04:57'),
+(5, 'afiliado', 12, '49328431', NULL, NULL, '2022-02-11', '16:00:00', 'Director ejecutivo', 'perdida', '#dc3545', '2022-02-10 07:36:02', '2022-02-12 02:52:25'),
+(6, 'interesado', NULL, NULL, '1006438450', 'Ebenezer de Jesus Hernandez de Ávila', '2022-02-18', '08:00:00', 'Director ejecutivo', 'pendiente', '#ffc107', '2022-02-10 07:37:29', '2022-02-11 02:21:30'),
+(7, 'afiliado', 1, '1065831073', NULL, NULL, '2022-02-15', '10:00:00', 'Director ejecutivo', 'pendiente', '#ffc107', '2022-02-12 18:27:45', '2022-02-12 18:27:45');
 
 -- --------------------------------------------------------
 
@@ -143,6 +177,52 @@ CREATE TABLE `entrevistas` (
 INSERT INTO `entrevistas` (`id`, `titulo_entrevista`, `descripcion_entrevista`, `video_entrevista`, `created_at`, `updated_at`) VALUES
 (1, 'REACTIVACIÓN DE ACOPI CESAR', 'Comienza la transformación en de los microempresarios en el departamento del Cesar. ', 'https://www.youtube.com/embed/qJ7Kpfm6DXM', NULL, NULL),
 (2, 'PARQUE INDUSTRIAL DE VALLEDUPAR', 'Entrevista realizada a su administradora, en que la se cuenta parte de su historia, los servicios que ofrece y responde a unas cuantas preguntas especificas.', 'https://www.youtube.com/embed/TYvtmPZ6YS8', '2022-01-01 21:06:11', '2022-01-02 01:40:47');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `eventos`
+--
+
+CREATE TABLE `eventos` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `tematica` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ponentes` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `patrocinadores` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `num_participantes` int(11) DEFAULT NULL,
+  `fecha_inicio` date NOT NULL,
+  `hora_inicio` time DEFAULT NULL,
+  `fecha_final` date DEFAULT NULL,
+  `hora_final` time DEFAULT NULL,
+  `backgroundColor` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `borderColor` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `allDay` varchar(20) COLLATE utf8_spanish_ci DEFAULT 'false',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `eventos`
+--
+
+INSERT INTO `eventos` (`id`, `nombre`, `tematica`, `ponentes`, `patrocinadores`, `num_participantes`, `fecha_inicio`, `hora_inicio`, `fecha_final`, `hora_final`, `backgroundColor`, `borderColor`, `allDay`, `created_at`, `updated_at`) VALUES
+(1, 'Evento todo el día', NULL, NULL, NULL, NULL, '2022-02-01', NULL, NULL, NULL, '#f56954', '#f56954', 'true', NULL, NULL),
+(2, 'Evento Largo', NULL, NULL, NULL, NULL, '2022-01-31', NULL, '2022-02-03', NULL, '#f39c12', '#f39c12', 'false', NULL, NULL),
+(3, 'Reunión', NULL, NULL, NULL, NULL, '2022-02-04', '10:30:00', NULL, NULL, '#0073b7', '#0073b7', 'false', NULL, NULL),
+(4, 'Almuerzo', NULL, NULL, NULL, NULL, '2022-02-04', '12:00:00', '2022-02-04', '14:00:00', '#00c0ef', '#00c0ef', 'false', NULL, NULL),
+(5, 'Fiesta de cumpleaños', NULL, NULL, NULL, NULL, '2022-02-05', '19:00:00', '2022-02-05', '22:30:00', '#00a65a', '#00a65a', 'false', NULL, NULL),
+(6, 'Entrar a Google', NULL, NULL, NULL, NULL, '2022-02-28', NULL, '2022-02-28', NULL, '#3c8dbc', '#3c8dbc', 'false', NULL, NULL),
+(7, 'Capacitación', 'Capacitación sobre implentación del nuevo aplicativo web.', 'Andrés Soto Suárez, Jean Carlos Recio.', 'Universidad Popular del Cesar.', 12, '2022-02-08', '08:00:00', '2022-02-08', '16:30:00', '#01ff70', '#01ff70', 'false', '2022-02-07 02:00:24', '2022-02-07 02:00:24'),
+(8, 'Auditoría', 'Sobre procesos internos', 'María Josefina Gutierrez', 'Contraloría', 2, '2022-02-10', NULL, '2022-02-12', NULL, '#6c757d', '#6c757d', 'false', '2022-02-07 02:07:28', '2022-02-08 02:17:24'),
+(9, 'Llamadas de cobro', NULL, NULL, NULL, NULL, '2022-02-12', NULL, NULL, NULL, '#f012be', '#f012be', 'true', '2022-02-07 02:11:39', '2022-02-08 02:24:25'),
+(11, 'Rendición de cuentas', NULL, 'Adonaís Fuentes.', NULL, 34, '2022-02-14', NULL, NULL, NULL, '#007bff', '#007bff', 'true', '2022-02-08 07:33:49', '2022-02-08 07:33:49'),
+(12, 'Campaña de socialización microempresarios.', NULL, NULL, NULL, NULL, '2022-02-15', NULL, NULL, NULL, '#ffc107', '#ffc107', 'true', '2022-02-08 07:35:49', '2022-02-08 07:35:49'),
+(13, 'Evaluación de resultados campaña afiliados.', NULL, NULL, NULL, NULL, '2022-02-16', NULL, NULL, NULL, '#f012be', '#f012be', 'true', '2022-02-08 07:37:04', '2022-02-08 07:37:04'),
+(14, 'Llamar a los interesados de la campaña de socialización', NULL, NULL, NULL, NULL, '2022-02-17', NULL, NULL, NULL, '#000000', '#000000', 'true', '2022-02-08 07:37:47', '2022-02-08 07:37:47'),
+(15, 'Plenaria jornada mañana', NULL, 'Adonaís Funetes.', 'ACOPI Cesar', 30, '2022-02-14', '08:00:00', '2022-02-14', '12:00:00', '#001f3f', '#001f3f', 'false', '2022-02-08 07:40:45', '2022-02-08 07:40:45'),
+(16, 'Plenaria jornada tarde', NULL, 'Adonaís Fuente', 'ACOPI Cesar', 25, '2022-02-14', '14:00:00', '2022-02-14', '18:00:00', '#ff851b', '#ff851b', 'false', '2022-02-08 07:44:26', '2022-02-08 07:44:26'),
+(17, 'Descanso', NULL, NULL, NULL, NULL, '2022-02-04', '12:00:00', '2022-02-04', '14:00:00', '#dc3545', '#dc3545', 'false', '2022-02-09 03:06:44', '2022-02-09 03:07:24');
 
 -- --------------------------------------------------------
 
@@ -463,7 +543,7 @@ CREATE TABLE `pagos_parametros` (
 --
 
 INSERT INTO `pagos_parametros` (`id`, `valor_cuota`, `periodo_activo`, `created_at`, `updated_at`) VALUES
-(1, 80000, 3, NULL, NULL);
+(1, 80000, 3, NULL, '2022-02-13 00:56:56');
 
 -- --------------------------------------------------------
 
@@ -632,7 +712,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `foto`, `rol`, `modo`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Andrés Soto', 'andresalfredosotosuarez@gmail.com', NULL, '$2y$10$jPmKrQ9l3Xvt8xN35BHt.OJ.NTYenPs9nHvKxAy6r6ZTKq1.sZln6', 'vistas/images/usuarios/723.jpg', 'Administrador', 'Nocturno', NULL, '2021-11-17 01:34:47', '2022-02-02 00:49:33'),
+(1, 'Andrés Soto', 'andresalfredosotosuarez@gmail.com', NULL, '$2y$10$jPmKrQ9l3Xvt8xN35BHt.OJ.NTYenPs9nHvKxAy6r6ZTKq1.sZln6', 'vistas/images/usuarios/723.jpg', 'Administrador', 'Diurno', NULL, '2021-11-17 01:34:47', '2022-02-12 20:29:12'),
 (4, 'Jean Carlos Recio', 'jrecio@gmail.com', NULL, '$2y$10$TqKqyV6QZ5LHB8OO.3nkm.VmkdIuxptHz2e6MgeMCMKeCFIjleBSy', 'vistas/images/usuarios/563.jpg', 'Administrador', 'Nocturno', NULL, '2021-11-30 07:18:38', '2022-01-22 06:41:14'),
 (5, 'Jimena Castro', 'jcastro@gmail.com', NULL, '$2y$10$SBtB5gICn1uZEoxOU0TvNey5zD1dFMPvYiFfl2O20ZX9YQS0N.VkG', 'vistas/images/usuarios/138.jpg', 'Subdirector de comunicaciones y eventos', 'Diurno', NULL, '2021-12-01 07:11:36', '2021-12-02 07:07:32'),
 (6, 'Adonais Fuentes', 'afuentes@gmail.com', NULL, '$2y$10$lc1gRh.wzkdYFpvXe4jxF.WLV1L1fQdojmUSzSK2UGxr1IunW7vka', 'vistas/images/usuarios/588.png', 'Director ejecutivo', 'Diurno', NULL, '2021-12-02 02:45:34', '2021-12-03 01:42:01'),
@@ -655,6 +735,12 @@ ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
+-- Indices de la tabla `citas`
+--
+ALTER TABLE `citas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `empleados_afiliados`
 --
 ALTER TABLE `empleados_afiliados`
@@ -670,6 +756,12 @@ ALTER TABLE `empresas`
 -- Indices de la tabla `entrevistas`
 --
 ALTER TABLE `entrevistas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `eventos`
+--
+ALTER TABLE `eventos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -777,6 +869,12 @@ ALTER TABLE `categorias`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `citas`
+--
+ALTER TABLE `citas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT de la tabla `empleados_afiliados`
 --
 ALTER TABLE `empleados_afiliados`
@@ -793,6 +891,12 @@ ALTER TABLE `empresas`
 --
 ALTER TABLE `entrevistas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `eventos`
+--
+ALTER TABLE `eventos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`

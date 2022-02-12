@@ -239,7 +239,7 @@
             =====================================-->
             @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial'))
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ url('citas/general') }}" class="nav-link">
                   <i class="nav-icon fas fa-business-time"></i>
                   <p>
                     Citas
@@ -256,7 +256,7 @@
             =====================================-->
             @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Asistente de dirección'))
               <li class="nav-item">
-                <a href="{{ url('eventos/general') }}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-user-friends"></i>
                   <p>
                     Empleados y pasantes
@@ -273,7 +273,7 @@
             =====================================-->
             @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Asistente de dirección') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos'))
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ url('eventos/general') }}" class="nav-link">
                   <i class="nav-icon fas fa-glass-cheers"></i>
                   <p>
                     Eventos

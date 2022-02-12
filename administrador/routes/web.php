@@ -110,8 +110,12 @@ Route::resource('/afiliados/sectorempresas', 'SectorEmpresaController');
 
 /*----------  Pagos  ----------*/
 Route::resource('/pagos/general', 'PagosController');
+Route::resource('/pagos/parametros', 'ParametrosPagosController');
 
 /*----------  Eventos  ----------*/
 Route::resource('/eventos/general', 'EventosController');
+
+/*----------  Citas  ----------*/
+Route::resource('/citas/general', 'CitasController');
 
 /*=====  End of Rutas que incluyen todos los metodos HTML  ======*/

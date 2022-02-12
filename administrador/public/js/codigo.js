@@ -1829,6 +1829,149 @@ $(document).on("click", ".eliminarEvento", function(){
 
 /*=====  End of Eliminar evento  ======*/
 
+/*====================================
+=            Agregar cita            =
+====================================*/
+
+$(document).on("click", ".agregarCita", async function(){
+	var tipo_cita = "";
+	await swal({
+	  title: 'Tipo de cita',
+	  text: '¿Qué tipo de cita desea agregar?',
+	  type: 'question',
+	  input: 'select',
+	  inputOptions: {
+	    'afiliado': 'Para afiliado',
+	    'interesado': 'Para interesado'
+	  },
+	  inputPlaceholder: 'Seleccionar un tipo',
+	  showCancelButton: true
+	  
+	}).then(function(result){
+
+  		if(result.value){
+  			if (result.value == "afiliado") {
+  				tipo_carrusel = result.value;
+  			}
+  			if (result.value == "interesado") {
+  				tipo_carrusel = result.value;
+  			}
+  		}
+  	})
+
+	if (tipo_carrusel == "afiliado") {	
+		$("#crearCitaAfiliado").modal("show");
+	}
+
+	if (tipo_carrusel == "interesado") {
+		$("#crearCitaInteresado").modal("show");
+		$("#soy_interesado").val("true");
+	}
+})
+
+/*=====  End of Agregar cita  ======*/
+
+/*================================================
+=            Modal agregar datos cita            =
+================================================*/
+
+$(document).on("click", ".agendarCitaSeleccionarAfiliado", function(){
+
+	var identificacion = $(this).attr("identificacion");
+  	var nombre = $(this).attr("nombre");
+  	var id_empresa = $(this).attr("id");
+  	var nit = $(this).attr("nit");
+  	var razon = $(this).attr("razon");
+
+  	$("#soy_afiliado").val("true");
+  	$("#id_empresa").val(id_empresa);
+  	$("#nit").val(nit);
+  	$("#razon_social").val(razon);
+  	$("#identificacion").val(identificacion);
+  	$("#afiliado").val(nombre);
+
+  	$("#crearCitaAfiliado2").modal("show");
+  	$("#crearCitaAfiliado").modal("hide");
+
+})
+
+/*=====  End of Modal agregar datos cita  ======*/
+
+/*=====================================
+=            Eliminar cita            =
+=====================================*/
+
+$(document).on("click", ".eliminarCita", function(){
+
+	var action = $(this).attr("action");
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	var token = $(this).attr("token");
+
+
+  	swal({
+  		 title: '¿Está seguro de eliminar esta cita?',
+  		 text: "¡Si no lo está puede cancelar la acción!",
+  		 type: 'warning',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Sí, eliminar cita!'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var datos = new FormData();
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡La cita ha sido eliminado!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina;
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+/*=====  End of Eliminar cita  ======*/
+
 
 /*=====================================
 =            LIMPIAR RUTAS            =
