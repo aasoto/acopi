@@ -7,7 +7,7 @@
     <div class="container">
         <!-- Logo container-->
         <div>
-            <a href="index.html" class="logo">
+            <a href="./" class="logo">
                     <img src="<?php echo 'administrador/public/'.$pagina_web["logo_navegacion"]; ?>" width="162px" height="60px">
                     <?php //echo $pagina_web["titulo_navegacion"]; ?>
             </a>

@@ -1,16 +1,12 @@
 <!-- START ORGANIGRAMA -->
-<section class="section bg-home-6" id="home">
+<section class="section bg-" id="home">
     <div class="bg-overlay-color"></div>
     <div class="home-center">
-        <div class="home-desc-center">
-            <div class="container slidero">
-                <div class="row vertical-content">
-                    <div class="col-lg-4">
-                        <div class="home-image mt-4">
-                            <!--<img src="images/organigrama/organigrama-acopi.png" class="img-fluid" alt="">-->
-                        </div>
+         <div class="home-image mt-4  container-fluid">
+                <img src="images/organigrama/organigrama-acopi.png" class="img-fluid" alt="" style="min-height: 100vh">
+            </div>
 
-                    </div>
+
                     <div class="col-lg-7 offset-lg-1">
                         <div class="home-content mt-4">
                             <!--<h4 class="home-subtitle">SImple App</h4>
@@ -27,10 +23,8 @@
                                 </a>-->
                             </div>
                         </div>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
+
 </section>
 <!-- END ORGANIGRAMA -->
