@@ -1,6 +1,56 @@
 @extends('plantilla')
 
 @section('content')
+    <style>
+        @media (min-width: 768px) {
+            .position-md-static {
+                position: static !important;
+            }
+            .position-md-relative {
+                position: relative !important;
+            }
+            .position-md-absolute {
+                position: absolute !important;
+            }
+            .position-md-fixed {
+                position: fixed !important;
+            }
+            .position-md-sticky {
+                position: sticky !important;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .border-xs-left-none {
+                border-left: none !important;
+            }
+            .border-xs-right-none {
+                border-right: none !important;
+            }
+            .border-xs-top-none {
+                border-top: none !important;
+            }
+            .border-xs-bottom-none {
+                border-bottom: none !important;
+            }
+
+        }
+
+        @media (max-width: 767.98px) {
+            .border-sm-left-none {
+                border-left: none !important;
+            }
+            .border-sm-right-none {
+                border-right: none !important;
+            }
+            .border-sm-top-none {
+                border-top: none !important;
+            }
+            .border-sm-bottom-none {
+                border-bottom: none !important;
+            }
+        }
+    </style>
 <div class="content-wrapper" style="min-height: 243px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -46,7 +96,7 @@
                         <button type="button" class="btn btn-success col-md-5 crearAfiliado">
                           <i class="fas fa-plus"></i> Agregar nuevo afiliado
                         </button>
-                        
+
                         <a href="{{$element["servidor"]}}afiliados/exportar">
                           <button type="button" class="btn btn-primary col-md-5 tablaExportar" id="botonExportar" name="botonExportar" action="'.$url.'">
                             <i class="fas fa-table"></i> Exportar datos
@@ -102,37 +152,81 @@
                       </div>
                     </div>
                     <div class="card-body">
-                      <table name="tablaAfiliado" id="tablaAfiliado" class="table table-bordered dt-responsive">
-                        <tr>
-                          <td rowspan="4" colspan="2" class="text-center">
-                            <br>
-                            <img src="" id="foto" name="foto">
-                          </td>
-                          <th><input class="form-control" id="tipo_documento" name="tipo_documento" value="" style="border: none; font-weight: bold; background: #FFFFFF;" readonly></input></th>
-                          <td><input class="form-control" id="num_cedula" name="num_cedula" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                        </tr>
-                        <tr>
-                          <th>Nombre completo</th>
-                          <td><input class="form-control" id="nombre_completo" name="nombre_completo" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                        </tr>
-                        <tr>
-                          <th>Genero</th>
-                          <td><input class="form-control" id="genero" name="genero" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                        </tr>
-                        <tr>
-                          <th>Fecha de nacimiento</th>
-                          <td><input class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                        </tr>
-                        <tr>
-                          <th>Correo electronico</th>
-                          <td><input class="form-control" id="email" name="email" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                          <th>Telefono o celular</th>
-                          <td><input class="form-control" id="telefono" name="telefono" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                        </tr>
-                      </table>
+                        <div class="row" id="tablaAfiliado" >
+                            <!--Columna izquierda -->
+                            <div class="col-12 col-md-6 border border-2 px-0 border-sm-bottom-none  position-relative ">
+                                <div  class=" col-12  d-flex align-items-center flex-wrap justify-content-center text-center py-2 ">
+                                    <div class="row"></div>
+
+                                    <img src="" id="foto" name="foto" class="my-auto">
+                                    <div class="row"></div>
+                                </div>
+                                <div class="col-12 position-relative position-md-absolute bottom-0 ">
+                                    <div class=" row border-2  border-top  ">
+                                        <div class="col-sm-4  align-middle border-2 border-right border-xs-right-none  ">
+                                            <p  class="font-weight-bold pt-2 text-wrap ">Correo electrónico</p>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p class="form-control pl-0 text-wrap" id="email" name="email" value="" style="border: none; background: #FFFFFF;" readonly></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <!--Columna derecha -->
+                            <div class="col-md-6 border border-2 px-0">
+                                <div class="col-12 ">
+                                    <div class="row borde-2 border-bottom ">
+                                        <div class="col-sm-4  text-wrap borde-2 border-right pb-2 border-xs-right-none">
+                                            <p class="form-control font-weight-bold pt-2 pl-0 text-wrap " id="tipo_documento" name="tipo_documento"  style="border: none; " ></p>
+                                        </div>
+                                        <div class="col-sm-8 text-wrap pb-2">
+                                            <p class="form-control pt-2 pl-0 text-wrap" id="num_cedula" name="num_cedula" value="" style="border: none; background: #FFFFFF;" readonly></p>
+                                        </div>
+                                    </div>
+
+                                    <div class=" row borde-2 border-bottom">
+                                        <div class="col-sm-4  text-wrap  borde-2 border-right pb-2 border-xs-right-none">
+                                            <p class=" form-control font-weight-bold pt-2 pl-0 text-wrap " style="border: none; font-weight: bold; " readonly>Nombre completo</p>
+                                        </div>
+                                        <div class="col-sm-8 text-wrap pb-2">
+                                            <p class="form-control pt-2 pl-0 text-wrap" id="nombre_completo" name="nombre_completo" value="" style="border: none; background: #FFFFFF;" readonly></p>
+                                        </div>
+                                    </div>
+                                    <div class=" row borde-2 border-bottom">
+                                        <div class="col-sm-4  text-wrap borde-2 border-right pb-2 border-xs-right-none">
+                                            <p class="font-weight-bold pt-2 pl-0 text-wrap " style="border: none; font-weight: bold; " readonly>Genero</p>
+                                        </div>
+                                        <div class="col-sm-8 text-wrap pb-2">
+                                            <p class="form-control pt-2 pl-0 text-wrap" id="genero" name="genero"  style="border: none; background: #FFFFFF;" readonly></p>
+                                        </div>
+                                    </div>
+                                    <div class=" row borde-2 border-bottom">
+                                        <div class="col-sm-4  text-wrap borde-2 border-right  pb-2 border-xs-right-none">
+                                            <p class="font-weight-bold pt-2 pl-0 text-wrap " style="border: none; font-weight: bold; " readonly>Fecha de nacimiento</p>
+                                        </div>
+                                        <div class="col-sm-8 text-wrap pb-2">
+                                            <p class="form-control pt-2 pl-0 text-wrap" id="fecha_nacimiento" name="fecha_nacimiento"  style="border: none; background: #FFFFFF;" readonly></p>
+                                        </div>
+                                    </div>
+                                    <div class=" row">
+                                        <div class="col-sm-4  text-wrap  borde-2 border-right pb-2 border-xs-right-none">
+                                            <p class="font-weight-bold pt-2 pl-0 text-wrap " style="border: none; font-weight: bold; " readonly>Telefono o celular</p>
+                                        </div>
+                                        <div class="col-sm-8 text-wrap pb-2">
+                                            <p class="form-control pt-2 pl-0 text-wrap" id="telefono" name="telefono"  style="border: none; background: #FFFFFF;" readonly></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
                     </div>
                     <div class="card-footer">
-                      
+
                     </div>
                   </div>
                 </div>
@@ -235,7 +329,7 @@
                       </div>
                       <div class="row">
                         <div class="col-md-6">
-                          
+
                           <div class="form-group my-2 text-center">
                             <label for="exampleInputPassword1">Foto afiliado</label><br>
                             <div class="btn btn-default btn-file mb-3">
@@ -248,7 +342,7 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          
+
                           <div class="form-group my-2 text-center">
                             <label for="exampleInputPassword1">Foto de documento de identidad</label><br>
                             <div class="btn btn-default btn-file mb-3">
@@ -273,7 +367,7 @@
                 </form>
               </div>
             </div>
- 
+
           </div>
         </div>
       </div>
@@ -402,7 +496,7 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6">
-                      
+
                       <div class="form-group my-2 text-center">
                         <label for="exampleInputPassword1">Foto afiliado</label><br>
                         <div class="btn btn-default btn-file mb-3">
@@ -416,12 +510,12 @@
                         @else
                           <img src="{{ url('/') }}/{{$value["foto_rprt"]}}" class="img-fluid py-2 bg-secondary previsualizarImg_foto">
                         @endif
-                        
+
                         <p class="help-block small mt-3">Dimensiones: 200px * 200px | Peso Max. 2MB | Formato: JPG o PNG</p>
                       </div>
                     </div>
                     <div class="col-md-6">
-                      
+
                       <div class="form-group my-2 text-center">
                         <label for="exampleInputPassword1">Foto de documento de identidad</label><br>
                         <div class="btn btn-default btn-file mb-3">
@@ -435,7 +529,7 @@
                         @else
                           <img src="{{ url('/') }}/{{$value["foto_cedula_rprt"]}}" class="img-fluid py-2 bg-secondary previsualizarImg_archivo_documento">
                         @endif
-                       
+
                         <p class="help-block small mt-3">Peso Max. 2MB | Formato: JPG, PNG</p>
                       </div>
                     </div>
@@ -453,10 +547,10 @@
       </div>
       <!-- /.modal -->
     @endforeach
-    <script>  
+    <script>
       $("#editarAfiliado").modal();
     </script>
-    
+
 
       @else
       {{$status}}
