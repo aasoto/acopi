@@ -396,7 +396,7 @@ button:focus {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
     height: 0;
-    margin-top: ;
+    /*margin-top: ;*/
 }
 .videoWrapper iframe {
     position: absolute;
@@ -1135,13 +1135,16 @@ textarea.form-control {
 /*******************************
        20.  RESPONSIVE
 *******************************/
-
+@media (max-width: 990px) {
+    .footer-title{
+        margin-top: 30px;
+    }
+}
 
 @media (max-width: 768px) {
     .bg-home{
       height: auto;
     }
-
     .home-slider .carousel-item,
     .home-slider .carousel{
         height:auto;

@@ -24,7 +24,7 @@
             //echo '<pre>'; print_r($proyectos); echo '</pre>';
             $key = null; $value = null;
             foreach ($proyectos as $key => $value) {
-                echo '<div class="col-lg-4">
+                echo '<div class="col-lg-4 bg-white">
                 <div class="blog-content mt-4 ">
                     <div class="blog-image">
                         <img src="'.$value["imagen"].'" class="img-fluid" alt="">
@@ -35,7 +35,7 @@
                         <p class="month mb-0">'.$value["fecha_mes"].'</p>
                     </div>
 
-                    <div class="blog-content bg-white p-1">
+                    <div class="blog-content bg-white p-1 pb-4 pb-lg-5">
                         <p class="text-muted f-13 mb-0">'.$value["categoria"].'</p>
                         <h3 class="mt-2"><a href="" class="blog-link f-17">'.$value["nombre"].'</a></h3>
                         <p class="text-muted mt-3 text-justify">'.$value["info"].'</p>
@@ -43,9 +43,9 @@
                     </div>
                     
                 </div>
-                <div class="mt-4 position-absolute bottom-0 start-0" style="bottom: -10px">
-                            <a href="" class="read-more">Ver más <i class="mdi mdi-arrow-right"></i></a>
-                        </div>
+                <div class="mt-4 position-absolute bottom-0 start-0" style="bottom: 10px;left: 20px">
+                      <a href="" class="read-more">Ver más <i class="mdi mdi-arrow-right"></i></a>
+                </div>
             </div>';
             }
             ?>
