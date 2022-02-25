@@ -23,36 +23,7 @@
             }
         }
 
-        /*@media (max-width: 575.98px) {
-            .border-xs-left-none {
-                border-left: none !important;
-            }
-            .border-xs-right-none {
-                border-right: none !important;
-            }
-            .border-xs-top-none {
-                border-top: none !important;
-            }
-            .border-xs-bottom-none {
-                border-bottom: none !important;
-            }
 
-        }
-
-        @media (max-width: 767.98px) {
-            .border-sm-left-none {
-                border-left: none !important;
-            }
-            .border-sm-right-none {
-                border-right: none !important;
-            }
-            .border-sm-top-none {
-                border-top: none !important;
-            }
-            .border-sm-bottom-none {
-                border-bottom: none !important;
-            }
-        }*/
     </style>
 <div class="content-wrapper" style="min-height: 243px;">
   <!-- Content Header (Page header) -->
@@ -406,58 +377,7 @@
                   </div>
 
               </div>
-                {{--
-                    <table  name="tablaEmpresa" id="tablaEmpresa" class="table table-bordered dt-responsive">
-                  <tr>
-                    <th>NIT</th>
-                    <td><p class="form-control" id="nit" name="nit" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Razón social</th>
-                    <td><p class="form-control" id="razon_social" name="razon_social" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Representante</th>
-                    <td><p class="form-control" id="representante" name="representante" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Número empleados</th>
-                    <td><p class="form-control" id="numero_empleados" name="numero_empleados" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Dirección</th>
-                    <td><p class="form-control" id="direccion" name="direccion" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Telefono</th>
-                    <td><p class="form-control" id="telefono" name="telefono" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Fax</th>
-                    <td><p class="form-control" id="fax" name="fax" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Celular</th>
-                    <td><p class="form-control" id="celular" name="celular" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Correo electronico</th>
-                    <td><p class="form-control" id="correo_electronico" name="correo_electronico" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Sector</th>
-                    <td><p class="form-control" id="sector" name="sector" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Productos</th>
-                    <td><p class="form-control" id="productos" name="productos" style="border: none; background: #FFFFFF;" readonly></p></td>
-                    <th>Ciudad</th>
-                    <td><p class="form-control" id="ciudad" name="ciudad" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Estado</th>
-                    <td><p class="form-control" id="estado" name="estado" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Pagos atrasados</th>
-                    <td><p class="form-control" id="pagos_atrasados" name="pagos_atrasados" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Fecha afiliación</th>
-                    <td><p class="form-control" id="fecha_afiliacion" name="fecha_afiliacion" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th></th>
-                    <td></td>
-                  </tr>
-                </table>
-                --}}
+
 
               <div class="card-footer">
 

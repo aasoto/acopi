@@ -268,37 +268,6 @@
 
                             </div>
 
-
-
-
-{{--                            <div class="col-12 col-md-6 border border-2 px-0 border-sm-bottom-none  position-relative ">--}}
-{{--                                <div class=" border-2 px-0 border-sm-bottom-none   px-0 w-100  h-100">--}}
-{{--                                    <div class=" border border-right  col-12 justify-content-center text-center py-2 mx-0 "--}}
-{{--                                         >--}}
-{{--                                        <div class="row"></div>--}}
-{{--                                        <img--}}
-{{--                                            src=""--}}
-{{--                                            id="foto" name="foto" class="my-auto " style="max-width: 100%">--}}
-{{--                                        <div class="row"></div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class=" row mt-auto col-12 border-2  border-top p-0   w-100 mx-0 align-self-end "--}}
-{{--                                         style="margin-left:0;margin-right: 0;">--}}
-
-{{--                                        <div class="col-sm-4  align-middle border-2 border-right border-md-right-none border-xs-right-none  ">--}}
-{{--                                            <p class="font-weight-bold pt-2 text-wrap ">Correo electrónico</p>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-8 pt-2">--}}
-{{--                                            <p class=" pl-0 text-wrap" id="email" name="email" value=""--}}
-{{--                                               style="border: none; background: #FFFFFF;" readonly></p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-
-{{--                                </div>--}}
-
-{{--                            </div>--}}
-
-                            <!--Columna derecha -->
-
                             <style>
 
                             </style>
@@ -377,53 +346,7 @@
                                 </div>
                             </div>
 
-{{--                            <div class="col-md-6 border border-2 px-0">--}}
-{{--                                <div class="col-12 ">--}}
-{{--                                    <div class="row borde-2 border-bottom ">--}}
-{{--                                        <div class="col-sm-4  text-wrap borde-2 border-right pb-2 border-xs-right-none">--}}
-{{--                                            <p class="form-control font-weight-bold pt-2 pl-0 text-wrap " id="tipo_documento" name="tipo_documento"  style="border: none; " ></p>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-8 text-wrap pb-2">--}}
-{{--                                            <p class="form-control pt-2 pl-0 text-wrap" id="num_cedula" name="num_cedula" value="" style="border: none; background: #FFFFFF;" readonly></p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
 
-{{--                                    <div class=" row borde-2 border-bottom">--}}
-{{--                                        <div class="col-sm-4  text-wrap  borde-2 border-right pb-2 border-xs-right-none">--}}
-{{--                                            <p class=" form-control font-weight-bold pt-2 pl-0 text-wrap " style="border: none; font-weight: bold; " readonly>Nombre completo</p>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-8 text-wrap pb-2">--}}
-{{--                                            <p class="form-control pt-2 pl-0 text-wrap" id="nombre_completo" name="nombre_completo" value="" style="border: none; background: #FFFFFF;" readonly></p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class=" row borde-2 border-bottom">--}}
-{{--                                        <div class="col-sm-4  text-wrap borde-2 border-right pb-2 border-xs-right-none">--}}
-{{--                                            <p class="font-weight-bold pt-2 pl-0 text-wrap " style="border: none; font-weight: bold; " readonly>Genero</p>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-8 text-wrap pb-2">--}}
-{{--                                            <p class="form-control pt-2 pl-0 text-wrap" id="genero" name="genero"  style="border: none; background: #FFFFFF;" readonly></p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class=" row borde-2 border-bottom">--}}
-{{--                                        <div class="col-sm-4  text-wrap borde-2 border-right  pb-2 border-xs-right-none">--}}
-{{--                                            <p class="font-weight-bold pt-2 pl-0 text-wrap " style="border: none; font-weight: bold; " readonly>Fecha de nacimiento</p>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-8 text-wrap pb-2">--}}
-{{--                                            <p class="form-control pt-2 pl-0 text-wrap" id="fecha_nacimiento" name="fecha_nacimiento"  style="border: none; background: #FFFFFF;" readonly></p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                    <div class=" row">--}}
-{{--                                        <div class="col-sm-4  text-wrap  borde-2 border-right pb-2 border-xs-right-none">--}}
-{{--                                            <p class="font-weight-bold pt-2 pl-0 text-wrap " style="border: none; font-weight: bold; " readonly>Telefono o celular</p>--}}
-{{--                                        </div>--}}
-{{--                                        <div class="col-sm-8 text-wrap pb-2">--}}
-{{--                                            <p class="form-control pt-2 pl-0 text-wrap" id="telefono" name="telefono"  style="border: none; background: #FFFFFF;" readonly></p>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-
-{{--                                </div>--}}
-
-{{--                            </div>--}}
                         </div>
 
                     </div>
