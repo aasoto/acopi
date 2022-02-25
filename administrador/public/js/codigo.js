@@ -1179,7 +1179,6 @@ $(document).on("click", ".verMasAfiliado", function(){
     }
     foto = ruta+"/"+foto_rprt;
     document.getElementById("foto").src = foto;
-
 	/*
     $("#tipo_documento").val(tipo_documento);
 	$("#num_cedula").val(cc_rprt_legal);
@@ -1189,7 +1188,6 @@ $(document).on("click", ".verMasAfiliado", function(){
 	$("#email").val(email_rprt);
 	$("#telefono").val(telefono_rprt);
 	*/
-
     document.getElementById('email').textContent = email_rprt ?? '-';
     document.getElementById('tipo_documento').textContent = tipo_documento ?? '-';
     document.getElementById('num_cedula').textContent = cc_rprt_legal ?? '-';
@@ -1197,8 +1195,8 @@ $(document).on("click", ".verMasAfiliado", function(){
     document.getElementById('genero').textContent = genero ?? '-';
     document.getElementById('fecha_nacimiento').textContent = fecha_nacimiento ?? '-';
     document.getElementById('telefono').textContent = telefono_rprt ?? '-';
-    /*
-    */
+
+
 
 
 
@@ -1245,9 +1243,16 @@ $(document).on("click", ".verMasEmpresa", function(){
 		}
 	}
 	var lista_productos;
+    //arreglado bug primer elemento indefinido
 	for (value of productos) {
-		lista_productos = lista_productos+", "+value;
+        if (lista_productos){
+            lista_productos = lista_productos+", "+value;
+        }else {
+		    lista_productos = value;
+        }
 	}
+    /*
+
 	$("#nit").val(nit);
 	$("#razon_social").val(razon_social);
 	$("#representante").val(representante);
@@ -1255,14 +1260,42 @@ $(document).on("click", ".verMasEmpresa", function(){
 	$("#direccion").val(direccion);
 	$("#telefono").val(telefono);
 	$("#fax").val(fax);
-	$("#celular").val(celular);
-	$("#correo_electronico").val(email);
-	$("#sector").val(sector);
-	$("#productos").val(lista_productos);
-	$("#ciudad").val(ciudad);
-	$("#estado").val(estado_afiliacion);
-	$("#pagos_atrasados").val(numero_pagos_atrasados);
-	$("#fecha_afiliacion").val(fecha_afiliacion);
+    $("#celular").val(celular);
+    $("#correo_electronico").val(email);
+    $("#sector").val(sector);
+    $("#productos").val(lista_productos);
+    $("#ciudad").val(ciudad);
+    $("#estado").val(estado_afiliacion);
+    $("#pagos_atrasados").val(numero_pagos_atrasados);
+    $("#fecha_afiliacion").val(fecha_afiliacion);
+     */
+
+
+
+
+
+    document.getElementById('nit').textContent = nit ?? '-';
+    document.getElementById('razon_social').textContent = razon_social ?? '-';
+    document.getElementById('representante').textContent = representante ?? '-';
+    document.getElementById('numero_empleados').textContent = num_empleados ?? '-';
+    document.getElementById('direccion').textContent = direccion ?? '-';
+    document.getElementById('telefono').textContent = telefono ?? '-';
+    document.getElementById('fax').textContent = fax ?? '-';
+    document.getElementById('celular').textContent = celular ?? '-';
+
+    document.getElementById("correo_electronico").textContent =email?? '-';
+    document.getElementById("sector").textContent =sector ?? '-';
+    document.getElementById("productos").textContent =lista_productos ?? '-';
+    document.getElementById("ciudad").textContent =ciudad ?? '-';
+    document.getElementById("estado").textContent =estado_afiliacion ?? '-';
+    document.getElementById("pagos_atrasados").textContent =numero_pagos_atrasados ?? '-';
+    document.getElementById("fecha_afiliacion").textContent =fecha_afiliacion ?? '-';
+    /*
+
+
+
+
+     */
 
 	$(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().remove();
 	/*----------  Quitar y añadir clases  ----------*/
