@@ -132,7 +132,10 @@ class EmpresasController extends Controller
         if (request()->ajax()) {
             return datatables()->of($join)
             ->addColumn('telefonos', function($data){
-                    
+                
+                    $paginaweb = PaginaWebModel::all();
+                    foreach ($paginaweb as $key => $web) {}
+
                     $representante = $data->primer_apellido." ".$data->segundo_apellido." ".$data->primer_nombre." ".$data->segundo_nombre;
                     $ciudad = MunicipiosModel::where("abreviatura", $data->ciudad_empresa)->get();
                     /*$telefonos = '<div class="btn-group">
@@ -150,9 +153,14 @@ class EmpresasController extends Controller
                     </div>';*/
 
                     $telefonos = "<div class='btn-group'>
-                        <a nit='".$data->nit_empresa."' razon_social='".$data->razon_social."' representante='".$representante."' num_empleados='".$data->num_empleados."' direccion='".$data->direccion_empresa."' telefono='".$data->telefono_empresa."' fax='".$data->fax_empresa."' celular='".$data->celular_empresa."' email='".$data->email_empresa."' id_sector='".$data->id_sector_empresa."' productos='".$data->productos_empresa."' ciudad='".$ciudad[0]["nombre"]."' estado_afiliacion='".$data->estado_afiliacion_empresa."' numero_pagos_atrasados='".$data->numero_pagos_atrasados."' fecha_afiliacion='".$data->fecha_afiliacion_empresa."' title='Ver más' id='verMasEmpresa' name='verMasEmpresa' class='btn btn-primary btn-sm verMasEmpresa'>
+                        <a type='button' title='Ver más' class='btn btn-primary btn-sm' data-toggle='dropdown'>
                             <i class='fas fa-eye'></i>
                         </a>
+                        <div class='dropdown-menu col-md-12' role='menu'>
+                            <a nit='".$data->nit_empresa."' razon_social='".$data->razon_social."' representante='".$representante."' num_empleados='".$data->num_empleados."' direccion='".$data->direccion_empresa."' telefono='".$data->telefono_empresa."' fax='".$data->fax_empresa."' celular='".$data->celular_empresa."' email='".$data->email_empresa."' id_sector='".$data->id_sector_empresa."' productos='".$data->productos_empresa."' ciudad='".$ciudad[0]["nombre"]."' estado_afiliacion='".$data->estado_afiliacion_empresa."' numero_pagos_atrasados='".$data->numero_pagos_atrasados."' fecha_afiliacion='".$data->fecha_afiliacion_empresa."' title='Ver más' id='verMasEmpresa' name='verMasEmpresa' class='dropdown-item verMasEmpresa'>Ver información de empresa</a>
+                            <div class='dropdown-divider'></div>
+                            <a href='".$web["servidor"]."afiliados/afiliadosEmpleadosEmpresa/".$data->id_empresa."' class='dropdown-item'>Ver información empleados</a>
+                        </div>
                         <button title='Agregar empleado' class='btn btn-success btn-sm agregarEmpleado' id_empresa='".$data->id_empresa."' nit_empresa='".$data->nit_empresa."' razon_social='".$data->razon_social."' data-toggle='modal' data-target='#nuevoEmpleado'>
                             <i class='fas fa-user-plus text-white'></i>
                         </button>
@@ -259,6 +267,20 @@ class EmpresasController extends Controller
             }else{ 
 
                 return view("paginas.afiliados.consultarEmpresas", array("status"=>404, "empresas"=>$empresas, "paginaweb"=>$paginaweb, "sector_empresa"=>$sector_empresa));
+            }
+        }
+
+        if (url()->current() == ($web["servidor"]."afiliados/afiliadosEmpleadosEmpresa/".$id)) {
+
+            $empleados = EmpleadosAfiliadosModel::where("id_empresa_afiliado", $id)->get();
+            
+            if(count($empleados) != 0){
+
+                return view("paginas.afiliados.afiliadosEmpleadosEmpresa", array("status"=>200, "empleados"=>$empleados, "paginaweb"=> $paginaweb));
+            
+            }else{ 
+
+                return view("paginas.afiliados.afiliadosEmpleadosEmpresa", array("status"=>404, "empleados"=>$empleados, "paginaweb"=> $paginaweb));
             }
         }
         

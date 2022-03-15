@@ -127,6 +127,7 @@
 			<script src="{{url('/')}}/js/codigo.js"></script>
 			<script src="{{url('/')}}/js/ownDatatables.js"></script>
 			<script src="{{url('/')}}/js/calendarios.js"></script>
+			<script src="{{url('/')}}/js/colorPicker.js"></script>
 			@if (Auth::user()->modo == 'Nocturno')
 				<script src="{{url('/')}}/js/modoNocturno.js"></script>
 			@endif

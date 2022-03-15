@@ -78,16 +78,16 @@ class CarruselController extends Controller
                 ${"texto_".$i} = array('texto_'.$i => $request->input("texto-".$i));
             }
             
-            ${"boton_1_Actual_".$i} = array('boton_1_'.$i => $request->input("boton-1-actual-".$i));
+            ${"boton_1_Color_".$i} = array('boton_1_color'.$i => $request->input("boton-1-color-".$i));
+            ${"boton_1_Texto_".$i} = array('boton_1_texto'.$i => $request->input("boton-1-texto-".$i));
             ${"url_Boton_1_".$i} = array('url_Boton_1_'.$i => $request->input("url-boton-1-".$i));
-            ${"boton_2_Actual_".$i} = array('boton_2_'.$i => $request->input("boton-2-actual-".$i));
+            ${"boton_2_Color_".$i} = array('boton_2_color'.$i => $request->input("boton-2-color-".$i));
+            ${"boton_2_Texto_".$i} = array('boton_2_texto'.$i => $request->input("boton-2-texto-".$i));
             ${"url_Boton_2_".$i} = array('url_Boton_2_'.$i => $request->input("url-boton-2-".$i));
             ${"foto_Delante_Actual_".$i} = array('foto_Delante_'.$i => $request->input("foto-delante-actual-".$i));
             ${"fondo_Actual_".$i} = array('fondo_'.$i => $request->input("fondo-actual-".$i));
 
             /*----------  Imagenes temporales  ----------*/
-            ${"boton_1_Temporal_".$i} = array('boton_1_'.$i => $request->file("boton-1-".$i));
-            ${"boton_2_Temporal_".$i} = array('boton_2_'.$i => $request->file("boton-2-".$i));
             ${"foto_Delante_Temporal_".$i} = array('foto_Delante_'.$i => $request->file("foto-delante-".$i));
             ${"fondo_Temporal_".$i} = array('fondo_'.$i => $request->file("fondo-".$i));
 
@@ -104,9 +104,16 @@ class CarruselController extends Controller
                 return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
             }
 
-            if (!empty(${"boton_1_Actual_".$i}["boton_1_".$i])) {
-                ${"validar_Boton_1_Actual_".$i} = \Validator::make(${"boton_1_Actual_".$i}, [ "boton_1_".$i => 'required|regex:/^[=\\&\\$\\-\\_\\?\\!\\:\\.\\0-9a-zA-Z]+$/i']);
-                if (${"validar_Boton_1_Actual_".$i}->fails()) {
+            
+            if (!empty(${"boton_1_Color_".$i}["boton_1_color".$i])) {
+                ${"validar_Boton_1_Color_".$i} = \Validator::make(${"boton_1_Color_".$i}, [ "boton_1_color".$i => 'required|regex:/^[-\\a-zA-Z]+$/i']);
+                if (${"validar_Boton_1_Color_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
+                }
+            }
+            if (!empty(${"boton_1_Texto_".$i}["boton_1_texto".$i])) {
+                ${"validar_Boton_1_Texto_".$i} = \Validator::make(${"boton_1_Texto_".$i}, [ "boton_1_texto".$i => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i']);
+                if (${"validar_Boton_1_Texto_".$i}->fails()) {
                     return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
                 }
             }
@@ -116,9 +123,15 @@ class CarruselController extends Controller
                     return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
                 }
             }
-            if (!empty(${"boton_2_Actual_".$i}["boton_2_".$i])) {
-                ${"validar_Boton_2_Actual_".$i} = \Validator::make(${"boton_2_Actual_".$i}, [ "boton_2_".$i => 'required|regex:/^[=\\&\\$\\-\\_\\?\\!\\:\\.\\0-9a-zA-Z]+$/i']);
-                if (${"validar_Boton_2_Actual_".$i}->fails()) {
+            if (!empty(${"boton_2_Color_".$i}["boton_2_color".$i])) {
+                ${"validar_Boton_2_Color_".$i} = \Validator::make(${"boton_2_Color_".$i}, [ "boton_2_color".$i => 'required|regex:/^[-\\a-zA-Z]+$/i']);
+                if (${"validar_Boton_2_Color_".$i}->fails()) {
+                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
+                }
+            }
+            if (!empty(${"boton_2_Texto_".$i}["boton_2_texto".$i])) {
+                ${"validar_Boton_2_Texto_".$i} = \Validator::make(${"boton_2_Texto_".$i}, [ "boton_2_texto".$i => 'required|regex:/^[=\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i']);
+                if (${"validar_Boton_2_Texto_".$i}->fails()) {
                     return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
                 }
             }
@@ -140,86 +153,7 @@ class CarruselController extends Controller
                     return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
                 }
             }
-            if (!empty(${"boton_1_Temporal_".$i}["boton_1_".$i])) {
-                ${"validar_Boton_1_Temporal_".$i} = \Validator::make(${"boton_1_Temporal_".$i}, [ "boton_1_".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
-                if (${"validar_Boton_1_Temporal_".$i}->fails()) {
-                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
-                } else {
-                    if (!empty(${"boton_2_Actual_".$i}["boton_2_".$i])) {
-                        unlink(${"boton_1_Actual_".$i}["boton_1_".$i]);
-                    }
-
-                    $aleatorio = mt_rand(10000, 99999);
-                    ${"ruta_Boton_1_".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"boton_1_Temporal_".$i}["boton_1_".$i]->guessExtension();
-
-                    /*----------  Redimensionar imagen  ----------*/
-                    list($ancho, $alto) = getimagesize(${"boton_1_Temporal_".$i}["boton_1_".$i]);
-                    $nuevoAncho = 400;
-                    $nuevoAlto = 118;
-
-                    if((${"boton_1_Temporal_".$i}["boton_1_".$i]->guessExtension() == "jpeg") || (${"boton_1_Temporal_".$i}["boton_1_".$i]->guessExtension() == "jpg")){
-
-                        $origen = imagecreatefromjpeg(${"boton_1_Temporal_".$i}["boton_1_".$i]);
-                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagejpeg($destino, ${"ruta_Boton_1_".$i});
-
-                    }
-
-                    if(${"boton_1_Temporal_".$i}["boton_1_".$i]->guessExtension() == "png"){
-
-                        $origen = imagecreatefrompng(${"boton_1_Temporal_".$i}["boton_1_".$i]);
-                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                        imagealphablending($destino, FALSE); 
-                        imagesavealpha($destino, TRUE);
-                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagepng($destino, ${"ruta_Boton_1_".$i});
-                        
-                    }
-                }
-            } else {
-                ${"ruta_Boton_1_".$i} = ${"boton_1_Actual_".$i}["boton_1_".$i];
-            }
-            if (!empty(${"boton_2_Temporal_".$i}["boton_2_".$i])) {
-                ${"validar_Boton_2_Temporal_".$i} = \Validator::make(${"boton_2_Temporal_".$i}, [ "boton_2_".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
-                if (${"validar_Boton_2_Temporal_".$i}->fails()) {
-                    return redirect("/pagina_web/ingresarCarrusel")->with("no-validacion", "");
-                } else {
-                    if (!empty(${"boton_2_Actual_".$i}["boton_2_".$i])) {
-                        unlink(${"boton_2_Actual_".$i}["boton_2_".$i]);
-                    }
-
-                    $aleatorio = mt_rand(10000, 99999);
-                    ${"ruta_Boton_2_".$i} = "vistas/images/pagina_web/carrusel/".$aleatorio.".".${"boton_2_Temporal_".$i}["boton_2_".$i]->guessExtension();
-
-                    /*----------  Redimensionar imagen  ----------*/
-                    list($ancho, $alto) = getimagesize(${"boton_2_Temporal_".$i}["boton_2_".$i]);
-                    $nuevoAncho = 400;
-                    $nuevoAlto = 118;
-
-                    if((${"boton_2_Temporal_".$i}["boton_2_".$i]->guessExtension() == "jpeg") || (${"boton_2_Temporal_".$i}["boton_2_".$i]->guessExtension() == "jpg")){
-
-                        $origen = imagecreatefromjpeg(${"boton_2_Temporal_".$i}["boton_2_".$i]);
-                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagejpeg($destino, ${"ruta_Boton_2_".$i});
-
-                    }
-
-                    if(${"boton_2_Temporal_".$i}["boton_2_".$i]->guessExtension() == "png"){
-
-                        $origen = imagecreatefrompng(${"boton_2_Temporal_".$i}["boton_2_".$i]);
-                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                        imagealphablending($destino, FALSE); 
-                        imagesavealpha($destino, TRUE);
-                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                        imagepng($destino, ${"ruta_Boton_2_".$i});
-                        
-                    }
-                }
-            } else {
-                ${"ruta_Boton_2_".$i} = ${"boton_2_Actual_".$i}["boton_2_".$i];
-            }
+            
             if (!empty(${"foto_Delante_Temporal_".$i}["foto_Delante_".$i])) {
                 ${"validar_Foto_Delante_Temporal_".$i} = \Validator::make(${"foto_Delante_Temporal_".$i}, [ "foto_Delante_".$i => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
                 if (${"validar_Foto_Delante_Temporal_".$i}->fails()) {
@@ -302,10 +236,12 @@ class CarruselController extends Controller
             }
 
             if($i == $indice["indice"]){
-                $carrusel = $carrusel."\n\t".'"categoria": "'.${'categoria_'.$i}['categoria_'.$i].'",'."\n\t".'"titulo": "'.${'titulo_'.$i}['titulo_'.$i].'",'."\n\t".'"texto": "'.${'texto_'.$i}['texto_'.$i].'",'."\n\t".'"boton-1": "'.${"ruta_Boton_1_".$i}.'",'."\n\t".'"url-boton-1": "'.${"url_Boton_1_".$i}["url_Boton_1_".$i].'",'."\n\t".'"boton-2": "'.${"ruta_Boton_2_".$i}.'",'."\n\t".'"url-boton-2": "'.${"url_Boton_2_".$i}["url_Boton_2_".$i].'",'."\n\t".'"foto-delante": "'.${"ruta_Foto_Delante_".$i}.'",'."\n\t".'"fondo": "'.${"ruta_Fondo_".$i}.'"'."\n".'}]';
+                $carrusel = $carrusel."\n\t".'"categoria": "'.${'categoria_'.$i}['categoria_'.$i].'",'."\n\t".'"titulo": "'.${'titulo_'.$i}['titulo_'.$i].'",'."\n\t".'"texto": "'.${'texto_'.$i}['texto_'.$i].'",'."\n\t".'"boton-1-color": "'.${"boton_1_Color_".$i}["boton_1_color".$i].'",'."\n\t".'"boton-1-texto": "'.${"boton_1_Texto_".$i}["boton_1_texto".$i].'",'."\n\t".'"url-boton-1": "'.${"url_Boton_1_".$i}["url_Boton_1_".$i].'",'."\n\t".'"boton-2-color": "'.${"boton_2_Color_".$i}["boton_2_color".$i].'",'."\n\t".'"boton-2-texto": "'.${"boton_2_Texto_".$i}["boton_2_texto".$i].'",'."\n\t".'"url-boton-2": "'.${"url_Boton_2_".$i}["url_Boton_2_".$i].'",'."\n\t".'"foto-delante": "'.${"ruta_Foto_Delante_".$i}.'",'."\n\t".'"fondo": "'.${"ruta_Fondo_".$i}.'"'."\n".'}]';
             }else{
-                $carrusel = $carrusel."\n\t".'"categoria": "'.${'categoria_'.$i}['categoria_'.$i].'",'."\n\t".'"titulo": "'.${'titulo_'.$i}['titulo_'.$i].'",'."\n\t".'"texto": "'.${'texto_'.$i}['texto_'.$i].'",'."\n\t".'"boton-1": "'.${"ruta_Boton_1_".$i}.'",'."\n\t".'"url-boton-1": "'.${"url_Boton_1_".$i}["url_Boton_1_".$i].'",'."\n\t".'"boton-2": "'.${"ruta_Boton_2_".$i}.'",'."\n\t".'"url-boton-2": "'.${"url_Boton_2_".$i}["url_Boton_2_".$i].'",'."\n\t".'"foto-delante": "'.${"ruta_Foto_Delante_".$i}.'",'."\n\t".'"fondo": "'.${"ruta_Fondo_".$i}.'"'."\n".'},{';
+                $carrusel = $carrusel."\n\t".'"categoria": "'.${'categoria_'.$i}['categoria_'.$i].'",'."\n\t".'"titulo": "'.${'titulo_'.$i}['titulo_'.$i].'",'."\n\t".'"texto": "'.${'texto_'.$i}['texto_'.$i].'",'."\n\t".'"boton-1-color": "'.${"boton_1_Color_".$i}["boton_1_color".$i].'",'."\n\t".'"boton-1-texto": "'.${"boton_1_Texto_".$i}["boton_1_texto".$i].'",'."\n\t".'"url-boton-1": "'.${"url_Boton_1_".$i}["url_Boton_1_".$i].'",'."\n\t".'"boton-2-color": "'.${"boton_2_Color_".$i}["boton_2_color".$i].'",'."\n\t".'"boton-2-texto": "'.${"boton_2_Texto_".$i}["boton_2_texto".$i].'",'."\n\t".'"url-boton-2": "'.${"url_Boton_2_".$i}["url_Boton_2_".$i].'",'."\n\t".'"foto-delante": "'.${"ruta_Foto_Delante_".$i}.'",'."\n\t".'"fondo": "'.${"ruta_Fondo_".$i}.'"'."\n".'},{';
             }
+
+            
         }
 
         $actualizar = array('carrusel' => $carrusel);

@@ -107,6 +107,7 @@ Route::resource('/afiliados/empresasInactivas', 'EmpresasController');
 Route::resource('/afiliados/reactivarEmpresa', 'EmpresasController');
 Route::resource('/afiliados/municipios', 'MunicipiosController');
 Route::resource('/afiliados/sectorempresas', 'SectorEmpresaController');
+Route::resource('/afiliados/afiliadosEmpleadosEmpresa', 'EmpresasController');
 
 /*----------  Pagos  ----------*/
 Route::resource('/pagos/general', 'PagosController');
