@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-02-2022 a las 21:07:15
+-- Tiempo de generación: 22-03-2022 a las 21:02:49
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.25
 
@@ -39,7 +39,8 @@ CREATE TABLE `categorias` (
 INSERT INTO `categorias` (`id_categoria`, `nombre_categoria`) VALUES
 (1, 'Noticias'),
 (2, 'Capacitación'),
-(3, 'Otros');
+(3, 'Otros'),
+(4, 'Eventos');
 
 -- --------------------------------------------------------
 
@@ -74,6 +75,38 @@ INSERT INTO `citas` (`id`, `tipo_usuario_cita`, `id_empresa`, `cc_rprt_legal`, `
 (5, 'afiliado', 12, '49328431', NULL, NULL, '2022-02-11', '16:00:00', 'Director ejecutivo', 'perdida', '#dc3545', '2022-02-10 07:36:02', '2022-02-12 02:52:25'),
 (6, 'interesado', NULL, NULL, '1006438450', 'Ebenezer de Jesus Hernandez de Ávila', '2022-02-18', '08:00:00', 'Director ejecutivo', 'pendiente', '#ffc107', '2022-02-10 07:37:29', '2022-02-11 02:21:30'),
 (7, 'afiliado', 1, '1065831073', NULL, NULL, '2022-02-15', '10:00:00', 'Director ejecutivo', 'pendiente', '#ffc107', '2022-02-12 18:27:45', '2022-02-12 18:27:45');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empleados`
+--
+
+CREATE TABLE `empleados` (
+  `id` int(11) NOT NULL,
+  `tipo_documento` varchar(5) COLLATE utf8_spanish_ci NOT NULL,
+  `num_documento` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `primer_nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `segundo_nombre` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `primer_apellido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `segundo_apellido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `sexo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `id_rol` int(11) NOT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `documentos_empleado` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`id`, `tipo_documento`, `num_documento`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `sexo`, `fecha_nacimiento`, `id_rol`, `estado`, `id_usuario`, `documentos_empleado`, `created_at`, `updated_at`) VALUES
+(2, 'CC', '1065831073', 'Andrés', 'Alfredo', 'Soto', 'Suárez', 'M', '1997-02-13', 1, 'Pasante', NULL, 'vistas/images/empleados/documentos/2929178.zip', '2022-03-17 03:52:51', '2022-03-18 07:40:03'),
+(5, 'CC', '1065758329', 'Pedro', 'José', 'Hurtado', 'Hurtado', 'M', '2004-06-25', 6, 'Pasante', NULL, 'vistas/images/empleados/documentos/6329184.zip', '2022-03-22 07:39:44', '2022-03-22 07:39:44');
 
 -- --------------------------------------------------------
 
@@ -130,6 +163,12 @@ CREATE TABLE `empresas` (
   `estado_afiliacion_empresa` text COLLATE utf8_spanish_ci DEFAULT NULL,
   `numero_pagos_atrasados` int(11) DEFAULT NULL,
   `fecha_afiliacion_empresa` date DEFAULT NULL,
+  `carta_bienvenida` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `acta_compromiso` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `estudio_afiliacion` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `rut` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `camara_comercio` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fechas_birthday` text COLLATE utf8_spanish_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -138,22 +177,26 @@ CREATE TABLE `empresas` (
 -- Volcado de datos para la tabla `empresas`
 --
 
-INSERT INTO `empresas` (`id_empresa`, `nit_empresa`, `razon_social`, `cc_rprt_legal`, `num_empleados`, `direccion_empresa`, `telefono_empresa`, `fax_empresa`, `celular_empresa`, `email_empresa`, `id_sector_empresa`, `productos_empresa`, `ciudad_empresa`, `estado_afiliacion_empresa`, `numero_pagos_atrasados`, `fecha_afiliacion_empresa`, `created_at`, `updated_at`) VALUES
-(1, '475939293-5', 'CompuCell', '1065831073', 8, 'Cra 14 No. 16-35', '5724386', '5724386', '3045395221', 'info@compucell.com', 2, '[\"celulares\",\"computadores\",\"reparaci\\u00f3n de equipos\",\"venta de software\"]', 'VLL', 'activa', 0, '2021-01-01', '2022-01-11 01:43:01', '2022-02-02 07:56:30'),
-(2, '574382232-5', 'Variedades Rosita', '1065839234', 8, 'Cra 25 No. 34-45', '5824385', '5824385', '3003428574', 'info@variedadesrosita.com', 2, '[\"collares\",\"hilos\",\"agujas\",\"telas\",\"vestidos\",\"camisas\",\"botones\"]', 'LPZ', 'activa', 2, '2021-01-14', '2022-01-13 23:10:40', '2022-02-02 07:56:30'),
-(3, '5843729343-6', 'Comercializadora La Providencia', '1065829462', 40, 'Cra 4A No. 25A-03', '5739483', '4538457', '3205483295', 'comlaprovidencia@hotmail.com', 1, '[\"abonos\",\"verduras\",\"frutas\"]', 'VLL', 'activa', 2, '2021-01-03', '2022-01-16 02:01:37', '2022-02-02 07:56:31'),
-(5, '483459210-4', 'Piñatería Mi fiestecita', '49213754', 7, 'Cra 9A No. 16A-34', '5723293', '5723293', '3013284356', 'info@mifiestecita.com', 2, '[\"pi\\u00f1atas\",\"recordatorios\",\"globos\",\"decoraci\\u00f3n\"]', 'VLL', 'activa', 2, '2021-01-12', '2022-01-26 06:56:07', '2022-02-02 07:56:31'),
-(6, '568430438-2', 'Boutique París', '1065723941', 5, 'Calle 18 No. 12-32', '5823495', '5823495', '3005494396', 'info@boutiqueparis.com', 2, '[\"ropa de damas\",\"vestidos de noche\",\"vestidos de novia\",\"lencer\\u00eda\",\"zapatos\",\"sandalias\"]', 'AGC', 'nueva', 0, '2021-12-12', '2022-01-26 06:59:39', '2022-01-29 18:09:13'),
-(7, '659430459-3', 'Ferretería Las Casas', '1001234758', 12, 'Cra 35 No. 23-01', '5723485', '5723485', '3003425483', 'info@ferrelascasas.com', 2, '[\"ladrillos\",\"varillas\",\"cemetos\",\"pintura\",\"grevilla\",\"herramientas de construccion\"]', 'LPZ', 'nueva', 0, '2022-01-24', '2022-01-26 07:07:44', '2022-01-29 18:09:13'),
-(8, '342948548-4', 'Textiles Libra-Yardas', '77345213', 20, 'Calle 11 No. 9A-01', '5726593', '5726593', '3045862395', 'info@librayardas.com', 3, '[\"telas\"]', 'VLL', 'nueva', 0, '2022-01-24', '2022-01-26 07:12:01', '2022-01-29 18:09:13'),
-(9, '485328438-9', 'Restaurante Seoul', '1001438437', 10, 'Cra 18D No. 21-35', '5823245', '5823245', '3045868305', 'info@restauranteseoul.com', 2, '[\"comida coreana\",\"bebidas\"]', 'VLL', 'activa', 2, '2021-10-22', '2022-01-26 07:15:51', '2022-02-02 07:56:31'),
-(10, '595324850-4', 'Droguería La Bendición', '65327430', 4, 'Cra 23 No. 23-23', '5823256', '5823256', '3164394395', 'info@labencion.com', 2, '[\"medicamentos\",\"productos para el cuidado personal\",\"tapabocas\"]', 'CDZ', 'activa', 1, '2021-01-12', '2022-01-26 07:28:13', '2022-02-02 07:56:31'),
-(11, '548438329-4', 'Gimnasio Mundo del Fitness', '1065856913', 5, 'Cra 40 No. 8D-34', '5724395', '5724395', '3173283493', 'info@mundodelfitness.com', 2, '[\"proteinas\",\"alquiler de maquinas de musculacion\",\"entremamiento personalizado\"]', 'VLL', 'activa', 1, '2019-03-12', '2022-01-26 07:39:05', '2022-02-02 07:56:31'),
-(12, '548329453-4', 'RestoBar La esquina rosa', '49328431', 7, 'Diagona 23 No. 17-44', '5833285', '5833285', '3145485295', 'info@laesquinarosa.com', 2, '[\"cervezas\",\"comidas rapidas\",\"cenas\"]', 'VLL', 'activa', 1, '2021-01-20', '2022-01-26 07:46:16', '2022-02-02 07:56:31'),
-(13, '657394758-3', 'Opticas Lunnettes', '77345723', 12, 'Cra 15 No. 13-34', '5823285', '5823285', '3208459345', 'info@opticaslunnettes', 2, '[\"gafas\",\"consulta de optometria\"]', 'VLL', 'activa', 1, '2021-01-25', '2022-01-26 07:52:09', '2022-02-02 07:56:31'),
-(14, '584439329-5', 'Electrodomesticos Nuevo Milenio', '77213845', 6, 'Cra 8A No. 16A-12', '5723232', '5723232', '3045863850', 'info@electronuevomilenio.com', 2, '[\"electrodomesticos\",\"televisores\",\"computadores\",\"celulares\"]', 'VLL', 'activa', 1, '2021-01-20', '2022-01-26 07:55:59', '2022-02-02 07:56:31'),
-(15, '475954021-5', 'Motos La 12', '49548329', 8, 'Calle 12 No. 11-23', '5823487', '5823487', '3008793254', 'info@motosdoce.com', 2, '[\"motos\",\"repuestos de motos\"]', 'VLL', 'activa', 1, '2021-01-20', '2022-01-26 07:58:22', '2022-02-02 07:56:32'),
-(16, '453854394-6', 'Floristería las Margaritas', '1065832953', 5, 'Cra 13 No. 24-45', '5739548', '5739548', '3194384395', 'info@lasmargaritas.com', 2, '[\"flores\",\"adornos florales\",\" decoraciones\"]', 'LPZ', 'nueva', 0, '2022-01-25', '2022-01-29 07:16:11', '2022-01-29 18:09:14');
+INSERT INTO `empresas` (`id_empresa`, `nit_empresa`, `razon_social`, `cc_rprt_legal`, `num_empleados`, `direccion_empresa`, `telefono_empresa`, `fax_empresa`, `celular_empresa`, `email_empresa`, `id_sector_empresa`, `productos_empresa`, `ciudad_empresa`, `estado_afiliacion_empresa`, `numero_pagos_atrasados`, `fecha_afiliacion_empresa`, `carta_bienvenida`, `acta_compromiso`, `estudio_afiliacion`, `rut`, `camara_comercio`, `fechas_birthday`, `created_at`, `updated_at`) VALUES
+(1, '475939293-5', 'CompuCell', '1065831073', 8, 'Cra 14 No. 16-35', '5724386', '5724386', '3045395221', 'info@compucell.com', 2, '[\"celulares\",\"computadores\",\"reparaci\\u00f3n de equipos\",\"venta de software\"]', 'VLL', 'activa', 0, '2021-01-01', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-11 01:43:01', '2022-03-22 02:40:59'),
+(2, '574382232-5', 'Variedades Rosita', '1065839234', 8, 'Cra 25 No. 34-45', '5824385', '5824385', '3003428574', 'info@variedadesrosita.com', 2, '[\"collares\",\"hilos\",\"agujas\",\"telas\",\"vestidos\",\"camisas\",\"botones\"]', 'LPZ', 'activa', 2, '2021-01-14', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-13 23:10:40', '2022-02-02 07:56:30'),
+(3, '5843729343-6', 'Comercializadora La Providencia', '1065829462', 40, 'Cra 4A No. 25A-03', '5739483', '4538457', '3205483295', 'comlaprovidencia@hotmail.com', 1, '[\"abonos\",\"verduras\",\"frutas\"]', 'VLL', 'activa', 2, '2021-01-03', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-16 02:01:37', '2022-02-02 07:56:31'),
+(5, '483459210-4', 'Piñatería Mi fiestecita', '49213754', 7, 'Cra 9A No. 16A-34', '5723293', '5723293', '3013284356', 'info@mifiestecita.com', 2, '[\"pi\\u00f1atas\",\"recordatorios\",\"globos\",\"decoraci\\u00f3n\"]', 'VLL', 'activa', 2, '2021-01-12', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 06:56:07', '2022-02-02 07:56:31'),
+(6, '568430438-2', 'Boutique París', '1065723941', 5, 'Calle 18 No. 12-32', '5823495', '5823495', '3005494396', 'info@boutiqueparis.com', 2, '[\"ropa de damas\",\"vestidos de noche\",\"vestidos de novia\",\"lencer\\u00eda\",\"zapatos\",\"sandalias\"]', 'AGC', 'nueva', 0, '2021-12-12', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 06:59:39', '2022-01-29 18:09:13'),
+(7, '659430459-3', 'Ferretería Las Casas', '1001234758', 12, 'Cra 35 No. 23-01', '5723485', '5723485', '3003425483', 'info@ferrelascasas.com', 2, '[\"ladrillos\",\"varillas\",\"cemetos\",\"pintura\",\"grevilla\",\"herramientas de construccion\"]', 'LPZ', 'nueva', 0, '2022-01-24', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:07:44', '2022-01-29 18:09:13'),
+(8, '342948548-4', 'Textiles Libra-Yardas', '77345213', 20, 'Calle 11 No. 9A-01', '5726593', '5726593', '3045862395', 'info@librayardas.com', 3, '[\"telas\"]', 'VLL', 'nueva', 0, '2022-01-24', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:12:01', '2022-01-29 18:09:13'),
+(9, '485328438-9', 'Restaurante Seoul', '1001438437', 10, 'Cra 18D No. 21-35', '5823245', '5823245', '3045868305', 'info@restauranteseoul.com', 2, '[\"comida coreana\",\"bebidas\"]', 'VLL', 'activa', 2, '2021-10-22', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:15:51', '2022-02-02 07:56:31'),
+(10, '595324850-4', 'Droguería La Bendición', '65327430', 4, 'Cra 23 No. 23-23', '5823256', '5823256', '3164394395', 'info@labencion.com', 2, '[\"medicamentos\",\"productos para el cuidado personal\",\"tapabocas\"]', 'CDZ', 'activa', 1, '2021-01-12', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:28:13', '2022-02-02 07:56:31'),
+(11, '548438329-4', 'Gimnasio Mundo del Fitness', '1065856913', 5, 'Cra 40 No. 8D-34', '5724395', '5724395', '3173283493', 'info@mundodelfitness.com', 2, '[\"proteinas\",\"alquiler de maquinas de musculacion\",\"entremamiento personalizado\"]', 'VLL', 'activa', 1, '2019-03-12', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:39:05', '2022-02-02 07:56:31'),
+(12, '548329453-4', 'RestoBar La esquina rosa', '49328431', 7, 'Diagona 23 No. 17-44', '5833285', '5833285', '3145485295', 'info@laesquinarosa.com', 2, '[\"cervezas\",\"comidas rapidas\",\"cenas\"]', 'VLL', 'activa', 1, '2021-01-20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:46:16', '2022-02-02 07:56:31'),
+(13, '657394758-3', 'Opticas Lunnettes', '77345723', 12, 'Cra 15 No. 13-34', '5823285', '5823285', '3208459345', 'info@opticaslunnettes', 2, '[\"gafas\",\"consulta de optometria\"]', 'VLL', 'activa', 1, '2021-01-25', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:52:09', '2022-02-02 07:56:31'),
+(14, '584439329-5', 'Electrodomesticos Nuevo Milenio', '77213845', 6, 'Cra 8A No. 16A-12', '5723232', '5723232', '3045863850', 'info@electronuevomilenio.com', 2, '[\"electrodomesticos\",\"televisores\",\"computadores\",\"celulares\"]', 'VLL', 'activa', 1, '2021-01-20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:55:59', '2022-02-02 07:56:31'),
+(15, '475954021-5', 'Motos La 12', '49548329', 8, 'Calle 12 No. 11-23', '5823487', '5823487', '3008793254', 'info@motosdoce.com', 2, '[\"motos\",\"repuestos de motos\"]', 'VLL', 'activa', 1, '2021-01-20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:58:22', '2022-02-02 07:56:32'),
+(16, '453854394-6', 'Floristería las Margaritas', '1065832953', 5, 'Cra 13 No. 24-45', '5739548', '5739548', '3194384395', 'info@lasmargaritas.com', 2, '[\"flores\",\"adornos florales\",\" decoraciones\"]', 'LPZ', 'nueva', 0, '2022-01-25', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-29 07:16:11', '2022-01-29 18:09:14'),
+(17, '596026594-2', 'Restaurante de puerta de Nankín', '1065873651', 10, 'Cra 8A No. 10-35', '5724396', '5724396', '3194385407', 'info@puertanankin.com', 2, '[\"comida china\",\"arroz chino\",\"bebidas frias\",\"domicilios\"]', 'CDZ', 'nueva', NULL, '2022-03-01', '', '', '', '', '', 'vistas/documentos/afiliados/empresas/29216233.pdf', '2022-03-21 02:55:24', '2022-03-21 02:55:24'),
+(18, '657394539-2', 'Empaquetería de la Costa', '77324956', 34, 'Calle 2 No. 13-45', '5834395', '5834395', '3209568345', 'info@empaqueriadelacosta.com', 2, '[\"empaquetes\",\"bolsas\",\"carpas\"]', 'AST', 'nueva', NULL, '2022-03-01', 'vistas/documentos/afiliados/empresas/15403055.pdf', 'vistas/documentos/afiliados/empresas/28960402.pdf', 'vistas/documentos/afiliados/empresas/28720370.pdf', 'vistas/documentos/afiliados/empresas/76844150.pdf', 'vistas/documentos/afiliados/empresas/40208453.pdf', 'vistas/documentos/afiliados/empresas/46269866.pdf', '2022-03-21 03:18:18', '2022-03-21 03:18:18'),
+(19, '5864394385-7', 'Gimnasio Cuerpo al Límite', '49520439', 7, 'Diagonal 12 No. 12-45', '5695678', '5695678', '3225469240', 'info@gymallimite.com', 2, '[\"entrenamiento personalizado\",\"suplementos multivitaminicos\",\"manuernas\",\"ropa deportiva\"]', 'BSC', 'nueva', NULL, '2022-03-02', 'vistas/documentos/afiliados/empresas/carta_bienvenida/79193744.pdf', 'vistas/documentos/afiliados/empresas/acta_compromiso/59492226.pdf', NULL, 'vistas/documentos/afiliados/empresas/rut/36959385.pdf', 'vistas/documentos/afiliados/empresas/camara_comercio/81250490.pdf', 'vistas/documentos/afiliados/empresas/fechas_birthday/86577550.pdf', '2022-03-22 01:34:48', '2022-03-22 02:33:18'),
+(20, '6874356078-3', 'Ferretería La Esperanza', '49213754', 10, 'Calle 7 No. 23-45', '5823456', '5823456', '3125484507', 'info@ferreesperanza.com', 2, '[\"ladrillos\",\"cementos\",\"varillas\",\"baldosas\",\"ba\\u00f1os\",\"cables\",\"herramientas\"]', 'VLL', 'nueva', NULL, '2020-06-02', '', '', '', '', '', '', '2022-03-22 07:31:37', '2022-03-22 07:31:37');
 
 -- --------------------------------------------------------
 
@@ -222,7 +265,9 @@ INSERT INTO `eventos` (`id`, `nombre`, `tematica`, `ponentes`, `patrocinadores`,
 (14, 'Llamar a los interesados de la campaña de socialización', NULL, NULL, NULL, NULL, '2022-02-17', NULL, NULL, NULL, '#000000', '#000000', 'true', '2022-02-08 07:37:47', '2022-02-08 07:37:47'),
 (15, 'Plenaria jornada mañana', NULL, 'Adonaís Funetes.', 'ACOPI Cesar', 30, '2022-02-14', '08:00:00', '2022-02-14', '12:00:00', '#001f3f', '#001f3f', 'false', '2022-02-08 07:40:45', '2022-02-08 07:40:45'),
 (16, 'Plenaria jornada tarde', NULL, 'Adonaís Fuente', 'ACOPI Cesar', 25, '2022-02-14', '14:00:00', '2022-02-14', '18:00:00', '#ff851b', '#ff851b', 'false', '2022-02-08 07:44:26', '2022-02-08 07:44:26'),
-(17, 'Descanso', NULL, NULL, NULL, NULL, '2022-02-04', '12:00:00', '2022-02-04', '14:00:00', '#dc3545', '#dc3545', 'false', '2022-02-09 03:06:44', '2022-02-09 03:07:24');
+(17, 'Descanso', NULL, NULL, NULL, NULL, '2022-02-04', '12:00:00', '2022-02-04', '14:00:00', '#dc3545', '#dc3545', 'false', '2022-02-09 03:06:44', '2022-02-09 03:07:24'),
+(18, 'Día de la mujer', 'Celebración del día de la mujer', 'María de los Ángeles Correa', 'ACOPI', 15, '2022-03-08', '08:00:00', '2022-03-08', '10:00:00', '#f012be', '#f012be', 'false', '2022-03-04 03:46:54', '2022-03-04 03:46:54'),
+(19, 'Revisión de estatus afiliados', 'Revisar que afiliados están inactivos y desde cuando lo están.', NULL, NULL, NULL, '2022-03-14', '08:00:00', NULL, NULL, '#ffc107', '#ffc107', 'false', '2022-03-11 02:08:22', '2022-03-11 02:09:05');
 
 -- --------------------------------------------------------
 
@@ -239,6 +284,28 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `generos`
+--
+
+CREATE TABLE `generos` (
+  `id` int(11) NOT NULL,
+  `codigo_genero` varchar(5) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre_genero` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `generos`
+--
+
+INSERT INTO `generos` (`id`, `codigo_genero`, `nombre_genero`) VALUES
+(1, 'F', 'Femenino'),
+(2, 'M', 'Masculino'),
+(3, 'O', 'Otro'),
+(4, 'NE', 'No especifica');
 
 -- --------------------------------------------------------
 
@@ -388,7 +455,8 @@ INSERT INTO `noticias` (`id`, `categoria`, `portada_noticia`, `titulo`, `descrip
 (22, 1, 'vistas/images/noticias/portada/78484.jpg', 'Aumento en el PIB Nacional', 'El producto interno bruto (PIB) es el valor de mercado de todos los bienes y servicios finales producidos usando los factores de producción disponibles dentro de un país en un periodo determinado.', '[\"acopi\",\"PIB\"]', 'pib-crece', '<div class=\"body field\" style=\"margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: Roboto, Arial, sans-serif;\"><p style=\"margin-right: 0px; margin-bottom: 1.25rem; margin-left: 0px; padding: 0px; font-family: inherit; font-size: 1em; line-height: 1.6; text-rendering: optimizelegibility;\">Cuando se usan los precios actuales (precios corrientes) para calcularlo se habla de PIB nominal, y al usar los precios de un año base (precios constantes) se conoce como PIB real. Este último es una mejor medida de la actividad económica de un país al medir exclusivamente el cambio en la producción de bienes y servicios en la economía (cantidades), dejando de lado el efecto de las variaciones de los precios.</p></div><div class=\"field field-name-field-definicion-experta field-type-text-with-summary field-label-hidden field-wrapper\" style=\"margin: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: Roboto, Arial, sans-serif;\"><p style=\"margin-right: 0px; margin-bottom: 1.25rem; margin-left: 0px; padding: 0px; font-family: inherit; font-size: 1rem; line-height: 1.6; text-rendering: optimizelegibility;\">El&nbsp;<strong style=\"font-weight: bold; line-height: inherit;\">PIB</strong>&nbsp;visto desde el enfoque de la&nbsp;<strong style=\"font-weight: bold; line-height: inherit;\">producción</strong>, es posible desagregarlo por&nbsp;<strong style=\"font-weight: bold; line-height: inherit;\">ramas de actividad económica</strong>&nbsp;para analizar sus desempeños o aportes al crecimiento económico del país.</p></div>', NULL, 0, '2021-12-05 02:22:25', '2021-12-05 07:22:24', '2021-12-05 07:22:24'),
 (23, 1, 'vistas/images/noticias/portada/96097.jpg', '¿Que es ACOPI?', 'Información de ACOPI', '[\"acopi\",\"colombia\",\"historia\",\"significado\"]', 'quienes-somos', '<p style=\"margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, sans-serif; font-size: 23px; line-height: 30px; text-align: justify;\"><img src=\"http://localhost/acopi/administrador/public../vistas/images/temp/c91591a8d461c2869b9f535ded3e213e.png\" style=\"width: 25%; float: right;\" class=\"note-float-right\"><span style=\"font-family: Arial;\">ACOPI es una entidad sin ánimo de lucro,una Federación Nacional de la MIPYME, Fundada el 27 de agosto de 1951,como resultado de la Fusión de entidades a fines del orden regional que existían en ese momento en cuatro de las más importantes ciudades del país.</span></p><p style=\"margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, sans-serif; font-size: 23px; line-height: 30px; text-align: justify;\"><span style=\"font-family: Arial;\">Como ente autónomo se creó ACOPI Regional Centro Occidente el 04 de septiembre de 2003,haciendo parte de la Federación Nacional Asociación Colombiana de las Micro, Pequeñas y Medianas Empresas;la regional comprende los Departamentos de Quindío, Chocó, y Risaralda.</span></p><p style=\"margin-right: 0px; margin-bottom: 10px; margin-left: 0px; color: rgb(51, 51, 51); font-family: &quot;Open Sans&quot;, sans-serif; font-size: 23px; line-height: 30px; text-align: justify;\"><span style=\"font-family: Arial;\">La experiencia acumulada por ACOPI Centro Occidente en el fortalecimiento y promoción de las MiPymes a través de desarrollo de diferentes estrategias innovadoras, que impactan el crecimiento empresarial en la región, favoreciendo la empleabilidad, la internacionalización de productos y servicios, el desarrollo del capital humano, la innovación social y la cultura de Asociatividad, son la mejor carta de presentación de nuestra organización.</span></p>', NULL, 0, '2021-12-05 02:37:36', '2021-12-05 07:37:36', '2021-12-05 07:37:36'),
 (24, 2, 'vistas/images/noticias/portada/96548.jpg', 'Las mejores microempresas de Colombia', 'Top de las mejores microempresas de Colombia', '[\"cesar\",\"microempresas\",\"acopi\",\"colombia\",\"pymes\",\"valledupar\"]', 'top-microempresas-valledupar', '<p style=\"padding: 1rem 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-family: &quot;Crimson Text&quot;, times, serif; font-size: 19.2px;\"><img src=\"http://localhost/acopi/administrador/public/vistas/images/noticias/contenido/8b0d268963dd0cfb808aac48a549829f.png\" style=\"width: 25%; float: right;\" class=\"note-float-right\">Debido a la necesidad de utilizar el teléfono celular para realizar múltiples actividades, cada vez son más las personas que usan este aparato móvil mientras está cargando su batería, lo cual puede generar efectos negativos.</p><p style=\"padding: 1rem 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-family: &quot;Crimson Text&quot;, times, serif; font-size: 19.2px;\">Según el portal especializado Betech, cuando se conecta el equipo al enchufe, la batería empieza a cargarse y por tanto aumenta la temperatura. Al usarlo, lo que sucede es que realmente no se carga el dispositivo ya que esa batería se la está consumiendo, derivando en una carga más lenta y perjudicial.</p><p style=\"padding: 1rem 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-family: &quot;Crimson Text&quot;, times, serif; font-size: 19.2px;\">Expertos indican que es necesario evitar ver videos, jugar videojuegos, descargas archivos, hablar por video con alguien, porque se estará usando funciones que exigen mucho a la batería y al propio procesador, lo que hará que se dispare la temperatura del teléfono.</p><p style=\"padding: 1rem 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-family: &quot;Crimson Text&quot;, times, serif; font-size: 19.2px;\">Aunque hay otras actividades de menor impacto, también debería evitarse durante el periodo de carga contestar un par de mensajes o hablar con alguien.</p><p style=\"padding: 1rem 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-family: &quot;Crimson Text&quot;, times, serif; font-size: 19.2px;\">Por último, recomiendan no cargar el celular al 100 % ni cargarlo durante toda la noche y, sobre todo, usar cargadores correspondientes y oficiales para su aparato.</p>', NULL, 0, '2021-12-30 17:18:08', '2021-12-06 02:15:30', '2021-12-30 22:18:08'),
-(25, 2, 'vistas/images/noticias/portada/61273.jpg', 'Bienvenidos a nuestra agremiación', 'Información acerca del evento de iniciación', '[\"acopi\",\"cesar\",\"inicio\",\"bienvenida\"]', 'evento-de-iniciacion', '<div>Este jueves 2 y el viernes 3 de diciembre la empresa de energía eléctrica Afinia adelantará el plan de mejoras y adecuaciones eléctricas para optimizar progresivamente su servicio en Valledupar y en municipios del Cesar.</div><div><br></div><div style=\"text-align: justify; \"><img src=\"http://localhost/acopi/administrador/public/vistas/images/noticias/contenido/a0f3601dc682036423013a5d965db9aa.jpg\" style=\"width: 25%; float: right;\" class=\"note-float-right\">En ese sentido, en el municipio de San Diego, el personal capacitado de Afinia instalará estructuras, redes y elementos de protección, los cuales harán parte del nuevo circuito San Diego 2. La actividad se llevará a cabo desde las 7:30 a.m. hasta las 4:30 p.m., y durante su desarrollo será suspendido el servicio de energía en el municipio y sectores aledaños.</div><div style=\"text-align: justify; \"><br></div><div style=\"text-align: justify;\">Del mismo modo, en Valledupar la empresa realizará trabajos en el circuito Valledupar 4 desde las 5:30 a.m. hasta las 7:30 a.m., durante la jornada habrá suspensión en el fluido eléctrico en los barrios: 9 de Abril, Las Acacias, Altos de La Nevada, Bello Horizonte, Campo Romero, El Limonar, Futuro de Los Niños, Urbanización Ciudad Tayrona, Villa Algenia, Villa Andrés, Villa Consuelo, Los Guasimales, Brisas de La Popa, Francisco Javier, Altos de Pimienta, Urbanización Bella Vista, Urbanización Ana María y el Conjunto Cerrado Alta Vista.</div><div style=\"text-align: justify;\"><br></div><div style=\"text-align: justify; \">Asimismo, el viernes 3 de diciembre no habrá servicio de energía desde las 7:45 a.m. hasta las 4:30 de la tarde para los habitantes del barrio San Fernando de Valledupar, en el sector comprendido entre las carreras 6 y 6B, desde la calle 45 hasta la calle 47, ya que en el marco de la construcción del nuevo circuito Salguero 5 en Valledupar instalarán nuevos postes y redes.</div>', NULL, 0, '2021-12-07 22:29:23', '2021-12-08 03:29:23', '2021-12-08 03:29:23');
+(25, 2, 'vistas/images/noticias/portada/61273.jpg', 'Bienvenidos a nuestra agremiación', 'Información acerca del evento de iniciación', '[\"acopi\",\"cesar\",\"inicio\",\"bienvenida\"]', 'evento-de-iniciacion', '<div>Este jueves 2 y el viernes 3 de diciembre la empresa de energía eléctrica Afinia adelantará el plan de mejoras y adecuaciones eléctricas para optimizar progresivamente su servicio en Valledupar y en municipios del Cesar.</div><div><br></div><div style=\"text-align: justify; \"><img src=\"http://localhost/acopi/administrador/public/vistas/images/noticias/contenido/a0f3601dc682036423013a5d965db9aa.jpg\" style=\"width: 25%; float: right;\" class=\"note-float-right\">En ese sentido, en el municipio de San Diego, el personal capacitado de Afinia instalará estructuras, redes y elementos de protección, los cuales harán parte del nuevo circuito San Diego 2. La actividad se llevará a cabo desde las 7:30 a.m. hasta las 4:30 p.m., y durante su desarrollo será suspendido el servicio de energía en el municipio y sectores aledaños.</div><div style=\"text-align: justify; \"><br></div><div style=\"text-align: justify;\">Del mismo modo, en Valledupar la empresa realizará trabajos en el circuito Valledupar 4 desde las 5:30 a.m. hasta las 7:30 a.m., durante la jornada habrá suspensión en el fluido eléctrico en los barrios: 9 de Abril, Las Acacias, Altos de La Nevada, Bello Horizonte, Campo Romero, El Limonar, Futuro de Los Niños, Urbanización Ciudad Tayrona, Villa Algenia, Villa Andrés, Villa Consuelo, Los Guasimales, Brisas de La Popa, Francisco Javier, Altos de Pimienta, Urbanización Bella Vista, Urbanización Ana María y el Conjunto Cerrado Alta Vista.</div><div style=\"text-align: justify;\"><br></div><div style=\"text-align: justify; \">Asimismo, el viernes 3 de diciembre no habrá servicio de energía desde las 7:45 a.m. hasta las 4:30 de la tarde para los habitantes del barrio San Fernando de Valledupar, en el sector comprendido entre las carreras 6 y 6B, desde la calle 45 hasta la calle 47, ya que en el marco de la construcción del nuevo circuito Salguero 5 en Valledupar instalarán nuevos postes y redes.</div>', NULL, 0, '2021-12-07 22:29:23', '2021-12-08 03:29:23', '2021-12-08 03:29:23'),
+(26, 4, 'vistas/images/noticias/portada/93927.jpg', 'Día de la mujer', 'Celebración del día de la mujer', '[\"celebracion\",\"dia de la mujer\",\"mujer\"]', 'celebracion-dia-de-la-mujer', '<p style=\"margin-right: 0px; margin-bottom: 0.714286rem; margin-left: 0px; font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(69, 69, 69); letter-spacing: -0.35px; line-height: 1.5;\">Potenciar la igualdad de género en el contexto de la crisis climática y la reducción del riesgo de desastres es uno de los mayores desafíos mundiales del siglo XXI.</p><p style=\"margin-right: 0px; margin-bottom: 0.714286rem; margin-left: 0px; font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(69, 69, 69); letter-spacing: -0.35px; line-height: 1.5;\">Cada vez es más evidente que las mujeres son más vulnerables al impacto del cambio climático que los hombres, ya que constituyen la mayoría de la población pobre del mundo y son más dependientes de los recursos naturales afectados por esta amenaza medioambiental.</p><p style=\"margin-right: 0px; margin-bottom: 0.714286rem; margin-left: 0px; font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(69, 69, 69); letter-spacing: -0.35px; line-height: 1.5;\">Al mismo tiempo, las mujeres y las niñas son líderes eficaces y poderosas que impulsan el cambio para lograr la mitigación y la adaptación climáticas. Se implican en iniciativas sostenibles en todo el mundo y su participación y liderazgo generan una acción por el clima más eficaz.</p><p style=\"margin-right: 0px; margin-bottom: 0.714286rem; margin-left: 0px; font-family: Roboto, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(69, 69, 69); letter-spacing: -0.35px; line-height: 1.5;\">Para lograr el desarrollo sostenible y una mayor igualdad de género es esencial seguir explorando las oportunidades, así como las limitaciones, para permitir que las mujeres y las niñas tengan voz y participen en igualdad en la toma de decisiones relacionadas con el cambio climático. Sin igualdad de género hoy, el futuro sostenible e igualitario seguirá estando fuera de nuestro alcance.</p>', NULL, 0, '2022-03-03 22:46:53', '2022-03-04 03:46:53', '2022-03-04 03:46:53');
 
 -- --------------------------------------------------------
 
@@ -423,7 +491,7 @@ CREATE TABLE `pagina_web` (
 --
 
 INSERT INTO `pagina_web` (`id`, `dominio`, `servidor`, `titulo_pestana`, `titulo_pagina`, `logo_navegacion`, `logo_pestana`, `titulo_navegacion`, `descripcion`, `palabras_claves`, `carrusel`, `proyectos`, `noticias_intro`, `aliados`, `videos`, `productos`, `redes_sociales`, `contacto`, `updated_at`) VALUES
-(1, 'http://localhost/acopi/', 'http://localhost/acopi/administrador/public/', 'ACOPI - Cesar', 'ACOPI - Cesar', 'vistas/images/pagina_web/8804.png', 'vistas/images/pagina_web/7536.png', 'ACOPI - CESAR', 'Página oficial de la asociación de las medianas y pequeñas industrias del Cesar, aquí encontrarás toda la información de nuestra agremiación.', '[\"acopi\",\"cesar\",\"acopicesar\",\"valledupar\",\"agremiacion\",\"agremiados\",\"microempresarios\",\"pymes\",\"colombia\",\"citas\"]', '[{\n	\"categoria\": \"Noticias\",\n	\"titulo\": \"¡LLEGA EL 2022 Y ES MOMENTO DE PONERTE AL DÍA!\",\n	\"texto\": \"Comienza la transformación de los microempresarios en el departamento del Cesar.<b>¡Reactivate de inmediato!</b>\",\n	\"boton-1\": \"vistas/images/pagina_web/carrusel/6153.png\",\n	\"url-boton-1\": \"https://www.google.com/\",\n	\"boton-2\": \"\",\n	\"url-boton-2\": \"https://www.google.com.co/\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/quinta.jpg\"\n},{\n	\"categoria\": \"Capacitación\",\n	\"titulo\": \"¡Ya comienza el festival! y es hora de planear.\",\n	\"texto\": \"Capacitación sobre como aprovechar la afluencia masiva de turistas (sector hotelero) y como incrementar las ventas (sector comercial). Dictado por la Doctora Alexandra Márquez.\",\n	\"boton-1\": \"vistas/images/pagina_web/carrusel/1450.png\",\n	\"url-boton-1\": \"https://www.google.com/\",\n	\"boton-2\": \"vistas/images/pagina_web/carrusel/6082.png\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"vistas/images/pagina_web/carrusel/2423.jpg\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/9693.jpg\"\n},{\n	\"categoria\": \"Noticias\",\n	\"titulo\": \"Descarga la App de la DIAN en Android o iPhone\",\n	\"texto\": \"Invitamos a todos nuestro agremiados a descargar la aplicación de la DIAN en todos sus dispositivos moviles y así matenerse actualizados de todas las novedades tributarias del momento.\",\n	\"boton-1\": \"vistas/images/pagina_web/carrusel/1947.png\",\n	\"url-boton-1\": \"https://www.google.com/\",\n	\"boton-2\": \"vistas/images/pagina_web/carrusel/4590.png\",\n	\"url-boton-2\": \"https://www.google.com/\",\n	\"foto-delante\": \"vistas/images/pagina_web/carrusel/2703.png\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/7085.jpg\"\n},{\n	\"categoria\": \"Noticias\",\n	\"titulo\": \"¡EMPIEZA EL AÑO 2022!\",\n	\"texto\": \"Este año tus ingresos crecerán.\",\n	\"boton-1\": \"vistas/images/pagina_web/carrusel/27088.png\",\n	\"url-boton-1\": \"https://www.google.com/\",\n	\"boton-2\": \"vistas/images/pagina_web/carrusel/98408.png\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/31551.jpg\"\n},{\n	\"categoria\": \"Capacitación\",\n	\"titulo\": \"¿CÓMO TENER UN PÁGINA WEB?\",\n	\"texto\": \"Capacitación sobre como poner acceder a la sistematización de procesos empresariales.\",\n	\"boton-1\": \"vistas/images/pagina_web/carrusel/80489.png\",\n	\"url-boton-1\": \"\",\n	\"boton-2\": \"vistas/images/pagina_web/carrusel/68333.png\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"vistas/images/pagina_web/carrusel/89315.png\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/31967.jpg\"\n},{\n	\"categoria\": \"Noticias\",\n	\"titulo\": \"AUMENTO EN EL PIB NACIONAL\",\n	\"texto\": \"Al final del 2021 se registró un alza del 10% en el PIB del país.\",\n	\"boton-1\": \"vistas/images/pagina_web/carrusel/93388.png\",\n	\"url-boton-1\": \"\",\n	\"boton-2\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/64137.png\"\n},{\n	\"categoria\": \"Otros\",\n	\"titulo\": \"PRUEBA VENDER EN LINEA\",\n	\"texto\": \"A través de las ventas en línea y promoción de productos por medio de las redes sociales puedes atraer nuevos clientes.\",\n	\"boton-1\": \"\",\n	\"url-boton-1\": \"\",\n	\"boton-2\": \"vistas/images/pagina_web/carrusel/72023.png\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/97296.jpg\"\n},{\n	\"categoria\": \"undefined\",\n	\"titulo\": \"undefined\",\n	\"texto\": \"undefined\",\n	\"boton-1\": \"\",\n	\"url-boton-1\": \"\",\n	\"boton-2\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/77108.jpg\"\n},{\n	\"categoria\": \"undefined\",\n	\"titulo\": \"undefined\",\n	\"texto\": \"undefined\",\n	\"boton-1\": \"\",\n	\"url-boton-1\": \"\",\n	\"boton-2\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/19974.jpg\"\n},{\n	\"categoria\": \"Capacitación\",\n	\"titulo\": \"Capacitación en herramientas de excel\",\n	\"texto\": \"Capacitación en base de datos con excel\",\n	\"boton-1\": \"vistas/images/pagina_web/carrusel/72816.png\",\n	\"url-boton-1\": \"https://www.google.com/?gws_rd=ssl\",\n	\"boton-2\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/17587.jpg\"\n}]', '[{\"imagen\": \"images/proyectos/agromercado.png\", \"fecha_dia\": \"14\", \"fecha_mes\": \"Abril\", \"categoria\": \"Sector Agroindustríal\", \"nombre\": \"AgroMercado\", \"info\": \"Este proyecto busca mejorar las condiciones de los campesinos mediante el mejoramiento o adecuación de vias, para que estos puedan sacar sus productos facilmente al mercado. Proyecto realizado en conjunto con la Gobernación del Cesar.\"\r\n},{\"imagen\": \"images/proyectos/textiles.png\", \"fecha_dia\": \"15\", \"fecha_mes\": \"Abril\", \"categoria\": \"Sector Comercial\", \"nombre\": \"La Tercera Transformación\", \"info\": \"Proyecto que consiste en la evaluación para la aprobación de creditos, dandole la oportunidad a los microempresarios de crecer y superar la reciente crisis economica. En colaboración con Bancoldex.\"},{\"imagen\": \"images/proyectos/taxes.png\", \"fecha_dia\": \"16\", \"fecha_mes\": \"Abril\", \"categoria\": \"Comunidad en general\", \"nombre\": \"Taxes al día\", \"info\": \"Consiste en asegurarse que todos los microempresarios estén al tanto de cuales son sus compromisos tributarios.\" }]\r\n', 'En esta sesión encontraras las  noticias más recientes de nuestra agremiación, solo cliquea sobre el recuadro para ver más.', '[{\n	\"nombre\": \"Universidad Popular del Cesar\", \n	\"logo\": \"vistas/images/pagina_web/aliados/4547.png\", \n	\"link\": \"http://www.unicesar.edu.co\"\n},{\n	\"nombre\": \"Universidad de Santander UDES\", \n	\"logo\": \"vistas/images/pagina_web/aliados/aliados-udes.png\", \n	\"link\": \"http://www.unicesar.edu.co\"\n},{\n	\"nombre\": \"Fundación Universitaria del Área Andina\", \n	\"logo\": \"vistas/images/pagina_web/aliados/8706.png\", \n	\"link\": \"http://www.unicesar.edu.co\"\n},{\n	\"nombre\": \"Servicio Nacional de Aprendizaje\", \n	\"logo\": \"vistas/images/pagina_web/aliados/aliados-sena.png\", \n	\"link\": \"http://www.unicesar.edu.co\"\n},{\n	\"nombre\": \"Gobernación del Cesar\", \n	\"logo\": \"vistas/images/pagina_web/aliados/2788.png\", \n	\"link\": \"http://www.unicesar.edu.co\"\n}]', '[\"https://www.youtube.com/embed/qJ7Kpfm6DXM\", \"https://www.youtube.com/embed/TYvtmPZ6YS8\", \"https://www.youtube.com/embed/jEVKFNZU4EI\"]', '[{\n	\"num\": \"01.\", \n	\"nombre\": \"Representación y liderazgo gremial.\", \n	\"descripcion\": \"Defendemos los intereses del sector ante las entidades gubernamentales y no gubernamentales, nacionales y/o extranjeras.\"\n},{\n	\"num\": \"02.\", \n	\"nombre\": \"Convenios de cooperación interinstitucional.\", \n	\"descripcion\": \"Suscritos con diversas entidades para desarrollar programas que contribuyan al fomentos de la pequeña y mediana empresa.\"\n},{\n	\"num\": \"03.\", \n	\"nombre\": \"Alianzas estrategicas.\", \n	\"descripcion\": \"Promovemos la asociación entre empresas afines para propocionar la transferencia de bienes y servicios buscando la ampliacion de sus mercados y la disminución de sus costos.\"\n},{\n	\"num\": \"04.\", \n	\"nombre\": \"Capacitación.\", \n	\"descripcion\": \"Programamos conferencias, talleres, cursos y seminarios especializados en diversas áreas administrativas y técnicas, orientadas a resolver las necesidades de capacitación del sector industrial, con tarifas especiales para afiliados.\"\n},{\n	\"num\": \"05.\", \n	\"nombre\": \"Asesorías.\", \n	\"descripcion\": \"Nuestros afiliados pueden obtener asesorías en las siguientes áreas:\"\n},{\n	\"num\": \"06.\", \n	\"nombre\": \"Información y divulgación.\", \n	\"descripcion\": \"Es nuestro interes mantener una cordial y permanente comunicación con nuestro gremio que nos permite hacerle llegar información especializada del sector y conocer sus inquietudes y necesidades.\"\n},{\n	\"num\": \"07.\", \n	\"nombre\": \"Eventos especiales.\", \n	\"descripcion\": \"Con el propósito de promocionar e integrar a nuestro afiliados, buscando ampliar sus horizontes, organizamos y apoyamos la realización de encuentros empresariales, muestras y ferias como Expocesar, Con la participación de entidades como PROEXPORT organizamos misiones a otros países con la intención de establecer contactos para importación y Exportación.\"\n},{\n	\"num\": \"08.\", \n	\"nombre\": \"Eventos institucionales.\", \n	\"descripcion\": \"Asamblea General de Afiliados, Convención Nacional, Congreso Nacional.\"\n},{\n	\"num\": \"09.\", \n	\"nombre\": \"Practicas empresariales.\", \n	\"descripcion\": \"Mediante Convenios con las universidades, estamos en la posibilidad de facilitar a nuestros afiliados practicantes calificados que les apoyen en la implantación de procesos hacia una mayor productividad, para lo cual se ha conformado un COMITÉ INTERDISCIPLINARIO.\"\n},{\n	\"num\": \"10.\", \n	\"nombre\": \"Fortalecimiento y desarrollo Sectorial.\", \n	\"descripcion\": \"A traves de los programas de desarrollo sectorial PRODES, se implementan actividades asociativas, orientadas al mejoramiento de la gestión y competividad con el objetivo final incorporar a las PYMES de la región en la corriente de los negocios internacionales.\"\n},{\n	\"num\": \"11.\", \n	\"nombre\": \"Centros de conciliación y arbitraje.\", \n	\"descripcion\": \"Al servicio de nuestros afiliados para disminuir conflictos por la via de la conciliación.\"\n}]', '[{\"nombre\":\"facebook\",\"logo\":\"fab fa-facebook-f\",\"link\":\"https://www.facebook.com\"},{\"nombre\":\"linkeln\",\"logo\":\"fab fa-linkedin-in\",\"link\":\"https://www.linkeln.com\"},{\"nombre\":\"twitter\",\"logo\":\"fab fa-twitter\",\"link\":\"https://www.twitter.com\"},{\"nombre\":\" tiktok\",\"logo\":\"fab fa-tiktok\",\"link\":\"https://www.tiktok.com\"},{\"nombre\":\" youtube\",\"logo\":\"fab fa-youtube\",\"link\":\"https://www.youtube.com\"},{\"nombre\":\" pinterest\",\"logo\":\"fab fa-pinterest-p\",\"link\":\"https://www.pinterest.com\"}]', '[\"Calle 15 # 4-33, oficina 401.\",\"574 9216\",\"+57 315 651 6647\",\"acopicesar07@hotmail.com\"]', '2022-01-23 20:56:56');
+(1, 'http://localhost/acopi/', 'http://localhost/acopi/administrador/public/', 'ACOPI - Cesar', 'ACOPI - Cesar', 'vistas/images/pagina_web/8804.png', 'vistas/images/pagina_web/7536.png', 'ACOPI - CESAR', 'Página oficial de la asociación de las medianas y pequeñas industrias del Cesar, aquí encontrarás toda la información de nuestra agremiación.', '[\"acopi\",\"cesar\",\"acopicesar\",\"valledupar\",\"agremiacion\",\"agremiados\",\"microempresarios\",\"pymes\",\"colombia\",\"citas\"]', '[{\n	\"categoria\": \"Noticias\",\n	\"titulo\": \"¡LLEGA EL 2022 Y ES MOMENTO DE PONERTE AL DÍA!\",\n	\"texto\": \"Comienza la transformación de los microempresarios en el departamento del Cesar.<b>¡Reactivate de inmediato!</b>\",\n	\"boton-1-color\": \"bg-navy\",\n	\"boton-1-texto\": \"Ver más\",\n	\"url-boton-1\": \"https://www.google.com/\",\n	\"boton-2-color\": \"\",\n	\"boton-2-texto\": \"\",\n	\"url-boton-2\": \"https://www.google.com.co/\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/quinta.jpg\"\n},{\n	\"categoria\": \"Capacitación\",\n	\"titulo\": \"¡Ya comienza el festival! y es hora de planear.\",\n	\"texto\": \"Capacitación sobre como aprovechar la afluencia masiva de turistas (sector hotelero) y como incrementar las ventas (sector comercial). Dictado por la Doctora Alexandra Márquez.\",\n	\"boton-1-color\": \"bg-primary\",\n	\"boton-1-texto\": \"Inscripción\",\n	\"url-boton-1\": \"https://www.google.com/\",\n	\"boton-2-color\": \"\",\n	\"boton-2-texto\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"vistas/images/pagina_web/carrusel/2423.jpg\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/9693.jpg\"\n},{\n	\"categoria\": \"Noticias\",\n	\"titulo\": \"Descarga la App de la DIAN en Android o iPhone\",\n	\"texto\": \"Invitamos a todos nuestro agremiados a descargar la aplicación de la DIAN en todos sus dispositivos moviles y así matenerse actualizados de todas las novedades tributarias del momento.\",\n	\"boton-1-color\": \"\",\n	\"boton-1-texto\": \"\",\n	\"url-boton-1\": \"https://www.google.com/\",\n	\"boton-2-color\": \"\",\n	\"boton-2-texto\": \"\",\n	\"url-boton-2\": \"https://www.google.com/\",\n	\"foto-delante\": \"vistas/images/pagina_web/carrusel/2703.png\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/7085.jpg\"\n},{\n	\"categoria\": \"Noticias\",\n	\"titulo\": \"¡EMPIEZA EL AÑO 2022!\",\n	\"texto\": \"Este año tus ingresos crecerán.\",\n	\"boton-1-color\": \"\",\n	\"boton-1-texto\": \"\",\n	\"url-boton-1\": \"https://www.google.com/\",\n	\"boton-2-color\": \"\",\n	\"boton-2-texto\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/31551.jpg\"\n},{\n	\"categoria\": \"Capacitación\",\n	\"titulo\": \"¿CÓMO TENER UN PÁGINA WEB?\",\n	\"texto\": \"Capacitación sobre como poner acceder a la sistematización de procesos empresariales.\",\n	\"boton-1-color\": \"\",\n	\"boton-1-texto\": \"\",\n	\"url-boton-1\": \"\",\n	\"boton-2-color\": \"\",\n	\"boton-2-texto\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"vistas/images/pagina_web/carrusel/89315.png\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/31967.jpg\"\n},{\n	\"categoria\": \"Noticias\",\n	\"titulo\": \"AUMENTO EN EL PIB NACIONAL\",\n	\"texto\": \"Al final del 2021 se registró un alza del 10% en el PIB del país.\",\n	\"boton-1-color\": \"\",\n	\"boton-1-texto\": \"\",\n	\"url-boton-1\": \"\",\n	\"boton-2-color\": \"\",\n	\"boton-2-texto\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/64137.png\"\n},{\n	\"categoria\": \"Otros\",\n	\"titulo\": \"PRUEBA VENDER EN LINEA\",\n	\"texto\": \"A través de las ventas en línea y promoción de productos por medio de las redes sociales puedes atraer nuevos clientes.\",\n	\"boton-1-color\": \"\",\n	\"boton-1-texto\": \"\",\n	\"url-boton-1\": \"\",\n	\"boton-2-color\": \"\",\n	\"boton-2-texto\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/97296.jpg\"\n},{\n	\"categoria\": \"undefined\",\n	\"titulo\": \"undefined\",\n	\"texto\": \"undefined\",\n	\"boton-1-color\": \"\",\n	\"boton-1-texto\": \"\",\n	\"url-boton-1\": \"\",\n	\"boton-2-color\": \"\",\n	\"boton-2-texto\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/77108.jpg\"\n},{\n	\"categoria\": \"undefined\",\n	\"titulo\": \"undefined\",\n	\"texto\": \"undefined\",\n	\"boton-1-color\": \"\",\n	\"boton-1-texto\": \"\",\n	\"url-boton-1\": \"\",\n	\"boton-2-color\": \"\",\n	\"boton-2-texto\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/19974.jpg\"\n},{\n	\"categoria\": \"Capacitación\",\n	\"titulo\": \"Capacitación en herramientas de excel\",\n	\"texto\": \"Capacitación en base de datos con excel\",\n	\"boton-1-color\": \"\",\n	\"boton-1-texto\": \"\",\n	\"url-boton-1\": \"https://www.google.com/?gws_rd=ssl\",\n	\"boton-2-color\": \"\",\n	\"boton-2-texto\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/17587.jpg\"\n},{\n	\"categoria\": \"Otros\",\n	\"titulo\": \"El tiempo de descanso es necesario\",\n	\"texto\": \"viajar\",\n	\"boton-1-color\": \"bg-teal\",\n	\"boton-1-texto\": \"Leer mas\",\n	\"url-boton-1\": \"https://www.google.com/?gws_rd=ssl\",\n	\"boton-2-color\": \"bg-maroon\",\n	\"boton-2-texto\": \"Inscripcion\",\n	\"url-boton-2\": \"https://www.google.com/?gws_rd=ssl\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/46000.jpg\"\n},{\n	\"categoria\": \"Otros\",\n	\"titulo\": \"Concéntrate en aspectos positivos de vida\",\n	\"texto\": \"Es momento de pensar en la salud mental\",\n	\"boton-1-color\": \"bg-indigo\",\n	\"boton-1-texto\": \"Buscar ayuda\",\n	\"url-boton-1\": \"https://www.google.com/?gws_rd=ssl\",\n	\"boton-2-color\": \"bg-lime\",\n	\"boton-2-texto\": \"Leer articulo\",\n	\"url-boton-2\": \"https://www.google.com/?gws_rd=ssl\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/95279.jpg\"\n},{\n	\"categoria\": \"undefined\",\n	\"titulo\": \"undefined\",\n	\"texto\": \"undefined\",\n	\"boton-1-color\": \"\",\n	\"boton-1-texto\": \"\",\n	\"url-boton-1\": \"\",\n	\"boton-2-color\": \"\",\n	\"boton-2-texto\": \"\",\n	\"url-boton-2\": \"\",\n	\"foto-delante\": \"\",\n	\"fondo\": \"vistas/images/pagina_web/carrusel/41082.jpg\"\n}]', '[{\"imagen\": \"images/proyectos/agromercado.png\", \"fecha_dia\": \"14\", \"fecha_mes\": \"Abril\", \"categoria\": \"Sector Agroindustríal\", \"nombre\": \"AgroMercado\", \"info\": \"Este proyecto busca mejorar las condiciones de los campesinos mediante el mejoramiento o adecuación de vias, para que estos puedan sacar sus productos facilmente al mercado. Proyecto realizado en conjunto con la Gobernación del Cesar.\"\r\n},{\"imagen\": \"images/proyectos/textiles.png\", \"fecha_dia\": \"15\", \"fecha_mes\": \"Abril\", \"categoria\": \"Sector Comercial\", \"nombre\": \"La Tercera Transformación\", \"info\": \"Proyecto que consiste en la evaluación para la aprobación de creditos, dandole la oportunidad a los microempresarios de crecer y superar la reciente crisis economica. En colaboración con Bancoldex.\"},{\"imagen\": \"images/proyectos/taxes.png\", \"fecha_dia\": \"16\", \"fecha_mes\": \"Abril\", \"categoria\": \"Comunidad en general\", \"nombre\": \"Taxes al día\", \"info\": \"Consiste en asegurarse que todos los microempresarios estén al tanto de cuales son sus compromisos tributarios.\" }]\r\n', 'En esta sesión encontraras las  noticias más recientes de nuestra agremiación, solo cliquea sobre el recuadro para ver más.', '[{\n	\"nombre\": \"Universidad Popular del Cesar\", \n	\"logo\": \"vistas/images/pagina_web/aliados/4547.png\", \n	\"link\": \"http://www.unicesar.edu.co\"\n},{\n	\"nombre\": \"Universidad de Santander UDES\", \n	\"logo\": \"vistas/images/pagina_web/aliados/aliados-udes.png\", \n	\"link\": \"http://www.unicesar.edu.co\"\n},{\n	\"nombre\": \"Fundación Universitaria del Área Andina\", \n	\"logo\": \"vistas/images/pagina_web/aliados/8706.png\", \n	\"link\": \"http://www.unicesar.edu.co\"\n},{\n	\"nombre\": \"Servicio Nacional de Aprendizaje\", \n	\"logo\": \"vistas/images/pagina_web/aliados/aliados-sena.png\", \n	\"link\": \"http://www.unicesar.edu.co\"\n},{\n	\"nombre\": \"Gobernación del Cesar\", \n	\"logo\": \"vistas/images/pagina_web/aliados/2788.png\", \n	\"link\": \"http://www.unicesar.edu.co\"\n}]', '[\"https://www.youtube.com/embed/qJ7Kpfm6DXM\", \"https://www.youtube.com/embed/TYvtmPZ6YS8\", \"https://www.youtube.com/embed/jEVKFNZU4EI\"]', '[{\n	\"num\": \"01.\", \n	\"nombre\": \"Representación y liderazgo gremial.\", \n	\"descripcion\": \"Defendemos los intereses del sector ante las entidades gubernamentales y no gubernamentales, nacionales y/o extranjeras.\"\n},{\n	\"num\": \"02.\", \n	\"nombre\": \"Convenios de cooperación interinstitucional.\", \n	\"descripcion\": \"Suscritos con diversas entidades para desarrollar programas que contribuyan al fomentos de la pequeña y mediana empresa.\"\n},{\n	\"num\": \"03.\", \n	\"nombre\": \"Alianzas estrategicas.\", \n	\"descripcion\": \"Promovemos la asociación entre empresas afines para propocionar la transferencia de bienes y servicios buscando la ampliacion de sus mercados y la disminución de sus costos.\"\n},{\n	\"num\": \"04.\", \n	\"nombre\": \"Capacitación.\", \n	\"descripcion\": \"Programamos conferencias, talleres, cursos y seminarios especializados en diversas áreas administrativas y técnicas, orientadas a resolver las necesidades de capacitación del sector industrial, con tarifas especiales para afiliados.\"\n},{\n	\"num\": \"05.\", \n	\"nombre\": \"Asesorías.\", \n	\"descripcion\": \"Nuestros afiliados pueden obtener asesorías en las siguientes áreas:\"\n},{\n	\"num\": \"06.\", \n	\"nombre\": \"Información y divulgación.\", \n	\"descripcion\": \"Es nuestro interes mantener una cordial y permanente comunicación con nuestro gremio que nos permite hacerle llegar información especializada del sector y conocer sus inquietudes y necesidades.\"\n},{\n	\"num\": \"07.\", \n	\"nombre\": \"Eventos especiales.\", \n	\"descripcion\": \"Con el propósito de promocionar e integrar a nuestro afiliados, buscando ampliar sus horizontes, organizamos y apoyamos la realización de encuentros empresariales, muestras y ferias como Expocesar, Con la participación de entidades como PROEXPORT organizamos misiones a otros países con la intención de establecer contactos para importación y Exportación.\"\n},{\n	\"num\": \"08.\", \n	\"nombre\": \"Eventos institucionales.\", \n	\"descripcion\": \"Asamblea General de Afiliados, Convención Nacional, Congreso Nacional.\"\n},{\n	\"num\": \"09.\", \n	\"nombre\": \"Practicas empresariales.\", \n	\"descripcion\": \"Mediante Convenios con las universidades, estamos en la posibilidad de facilitar a nuestros afiliados practicantes calificados que les apoyen en la implantación de procesos hacia una mayor productividad, para lo cual se ha conformado un COMITÉ INTERDISCIPLINARIO.\"\n},{\n	\"num\": \"10.\", \n	\"nombre\": \"Fortalecimiento y desarrollo Sectorial.\", \n	\"descripcion\": \"A traves de los programas de desarrollo sectorial PRODES, se implementan actividades asociativas, orientadas al mejoramiento de la gestión y competividad con el objetivo final incorporar a las PYMES de la región en la corriente de los negocios internacionales.\"\n},{\n	\"num\": \"11.\", \n	\"nombre\": \"Centros de conciliación y arbitraje.\", \n	\"descripcion\": \"Al servicio de nuestros afiliados para disminuir conflictos por la via de la conciliación.\"\n}]', '[{\"nombre\":\"facebook\",\"logo\":\"fab fa-facebook-f\",\"link\":\"https://www.facebook.com\"},{\"nombre\":\"linkeln\",\"logo\":\"fab fa-linkedin-in\",\"link\":\"https://www.linkeln.com\"},{\"nombre\":\"twitter\",\"logo\":\"fab fa-twitter\",\"link\":\"https://www.twitter.com\"},{\"nombre\":\" tiktok\",\"logo\":\"fab fa-tiktok\",\"link\":\"https://www.tiktok.com\"},{\"nombre\":\" youtube\",\"logo\":\"fab fa-youtube\",\"link\":\"https://www.youtube.com\"},{\"nombre\":\" pinterest\",\"logo\":\"fab fa-pinterest-p\",\"link\":\"https://www.pinterest.com\"}]', '[\"Calle 15 # 4-33, oficina 401.\",\"574 9216\",\"+57 315 651 6647\",\"acopicesar07@hotmail.com\"]', '2022-03-13 19:10:08');
 
 -- --------------------------------------------------------
 
@@ -452,7 +520,7 @@ CREATE TABLE `pagos` (
 --
 
 INSERT INTO `pagos` (`id`, `codigo_recibo`, `id_empresa`, `valor_deuda`, `valor_mes`, `valor_recibo`, `mes_recibo`, `fecha_limite`, `estado`, `id_reporta`, `fecha_reporte`, `created_at`, `updated_at`) VALUES
-(1931, NULL, 1, 0, 80000, 80000, 'febrero', '2022-02-11', 'negoceado', NULL, NULL, '2022-02-02 01:38:45', '2022-02-02 07:30:12'),
+(1931, NULL, 1, 0, 80000, 80000, 'febrero', '2022-02-11', 'pagado', NULL, NULL, '2022-02-02 01:38:45', '2022-03-22 02:40:58'),
 (1932, NULL, 2, 0, 80000, 80000, 'febrero', '2022-02-11', 'vencido', NULL, NULL, '2022-02-02 01:38:45', '2022-02-02 01:40:20'),
 (1933, NULL, 3, 0, 80000, 80000, 'febrero', '2022-02-11', 'vencido', NULL, NULL, '2022-02-02 01:38:45', '2022-02-02 01:40:20'),
 (1934, NULL, 5, 0, 80000, 80000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-02-03 01:45:50', '2022-02-02 01:38:46', '2022-02-03 01:45:50'),
@@ -690,6 +758,31 @@ INSERT INTO `sector_empresa` (`id_sector`, `nombre_sector`, `created_at`, `updat
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tipos_documentos`
+--
+
+CREATE TABLE `tipos_documentos` (
+  `id` int(11) NOT NULL,
+  `codigo_doc` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre_doc` varchar(150) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tipos_documentos`
+--
+
+INSERT INTO `tipos_documentos` (`id`, `codigo_doc`, `nombre_doc`) VALUES
+(1, 'CC', 'Cédula de ciudadanía'),
+(2, 'CE', 'Cédula de Extranjería'),
+(3, 'NIP', 'Número de Identificación Personal'),
+(4, 'NIT', 'Número de Idenficación Tributaría'),
+(5, 'TI', 'Tarjeta de Identidad'),
+(6, 'PAP', 'Pasaporte'),
+(7, 'O', 'Otro');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `users`
 --
 
@@ -712,7 +805,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `foto`, `rol`, `modo`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Andrés Soto', 'andresalfredosotosuarez@gmail.com', NULL, '$2y$10$jPmKrQ9l3Xvt8xN35BHt.OJ.NTYenPs9nHvKxAy6r6ZTKq1.sZln6', 'vistas/images/usuarios/723.jpg', 'Administrador', 'Diurno', NULL, '2021-11-17 01:34:47', '2022-02-12 20:29:12'),
+(1, 'Andrés Soto', 'andresalfredosotosuarez@gmail.com', NULL, '$2y$10$jPmKrQ9l3Xvt8xN35BHt.OJ.NTYenPs9nHvKxAy6r6ZTKq1.sZln6', 'vistas/images/usuarios/723.jpg', 'Administrador', 'Diurno', NULL, '2021-11-17 01:34:47', '2022-03-22 07:25:24'),
 (4, 'Jean Carlos Recio', 'jrecio@gmail.com', NULL, '$2y$10$TqKqyV6QZ5LHB8OO.3nkm.VmkdIuxptHz2e6MgeMCMKeCFIjleBSy', 'vistas/images/usuarios/563.jpg', 'Administrador', 'Nocturno', NULL, '2021-11-30 07:18:38', '2022-01-22 06:41:14'),
 (5, 'Jimena Castro', 'jcastro@gmail.com', NULL, '$2y$10$SBtB5gICn1uZEoxOU0TvNey5zD1dFMPvYiFfl2O20ZX9YQS0N.VkG', 'vistas/images/usuarios/138.jpg', 'Subdirector de comunicaciones y eventos', 'Diurno', NULL, '2021-12-01 07:11:36', '2021-12-02 07:07:32'),
 (6, 'Adonais Fuentes', 'afuentes@gmail.com', NULL, '$2y$10$lc1gRh.wzkdYFpvXe4jxF.WLV1L1fQdojmUSzSK2UGxr1IunW7vka', 'vistas/images/usuarios/588.png', 'Director ejecutivo', 'Diurno', NULL, '2021-12-02 02:45:34', '2021-12-03 01:42:01'),
@@ -738,6 +831,12 @@ ALTER TABLE `categorias`
 -- Indices de la tabla `citas`
 --
 ALTER TABLE `citas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `empleados`
+--
+ALTER TABLE `empleados`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -770,6 +869,12 @@ ALTER TABLE `eventos`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indices de la tabla `generos`
+--
+ALTER TABLE `generos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `interesados`
@@ -852,6 +957,12 @@ ALTER TABLE `sector_empresa`
   ADD PRIMARY KEY (`id_sector`);
 
 --
+-- Indices de la tabla `tipos_documentos`
+--
+ALTER TABLE `tipos_documentos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
@@ -866,13 +977,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de la tabla `empleados`
+--
+ALTER TABLE `empleados`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados_afiliados`
@@ -884,7 +1001,7 @@ ALTER TABLE `empleados_afiliados`
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
-  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_empresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `entrevistas`
@@ -896,13 +1013,19 @@ ALTER TABLE `entrevistas`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `generos`
+--
+ALTER TABLE `generos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `interesados`
@@ -926,7 +1049,7 @@ ALTER TABLE `municipios_departamento`
 -- AUTO_INCREMENT de la tabla `noticias`
 --
 ALTER TABLE `noticias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `pagina_web`
@@ -975,6 +1098,12 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `sector_empresa`
   MODIFY `id_sector` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `tipos_documentos`
+--
+ALTER TABLE `tipos_documentos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

@@ -402,55 +402,7 @@ $(document).on("click", ".confirmacionEliminarItemCarrusel", function(){
 /*=====  End of Eliminar item carrusel  ======*/
 
 
-/*=============================================
-PREVISUALIZAR IMÁGENES TEMPORALES
-=============================================*/
-$("input[type='file']").change(function(){
 
-	var imagen = this.files[0];
-	//console.log("imagen", imagen);
-	var tipo = $(this).attr("name");
-	/*=============================================
-    VALIDAMOS EL FORMATO DE LA IMAGEN SEA JPG O PNG
-    =============================================*/
-
-    if(imagen["type"] != "image/jpeg" && imagen["type"] != "image/png"){
-
-    	$("input[type='file']").val("");
-
-      	swal({
-      		title: "¡Error!",
-      		text: "¡La imagen debe estar en formato JPG o PNG!",
-      		icon: "error"
-      	});
-
-    }else if(imagen["size"] > 2000000){
-
-    	$("input[type='file']").val("");
-
-    	swal({
-      		title: "¡Error!",
-      		text: "¡La imagen no debe pesar más de 2MB!",
-      		icon: "error"
-      	});
-
-    }else{
-
-    	var datosImagen = new FileReader;
-    	datosImagen.readAsDataURL(imagen);
-
-    	$(datosImagen).on("load", function(event){
-
-    		var rutaImagen = event.target.result;
-
-    		$(".previsualizarImg_"+tipo).attr("src", rutaImagen);
-
-    	})
-
-    }
-
-
-})
 
 /*=============================================
 SUMMERNOTE
@@ -1603,6 +1555,7 @@ $(document).on("click", ".reactivarEmpresa", function(){
 
 /*=====  End of Reactivar empresa  ======*/
 
+
 /*==========================================
 =            Eliminar municipio            =
 ==========================================*/
@@ -1971,6 +1924,110 @@ $(document).on("click", ".eliminarCita", function(){
 })
 
 /*=====  End of Eliminar cita  ======*/
+
+/*=======================================================
+=            Ver ingresar empleado o pasante            =
+=======================================================*/
+
+$(document).on("click", ".agregarEmpleadoPasante", function(){
+
+	document.getElementById("ingresarEmpleadoPasante").style.visibility="";
+	$(this).parent().parent().parent().remove();
+	document.getElementById("ingresarEmpleadoPasante").classList.remove("collapsed-card");
+})
+
+/*=====  End of Ver ingresar empleado o pasante  ======*/
+
+/*=========================================
+=            Eliminar Empleado            =
+=========================================*/
+
+$(document).on("click", ".eliminarEmpleado", function(){
+
+	var action = $(this).attr("action");
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	//var token = $(this).children("[name='_token']").attr("value");
+  	var token = $(this).attr("token");
+
+  	var archivos = $(this).attr("archivos");
+  	console.log("archivos: ", archivos);
+
+  	swal({
+  		 title: '¿Está seguro de eliminar este empleado o pasante?',
+  		 text: "¡Si no lo está puede cancelar la acción!",
+  		 type: 'warning',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Sí, eliminar empleado o pasante!'
+  	}).then(function(result){
+
+  		if(result.value){
+  			var datos = "archivos="+archivos;
+  			$.ajax({
+				url: ruta+"/ajax/empleados.php",
+				method: "POST",
+				data: datos,
+
+			}).done(function(respuesta){
+				console.log("Hecho");
+			}).fail(function(){
+				console.log("Error");
+			}).always(function(){
+				console.log("Completado");
+			});
+
+  			var datos = new FormData();
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡El empleado o pasante ha sido eliminado!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina;
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+/*=====  End of Eliminar Empleado  ======*/
 
 
 /*=====================================

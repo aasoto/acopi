@@ -116,7 +116,7 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label>Sector empresa</label>
-                              <select class="form-control select2" name="sector_empresa" id="sector_empresa" style="width: 100%;" required>
+                              <select class="form-control select2bs4" name="sector_empresa" id="sector_empresa" style="width: 100%;" required>
                                 <option value="">Seleccionar...</option>
                                 @foreach ($sectores as $key => $sector)
                                   <option value="{{$sector["id_sector"]}}">{{$sector["nombre_sector"]}}</option>
@@ -135,7 +135,7 @@
                           <div class="col-md-6">
                             <div class="form-group">
                               <label>Ciudad</label>
-                              <select class="form-control select2" name="ciudad" id="ciudad" style="width: 100%;">
+                              <select class="form-control select2bs4" name="ciudad" id="ciudad" style="width: 100%;">
                                 <option value="">Seleccionar...</option>
                                 @foreach ($municipios as $key => $municipio)
                                   <option value="{{$municipio["abreviatura"]}}">{{$municipio["nombre"]}}</option>
@@ -150,6 +150,86 @@
                             </div>
                           </div>
                         </div>
+                        <div class="card">
+                          <div class="card-header">
+                            <div class="card-title">Adjuntar documentos de respaldo</div>
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Carta de bienvenida</label>
+                                  <div class="input-group">
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input" name="carta_bienvenida" id="carta_bienvenida">
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Acta de compromiso</label>
+                                  <div class="input-group">
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input" name="acta_compromiso" id="acta_compromiso">
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Estudio de afiliación</label>
+                                  <div class="input-group">
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input" name="estudio_afiliacion" id="estudio_afiliacion">
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Registro Único Tributario (RUT)</label>
+                                  <div class="input-group">
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input" name="rut" id="rut">
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Registro en Camara de Comercio</label>
+                                  <div class="input-group">
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input" name="camara_comercio" id="camara_comercio">
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label>Documento de fechas de cumpleaños</label>
+                                  <div class="input-group">
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input" name="fechas_birthday" id="fechas_birthday">
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
                       </div>
                       <div class="card-footer">
                         <div class="col-md-12 text-center">
@@ -168,7 +248,18 @@
       </div>
     </section>
 </div>
-
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+    //File-input
+    bsCustomFileInput.init();
+  })
+</script>
 @if (isset($empresa_existe))
   @if ($empresa_existe == "si")
   <script>

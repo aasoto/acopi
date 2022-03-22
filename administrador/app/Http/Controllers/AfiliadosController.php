@@ -22,10 +22,13 @@ class AfiliadosController extends Controller
     		return datatables()->of(RepresentanteEmpresaModel::all()) 
     		->addColumn('nombre', function($data){
     			
-    				$nombre = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre;
+    			$nombre = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre.' ';
 
-			
-
+				$empresas = EmpresasModel::where("cc_rprt_legal", $data->cc_rprt_legal)->get();
+				$total_empresas = count($empresas);
+				for ($i=0; $i < $total_empresas; $i++) { 
+					$nombre = $nombre.'<i class="fas fa-check-circle" style="color: #28A745;"></i>';
+				}
 				return $nombre;
 			})
 
