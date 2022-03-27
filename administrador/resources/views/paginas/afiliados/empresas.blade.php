@@ -162,7 +162,7 @@
                                   <div class="input-group">
                                     <div class="custom-file">
                                       <input type="file" class="custom-file-input" name="carta_bienvenida" id="carta_bienvenida">
-                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
                                     </div>
                                   </div>
                                 </div>
@@ -173,7 +173,7 @@
                                   <div class="input-group">
                                     <div class="custom-file">
                                       <input type="file" class="custom-file-input" name="acta_compromiso" id="acta_compromiso">
-                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
                                     </div>
                                   </div>
                                 </div>
@@ -186,7 +186,7 @@
                                   <div class="input-group">
                                     <div class="custom-file">
                                       <input type="file" class="custom-file-input" name="estudio_afiliacion" id="estudio_afiliacion">
-                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
                                     </div>
                                   </div>
                                 </div>
@@ -197,7 +197,7 @@
                                   <div class="input-group">
                                     <div class="custom-file">
                                       <input type="file" class="custom-file-input" name="rut" id="rut">
-                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
                                     </div>
                                   </div>
                                 </div>
@@ -210,7 +210,7 @@
                                   <div class="input-group">
                                     <div class="custom-file">
                                       <input type="file" class="custom-file-input" name="camara_comercio" id="camara_comercio">
-                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
                                     </div>
                                   </div>
                                 </div>
@@ -221,7 +221,7 @@
                                   <div class="input-group">
                                     <div class="custom-file">
                                       <input type="file" class="custom-file-input" name="fechas_birthday" id="fechas_birthday">
-                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                      <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
                                     </div>
                                   </div>
                                 </div>

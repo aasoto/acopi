@@ -65,12 +65,6 @@ class EmpleadosController extends Controller
 				return $rol;
 			})
 
-    		->addColumn('ver_archivos', function($data){
-    				$pagina_web = PaginaWebModel::all();
-    				$ver_archivos = "<a href='".$pagina_web[0]["servidor"]."".$data->documentos_empleado."'>Ver documentación</a>";
-    				return $ver_archivos;
-			})
-
 			->addColumn('procedimientos', function($data){
     				$procedimientos = '
     				<div class="btn-group">
@@ -80,7 +74,7 @@ class EmpleadosController extends Controller
 						<a href="'.url()->current().'/'.$data->id.'" title="Editar" class="btn btn-warning btn-sm editarAfiliado">
 							<i class="fas fa-pencil-alt text-white"></i>
 						<a>
-						<button class="btn btn-danger btn-sm eliminarEmpleado" title="Eliminar" action="'.url()->current().'/'.$data->id.'" method="DELETE" archivos="'.$data->documentos_empleado.'" cedula="'.$data->documentos_empleado.'" pagina="empleados/general" token="'.csrf_token().'">
+						<button class="btn btn-danger btn-sm eliminarEmpleado" title="Eliminar" action="'.url()->current().'/'.$data->id.'" method="DELETE" foto="'.$data->foto.'" hoja_de_vida="'.$data->hoja_de_vida.'" cedula="'.$data->cedula.'" pagina="empleados/general" token="'.csrf_token().'">
 						<i class="fas fa-trash-alt"></i>
 						</button>
 
@@ -89,7 +83,7 @@ class EmpleadosController extends Controller
 				return $procedimientos;
 			})
 
-			  ->rawColumns(['type_document', 'nombre', 'sexo', 'rol', 'ver_archivos', 'procedimientos'])
+			  ->rawColumns(['type_document', 'nombre', 'sexo', 'rol', 'procedimientos'])
 			  -> make(true);
 
 		}
@@ -109,7 +103,9 @@ class EmpleadosController extends Controller
     		'fecha_nacimiento' => $request->input("fecha_nacimiento"),
     		'id_rol' => $request->input("id_rol"),
     		'estado' => $request->input("estado"),
-    		'archivos' => $request->file("archivos")
+            'foto' => $request->file("foto"),
+    		'hoja_de_vida' => $request->file("hoja_de_vida"),
+            'cedula' => $request->file("cedula")
     	);
 
     	/*echo '<pre>'; print_r($datos); echo '</pre>';
@@ -140,15 +136,76 @@ class EmpleadosController extends Controller
 						return redirect("/empleados/general")->with("no-validacion", "");
 					}
     			}
-    			if (!empty($datos["archivos"])) {
-    				if ($datos["archivos"]->guessExtension() == "zip") {
-    					$aleatorio = mt_rand(1000000, 9999999);
-						$ruta_archivos = "vistas/images/empleados/documentos/".$aleatorio.".".$datos["archivos"]->guessExtension();
-						move_uploaded_file($datos["archivos"], $ruta_archivos);
+
+                if (!empty($datos["foto"])) {
+                    $validar_Foto = \Validator::make($datos, ['foto' => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+                    if ($validar_Foto->fails()) {
+                        return redirect("/empleados/general")->with("no-foto", "");
+                    } else {
+                        $aleatorio_Foto = mt_rand(1000000,9999999);  
+
+                        $rutaFoto = "vistas/documentos/empleados/fotos/".$aleatorio_Foto.".".$datos["foto"]->guessExtension();
+
+                        /*----------  Redimensionar foto de perfil  ----------*/
+                        list($ancho, $alto) = getimagesize($datos["foto"]);
+                        $nuevoAncho = 400;
+                        $nuevoAlto = 500;
+
+                        if(($datos["foto"]->guessExtension() == "jpeg") || ($datos["foto"]->guessExtension() == "jpg")){
+
+                            $origen = imagecreatefromjpeg($datos["foto"]);
+                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                            imagejpeg($destino, $rutaFoto);
+
+                        }
+
+                        if($datos["foto"]->guessExtension() == "png"){
+
+                            $origen = imagecreatefrompng($datos["foto"]);
+                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                            imagealphablending($destino, FALSE); 
+                            imagesavealpha($destino, TRUE);
+                            imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                            imagepng($destino, $rutaFoto);
+                            
+                        }
+                    }
+                    
+                } else {
+                    $rutaFoto =  "";
+                }
+
+    			if (!empty($datos["hoja_de_vida"])) {
+    				if ($datos["hoja_de_vida"]->guessExtension() == "pdf") {
+    					$aleatorio_hoja_de_vida = mt_rand(1000000, 9999999);
+						$ruta_hoja_de_vida = "vistas/documentos/empleados/hojas-de-vida/".$aleatorio_hoja_de_vida.".".$datos["hoja_de_vida"]->guessExtension();
+						move_uploaded_file($datos["hoja_de_vida"], $ruta_hoja_de_vida);
     				} else {
-    					return redirect("/empleados/general")->with("no-zip", "");
+    					return redirect("/empleados/general")->with("no-pdf", "");
     				}
-    			}
+    			} else {
+                    $ruta_hoja_de_vida = "";
+                }
+
+                if (!empty($datos["cedula"])) {
+                    if ($datos["cedula"]->guessExtension() == "pdf") {
+                        $aleatorio_cedula = mt_rand(1000000, 9999999);
+                        $ruta_cedula = "vistas/documentos/empleados/cedulas/".$aleatorio_cedula.".".$datos["cedula"]->guessExtension();
+                        move_uploaded_file($datos["cedula"], $ruta_cedula);
+                    } else {
+                        $validar_cedula = \Validator::make($datos, ['cedula' => 'required|image|mimes:jpg,jpeg,png|max:7000000']);
+                        if ($validar_cedula->fails()) {
+                            return redirect("/empleados/general")->with("no-cedula", "");
+                        } else {
+                            $aleatorio_cedula = mt_rand(1000000,9999999);  
+                            $ruta_cedula = "vistas/documentos/empleados/cedulas/".$aleatorio_cedula.".".$datos["cedula"]->guessExtension();
+                            move_uploaded_file($datos["cedula"], $ruta_cedula);
+                        }
+                    }
+                } else {
+                    $ruta_cedula = "";
+                }
 
     			$empleado = new EmpleadosModel();
 
@@ -162,7 +219,9 @@ class EmpleadosController extends Controller
     			$empleado->fecha_nacimiento = $datos["fecha_nacimiento"];
     			$empleado->id_rol = $datos["id_rol"];
     			$empleado->estado = $datos["estado"];
-    			$empleado->documentos_empleado = $ruta_archivos;
+                $empleado->foto = $rutaFoto;
+    			$empleado->hoja_de_vida = $ruta_hoja_de_vida;
+                $empleado->cedula = $ruta_cedula;
 
     			$empleado->save();
 
@@ -185,8 +244,13 @@ class EmpleadosController extends Controller
     	$roles = RolesModel::all();
         
         if(count($empleado) != 0){
-
-            return view("paginas.empleados.general", array("status"=>200, "empleado"=>$empleado, "empleados"=>$empleados, "generos" => $generos, "tipos_documentos" => $tipos_documentos, "roles" => $roles));
+            $pdf = strpos($empleado[0]["cedula"], "pdf");
+            if ($pdf !== false) {
+                $tipo_cedula = "pdf";
+            } else {
+                $tipo_cedula = "imagen";
+            }
+            return view("paginas.empleados.general", array("status"=>200, "empleado"=>$empleado, "empleados"=>$empleados, "generos" => $generos, "tipos_documentos" => $tipos_documentos, "roles" => $roles, "tipo_cedula"=>$tipo_cedula));
         
         }else{ 
 
@@ -206,8 +270,12 @@ class EmpleadosController extends Controller
     		'fecha_nacimiento' => $request->input("fecha_nacimiento"),
     		'id_rol' => $request->input("id_rol"),
     		'estado' => $request->input("estado"),
-    		'archivos_actuales' => $request->input("archivos_actuales"),
-    		'archivos_nuevos' => $request->file("archivos")
+            'foto_actual' => $request->input("foto_actual"),
+            'foto_nueva' => $request->file("foto"),
+    		'hoja_de_vida_actual' => $request->input("hoja_de_vida_actual"),
+    		'hoja_de_vida_nueva' => $request->file("hoja_de_vida"),
+            'cedula_actual' => $request->input("cedula_actual"),
+            'cedula_nueva' => $request->file("cedula")
     	);
 
     	/*echo '<pre>'; print_r($datos); echo '</pre>';
@@ -238,20 +306,85 @@ class EmpleadosController extends Controller
 						return redirect("/empleados/general")->with("no-validacion", "");
 					}
     			}
-    			if (!empty($datos["archivos_nuevos"])) {
-                    if (!empty($datos["archivos_actuales"])) {
-                        unlink($datos["archivos_actuales"]);
+
+                if (!empty($datos["foto_nueva"])) {
+                    $validar_Foto_Nueva = \Validator::make($datos, ['foto_nueva' => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+                    if ($validar_Foto_Nueva->fails()) {
+                        return redirect("/empleados/general")->with("no-foto", "");
+                    } else {
+                        if (!empty($datos["foto_actual"])) {
+                            unlink($datos["foto_actual"]);
+                        }
+                        $aleatorio_Foto_Nueva = mt_rand(1000000,9999999);  
+
+                        $rutaFoto_Nueva = "vistas/documentos/empleados/fotos/".$aleatorio_Foto_Nueva.".".$datos["foto_nueva"]->guessExtension();
+
+                        /*----------  Redimensionar foto de perfil  ----------*/
+                        list($ancho, $alto) = getimagesize($datos["foto_nueva"]);
+                        $nuevoAncho = 400;
+                        $nuevoAlto = 500;
+
+                        if(($datos["foto_nueva"]->guessExtension() == "jpeg") || ($datos["foto_nueva"]->guessExtension() == "jpg")){
+
+                            $origen = imagecreatefromjpeg($datos["foto_nueva"]);
+                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                            imagejpeg($destino, $rutaFoto_Nueva);
+
+                        }
+
+                        if($datos["foto_nueva"]->guessExtension() == "png"){
+
+                            $origen = imagecreatefrompng($datos["foto_nueva"]);
+                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                            imagealphablending($destino, FALSE); 
+                            imagesavealpha($destino, TRUE);
+                            imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                            imagepng($destino, $rutaFoto_Nueva);
+                            
+                        }
                     }
-    				if ($datos["archivos_nuevos"]->guessExtension() == "zip") {
+                    
+                } else {
+                    $rutaFoto_Nueva = $datos["foto_actual"];
+                }
+
+    			if (!empty($datos["hoja_de_vida_nueva"])) {
+                    if (!empty($datos["hoja_de_vida_actual"])) {
+                        unlink($datos["hoja_de_vida_actual"]);
+                    }
+    				if ($datos["hoja_de_vida_nueva"]->guessExtension() == "pdf") {
     					$aleatorio = mt_rand(1000000, 9999999);
-						$ruta_archivos = "vistas/images/empleados/documentos/".$aleatorio.".".$datos["archivos_nuevos"]->guessExtension();
-						move_uploaded_file($datos["archivos_nuevos"], $ruta_archivos);
+						$ruta_hoja_de_vida = "vistas/documentos/empleados/hojas-de-vida/".$aleatorio.".".$datos["hoja_de_vida_nueva"]->guessExtension();
+						move_uploaded_file($datos["hoja_de_vida_nueva"], $ruta_hoja_de_vida);
     				} else {
-    					return redirect("/empleados/general")->with("no-zip", "");
+    					return redirect("/empleados/general")->with("no-pdf", "");
     				}
     			} else {
-    				$ruta_archivos = $datos["archivos_actuales"];
+    				$ruta_hoja_de_vida = $datos["hoja_de_vida_actual"];
     			}
+
+                if (!empty($datos["cedula_nueva"])) {
+                    if ($datos["cedula_nueva"]->guessExtension() == "pdf") {
+                        $aleatorio_cedula = mt_rand(1000000, 9999999);
+                        $ruta_cedula = "vistas/documentos/empleados/cedulas/".$aleatorio_cedula.".".$datos["cedula_nueva"]->guessExtension();
+                        move_uploaded_file($datos["cedula_nueva"], $ruta_cedula);
+                    } else {
+                        $validar_cedula = \Validator::make($datos, ['cedula_nueva' => 'required|image|mimes:jpg,jpeg,png|max:7000000']);
+                        if ($validar_cedula->fails()) {
+                            return redirect("/empleados/general")->with("no-cedula", "");
+                        } else {
+                            $aleatorio_cedula = mt_rand(1000000,9999999);  
+                            $ruta_cedula = "vistas/documentos/empleados/cedulas/".$aleatorio_cedula.".".$datos["cedula_nueva"]->guessExtension();
+                            move_uploaded_file($datos["cedula_nueva"], $ruta_cedula);
+                        }
+                    }
+                    if (!empty($datos["cedula_actual"])) {
+                        unlink($datos["cedula_actual"]);
+                    }
+                } else {
+                    $ruta_cedula = $datos["cedula_actual"];
+                }
 
     			$actualizar = array(
     				'tipo_documento' => $datos["tipo_documento"],
@@ -264,7 +397,9 @@ class EmpleadosController extends Controller
     				'fecha_nacimiento' => $datos["fecha_nacimiento"],
     				'id_rol' => $datos["id_rol"],
     				'estado' => $datos["estado"],
-    				'documentos_empleado' => $ruta_archivos 
+                    'foto' => $rutaFoto_Nueva,
+    				'hoja_de_vida' => $ruta_hoja_de_vida,
+                    'cedula' => $ruta_cedula
     			);
 
     			$empleado = EmpleadosModel::where("id", $id)->update($actualizar);

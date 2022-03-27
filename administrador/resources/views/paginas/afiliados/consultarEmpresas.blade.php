@@ -437,7 +437,7 @@
                             <div class="custom-file">
                               <input type="file" class="custom-file-input" name="acta_compromiso" id="acta_compromiso">
                               @if ($value["acta_compromiso"] == "")
-                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
                               @else
                                 <label class="custom-file-label" for="exampleInputFile">acta_compromiso_{{$value["nit_empresa"]}}.pdf</label>
                               @endif
@@ -455,7 +455,7 @@
                             <div class="custom-file">
                               <input type="file" class="custom-file-input" name="estudio_afiliacion" id="estudio_afiliacion">
                               @if ($value["estudio_afiliacion"] == "")
-                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
                               @else
                                 <label class="custom-file-label" for="exampleInputFile">estudio_afiliacion_{{$value["nit_empresa"]}}.pdf</label>
                               @endif
@@ -471,7 +471,7 @@
                             <div class="custom-file">
                               <input type="file" class="custom-file-input" name="rut" id="rut">
                               @if ($value["rut"] == "")
-                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
                               @else
                                 <label class="custom-file-label" for="exampleInputFile">rut_{{$value["nit_empresa"]}}.pdf</label>
                               @endif
@@ -489,7 +489,7 @@
                             <div class="custom-file">
                               <input type="file" class="custom-file-input" name="camara_comercio" id="camara_comercio">
                               @if ($value["camara_comercio"] == "")
-                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
                               @else
                                 <label class="custom-file-label" for="exampleInputFile">camara_comercio_{{$value["nit_empresa"]}}.pdf</label>
                               @endif
@@ -505,7 +505,7 @@
                             <div class="custom-file">
                               <input type="file" class="custom-file-input" name="fechas_birthday" id="fechas_birthday">
                               @if ($value["fechas_birthday"] == "")
-                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
                               @else
                                 <label class="custom-file-label" for="exampleInputFile">fechas_birthday_{{$value["nit_empresa"]}}.pdf</label>
                               @endif

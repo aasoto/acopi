@@ -170,7 +170,7 @@
             =====================================-->
             @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Asistente de dirección'))
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ url('documentos/inicio') }}" class="nav-link">
                   <i class="nav-icon fas fa-file-pdf"></i>
                   <p>
                     Documentos

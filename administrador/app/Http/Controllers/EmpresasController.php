@@ -155,7 +155,7 @@ class EmpresasController extends Controller
                             <i class='fas fa-pencil-alt text-white'></i>
                         </a>
 
-                        <button class='btn btn-danger btn-sm eliminarEmpresa' title='Eliminar empresa' action='".url()->current()."/".$data->id_empresa."' method='DELETE' pagina='afiliados/consultarEmpresas' token='".csrf_token()."'>
+                        <button class='btn btn-danger btn-sm eliminarEmpresa' title='Eliminar empresa' action='".url()->current()."/".$data->id_empresa."' carta_bienvenida='".$data->carta_bienvenida."' acta_compromiso='".$data->acta_compromiso."' estudio_afiliacion='".$data->estudio_afiliacion."' rut='".$data->rut."' camara_comercio='".$data->camara_comercio."' fechas_birthday='".$data->fechas_birthday."'  method='DELETE' pagina='afiliados/consultarEmpresas' token='".csrf_token()."'>
                         <i class='fas fa-trash-alt'></i>
                         </button>
 

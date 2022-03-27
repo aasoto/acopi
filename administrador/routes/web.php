@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::view('/', 'paginas.inicio');
 Route::view('/pagina_web/inicio', 'paginas.pagina_web.inicio');
 Route::view('/afiliados/inicio', 'paginas.afiliados.inicio');
+Route::view('/documentos/inicio', 'paginas.documentos.inicio');
 
 /*==================================================
 =            Rutas de módulo página web            =
@@ -121,5 +122,11 @@ Route::resource('/citas/general', 'CitasController');
 
 /*----------  Empleados y pasantes  ----------*/
 Route::resource('/empleados/general', 'EmpleadosController');
+Route::resource('/empleados/exportar', 'ExportarController');
+
+/*----------  Documentos  ----------*/
+Route::resource('/documentos/empresas', 'DocumentosController');
+Route::resource('/documentos/empleados', 'DocumentosController');
+
 
 /*=====  End of Rutas que incluyen todos los metodos HTML  ======*/

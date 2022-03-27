@@ -158,7 +158,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Tipo de documento</label>
-                            <select class="form-control select2" name="tipo_documento" id="tipo_documento" style="width: 100%;" required>
+                            <select class="form-control select2bs4" name="tipo_documento" id="tipo_documento" style="width: 100%;" required>
                               <option selected="sin verificar"><i>Seleccionar tipo de documento...</i></option>
                               <option value="cedula">Cédula de Ciudadanía</option>
                               <option value="pasaporte">Pasaporte</option>
@@ -205,7 +205,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Sexo</label>
-                            <select class="form-control select2" name="sexo" id="sexo" style="width: 100%;" required>
+                            <select class="form-control select2bs4" name="sexo" id="sexo" style="width: 100%;" required>
                               <option selected="sin verificar"><i>Seleccionar sexo...</i></option>
                               <option value="m">Masculino</option>
                               <option value="f">Femenino</option>
@@ -233,34 +233,60 @@
                           </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          
-                          <div class="form-group my-2 text-center">
-                            <label for="exampleInputPassword1">Foto afiliado</label><br>
-                            <div class="btn btn-default btn-file mb-3">
-                              <i class="fas fa-paperclip"></i> Adjuntar foto
-                              <input type="file" name="foto">
-                            </div>
-                            <br>
-                            <img src="{{ url('/') }}/vistas/images/afiliados/unknown.png" class="img-fluid py-2 bg-secondary previsualizarImg_foto">
-                            <p class="help-block small mt-3">Dimensiones: 700px * 200px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                          </div>
+                      <div class="card">
+                        <div class="card-header">
+                          <div class="card-title">Adjuntar archivos</div>
                         </div>
-                        <div class="col-md-6">
-                          
-                          <div class="form-group my-2 text-center">
-                            <label for="exampleInputPassword1">Foto de documento de identidad</label><br>
-                            <div class="btn btn-default btn-file mb-3">
-                              <i class="fas fa-paperclip"></i> Adjuntar documento
-                              <input type="file" name="archivo_documento" required>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-6">
+                              
+                              <div class="form-group my-2">
+                                <label for="exampleInputPassword1">Foto afiliado</label><br>
+                                {{--<div class="btn btn-default btn-file mb-3">
+                                  <i class="fas fa-paperclip"></i> Adjuntar foto
+                                  <input type="file" name="foto">
+                                </div>--}}
+                                <div class="input-group">
+                                  <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="foto" id="foto">
+                                    <label class="custom-file-label" for="exampleInputFile">Seleccionar foto formato JPG, JPEG o PNG</label>
+                                  </div>
+                                </div>
+                                <br>
+                                <div class="text-center">
+                                  <img src="" class="img-fluid py-2 bg-secondary previsualizarImg_foto">
+                                  <p class="help-block small mt-3">Dimensiones: 700px * 200px | Peso Max. 2MB | Formato: JPG o PNG</p>
+                                </div>
+                              </div>
                             </div>
-                            <br>
-                            <img src="{{ url('/') }}/vistas/images/afiliados/address-card.png" class="img-fluid py-2 bg-secondary previsualizarImg_archivo_documento">
-                            <p class="help-block small mt-3">Dimensiones: 700px * 200px para imagenes | Peso Max. 2MB | Formato: JPG, PNG o PDF</p>
+                            <div class="col-md-6">
+                              
+                              <div class="form-group my-2">
+                                <label for="exampleInputPassword1">Documento de identidad</label>
+                                <br>
+                                {{--<div class="btn btn-default btn-file mb-3">
+                                  <i class="fas fa-paperclip"></i> Adjuntar documento
+                                  <input type="file" name="archivo_documento" required>
+                                </div>--}}
+                                <div class="input-group">
+                                  <div class="custom-file">
+                                    <input type="file" class="custom-file-input" name="archivo_documento" id="archivo_documento">
+                                    <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato JPG, JPEG, PNG o PDF</label>
+                                  </div>
+                                </div>
+                                <br>
+                                <div class="text-center">
+                                  <img src="" class="img-fluid py-2 bg-secondary previsualizarImg_archivo_documento">
+                                  <div class="form-group text-center logoPDF"></div>
+                                  <p class="help-block small mt-3">Dimensiones: 700px * 200px para imagenes | Peso Max. 2MB | Formato: JPG, PNG o PDF</p>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
+                      
                     </div>
                     <div class="card-footer">
                       <div class="col-md-12 text-center">
@@ -295,7 +321,7 @@
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header bg-warning">
-              <h4 class="modal-title">Editar Entrevista</h4>
+              <h4 class="modal-title">Editar Afiliado</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -308,7 +334,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Tipo de documento</label>
-                        <select class="form-control select2" name="tipo_documento" id="tipo_documento" style="width: 100%;" required>
+                        <select class="form-control select2bs4" name="tipo_documento" id="tipo_documento" style="width: 100%;" required>
                           <option value="{{$value["tipo_documento_rprt"]}}">
                             @if ($value["tipo_documento_rprt"] == "cedula")
                               Cédula de Ciudadanía
@@ -365,7 +391,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="exampleInputEmail1">Sexo</label>
-                        <select class="form-control select2" name="sexo" id="sexo" style="width: 100%;" required>
+                        <select class="form-control select2bs4" name="sexo" id="sexo" style="width: 100%;" required>
                           <option value="{{$value["sexo_rprt"]}}"><i>
                             @if ($value["sexo_rprt"] == "m")
                               Masculino
@@ -400,46 +426,76 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      
-                      <div class="form-group my-2 text-center">
-                        <label for="exampleInputPassword1">Foto afiliado</label><br>
-                        <div class="btn btn-default btn-file mb-3">
-                          <i class="fas fa-paperclip"></i> Adjuntar foto
-                          <input type="hidden" value="{{$value["foto_rprt"]}}" name="foto_actual">
-                          <input type="file" name="foto">
-                        </div>
-                        <br>
-                        @if ($value["foto_rprt"] == "")
-                          <img src="{{ url('/') }}/vistas/images/afiliados/unknown.png" class="img-fluid py-2 bg-secondary previsualizarImg_foto">
-                        @else
-                          <img src="{{ url('/') }}/{{$value["foto_rprt"]}}" class="img-fluid py-2 bg-secondary previsualizarImg_foto">
-                        @endif
-                        
-                        <p class="help-block small mt-3">Dimensiones: 200px * 200px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                      </div>
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Adjuntar archivos</div>
                     </div>
-                    <div class="col-md-6">
-                      
-                      <div class="form-group my-2 text-center">
-                        <label for="exampleInputPassword1">Foto de documento de identidad</label><br>
-                        <div class="btn btn-default btn-file mb-3">
-                          <i class="fas fa-paperclip"></i> Adjuntar documento
-                          <input type="hidden" name="archivo_documento_actual" value="{{$value["foto_cedula_rprt"]}}">
-                          <input type="file" name="archivo_documento">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          
+                          <div class="form-group my-2">
+                            <label for="exampleInputPassword1">Foto afiliado</label><br>
+                            {{--<div class="btn btn-default btn-file mb-3">
+                              <i class="fas fa-paperclip"></i> Adjuntar foto
+                              <input type="hidden" value="{{$value["foto_rprt"]}}" name="foto_actual">
+                              <input type="file" name="foto">
+                            </div>--}}
+                            <input type="hidden" value="{{$value["foto_rprt"]}}" name="foto_actual">
+                            <div class="input-group">
+                              <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="foto" id="foto">
+                                <label class="custom-file-label" for="exampleInputFile">foto_afiliado_{{$value["cc_rprt_legal"]}}</label>
+                              </div>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                              @if ($value["foto_rprt"] == "")
+                                <img src="" class="img-fluid py-2 bg-secondary previsualizarImg_foto">
+                              @else
+                                <img src="{{ url('/') }}/{{$value["foto_rprt"]}}" class="img-fluid py-2 bg-secondary previsualizarImg_foto">
+                              @endif
+                              <p class="help-block small mt-3">Dimensiones: 200px * 200px | Peso Max. 2MB | Formato: JPG o PNG</p>
+                            </div>
+                          </div>
                         </div>
-                        <br>
-                        @if ($value["foto_cedula_rprt"] == "")
-                          <img src="{{ url('/') }}/vistas/images/afiliados/address-card.png" class="img-fluid py-2 bg-secondary previsualizarImg_archivo_documento">
-                        @else
-                          <img src="{{ url('/') }}/{{$value["foto_cedula_rprt"]}}" class="img-fluid py-2 bg-secondary previsualizarImg_archivo_documento">
-                        @endif
-                       
-                        <p class="help-block small mt-3">Peso Max. 2MB | Formato: JPG, PNG</p>
+                        <div class="col-md-6">
+                          
+                          <div class="form-group my-2">
+                            <label for="exampleInputPassword1">Foto de documento de identidad</label>
+                            {{--<div class="btn btn-default btn-file mb-3">
+                              <i class="fas fa-paperclip"></i> Adjuntar documento
+                              <input type="hidden" name="archivo_documento_actual" value="{{$value["foto_cedula_rprt"]}}">
+                              <input type="file" name="archivo_documento">
+                            </div>--}}
+                            <input type="hidden" name="archivo_documento_actual" value="{{$value["foto_cedula_rprt"]}}">
+                            <div class="input-group">
+                              <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="archivo_documento" id="archivo_documento">
+                                <label class="custom-file-label" for="exampleInputFile">documento_identidad_{{$value["cc_rprt_legal"]}}</label>
+                              </div>
+                            </div>
+                            <br>
+                            <div class="text-center">
+                              @if ($tipo_cedula == "pdf")
+                                <iframe src="{{ url('/') }}/{{$value["foto_cedula_rprt"]}}" style="width: 80%; height: 400px;"></iframe>
+                              @endif
+                              @if ($tipo_cedula == "imagen")
+                                @if ($value["foto_cedula_rprt"] == "")
+                                  <img src="" class="img-fluid py-2 bg-secondary previsualizarImg_archivo_documento">
+                                @else
+                                  <img src="{{ url('/') }}/{{$value["foto_cedula_rprt"]}}" class="img-fluid py-2 bg-secondary previsualizarImg_archivo_documento">
+                                @endif
+                              @endif
+                              <p class="help-block small mt-3">Peso Max. 2MB | Formato: JPG, PNG o PDF</p>
+                            </div>
+                           
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
+                  
               </div>
               <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default bg-danger" data-dismiss="modal">Cerrar</button>
@@ -465,6 +521,18 @@
 
 <!--====  End of Editar Afiliado  ====-->
 
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+    //File-input
+    bsCustomFileInput.init();
+  })
+</script>
 
   @if (Session::has("no-validacion"))
 <script>

@@ -1228,6 +1228,12 @@ $(document).on("click", ".eliminarEmpresa", function(){
   	//var token = $(this).children("[name='_token']").attr("value");
   	var token = $(this).attr("token");
 
+  	var carta_bienvenida = $(this).attr("carta_bienvenida");
+  	var acta_compromiso = $(this).attr("acta_compromiso");
+  	var estudio_afiliacion = $(this).attr("estudio_afiliacion");
+  	var rut = $(this).attr("rut");
+  	var camara_comercio = $(this).attr("camara_comercio");
+  	var fechas_birthday = $(this).attr("fechas_birthday");
 
   	swal({
   		 title: '¿Está seguro de eliminar esta empresa?',
@@ -1241,6 +1247,20 @@ $(document).on("click", ".eliminarEmpresa", function(){
   	}).then(function(result){
 
   		if(result.value){
+
+  			var datos = "carta_bienvenida="+carta_bienvenida+"&acta_compromiso="+acta_compromiso+"&estudio_afiliacion="+estudio_afiliacion+"&rut="+rut+"&camara_comercio="+camara_comercio+"&fechas_birthday="+fechas_birthday;
+  			$.ajax({
+				url: ruta+"/ajax/empresas.php",
+				method: "POST",
+				data: datos,
+
+			}).done(function(respuesta){
+				console.log("Hecho");
+			}).fail(function(){
+				console.log("Error");
+			}).always(function(){
+				console.log("Completado");
+			});
 
   			var datos = new FormData();
   			datos.append("_method", method);
@@ -1950,8 +1970,9 @@ $(document).on("click", ".eliminarEmpleado", function(){
   	//var token = $(this).children("[name='_token']").attr("value");
   	var token = $(this).attr("token");
 
-  	var archivos = $(this).attr("archivos");
-  	console.log("archivos: ", archivos);
+  	var foto = $(this).attr("foto");
+  	var hoja_de_vida = $(this).attr("hoja_de_vida");
+  	var cedula = $(this).attr("cedula");
 
   	swal({
   		 title: '¿Está seguro de eliminar este empleado o pasante?',
@@ -1965,7 +1986,7 @@ $(document).on("click", ".eliminarEmpleado", function(){
   	}).then(function(result){
 
   		if(result.value){
-  			var datos = "archivos="+archivos;
+  			var datos = "foto="+foto+"&hoja_de_vida="+hoja_de_vida+"&cedula="+cedula;
   			$.ajax({
 				url: ruta+"/ajax/empleados.php",
 				method: "POST",

@@ -40,6 +40,11 @@
                   <button type="button" class="btn btn-success col-md-5 agregarEmpleadoPasante">
                     <i class="fas fa-plus"></i> Agregar nuevo empleado o pasante
                   </button>
+                  <a href="{{ url('/') }}/empleados/exportar">
+                    <button type="button" class="btn btn-primary col-md-5">
+                      <i class="fas fa-table"></i> Exportar datos
+                    </button>
+                  </a>
                 </div>
                 <br>
                 <table id="tablaEmpleados" class="table table-bordered table-striped">
@@ -52,7 +57,6 @@
                       <th>Sexo</th>
                       <th>Fecha nacimiento</th>
                       <th>Área</th>
-                      <th>Archivos</th>
                       <th>Procedimientos</th>
                     </tr>
                   </thead>
@@ -67,7 +71,6 @@
                       <th>Sexo</th>
                       <th>Fecha nacimiento</th>
                       <th>Área</th>
-                      <th>Archivos</th>
                       <th>Procedimientos</th>
                     </tr>
                   </tfoot>
@@ -181,16 +184,47 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 text-center">
-                      <label>Archivos</label>
-                      <div class="input-group">
-                        <div class="custom-file">
-                          <input type="file" class="custom-file-input" name="archivos" id="archivos">
-                          <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo zip con todos los documentos</label>
+                  <div class="card">
+                    <div class="card-header">
+                      <div class="card-title">Adjuntar archivos</div>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label>Foto</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="foto" id="foto">
+                              <label class="custom-file-label" for="exampleInputFile">Seleccionar imagen formato JPG, JPEG o PNG</label>
+                            </div>
+                          </div>
+                          <div class="form-group my-2 text-center">
+                            <img class="previsualizarImg_foto img-fluid py-2">
+                            <p class="help-block small">Dimensiones: 500px * 400px | Peso Max. 2MB | Formato: JPG o PNG</p>
+                          </div>
                         </div>
-                        <div class="input-group-append">
-                          <span class="input-group-text">Actualizar</span>
+                        <div class="col-md-6">
+                          <label>Hoja de vida</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="hoja_de_vida" id="hoja_de_vida">
+                              <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo PDF</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label>Archivo documento de identidad</label>
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="cedula" id="cedula">
+                              <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo PDF, JPG o PNG</label>
+                            </div>
+                          </div>
+                          <div class="form-group my-2 text-center">
+                            <img class="previsualizarImg_cedula img-fluid py-2">
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -334,22 +368,99 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-12 text-center">
-                  <label>Archivos</label>
-                  <input type="hidden" name="archivos_actuales" id="archivos_actuales" value="{{$value["documentos_empleado"]}}">
-                  <div class="input-group">
-                    <div class="custom-file">
-                      <input type="file" class="custom-file-input" name="archivos" id="archivos">
-                      @if ($value["documentos_empleado"] == "")
-                        <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo zip con todos los documentos</label>
-                      @else
-                        <label class="custom-file-label" for="exampleInputFile">{{$value["documentos_empleado"]}}</label>
-                      @endif
-                      
+              <div class="card">
+                <div class="card-header">
+                  <div class="card-title">Adjuntar archivos</div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Foto</label>
+                      <input type="hidden" name="foto_actual" id="foto_actual" value="{{$value["foto"]}}">
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" name="foto" id="foto">
+                          @if ($value["foto"] == "")
+                            <label class="custom-file-label" for="exampleInputFile">Seleccionar imagen formato JPG, JPEG o PNG</label>
+                          @else
+                            <label class="custom-file-label" for="exampleInputFile">foto_{{$value["num_documento"]}}</label>
+                          @endif
+                        </div>
+                      </div>
+                      <div class="form-group my-2 text-center">
+                        @if ($value["foto"] == "")
+                          <img src="" class="previsualizarImg_foto img-fluid py-2">
+                          <p class="help-block small">Dimensiones: 500px * 400px | Peso Max. 2MB | Formato: JPG o PNG</p>
+                        @else
+                          <img src="{{ url('/') }}/{{$value["foto"]}}" class="previsualizarImg_foto img-fluid py-2">
+                          <p class="help-block small">Dimensiones: 500px * 400px | Peso Max. 2MB | Formato: JPG o PNG</p>
+                        @endif
+                        
+                      </div>
                     </div>
-                    <div class="input-group-append">
-                      <span class="input-group-text">Actualizar</span>
+                    <div class="col-md-6">
+                      <label>Hoja de vida</label>
+                      <input type="hidden" name="hoja_de_vida_actual" id="hoja_de_vida_actual" value="{{$value["hoja_de_vida"]}}">
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" name="hoja_de_vida" id="hoja_de_vida">
+                          @if ($value["hoja_de_vida"] == "")
+                            <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
+                          @else
+                            <label class="custom-file-label" for="exampleInputFile">hoja_de_vida_{{$value["num_documento"]}}.pdf</label>
+                          @endif
+                        </div>
+                      </div>
+                      @if ($value["hoja_de_vida"] == "")
+                        <div class="form-group text-center">
+                          <i class="fas fa-file" style="color: #adb5bd; font-size: 100px;"></i>
+                          <br>
+                          <h4>Hoja de vida no encontrada</h4>
+                        </div>
+                      @else
+                        <iframe src="{{ url('/') }}/{{$value["hoja_de_vida"]}}" style="width: 80%; height: 400px;"></iframe>
+                      @endif
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Archivo documento de identidad</label>
+                      <input type="hidden" name="cedula_actual" id="cedula_actual" value="{{$value["cedula"]}}">
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" name="cedula" id="cedula">
+                          @if ($value["cedula"] == "")
+                            <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo PDF, JPG o PNG</label>
+                          @else
+                            <label class="custom-file-label" for="exampleInputFile">documento_{{$value["num_documento"]}}</label>
+                          @endif
+                        </div>
+                      </div>
+                      <div class="form-group my-2 text-center">
+                        @if ($tipo_cedula == "pdf")
+                          @if ($value["cedula"] == "")
+                            <div class="form-group text-center">
+                              <i class="fas fa-file" style="color: #adb5bd; font-size: 100px;"></i>
+                              <br>
+                              <h4>Cedula no encontrada</h4>
+                            </div>
+                          @else
+                            <iframe src="{{ url('/') }}/{{$value["cedula"]}}" style="width: 80%; height: 400px;"></iframe>
+                          @endif
+                        @endif
+                        @if($tipo_cedula == "imagen")
+                          @if ($value["cedula"] == "")
+                            <div class="form-group text-center">
+                              <img src="" class="previsualizarImg_cedula img-fluid py-2">
+                            </div>
+                          @else
+                            <img src="{{ url('/') }}/{{$value["cedula"]}}" class="previsualizarImg_cedula img-fluid py-2">
+                          @endif
+                        @endif
+                        @if (($tipo_cedula != "pdf") && ($tipo_cedula != "imagen"))
+                          <img src="" class="previsualizarImg_cedula img-fluid py-2">
+                        @endif
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -425,11 +536,20 @@
   });
 </script>
 @endif
-@if (Session::has("no-zip"))
+@if (Session::has("no-pdf"))
 <script>
   swal({
     title: "¡Error!",
-    text: "El archivo que usted acaba de ingresar está en un formato no permitido, por favor ingrese solo archivos comprimidos en formato ZIP, extensión .zip",
+    text: "El archivo que usted acaba de ingresar está en un formato no permitido, por favor ingrese solo archivos en formato PDF, extensión .pdf",
+    type: "error"
+  });
+</script>
+@endif
+@if (Session::has("no-foto"))
+<script>
+  swal({
+    title: "¡Error!",
+    text: "El archivo que usted acaba de ingresar está en un formato no permitido, por favor ingrese solo fotos en formato JPG o PNG, extensión .jpg, .jpeg o .png",
     type: "error"
   });
 </script>

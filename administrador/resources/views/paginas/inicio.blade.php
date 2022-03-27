@@ -134,7 +134,7 @@
               <div class="icon">
                 <i class="fas fa-file-pdf"></i>
               </div>
-              <a href="#" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('documentos/inicio') }}" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
         </div>
