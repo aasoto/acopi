@@ -36,9 +36,19 @@
         </div>
         <div class="card-body">
           <div class="col-md-12 text-center">
-            <button class="btn btn-default col-md-6" data-toggle="modal" data-target="#crearEvento">
+            {{--<button class="btn btn-default col-md-6" data-toggle="modal" data-target="#crearEvento">
               <i class="fas fa-calendar-alt"></i> Crear evento
-            </button>
+            </button>--}}
+            <div class="btn-group col-md-6">
+              <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                <i class="fas fa-calendar-alt"></i> Crear evento
+              </button>
+              <div class="dropdown-menu col-md-12" role="menu">
+                <a class="dropdown-item" data-toggle="modal" data-target="#crearEvento">Evento</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" data-toggle="modal" data-target="#crearActividad">Actividad</a>
+              </div>
+            </div>
           </div>
           <div id="calendarioEventos"></div>
         </div>
@@ -60,6 +70,7 @@
       </div>
       <form action="{{url('/')}}/eventos/general" method="post" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" name="tipo_evento" id="tipo_evento" value="evento">
         <div class="modal-body">       
            <div class="form-group">
             <div class="row">
@@ -97,17 +108,61 @@
             </div>
             <hr class="my-4">
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <label>Nombre del evento</label>
                 <input type="text" class="form-control" name="nombre" value="" required>
-                <label>Tematica</label>
-                <textarea class="form-control" name="tematica" rows="8"></textarea>
               </div>
+              <div class="col-md-12">
+                <div class="form-group text-center">
+                  <label for="exampleInputFile">Imagen de portada</label>
+                  <div class="form-group my-2 text-center">
+                      <div class="btn btn-default btn-file">
+                        <i class="fas fa-paperclip"></i> Adjuntar Imagen de portada
+                        <input type="file" name="portada_evento" required>
+                      </div>
+                      <img class="previsualizarImg_portada_evento img-fluid py-2">
+                      <p class="help-block small">Dimensiones: 1024px * 250px | Peso Max. 2MB | Formato: JPG o PNG</p>
+                  </div>
+                  <br>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Descripción</label>
+                  <textarea class="form-control" rows="6" name="descripcion" required></textarea>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Palabras claves</label>
+                  <input type="text" class="form-control" name="palabras_claves" data-role="tagsinput" required>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Ruta</label>
+                  <input type="text" class="form-control inputRuta" name="ruta" value="" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="nameEditor">Contenido noticia</label>
+                  <textarea class="form-control summernote-sm" name="contenido_noticia" rows="10" required></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-md-6">
                 <label>Ponentes</label>
                 <textarea class="form-control" name="ponentes" rows="3"></textarea>
+              </div>
+              <div class="col-md-6">
                 <label>Patrocinadores</label>
                 <textarea class="form-control" name="patrocinadores" rows="3"></textarea>
+              </div>
+              <div class="col-md-12">
                 <label>Número participantes</label>
                 <input type="number" class="form-control" name="num_participantes" value="">
               </div>
@@ -147,6 +202,113 @@
         <div id="pie" class="modal-footer col-md-12 justify-content-between">
           <button id="cerrar" type="button" class="btn btn-default col-md-3" data-dismiss="modal">Cerrar</button>
           <button id="guardar" type="submit" class="btn btn-default col-md-3">Guardar</button>
+        </div>
+      </form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal" id="crearActividad">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div id="actividad-cabecera" class="modal-header bg-default">
+        <h4 class="modal-title">Crear Actividad</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{url('/')}}/eventos/general" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" name="tipo_evento" id="tipo_evento" value="actividad">
+        <div class="modal-body">       
+           <div class="form-group">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-center">
+                  <label>Seleccionar un color para identificar la actividad.</label>
+                </div>
+                <div class="btn-group justify-content-center" style="width: 100%; margin-bottom: 10px;">
+                  <input type="hidden" name="actividad-color" id="actividad-color" value="" required>
+                  <ul class="fc-color-picker" id="color-chooser">
+                    <li><a class="text-purple" href="#"><i id="actividad-purple-icono" title="Purpura" class="fas fa-square"></i></a></li>
+                    <li><a class="text-indigo" href="#"><i id="actividad-indigo-icono" title="Indigo" class="fas fa-square"></i></a></li>
+                    <li><a class="text-navy" href="#"><i id="actividad-navy-icono" title="Azul marino" class="fas fa-square"></i></a></li>
+                    <li><a class="text-primary" href="#"><i id="actividad-primary-icono" title="Azul primario" class="fas fa-square"></i></a></li>
+                    <li><a class="text-lightblue" href="#"><i id="actividad-lightblue-icono" title="Azul cielo" class="fas fa-square"></i></a></li>
+                    <li><a class="text-info" href="#"><i id="actividad-info-icono" title="Azul informativo" class="fas fa-square"></i></a></li>
+                    <li><a class="text-teal" href="#"><i id="actividad-teal-icono" title="Verde menta" class="fas fa-square"></i></a></li>
+                    <li><a class="text-olive" href="#"><i id="actividad-olive-icono" title="Verde oliva" class="fas fa-square"></i></a></li>
+                    <li><a class="text-success" href="#"><i id="actividad-success-icono" title="Verde" class="fas fa-square"></i></a></li>
+                    <li><a class="text-lime" href="#"><i id="actividad-lime-icono" title="Verde lima" class="fas fa-square"></i></a></li>
+                    <li><a class="text-warning" href="#"><i id="actividad-warning-icono" title="Amarillo" class="fas fa-square"></i></a></li>
+                    <li><a class="text-orange" href="#"><i id="actividad-orange-icono" title="Naranja" class="fas fa-square"></i></a></li>
+                    <li><a class="text-danger" href="#"><i id="actividad-danger-icono" title="Rojo" class="fas fa-square"></i></a></li>
+                    <li><a class="text-maroon" href="#"><i id="actividad-maroon-icono" title="Rojo granate" class="fas fa-square"></i></a></li>
+                    <li><a class="text-pink" href="#"><i id="actividad-pink-icono" title="Rosa" class="fas fa-square"></i></a></li>
+                    <li><a class="text-fuchsia" href="#"><i id="actividad-fuchsia-icono" title="Fucsia" class="fas fa-square"></i></a></li>
+                    <li><a class="text-light" href="#"><i id="actividad-light-icono" title="Blanco" class="fas fa-square"></i></a></li>
+                    <li><a class="text-secondary" href="#"><i id="actividad-secondary-icono" title="Secundario" class="fas fa-square"></i></a></li>
+                    <li><a class="text-gray" href="#"><i id="actividad-gray-icono" title="Gris" class="fas fa-square"></i></a></li>
+                    <li><a class="text-gray-dark" href="#"><i id="actividad-gray-dark-icono" title="Gris oscuro" class="fas fa-square"></i></a></li>
+                    <li><a class="text-black" href="#"><i id="actividad-black-icono" title="Negro" class="fas fa-square"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+              <div class="col-md-6">
+                <label>Nombre de la actividad</label>
+                <input type="text" class="form-control" name="nombre" value="" required>
+                <label>Tematica</label>
+                <textarea class="form-control" name="tematica" rows="8"></textarea>
+              </div>
+              <div class="col-md-6">
+                <label>Ponentes</label>
+                <textarea class="form-control" name="ponentes" rows="3"></textarea>
+                <label>Patrocinadores</label>
+                <textarea class="form-control" name="patrocinadores" rows="3"></textarea>
+                <label>Número participantes</label>
+                <input type="number" class="form-control" name="num_participantes" value="">
+              </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <div class="form-check form-switch">
+                  <input class="form-check-input todo-dia" type="checkbox" id="todo-dia">
+                  <input type="hidden" name="allDay" id="allDay" value="false">
+                  <label class="form-check-label" for="todo-dia"> La actividad durará todo el día.</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Fecha inicio</label>
+                <input type="date" class="form-control" name="fecha-inicio" value="" required>
+              </div>
+              <div class="col-md-6">
+                <label>Hora inicio</label>
+                <input type="time" class="form-control" name="hora-inicio" id="hora-inicio" value="">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Fecha final</label>
+                <input type="date" class="form-control" name="fecha-final" id="fecha-final" value="">
+              </div>
+              <div class="col-md-6">
+                <label>Hora final</label>
+                <input type="time" class="form-control" name="hora-final" id="hora-final" value="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="actividad-pie" class="modal-footer col-md-12 justify-content-between">
+          <button id="actividad-cerrar" type="button" class="btn btn-default col-md-3" data-dismiss="modal">Cerrar</button>
+          <button id="actividad-guardar" type="submit" class="btn btn-default col-md-3">Guardar</button>
         </div>
       </form>
     </div>

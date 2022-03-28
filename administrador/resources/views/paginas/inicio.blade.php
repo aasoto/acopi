@@ -23,7 +23,7 @@
 
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-3 col-6">
+          {{--<div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-indigo">
               <div class="inner">
@@ -36,7 +36,7 @@
               </div>
               <a href="{{ url('pagina_web/inicio') }}" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
-          </div>
+          </div>--}}
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
@@ -79,8 +79,6 @@
               <a href="{{ url('pagos/general') }}" class="small-box-footer"><h7 style="color: white;">Gestionar </h7><i class="fas fa-arrow-circle-right" style="color: white;"></i></a>
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-orange">
@@ -95,6 +93,8 @@
               <a href="{{url('citas/general')}}" class="small-box-footer"><h7 style="color: white;">Gestionar </h7><i class="fas fa-arrow-circle-right" style="color: white;"></i></a>
             </div>
           </div>
+        </div>
+        <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-danger">
@@ -106,7 +106,7 @@
               <div class="icon">
                 <i class="fas fa-user-friends"></i>
               </div>
-              <a href="#" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{url('empleados/general')}}" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
@@ -134,7 +134,7 @@
               <div class="icon">
                 <i class="fas fa-file-pdf"></i>
               </div>
-              <a href="#" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ url('documentos/inicio') }}" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
         </div>

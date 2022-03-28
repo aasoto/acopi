@@ -52,6 +52,9 @@
   	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/css/adminlte.min.css">
   	<!-- FullCalendar -->
   	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/fullcalendar/main.css">
+  	<!-- Select2 -->
+  	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/select2/css/select2.min.css">
+  	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 	<!--====  End of Plugins HTML  ====-->
 	
 	<!--==========================================
@@ -108,6 +111,9 @@
     <!-- FullCalendar -->
     <script src="{{ url('/') }}/js/plugins/fullcalendar/main.js"></script>
     <script src="{{ url('/') }}/js/plugins/fullcalendar/locales/es.js"></script>
+    <!-- Select2 -->
+    <script src="{{ url('/') }}/js/plugins/select2/js/select2.full.min.js"></script>
+    <script src="{{ url('/') }}/js/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 	<!-- SweetAlert2 -->
 	{{--<script src="{{ url('/') }}/js/plugins/sweetalert2/sweetalert2.min.js"></script>--}}
 	<!--=====  End of Plugins JavaScript  ======-->
@@ -127,6 +133,8 @@
 			<script src="{{url('/')}}/js/codigo.js"></script>
 			<script src="{{url('/')}}/js/ownDatatables.js"></script>
 			<script src="{{url('/')}}/js/calendarios.js"></script>
+			<script src="{{url('/')}}/js/colorPicker.js"></script>
+			<script src="{{url('/')}}/js/archivos.js"></script>
 			@if (Auth::user()->modo == 'Nocturno')
 				<script src="{{url('/')}}/js/modoNocturno.js"></script>
 			@endif

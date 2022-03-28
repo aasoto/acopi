@@ -69,3 +69,6 @@ if (document.getElementById("tablaPagos")) {
 if (document.getElementById("tablaEmpresasInactivas")) {
 	document.getElementById("tablaEmpresasInactivas").classList.remove('table-striped');
 }
+if (document.getElementById("tablaEmpleados")) {
+	document.getElementById("tablaEmpleados").classList.remove('table-striped');
+}

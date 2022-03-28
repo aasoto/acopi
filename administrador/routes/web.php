@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::view('/', 'paginas.inicio');
 Route::view('/pagina_web/inicio', 'paginas.pagina_web.inicio');
 Route::view('/afiliados/inicio', 'paginas.afiliados.inicio');
+Route::view('/documentos/inicio', 'paginas.documentos.inicio');
 
 /*==================================================
 =            Rutas de módulo página web            =
@@ -103,10 +104,11 @@ Route::resource('/afiliados/consultarEmpresas', 'EmpresasController');
 Route::resource('/afiliados/exportarEmpresas', 'ExportarController');
 Route::resource('/afiliados/afiliadosEmpleados', 'EmpresasController');
 Route::resource('/afiliados/birthday', 'EmpresasController');
-Route::resource('/afiliados/empresasInactivas', 'EmpresasController');
-Route::resource('/afiliados/reactivarEmpresa', 'EmpresasController');
+Route::resource('/afiliados/empresasInactivas', 'ReactivarEmpresaController');
+Route::resource('/afiliados/reactivarEmpresa', 'ReactivarEmpresaController');
 Route::resource('/afiliados/municipios', 'MunicipiosController');
 Route::resource('/afiliados/sectorempresas', 'SectorEmpresaController');
+Route::resource('/afiliados/afiliadosEmpleadosEmpresa', 'EmpresasController');
 
 /*----------  Pagos  ----------*/
 Route::resource('/pagos/general', 'PagosController');
@@ -117,5 +119,14 @@ Route::resource('/eventos/general', 'EventosController');
 
 /*----------  Citas  ----------*/
 Route::resource('/citas/general', 'CitasController');
+
+/*----------  Empleados y pasantes  ----------*/
+Route::resource('/empleados/general', 'EmpleadosController');
+Route::resource('/empleados/exportar', 'ExportarController');
+
+/*----------  Documentos  ----------*/
+Route::resource('/documentos/empresas', 'DocumentosController');
+Route::resource('/documentos/empleados', 'DocumentosController');
+
 
 /*=====  End of Rutas que incluyen todos los metodos HTML  ======*/

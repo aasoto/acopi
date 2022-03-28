@@ -358,7 +358,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Sector empresa</label>
-                      <select class="form-control select2" name="sector_empresa" id="sector_empresa" style="width: 100%;" required>
+                      <select class="form-control select2bs4" name="sector_empresa" id="sector_empresa" style="width: 100%;" required>
                         @foreach ($sector_empresa as $key => $sector)
 
                           @if ($sector["id_sector"] == $value["id_sector_empresa"])
@@ -389,12 +389,14 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Ciudad</label>
-                      <select class="form-control select2" name="ciudad" id="ciudad" style="width: 100%;">
-                        <option value="{{$value["ciudad_empresa"]}}">{{$value["ciudad_empresa"]}}</option>
-                        <option value="Valledupar">Valledupar</option>
-                        <option value="La paz">La Paz</option>
-                        <option value="Agustín Codazzi">Agustín Codazzi</option>
-                        <option value="Aguachica">Aguachica</option>
+                      <select class="form-control select2bs4" name="ciudad" id="ciudad" style="width: 100%;">
+                        @foreach ($municipios as $key => $municipio)
+                          @if ($value["ciudad_empresa"] == $municipio["abreviatura"])
+                            <option selected="selected" value="{{$municipio["abreviatura"]}}">{{$municipio["nombre"]}}</option>
+                          @else
+                            <option value="{{$municipio["abreviatura"]}}">{{$municipio["nombre"]}}</option>
+                          @endif
+                        @endforeach
                       </select>
                     </div>
                   </div>
@@ -405,10 +407,119 @@
                     </div>
                   </div>
                 </div>
+                <div class="card">
+                  <div class="card-header">
+                    <div class="card-title">Documentos de respaldo</div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Carta de bienvenida</label>
+                          <input type="hidden" name="carta_bienvenida_actual" id="carta_bienvenida_actual" value="{{$value["carta_bienvenida"]}}">
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="carta_bienvenida" id="carta_bienvenida">
+                              @if ($value["carta_bienvenida"] == "")
+                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF .pdf</label>
+                              @else
+                                <label class="custom-file-label" for="exampleInputFile">carta_bienvenida_{{$value["nit_empresa"]}}.pdf</label>
+                              @endif
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Acta de compromiso</label>
+                          <input type="hidden" name="acta_compromiso_actual" id="acta_compromiso_actual" value="{{$value["acta_compromiso"]}}">
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="acta_compromiso" id="acta_compromiso">
+                              @if ($value["acta_compromiso"] == "")
+                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
+                              @else
+                                <label class="custom-file-label" for="exampleInputFile">acta_compromiso_{{$value["nit_empresa"]}}.pdf</label>
+                              @endif
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Estudio de afiliación</label>
+                          <input type="hidden" name="estudio_afiliacion_actual" id="estudio_afiliacion_actual" value="{{$value["estadio_afiliacion"]}}">
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="estudio_afiliacion" id="estudio_afiliacion">
+                              @if ($value["estudio_afiliacion"] == "")
+                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
+                              @else
+                                <label class="custom-file-label" for="exampleInputFile">estudio_afiliacion_{{$value["nit_empresa"]}}.pdf</label>
+                              @endif
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Registro Único Tributario (RUT)</label>
+                          <input type="hidden" name="rut_actual" id="rut_actual" value="{{$value["rut"]}}">
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="rut" id="rut">
+                              @if ($value["rut"] == "")
+                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
+                              @else
+                                <label class="custom-file-label" for="exampleInputFile">rut_{{$value["nit_empresa"]}}.pdf</label>
+                              @endif
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Registro en Camara de Comercio</label>
+                          <input type="hidden" name="camara_comercio_actual" id="camara_comercio_actual" value="{{$value["camara_comercio"]}}">
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="camara_comercio" id="camara_comercio">
+                              @if ($value["camara_comercio"] == "")
+                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
+                              @else
+                                <label class="custom-file-label" for="exampleInputFile">camara_comercio_{{$value["nit_empresa"]}}.pdf</label>
+                              @endif
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Documento de fechas de cumpleaños</label>
+                          <input type="hidden" name="fechas_birthday_actual" id="fechas_birthday_actual" value="{{$value["fechas_birthday"]}}">
+                          <div class="input-group">
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="fechas_birthday" id="fechas_birthday">
+                              @if ($value["fechas_birthday"] == "")
+                                <label class="custom-file-label" for="exampleInputFile">Seleccionar archivo formato PDF</label>
+                              @else
+                                <label class="custom-file-label" for="exampleInputFile">fechas_birthday_{{$value["nit_empresa"]}}.pdf</label>
+                              @endif
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default bg-danger" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" class="btn btn-primary" action="{{url('afiliados/consultarEmpresas/')}}{{$value["id_empresa"]}}" id="guardarCambiosEmpresas">Guardar</button>
               </div>
             </form>
             
@@ -426,7 +537,18 @@
   @endif
 @endif
 
-
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+    //File-input
+    bsCustomFileInput.init();
+  })
+</script>
 
 @if (Session::has("no-validacion"))
 <script>

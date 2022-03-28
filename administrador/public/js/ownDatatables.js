@@ -1110,6 +1110,265 @@ tablaAgendarCita.on('order.dt search.dt', function(){
 
 /*=====  End of Datatable Agendar Cita  ======*/
 
+/*===========================================
+=            Datatable Empleados            =
+===========================================*/
+
+var tablaEmpleados = $("#tablaEmpleados").DataTable({
+	processing: true,
+  	serverSide: true,
+
+  	ajax:{
+  		url: ruta+"/empleados/general"		
+  	},
+
+  	"columnDefs":[{
+  		"searchable": true,
+  		"orderable": true,
+  		"targets": 0
+  	}],
+
+  	"order":[[0, "desc"]],
+
+  	columns: [
+	  	{
+	    	data: 'id',
+	    	name: 'id'
+	  	},
+	  	{
+	  		data: 'type_document',
+	    	name: 'type_document'
+	  	},
+	  	{
+	  		data: 'num_documento',
+	    	name: 'num_documento'
+	  	},
+	  	{
+	  		data: 'nombre',
+	    	name: 'nombre'
+	  	},
+	  	{
+	  		data: 'sexo',
+	    	name: 'sexo'
+	  	},
+	  	{
+	  		data: 'fecha_nacimiento',
+	    	name: 'fecha_nacimiento'
+	  	},
+	  	{
+	  		data: 'rol',
+	    	name: 'rol'
+	  	},
+	  	{
+	  		data: 'procedimientos',
+	    	name: 'procedimientos'
+	  	}
+
+	],
+	"responsive": true, "lengthChange": true, "autoWidth": false,
+	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+	"language": {
+
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		},
+	    "oAria": {
+	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+	}
+});
+
+tablaEmpleados.on('order.dt search.dt', function(){
+
+	tablaEmpleados.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+
+
+}).draw();
+
+/*=====  End of Datatable Empleados  ======*/
+
+/*=====================================================
+=            DataTable Documentos empresas            =
+=====================================================*/
+
+var tablaDocumentacionEmpresas = $("#tablaDocumentacionEmpresas").DataTable({
+	processing: true,
+  	serverSide: true,
+
+  	ajax:{
+  		url: ruta+"/documentos/empresas"		
+  	},
+
+  	"columnDefs":[{
+  		"searchable": true,
+  		"orderable": true,
+  		"targets": 0
+  	}],
+
+  	"order":[[0, "desc"]],
+
+  	columns: [
+	  	{
+	    	data: 'id_empresa',
+	    	name: 'id_empresa'
+	  	},
+	  	{
+	  		data: 'nit_empresa',
+	    	name: 'nit_empresa'
+	  	},
+	  	{
+	  		data: 'razon_social',
+	    	name: 'razon_social'
+	  	},
+	  	{
+	  		data: 'cc_rprt_legal',
+	    	name: 'cc_rprt_legal'
+	  	},
+	  	{
+	  		data: 'nombre',
+	    	name: 'nombre'
+	  	},
+	  	{
+	  		data: 'procedimientos',
+	    	name: 'procedimientos'
+	  	}
+
+	],
+	"responsive": true, "lengthChange": true, "autoWidth": false,
+	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+	"language": {
+
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		},
+	    "oAria": {
+	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+	}
+});
+
+tablaDocumentacionEmpresas.on('order.dt search.dt', function(){
+
+	tablaDocumentacionEmpresas.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+
+
+}).draw();
+
+/*=====  End of DataTable Documentos empresas  ======*/
+
+/*=================================================================
+=            DataTable Documentos empleados o pasantes            =
+=================================================================*/
+
+var tablaDocumentacionEmpleados = $("#tablaDocumentacionEmpleados").DataTable({
+	processing: true,
+  	serverSide: true,
+
+  	ajax:{
+  		url: ruta+"/documentos/empleados"		
+  	},
+
+  	"columnDefs":[{
+  		"searchable": true,
+  		"orderable": true,
+  		"targets": 0
+  	}],
+
+  	"order":[[0, "desc"]],
+
+  	columns: [
+	  	{
+	    	data: 'id',
+	    	name: 'id'
+	  	},
+	  	{
+	  		data: 'num_documento',
+	    	name: 'num_documento'
+	  	},
+	  	{
+	  		data: 'nombre_completo',
+	    	name: 'nombre_completo'
+	  	},
+	  	{
+	  		data: 'rol',
+	    	name: 'rol'
+	  	},
+	  	{
+	  		data: 'procedimientos',
+	    	name: 'procedimientos'
+	  	}
+
+	],
+	"responsive": true, "lengthChange": true, "autoWidth": false,
+	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+	"language": {
+
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		},
+	    "oAria": {
+	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+	}
+});
+
+tablaDocumentacionEmpleados.on('order.dt search.dt', function(){
+
+	tablaDocumentacionEmpleados.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+
+
+}).draw();
+
+/*=====  End of DataTable Documentos empleados o pasantes  ======*/
+
 
 /*var tablaAfiliados = $("#tablaAfiliados").DataTable({
 	processing: true,

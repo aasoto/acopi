@@ -455,6 +455,347 @@ if ($("#eventos")) {
 		$('#color').val('#000000');
 	})
 
+	/*----------  Ingresar actividad  ----------*/
+	
+	var actividad_chequeado = "";
+	$(document).on("click", ".text-purple", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-purple");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-purple");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-purple-icono').removeClass();
+		$('#actividad-purple-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-purple-icono";
+		$('#actividad-color').val('#605ca8');
+	})
+	$(document).on("click", ".text-indigo", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-indigo");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-indigo");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-indigo-icono').removeClass();
+		$('#actividad-indigo-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-indigo-icono";
+		$('#actividad-color').val('#6610f2');
+	})
+	$(document).on("click", ".text-navy", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-navy");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-navy");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-navy-icono').removeClass();
+		$('#actividad-navy-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-navy-icono";
+		$('#actividad-color').val('#001f3f');
+	})
+	$(document).on("click", ".text-primary", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-primary");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-primary");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-primary-icono').removeClass();
+		$('#actividad-primary-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-primary-icono";
+		$('#actividad-color').val('#007bff');
+	})
+	$(document).on("click", ".text-lightblue", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-lightblue");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-lightblue");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-lightblue-icono').removeClass();
+		$('#actividad-lightblue-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-lightblue-icono";
+		$('#actividad-color').val('#3c8dbc');
+	})
+	$(document).on("click", ".text-info", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-info");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-info");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-info-icono').removeClass();
+		$('#actividad-info-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-info-icono";
+		$('#actividad-color').val('#17a2b8');
+	})
+	$(document).on("click", ".text-teal", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-teal");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-teal");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-teal-icono').removeClass();
+		$('#actividad-teal-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-teal-icono";
+		$('#actividad-color').val('#39cccc');
+	})
+	$(document).on("click", ".text-olive", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-olive");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-olive");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-olive-icono').removeClass();
+		$('#actividad-olive-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-olive-icono";
+		$('#actividad-color').val('#3d9970');
+	})
+	$(document).on("click", ".text-success", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-success");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-success");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-success-icono').removeClass();
+		$('#actividad-success-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-success-icono";
+		$('#actividad-color').val('#28a745');
+	})
+	$(document).on("click", ".text-lime", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-lime");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-lime");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-dark");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-dark");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-lime-icono').removeClass();
+		$('#actividad-lime-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-lime-icono";
+		$('#actividad-color').val('#01ff70');
+	})
+	$(document).on("click", ".text-warning", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-warning");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-warning");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-dark");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-dark");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-warning-icono').removeClass();
+		$('#actividad-warning-icono').addClass("fas").addClass("fa-check-square");
+		chequeado = "#actividad-warning-icono";
+		$('#actividad-color').val('#ffc107');
+	})
+	$(document).on("click", ".text-orange", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-orange");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-orange");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-dark");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-dark");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-orange-icono').removeClass();
+		$('#actividad-orange-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-orange-icono";
+		$('#actividad-color').val('#ff851b');
+	})
+	$(document).on("click", ".text-danger", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-danger");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-danger");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-danger-icono').removeClass();
+		$('#actividad-danger-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-danger-icono";
+		$('#actividad-color').val('#dc3545');
+	})
+	$(document).on("click", ".text-maroon", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-maroon");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-maroon");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-maroon-icono').removeClass();
+		$('#actividad-maroon-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-maroon-icono";
+		$('#actividad-color').val('#d81b60');
+	})
+	$(document).on("click", ".text-pink", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-pink");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-pink");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-pink-icono').removeClass();
+		$('#actividad-pink-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-pink-icono";
+		$('#actividad-color').val('#e83e8c');
+	})
+	$(document).on("click", ".text-fuchsia", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-fuchsia");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-fuchsia");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-fuchsia-icono').removeClass();
+		$('#actividad-fuchsia-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-fuchsia-icono";
+		$('#actividad-color').val('#f012be');
+	})
+	$(document).on("click", ".text-light", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-light");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-light");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-dark");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-dark");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-light-icono').removeClass();
+		$('#actividad-light-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-light-icono";
+		$('#actividad-color').val('#1f2d3d');
+	})
+	$(document).on("click", ".text-secondary", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-secondary");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-secondary");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-secondary-icono').removeClass();
+		$('#actividad-secondary-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-secondary-icono";
+		$('#actividad-color').val('#6c757d');
+	})
+	$(document).on("click", ".text-gray", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-gray");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-gray");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-gray-icono').removeClass();
+		$('#actividad-gray-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-gray-icono";
+		$('#actividad-color').val('#adb5bd');
+	})
+	$(document).on("click", ".text-gray-dark", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-gray-dark");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-gray-dark");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-gray-dark-icono').removeClass();
+		$('#actividad-gray-dark-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-gray-dark-icono";
+		$('#actividad-color').val('#343a40');
+	})
+	$(document).on("click", ".text-black", function(){
+		$('#actividad-cabecera').removeClass();
+		$('#actividad-cabecera').addClass("modal-header").addClass("bg-black");
+		$('#actividad-pie').removeClass();
+		$('#actividad-pie').addClass("modal-header").addClass("bg-black");
+		$('#actividad-cerrar').removeClass();
+		$('#actividad-cerrar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$('#actividad-guardar').removeClass();
+		$('#actividad-guardar').addClass("btn").addClass("col-md-3").addClass("btn-outline-light");
+		$(actividad_chequeado).removeClass();
+		$(actividad_chequeado).addClass("fas").addClass("fa-square");
+		$('#actividad-black-icono').removeClass();
+		$('#actividad-black-icono').addClass("fas").addClass("fa-check-square");
+		actividad_chequeado = "#actividad-black-icono";
+		$('#actividad-color').val('#000000');
+	})
+
+
 	/*----------  Editar evento  ----------*/
 
 	$( '.editar-todo-dia' ).on( 'click', function() {

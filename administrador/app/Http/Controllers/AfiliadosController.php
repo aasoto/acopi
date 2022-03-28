@@ -22,10 +22,13 @@ class AfiliadosController extends Controller
     		return datatables()->of(RepresentanteEmpresaModel::all()) 
     		->addColumn('nombre', function($data){
     			
-    				$nombre = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre;
+    			$nombre = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre.' ';
 
-			
-
+				$empresas = EmpresasModel::where("cc_rprt_legal", $data->cc_rprt_legal)->get();
+				$total_empresas = count($empresas);
+				for ($i=0; $i < $total_empresas; $i++) { 
+					$nombre = $nombre.'<i class="fas fa-check-circle" style="color: #28A745;"></i>';
+				}
 				return $nombre;
 			})
 
@@ -164,8 +167,7 @@ class AfiliadosController extends Controller
 				'primer_apellido' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
 				'segundo_apellido' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
 				'sexo' => 'required|regex:/^[a-z]+$/i',
-				'fecha_nacimiento' => 'required|regex:/^[-\\_\\:\\.\\0-9 ]+$/i',
-				'archivo_documento' => 'required|image|mimes:jpg,jpeg,png|max:2000000'
+				'fecha_nacimiento' => 'required|regex:/^[-\\_\\:\\.\\0-9 ]+$/i'
 			]);
 
 			if ($validar->fails()) {
@@ -203,8 +205,8 @@ class AfiliadosController extends Controller
 			 			//move_uploaded_file($foto["foto"], $ruta);
 			 			/*----------  Redimensionar foto de perfil  ----------*/
 						list($ancho, $alto) = getimagesize($datos["foto"]);
-	                    $nuevoAncho = 200;
-	                    $nuevoAlto = 200;
+	                    $nuevoAncho = 300;
+	                    $nuevoAlto = 400;
 
 	                    if(($datos["foto"]->guessExtension() == "jpeg") || ($datos["foto"]->guessExtension() == "jpg")){
 
@@ -232,13 +234,27 @@ class AfiliadosController extends Controller
 				}
 
 				if (!empty($datos["archivo_documento"])) {
-					$aleatorio = mt_rand(10000,99999);	
 
-		 			$rutaDocumento = "vistas/images/afiliados/documentos/".$aleatorio.".".$datos["archivo_documento"]->guessExtension();
+					$validar_Archivo_Documento = \Validator::make($datos, ['archivo_documento' => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
+					if ($validar_Archivo_Documento->fails()) {
+						if ($datos["archivo_documento"]->guessExtension() == "pdf") {
+							$aleatorio = mt_rand(10000,99999);	
+		 					$rutaDocumento = "vistas/images/afiliados/documentos/".$aleatorio.".".$datos["archivo_documento"]->guessExtension();
+		 					move_uploaded_file($datos["archivo_documento"], $rutaDocumento);
+						} else {
+							return redirect("/afiliados/general")->with("no-validacion", "");
+						}
 
-		 			if(($datos["archivo_documento"]->guessExtension() == "jpeg") || ($datos["archivo_documento"]->guessExtension() == "jpg") || ($datos["archivo_documento"]->guessExtension() == "png")) {
-		 				move_uploaded_file($datos["archivo_documento"], $rutaDocumento);
-		 			}
+					} else {
+						$aleatorio = mt_rand(10000,99999);	
+
+			 			$rutaDocumento = "vistas/images/afiliados/documentos/".$aleatorio.".".$datos["archivo_documento"]->guessExtension();
+
+			 			if(($datos["archivo_documento"]->guessExtension() == "jpeg") || ($datos["archivo_documento"]->guessExtension() == "jpg") || ($datos["archivo_documento"]->guessExtension() == "png")) {
+			 				move_uploaded_file($datos["archivo_documento"], $rutaDocumento);
+			 			}
+					}
+
 
 				} else {
 					$rutaDocumento =  "";
@@ -281,9 +297,15 @@ class AfiliadosController extends Controller
         $afiliados = RepresentanteEmpresaModel::all();
         $pagina_web = PaginaWebModel::all();
         
+        $pdf = strpos($afiliado[0]["foto_cedula_rprt"], "pdf");
+        if ($pdf !== false) {
+        	$tipo_cedula = "pdf";
+        } else {
+        	$tipo_cedula = "imagen";
+        }
         if(count($afiliado) != 0){
 
-            return view("paginas.afiliados.general", array("status"=>200, "afiliado"=>$afiliado, "afiliados"=>$afiliados, "pagina_web"=>$pagina_web));
+            return view("paginas.afiliados.general", array("status"=>200, "afiliado"=>$afiliado, "afiliados"=>$afiliados, "pagina_web"=>$pagina_web, "tipo_cedula"=>$tipo_cedula));
         
         }else{ 
 
@@ -375,8 +397,8 @@ class AfiliadosController extends Controller
 			 			//move_uploaded_file($foto["foto"], $ruta);
 			 			/*----------  Redimensionar foto de perfil  ----------*/
 						list($ancho, $alto) = getimagesize($archivos["foto"]);
-	                    $nuevoAncho = 200;
-	                    $nuevoAlto = 200;
+	                    $nuevoAncho = 300;
+	                    $nuevoAlto = 400;
 
 	                    if(($archivos["foto"]->guessExtension() == "jpeg") || ($archivos["foto"]->guessExtension() == "jpg")){
 
@@ -406,7 +428,16 @@ class AfiliadosController extends Controller
 				if (!empty($archivos["cedula"])) {
 					$validar_Archivo_Documento = \Validator::make($archivos, ['cedula' => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
 					if ($validar_Archivo_Documento->fails()) {
-						return redirect("/afiliados/general")->with("no-validacion", "");
+						if ($archivos["cedula"]->guessExtension() == "pdf") {
+							if (!empty($datos["archivo_documento"])) {
+								unlink($datos["archivo_documento"]);
+							}
+							$aleatorio = mt_rand(10000,99999);	
+		 					$rutaDocumento = "vistas/images/afiliados/documentos/".$aleatorio.".".$archivos["cedula"]->guessExtension();
+		 					move_uploaded_file($archivos["cedula"], $rutaDocumento);
+						} else {
+							return redirect("/afiliados/general")->with("no-validacion", "");
+						}
 					} else {
 						if (!empty($datos["archivo_documento"])) {
 							unlink($datos["archivo_documento"]);

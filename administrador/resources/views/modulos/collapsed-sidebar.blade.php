@@ -44,7 +44,144 @@
           =            Sección de botones del menú            =
           ===================================================-->
 
-          <!--=============================================
+          
+
+            
+            <!--======================================
+            =            Menú Afiliados            =
+            ======================================-->
+            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Asistente de dirección') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial') || (Auth::user()->rol == 'Subdirector administrativo y financiero') || (Auth::user()->rol == 'Director ejecutivo'))
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-address-card"></i>
+                  <p>
+                    Afiliados
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ url('afiliados/general') }}" class="nav-link">
+                      <i class="nav-icon fas fa-id-card-alt"></i>
+                      <p>Consultar afliados</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('afiliados/consultarEmpresas') }}" class="nav-link">
+                      <i class="nav-icon fas fa-store-alt"></i>
+                      <p>Consultar empresas</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            @endif
+            
+            
+            
+            <!--=====  End of Menú Afiliados  ======-->
+            
+            <!--======================================
+            =            Menú Usuarios            =
+            ======================================-->
+            @if (Auth::user()->rol == 'Administrador')
+              <li class="nav-item">
+                <a href="{{ url('usuarios/consultarUser') }}" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>
+                    Usuarios
+                  </p>
+                </a>
+              </li>
+            @endif
+            
+            
+            <!--=====  End of Menú Usuarios  ======-->
+
+            <!--=====================================
+            =            Menú de pagos            =
+            =====================================-->
+            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector administrativo y financiero'))
+              <li class="nav-item">
+                <a href="{{ url('pagos/general') }}" class="nav-link">
+                  <i class="nav-icon fas fa-money-bill-alt"></i>
+                  <p>
+                    Pagos
+                  </p>
+                </a>
+              </li>
+            @endif
+            
+            
+            <!--=====  End of Menú de pagos  ======-->
+
+            <!--=====================================
+            =            Menú de Citas            =
+            =====================================-->
+            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial'))
+              <li class="nav-item">
+                <a href="{{ url('citas/general') }}" class="nav-link">
+                  <i class="nav-icon fas fa-business-time"></i>
+                  <p>
+                    Citas
+                  </p>
+                </a>
+              </li>
+            @endif
+            
+            
+            <!--=====  End of Menú de Citas  ======-->
+
+            <!--=====================================
+            =            Menú de Empleados y pasantes            =
+            =====================================-->
+            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Asistente de dirección'))
+              <li class="nav-item">
+                <a href="{{ url('empleados/general') }}" class="nav-link">
+                  <i class="nav-icon fas fa-user-friends"></i>
+                  <p>
+                    Empleados y pasantes
+                  </p>
+                </a>
+              </li>
+            @endif
+            
+            
+            <!--=====  End of Menú de Empleados y pasantes  ======-->
+            
+            <!--=====================================
+            =            Menú de Eventos            =
+            =====================================-->
+            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Asistente de dirección') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos'))
+              <li class="nav-item">
+                <a href="{{ url('eventos/general') }}" class="nav-link">
+                  <i class="nav-icon fas fa-glass-cheers"></i>
+                  <p>
+                    Eventos
+                  </p>
+                </a>
+              </li>
+            @endif
+            
+            
+            <!--=====  End of Menú de Eventos  ======-->
+
+            <!--=====================================
+            =            Menú de Documentos            =
+            =====================================-->
+            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Asistente de dirección'))
+              <li class="nav-item">
+                <a href="{{ url('documentos/inicio') }}" class="nav-link">
+                  <i class="nav-icon fas fa-file-pdf"></i>
+                  <p>
+                    Documentos
+                  </p>
+                </a>
+              </li>
+            @endif
+            
+            <!--=====  End of Menú de Documentos  ======-->
+
+            <!--=============================================
           =            Menú página web            =
           =============================================-->
           
@@ -58,6 +195,12 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="{{ url('pagina_web/inicio') }}" class="nav-link">
+                    <i class="fas fa-ellipsis-h nav-icon"></i>
+                    <p>Menú</p>
+                  </a>
+                </li>
                 <li class="nav-item">
                   <a href="{{ url('pagina_web/datosg?ver=datosg') }}" class="nav-link">
                     <i class="fas fa-laptop nav-icon"></i>
@@ -165,141 +308,6 @@
           
           <!--=====  End of Menú página web  ======-->
           
-
-            
-            <!--======================================
-            =            Menú Afiliados            =
-            ======================================-->
-            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Asistente de dirección') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial') || (Auth::user()->rol == 'Subdirector administrativo y financiero') || (Auth::user()->rol == 'Director ejecutivo'))
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-address-card"></i>
-                  <p>
-                    Afiliados
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="{{ url('afiliados/general') }}" class="nav-link">
-                      <i class="nav-icon fas fa-id-card-alt"></i>
-                      <p>Consultar afliados</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="{{ url('afiliados/consultarEmpresas') }}" class="nav-link">
-                      <i class="nav-icon fas fa-store-alt"></i>
-                      <p>Consultar empresas</p>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            @endif
-            
-            
-            
-            <!--=====  End of Menú Afiliados  ======-->
-            
-            <!--======================================
-            =            Menú Usuarios            =
-            ======================================-->
-            @if (Auth::user()->rol == 'Administrador')
-              <li class="nav-item">
-                <a href="{{ url('usuarios/consultarUser') }}" class="nav-link">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p>
-                    Usuarios
-                  </p>
-                </a>
-              </li>
-            @endif
-            
-            
-            <!--=====  End of Menú Usuarios  ======-->
-
-            <!--=====================================
-            =            Menú de pagos            =
-            =====================================-->
-            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector administrativo y financiero'))
-              <li class="nav-item">
-                <a href="{{ url('pagos/general') }}" class="nav-link">
-                  <i class="nav-icon fas fa-money-bill-alt"></i>
-                  <p>
-                    Pagos
-                  </p>
-                </a>
-              </li>
-            @endif
-            
-            
-            <!--=====  End of Menú de pagos  ======-->
-
-            <!--=====================================
-            =            Menú de Citas            =
-            =====================================-->
-            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial'))
-              <li class="nav-item">
-                <a href="{{ url('citas/general') }}" class="nav-link">
-                  <i class="nav-icon fas fa-business-time"></i>
-                  <p>
-                    Citas
-                  </p>
-                </a>
-              </li>
-            @endif
-            
-            
-            <!--=====  End of Menú de Citas  ======-->
-
-            <!--=====================================
-            =            Menú de Empleados y pasantes            =
-            =====================================-->
-            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Asistente de dirección'))
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-user-friends"></i>
-                  <p>
-                    Empleados y pasantes
-                  </p>
-                </a>
-              </li>
-            @endif
-            
-            
-            <!--=====  End of Menú de Empleados y pasantes  ======-->
-            
-            <!--=====================================
-            =            Menú de Eventos            =
-            =====================================-->
-            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Asistente de dirección') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos'))
-              <li class="nav-item">
-                <a href="{{ url('eventos/general') }}" class="nav-link">
-                  <i class="nav-icon fas fa-glass-cheers"></i>
-                  <p>
-                    Eventos
-                  </p>
-                </a>
-              </li>
-            @endif
-            
-            
-            <!--=====  End of Menú de Eventos  ======-->
-
-            <!--=====================================
-            =            Menú de Documentos            =
-            =====================================-->
-            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Asistente de dirección'))
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-file-pdf"></i>
-                  <p>
-                    Documentos
-                  </p>
-                </a>
-              </li>
-            @endif
-            
-            <!--=====  End of Menú de Documentos  ======-->
 
           </li>
 
