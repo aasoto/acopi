@@ -14,11 +14,13 @@
           @if (Auth::user()->foto == '')
             <img src="{{ url('/') }}/vistas/images/usuarios/unknown.png" class="img-circle elevation-2" alt="User Image">
           @else
-            <img src="{{ url('/') }}/{{ Auth::user()->foto }}" class="img-circle elevation-2" alt="User Image">
+            <a href="{{ url('usuarios/perfil') }}">
+              <img src="{{ url('/') }}/{{ Auth::user()->foto }}" class="img-circle elevation-2" alt="User Image">
+            </a>
           @endif
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="{{ url('usuarios/perfil') }}" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 

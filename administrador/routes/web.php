@@ -94,7 +94,9 @@ Route::resource('/pagina_web/info/gremio', 'PaginaWebController');
 Route::resource('/pagina_web/info/productos', 'ProductosController');
 Route::resource('/pagina_web/info/redes', 'PaginaWebController');
 
+/*----------  Usuarios  ----------*/
 Route::resource('/usuarios/consultarUser', 'UsuariosController');
+Route::resource('/usuarios/perfil', 'PerfilController');
 
 /*----------  Afiliados  ----------*/
 Route::resource('/afiliados/general', 'AfiliadosController');
