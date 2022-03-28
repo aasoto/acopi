@@ -27,7 +27,7 @@ CONTENIDO NOTICIAS
         
         <div class="row">
             <!-- COLUMNA IZQUIERDA -->
-            <div class="col-12 col-md-8 col-lg-9 p-0 pr-lg-5">
+            <div class="col-12 col-md-7 col-lg-9 p-0 pr-lg-5">
                 <?php foreach ($noticias as $key => $value) { ?>
                 <!-- ARTÍCULO 01 -->
                 <div class="row">
@@ -36,7 +36,7 @@ CONTENIDO NOTICIAS
                         <a href="articulos.html"><img src="<?php echo $pagina_web["servidor"]; echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
                     </div>
                     <div class="col-12 col-lg-7 introArticulo">
-<!--                        <a href="articulos.html"><h4 class="title-heading">--><?php //echo $value["titulo"]; ?><!--</h4></a>-->
+                        <a href="articulos.html"><h4 class="title-heading d-none d-lg-block"><?php echo $value["titulo"]; ?></h4></a>
                         <p class="title-desc text-muted mt-4"><?php echo $value["descripcion_noticia"]; ?></p>
                         <a href="articulos.html" class="float-right">Leer Más</a>
                         <div class="fecha"><?php echo str_replace ( "." , "/" ,  $value["fecha_noticia"]); ?></div>
@@ -49,8 +49,8 @@ CONTENIDO NOTICIAS
             </div>
 
             <!-- COLUMNA DERECHA -->
-
-            <div class="d-none d-md-block pt-md-4 pt-lg-0 col-md-4 col-lg-3">
+            <div class="d-none d-md-block col-md-1 d-lg-none"></div>
+            <div class="d-none d-md-block pt-md-3 pt-lg-0 col-md-4 col-lg-3" >
                 <!-- SOBRE MI -->
                 <div class="sobreMi">
                     <h4>Sobre Mi</h4>

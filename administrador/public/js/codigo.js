@@ -668,7 +668,7 @@ $(document).on("click", ".botonAgregarItemCarrusel", async function(){
 	  },
 	  inputPlaceholder: 'Seleccionar un tipo',
 	  showCancelButton: true
-	  
+
 	}).then(function(result){
 
   		if(result.value){
@@ -701,7 +701,7 @@ $(document).on("click", ".botonAgregarItemCarrusel", async function(){
 		document.getElementById("tarjetaAgregarItemCarrusel").classList.remove("collapsed-card");
 		document.getElementById("complementosIngresarCarrusel").style ="";
 		document.getElementById("desplegableComplementos").style.display ="none";
-		
+
 	}
 })
 
@@ -1131,14 +1131,26 @@ $(document).on("click", ".verMasAfiliado", function(){
     }
     foto = ruta+"/"+foto_rprt;
     document.getElementById("foto").src = foto;
-    
-	$("#tipo_documento").val(tipo_documento);
+	/*
+    $("#tipo_documento").val(tipo_documento);
 	$("#num_cedula").val(cc_rprt_legal);
 	$("#nombre_completo").val(primer_apellido+" "+segundo_apellido+" "+primer_nombre+" "+segundo_nombre);
 	$("#genero").val(genero);
 	$("#fecha_nacimiento").val(fecha_nacimiento);
 	$("#email").val(email_rprt);
 	$("#telefono").val(telefono_rprt);
+	*/
+    document.getElementById('email').textContent = email_rprt ?? '-';
+    document.getElementById('tipo_documento').textContent = tipo_documento ?? '-';
+    document.getElementById('num_cedula').textContent = cc_rprt_legal ?? '-';
+    document.getElementById('nombre_completo').textContent = primer_apellido+" "+segundo_apellido+" "+primer_nombre+" "+segundo_nombre;
+    document.getElementById('genero').textContent = genero ?? '-';
+    document.getElementById('fecha_nacimiento').textContent = fecha_nacimiento ?? '-';
+    document.getElementById('telefono').textContent = telefono_rprt ?? '-';
+
+
+
+
 
 	$(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().remove();
 	document.getElementById("tarjetaInformacionAfiliado").classList.remove("collapsed-card");
@@ -1168,7 +1180,7 @@ $(document).on("click", ".verMasEmpresa", function(){
 	var fecha_afiliacion = $(this).attr("fecha_afiliacion");
 
 	var sector_empresa = JSON.parse($("#sectores").val());
-	
+
 	/*console.log(sector_empresa);
 	for (x of sector_empresa){
 		console.log(x.nombre_sector);
@@ -1183,9 +1195,16 @@ $(document).on("click", ".verMasEmpresa", function(){
 		}
 	}
 	var lista_productos;
+    //arreglado bug primer elemento indefinido
 	for (value of productos) {
-		lista_productos = lista_productos+", "+value;
+        if (lista_productos){
+            lista_productos = lista_productos+", "+value;
+        }else {
+		    lista_productos = value;
+        }
 	}
+    /*
+
 	$("#nit").val(nit);
 	$("#razon_social").val(razon_social);
 	$("#representante").val(representante);
@@ -1193,14 +1212,42 @@ $(document).on("click", ".verMasEmpresa", function(){
 	$("#direccion").val(direccion);
 	$("#telefono").val(telefono);
 	$("#fax").val(fax);
-	$("#celular").val(celular);
-	$("#correo_electronico").val(email);
-	$("#sector").val(sector);
-	$("#productos").val(lista_productos);
-	$("#ciudad").val(ciudad);
-	$("#estado").val(estado_afiliacion);
-	$("#pagos_atrasados").val(numero_pagos_atrasados);
-	$("#fecha_afiliacion").val(fecha_afiliacion);
+    $("#celular").val(celular);
+    $("#correo_electronico").val(email);
+    $("#sector").val(sector);
+    $("#productos").val(lista_productos);
+    $("#ciudad").val(ciudad);
+    $("#estado").val(estado_afiliacion);
+    $("#pagos_atrasados").val(numero_pagos_atrasados);
+    $("#fecha_afiliacion").val(fecha_afiliacion);
+     */
+
+
+
+
+
+    document.getElementById('nit').textContent = nit ?? '-';
+    document.getElementById('razon_social').textContent = razon_social ?? '-';
+    document.getElementById('representante').textContent = representante ?? '-';
+    document.getElementById('numero_empleados').textContent = num_empleados ?? '-';
+    document.getElementById('direccion').textContent = direccion ?? '-';
+    document.getElementById('telefono').textContent = telefono ?? '-';
+    document.getElementById('fax').textContent = fax ?? '-';
+    document.getElementById('celular').textContent = celular ?? '-';
+
+    document.getElementById("correo_electronico").textContent =email?? '-';
+    document.getElementById("sector").textContent =sector ?? '-';
+    document.getElementById("productos").textContent =lista_productos ?? '-';
+    document.getElementById("ciudad").textContent =ciudad ?? '-';
+    document.getElementById("estado").textContent =estado_afiliacion ?? '-';
+    document.getElementById("pagos_atrasados").textContent =numero_pagos_atrasados ?? '-';
+    document.getElementById("fecha_afiliacion").textContent =fecha_afiliacion ?? '-';
+    /*
+
+
+
+
+     */
 
 	$(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().remove();
 	/*----------  Quitar y añadir clases  ----------*/
@@ -1211,7 +1258,7 @@ $(document).on("click", ".verMasEmpresa", function(){
 /*----------  Regresar  ----------*/
 $(document).on("click", ".verTablaEmpresas", function(){
 	window.location.reload();
-	
+
 })
 
 /*=====  End of Ver empresa  ======*/
@@ -1321,7 +1368,7 @@ $(document).on("click", ".agregarEmpleado", function(){
 	var nit_empresa = $(this).attr("nit_empresa");
 	var id_empresa = $(this).attr("id_empresa");
 	var titulo_modal = $(this).attr("razon_social");
-	
+
 	document.getElementById("titulo_modal").innerHTML = " - "+titulo_modal;
 	$("#id_empresa").val(id_empresa);
 	$("#nit_empresa").val(nit_empresa);
@@ -1819,7 +1866,7 @@ $(document).on("click", ".agregarCita", async function(){
 	  },
 	  inputPlaceholder: 'Seleccionar un tipo',
 	  showCancelButton: true
-	  
+
 	}).then(function(result){
 
   		if(result.value){
@@ -1832,7 +1879,7 @@ $(document).on("click", ".agregarCita", async function(){
   		}
   	})
 
-	if (tipo_carrusel == "afiliado") {	
+	if (tipo_carrusel == "afiliado") {
 		$("#crearCitaAfiliado").modal("show");
 	}
 
@@ -2160,7 +2207,7 @@ $(document).on("click", ".modoNocturno", function(){
 
 	})
 
-  	
+
 })
 
 /*=====  End of Modo nocturno  ======*/

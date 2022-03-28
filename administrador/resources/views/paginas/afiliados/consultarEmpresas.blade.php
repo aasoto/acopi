@@ -1,6 +1,30 @@
 @extends('plantilla')
 
 @section('content')
+    <style>
+        @media (min-width: 768px) {
+            .w-md-100{
+                width: 100% !important;
+            }
+            .position-md-static {
+                position: static !important;
+            }
+            .position-md-relative {
+                position: relative !important;
+            }
+            .position-md-absolute {
+                position: absolute !important;
+            }
+            .position-md-fixed {
+                position: fixed !important;
+            }
+            .position-md-sticky {
+                position: sticky !important;
+            }
+        }
+
+
+    </style>
 <div class="content-wrapper" style="min-height: 243px;">
   <!-- Content Header (Page header) -->
   <section class="content-header">
@@ -27,7 +51,7 @@
       @foreach ($paginaweb as $element) @endforeach
       <div class="row">
         <div class="col-12">
-          
+
           <input type="hidden" name="sectores" id="sectores" value='{{$sector_empresa}}'>
           <div id="listadoEmpresas" name="listadoEmpresas">
             <div class="card card-primary">
@@ -83,11 +107,11 @@
                 </table>
               </div>
               <div class="card-footer">
-                
+
               </div>
             </div>
           </div>
-          
+
           <div id="descripcionEmpresa" name="descripcionEmpresa" style="visibility: hidden;">
             <div class="card card-primary collapsed-card" id="tarjetaDescripcion">
               <div class="card-header">
@@ -101,67 +125,269 @@
                   </button>
                 </div>
               </div>
+                <style>
+                    .row-flex {
+                        display: flex;
+                        flex-wrap: wrap;
+                    }
+                </style>
               <div class="card-body">
-                <table  name="tablaEmpresa" id="tablaEmpresa" class="table table-bordered dt-responsive">
-                  <tr>
-                    <th>NIT</th>
-                    <td><input class="form-control" id="nit" name="nit" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Razón social</th>
-                    <td><input class="form-control" id="razon_social" name="razon_social" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Representante</th>
-                    <td><input class="form-control" id="representante" name="representante" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Número empleados</th>
-                    <td><input class="form-control" id="numero_empleados" name="numero_empleados" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Dirección</th>
-                    <td><input class="form-control" id="direccion" name="direccion" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Telefono</th>
-                    <td><input class="form-control" id="telefono" name="telefono" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Fax</th>
-                    <td><input class="form-control" id="fax" name="fax" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Celular</th>
-                    <td><input class="form-control" id="celular" name="celular" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Correo electronico</th>
-                    <td><input class="form-control" id="correo_electronico" name="correo_electronico" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Sector</th>
-                    <td><input class="form-control" id="sector" name="sector" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Productos</th>
-                    <td><textarea class="form-control" id="productos" name="productos" style="border: none; background: #FFFFFF;" readonly></textarea></td>
-                    <th>Ciudad</th>
-                    <td><input class="form-control" id="ciudad" name="ciudad" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Estado</th>
-                    <td><input class="form-control" id="estado" name="estado" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th>Pagos atrasados</th>
-                    <td><input class="form-control" id="pagos_atrasados" name="pagos_atrasados" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                  </tr>
-                  <tr>
-                    <th>Fecha afiliación</th>
-                    <td><input class="form-control" id="fecha_afiliacion" name="fecha_afiliacion" value="" style="border: none; background: #FFFFFF;" readonly></td>
-                    <th></th>
-                    <td></td>
-                  </tr>
-                </table>
+                  <div id="tablaEmpresa">
+
+                  </div>
+                  <div class="row row-flex">
+                      <!--Col izquierda-->
+                      <div class="col-12 col-md-6 w-md-100">
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">NIT</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break ">
+                                  <p class="text-break pt-2" id="nit"></p>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!--Col Derecha-->
+                      <div class="col-12 col-md-6 w-100">
+
+                              <div class="row h-100">
+                                  <!--Enunciado-->
+                                  <div class="col-sm-5  border border-2  pb-2 border-xs-right-none ">
+                                      <p class=" font-weight-bold pt-2 pl-0  text-break ">Razón social</p>
+                                  </div>
+                                  <!--Valor-->
+                                  <div class="col-sm-7  border border-2 pb-2 text-break ">
+                                      <p class="text-break pt-2"  id="razon_social"> </p>
+                                  </div>
+                              </div>
+                      </div>
+                  </div>
+                  <div class="row row-flex  ">
+                      <!--Col izquierda-->
+                      <div class="col-12 col-md-6 w-md-100">
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none  ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Representante</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break  ">
+                                  <p class="text-break pt-2" id="representante"></p>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!--Col Derecha-->
+                      <div class="col-12 col-md-6 w-md-100">
+
+                              <div class="row h-100">
+                                  <!--Enunciado-->
+                                  <div class="col-sm-5  border border-2  pb-2 border-xs-right-none ">
+                                      <p class=" font-weight-bold pt-2 pl-0  text-break ">Número empleados</p>
+                                  </div>
+                                  <!--Valor-->
+                                  <div class="col-sm-7  border border-2 pb-2 text-break ">
+                                      <p class="text-break pt-2"  id="numero_empleados"> </p>
+                                  </div>
+                              </div>
+                      </div>
+                  </div>
+                  <div class="row row-flex  ">
+                      <!--Col izquierda-->
+                      <div class="col-12 col-md-6 w-md-100">
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none  ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Dirección</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break  ">
+                                  <p class="text-break pt-2" id="direccion"></p>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!--Col Derecha-->
+                      <div class="col-12 col-md-6 w-md-100">
+
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Teléfono</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break ">
+                                  <p class="text-break pt-2"  id="telefono"> </p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row row-flex  ">
+                      <!--Col izquierda-->
+                      <div class="col-12 col-md-6 w-md-100">
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none  ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Fax</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break  ">
+                                  <p class="text-break pt-2" id="fax"></p>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!--Col Derecha-->
+                      <div class="col-12 col-md-6 w-md-100">
+
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Celular</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break ">
+                                  <p class="text-break pt-2"  id="celular"> </p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row row-flex  ">
+                      <!--Col izquierda-->
+                      <div class="col-12 col-md-6 w-md-100">
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none  ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Correo electrónico</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break  ">
+                                  <p class="text-break pt-2" id="correo_electronico"></p>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!--Col Derecha-->
+                      <div class="col-12 col-md-6 w-md-100">
+
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Sector</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break ">
+                                  <p class="text-break pt-2"  id="sector"> </p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row row-flex  ">
+                      <!--Col izquierda-->
+                      <div class="col-12 col-md-6 w-md-100">
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none  ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Productos</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break  ">
+                                  <p class="text-break pt-2" id="productos"></p>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!--Col Derecha-->
+                      <div class="col-12 col-md-6 w-md-100">
+
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Ciudad</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break ">
+                                  <p class="text-break pt-2"  id="ciudad"> </p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row row-flex  ">
+                      <!--Col izquierda-->
+                      <div class="col-12 col-md-6 w-md-100">
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none  ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Estado</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break  ">
+                                  <p class="text-break pt-2" id="estado"></p>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!--Col Derecha-->
+                      <div class="col-12 col-md-6 w-md-100">
+
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Pagos atrasados</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break ">
+                                  <p class="text-break pt-2"  id="pagos_atrasados"> </p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row row-flex  ">
+                      <!--Col izquierda-->
+                      <div class="col-12 col-md-6 w-md-100">
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none  ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break ">Fecha afiliación</p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break  ">
+                                  <p class="text-break pt-2" id="fecha_afiliacion"></p>
+                              </div>
+                          </div>
+                      </div>
+
+                      <!--Col Derecha-->
+                      <div class="col-12 col-md-6 w-md-100 d-none d-md-block">
+
+                          <div class="row h-100">
+                              <!--Enunciado-->
+                              <div class="col-sm-5  border border-2  pb-2 border-xs-right-none ">
+                                  <p class=" font-weight-bold pt-2 pl-0  text-break "></p>
+                              </div>
+                              <!--Valor-->
+                              <div class="col-sm-7  border border-2 pb-2 text-break ">
+                                  <p class="text-break pt-2"  id=""> </p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
               </div>
+
+
               <div class="card-footer">
-                
+
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
-      
+
     </div>
   </section>
 </div>
@@ -366,7 +592,7 @@
                           @else
                             <option value="{{$sector["id_sector"]}}">{{$sector["nombre_sector"]}}</option>
                           @endif
-                          
+
                         @endforeach
                       </select>
                     </div>
@@ -522,15 +748,15 @@
                 <button type="submit" class="btn btn-primary" action="{{url('afiliados/consultarEmpresas/')}}{{$value["id_empresa"]}}" id="guardarCambiosEmpresas">Guardar</button>
               </div>
             </form>
-            
+
           </div>
         </div>
       </div>
     @endforeach
-    <script>  
+    <script>
       $("#editarEmpresa").modal();
     </script>
-    
+
 
       @else
       {{$status}}

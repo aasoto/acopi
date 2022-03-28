@@ -1,6 +1,132 @@
 @extends('plantilla')
 
 @section('content')
+    <style>
+        .col-derecha {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+        .col-izquierda {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+        .row-left{
+            flex: 1 0 auto;
+        }
+
+        .row-right-height-equal {
+            flex: 1 0 auto;
+            max-width: 100% !important;
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+            align-self: stretch;
+            align-content: stretch;
+        }
+
+        .row-flex {
+            display: flex;
+            /* flex-direction: row;
+            align-items: stretch;
+            flex-wrap: nowrap; */
+            min-height: 100%;
+            flex-wrap: wrap;
+        }
+
+        .row-flex-item-left {
+            display: inline-block;
+            flex: 1 0 auto;
+            max-width: 33% !important;
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+            align-self: stretch;
+            align-content: stretch;
+        }
+
+        .row-flex-item-right {
+            display: inline-block;
+            flex: 1 0 auto;
+            max-width: 67% !important;
+            margin-right: 0 !important;
+            margin-left: 0 !important;
+            align-self: stretch;
+            align-content: stretch;
+        }
+
+        @media (min-width:768px) {
+
+        }
+        @media (min-width: 992px) {
+            .border-lg-right-none{
+                border-right-width:0 !important;
+            }
+        }
+        @media (min-width: 768px) {
+            .border-md-right-none{
+                border-right-width:0 !important;
+            }
+
+            .position-md-static {
+                position: static !important;
+            }
+            .position-md-relative {
+                position: relative !important;
+            }
+            .position-md-absolute {
+                position: absolute !important;
+            }
+            .position-md-fixed {
+                position: fixed !important;
+            }
+            .position-md-sticky {
+                position: sticky !important;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .border-xs-left-none {
+                border-left: none !important;
+            }
+            .border-xs-right-none {
+                border-right: none !important;
+            }
+            .border-xs-top-none {
+                border-top: none !important;
+            }
+            .border-xs-bottom-none {
+                border-bottom: none !important;
+            }
+
+        }
+
+        @media (max-width: 767.98px) {
+            .border-sm-left-none {
+                border-left: none !important;
+            }
+            .border-sm-right-none {
+                border-right: none !important;
+            }
+            .border-sm-top-none {
+                border-top: none !important;
+            }
+            .border-sm-bottom-none {
+                border-bottom: none !important;
+            }
+        }
+
+        @media (max-width:575px) {
+            .row-flex-item-right{
+                width: 100% !important ;
+                max-width: 100% !important ;
+                border-right-width: 0!important;
+            }
+            .row-flex-item-left{
+                width: 100% !important ;
+                max-width: 100% !important ;
+            }
+        }
+    </style>
 <div class="content-wrapper" style="min-height: 243px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -46,7 +172,7 @@
                         <button type="button" class="btn btn-success col-md-5 crearAfiliado">
                           <i class="fas fa-plus"></i> Agregar nuevo afiliado
                         </button>
-                        
+
                         <a href="{{$element["servidor"]}}afiliados/exportar">
                           <button type="button" class="btn btn-primary col-md-5 tablaExportar" id="botonExportar" name="botonExportar" action="'.$url.'">
                             <i class="fas fa-table"></i> Exportar datos
@@ -102,37 +228,130 @@
                       </div>
                     </div>
                     <div class="card-body">
-                      <table name="tablaAfiliado" id="tablaAfiliado" class="table table-bordered dt-responsive">
-                        <tr>
-                          <td rowspan="4" colspan="2" class="text-center">
-                            <br>
-                            <img src="" id="foto" name="foto">
-                          </td>
-                          <th><input class="form-control" id="tipo_documento" name="tipo_documento" value="" style="border: none; font-weight: bold; background: #FFFFFF;" readonly></input></th>
-                          <td><input class="form-control" id="num_cedula" name="num_cedula" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                        </tr>
-                        <tr>
-                          <th>Nombre completo</th>
-                          <td><input class="form-control" id="nombre_completo" name="nombre_completo" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                        </tr>
-                        <tr>
-                          <th>Genero</th>
-                          <td><input class="form-control" id="genero" name="genero" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                        </tr>
-                        <tr>
-                          <th>Fecha de nacimiento</th>
-                          <td><input class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                        </tr>
-                        <tr>
-                          <th>Correo electronico</th>
-                          <td><input class="form-control" id="email" name="email" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                          <th>Telefono o celular</th>
-                          <td><input class="form-control" id="telefono" name="telefono" value="" style="border: none; background: #FFFFFF;" readonly></input></td>
-                        </tr>
-                      </table>
+                        <div class="row" id="tablaAfiliado" >
+                            <!--Columna izquierda -->
+
+                            <div class="col-12 col-md-6 border px-0 border-sm-bottom-none   col-izquierda">
+
+
+                                <div class="  border-bottom  row-right-height-equal  row-left">
+
+                                    <div class="row-flex">
+                                        <div class="   col-12 justify-content-center text-center py-2 mx-0 ">
+                                            <div class="row"></div>
+                                            <img src="" id="foto" name="foto" class="my-auto " style="max-width: 100%">
+                                            <div class="row"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- <div class=" border-2 px-0 border-sm-bottom-none   px-0 w-100  ">
+
+                                </div> -->
+
+                                <div class="   row-right-height-equal    row-left">
+                                    <div class=" row-flex     p-0    mx-0 align-self-end "
+                                         style="margin-left:0;margin-right: 0;">
+
+                                        <div class="row-flex-item-left p-2 border-right border-xs-right-none">
+                                            <p class="font-weight-bold  text-break  " style="word-wrap: break-word;">Correo
+                                                electrónico
+                                            </p>
+                                        </div>
+                                        <div class="row-flex-item-right p-2 ">
+                                            <p class=" pl-0 text-break" id="email" name="email" value=""
+                                               style="border: none; background: #FFFFFF;"> </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <style>
+
+                            </style>
+                            <!--Columna derecha -->
+                            <div class="col-12 col-md-6 border border-3 px-0  col-derecha"
+                                 style="  ">
+
+
+                                <div class=" borde-2 border-bottom  row-right-height-equal  border border-2 border row-right">
+                                    <div class="row-flex">
+                                        <div class=" col-sm-4 row-flex-item-left  text-break borde-2 border-right p-2 border-xs-right-none">
+                                            <p class=" font-weight-bold pt-2 pl-0 text-break " id="tipo_documento" name="tipo_documento"
+                                               style="border: none; "></p>
+                                        </div>
+                                        <div class=" col-sm-8 row-flex-item-right text-break p-2">
+                                            <p class=" pt-2 pl-0 text-break" id="num_cedula" name="num_cedula" value=""
+                                               style="border: none; background: #FFFFFF;" readonly></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="  borde-2 border-bottom row-right-height-equal border border-2 border row-right">
+                                    <div class="row-flex">
+                                        <div class=" col-sm-4 row-flex-item-left  text-break  borde-2 border-right p-2 border-xs-right-none">
+                                            <p class="  font-weight-bold pt-2 pl-0 text-break " style="border: none; font-weight: bold; "
+                                               readonly>
+                                                Nombre completo</p>
+                                        </div>
+                                        <div class="col-sm-8 row-flex-item-right text-break p-2">
+                                            <p class=" pt-2 pl-0 text-break" id="nombre_completo" name="nombre_completo" value=""
+                                               style="border: none; background: #FFFFFF;" readonly></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="  borde-2 border-bottom row-right-height-equal border border-2 border row-right">
+                                    <div class="row-flex">
+                                        <div class="row-flex-item-left  text-break borde-2 border-right p-2 border-xs-right-none">
+                                            <p class="font-weight-bold pt-2 pl-0 text-break " style="border: none; font-weight: bold; "
+                                               readonly>
+                                                Genero</p>
+                                        </div>
+                                        <div class="row-flex-item-right text-break p-2" >
+                                            <p class=" pt-2 pl-0 text-break" id="genero" name="genero"
+                                               style="border: none; background: #FFFFFF;" readonly></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="  borde-2 border-bottom row-right-height-equal border border-2 border row-right">
+                                    <div class="row-flex">
+                                        <div class="row-flex-item-left  text-break borde-2 border-right  p-2 border-xs-right-none">
+                                            <p class="font-weight-bold pt-2 pl-0 text-break " style="border: none; font-weight: bold; "
+                                               readonly>
+                                                Fecha de nacimiento</p>
+                                        </div>
+                                        <div class="row-flex-item-right text-break p-2">
+                                            <p class=" pt-2 pl-0 text-break" id="fecha_nacimiento" name="fecha_nacimiento"
+                                               style="border: none; background: #FFFFFF;" readonly></p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class=" row-right-height-equal border border-2 border row-right"
+                                     style="align-self: stretch;">
+                                    <div class="row-flex">
+                                        <div class="row-flex-item-left  text-break  borde-2 border-right p-2 border-xs-right-none">
+                                            <p class="font-weight-bold pt-2 pl-0 text-break " style="border: none; font-weight: bold; "
+                                               readonly>
+                                                Telefono o celular</p>
+                                        </div>
+                                        <div class="row-flex-item-right text-break p-2">
+                                            <p class=" pt-2 pl-0 text-break" id="telefono" name="telefono"
+                                               style="border: none; background: #FFFFFF;" readonly> </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
                     </div>
                     <div class="card-footer">
-                      
+
                     </div>
                   </div>
                 </div>
@@ -299,7 +518,7 @@
                 </form>
               </div>
             </div>
- 
+
           </div>
         </div>
       </div>
@@ -509,10 +728,10 @@
       </div>
       <!-- /.modal -->
     @endforeach
-    <script>  
+    <script>
       $("#editarAfiliado").modal();
     </script>
-    
+
 
       @else
       {{$status}}
