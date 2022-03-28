@@ -102,6 +102,9 @@
       <excludeFolder url="file://$MODULE_DIR$/administrador/vendor/scrivo/highlight.php" />
       <excludeFolder url="file://$MODULE_DIR$/administrador/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/administrador/vendor/yajra/laravel-datatables-oracle" />
+      <excludeFolder url="file://$MODULE_DIR$/administrador/vendor/laravel-lang/lang" />
+      <excludeFolder url="file://$MODULE_DIR$/administrador/vendor/symfony/dom-crawler" />
+      <excludeFolder url="file://$MODULE_DIR$/administrador/vendor/nunomaduro/laravel-mojito" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
