@@ -1,4 +1,4 @@
-<section class="home-slider" id="home">
+<section class="home-slider" id="home" style="margin-top: 65px; min-height: 80%">
     <div class="container-fluid">
         <div class="row">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -20,20 +20,39 @@
 
                                                 <div class="col-lg-6">
                                                     <div class="home-content mt-4 slider-principal">';
-                                                        if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
-                                                            echo '
-                                                            <h4 class="home-subtitle">'.$value["categoria"].'</h4>
-                                                            <h2 class="home-title my-4">'.$value["titulo"].'</h2>
-                                                            <p class="home-desc mt-4 f-17">'.$value["texto"].'</p>';
+                                                        if ($value["categoria"] != 'undefined' )
+                                                        {
+                                                            echo '<h4 class="home-subtitle">'.$value["categoria"].'</h4>';
+                                                        }
+                                                        if ($value["titulo"] != 'undefined'){
+                                                           echo '<h2 class="home-title my-4">'.$value["titulo"].'</h2>' ;
+                                                        }
+                                                        if ($value["texto"] != 'undefined'){
+                                                           echo '<p class="home-desc mt-4 f-17">'.$value["texto"].'</p>';
                                                         }
 
-                                                        echo '<div class="mt-4">
-                                                            <a href="'.$value["url-boton-1"].'" class="pr-3 btn btn-primary btn-slider-item">
-                                                                Ver más
+                                                        echo '<div class="mt-4 ">
+                                                            <a href="'.$value["url-boton-1"].'" class="pr-3 btn btn-primary btn-slider-item mb-5  '.$value["boton-1-color"].'">
+                                                                ';
+                                                                if (isset($value['boton-1-texto'] )and $value['boton-1-texto'] != ''){
+                                                                    echo $value['boton-1-texto'];
+                                                                }else
+                                                                {
+                                                                    echo "Ver Más";
+                                                                }
+                                                                echo'
                                                             </a>
-//                                                            <!--<a href="'.$value["url-boton-2"].'">
-//                                                                <img src="administrador/public/'.$value["boton-2"].'" class="mt-4" height="50" alt="">
-//                                                            </a>-->
+                                                            <a href="'.$value["url-boton-2"].'" class="pr-3 btn btn-primary btn-slider-item mb-5  '.$value["boton-2-color"].'">
+                                                                ';
+                                                                if (isset($value['boton-2-texto'] )and $value['boton-2-texto'] != ''){
+                                                                    echo $value['boton-2-texto'];
+                                                                }else
+                                                                {
+                                                                    echo "Ver Más";
+                                                                }
+                                                                echo'
+                                                            </a>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -49,14 +68,16 @@
                                 </div>
                             </div>';
                             $active = false;
-                        }else{
+                        }else
+                        {
                             echo '
                                 <div class="carousel-item" style="background-image: url(administrador/public/'.$value["fondo"].');
                                 background-position: center center;">
                                 <div class="home-center">
                                     <div class="home-desc-center">';
                                         if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
-                                        echo '<div class="bg-overlay-color"></div>'; }
+                                            echo '<div class="bg-overlay-color"></div>';
+                                        }
                                         echo '<div class="container">
                                             <div class="row vertical-content">
 
@@ -70,8 +91,26 @@
                                                     }
 
                                                         echo '<div class="mt-4">
-                                                            <a href="'.$value["url-boton-1"].'" class="pr-3 btn btn-primary btn-slider-item">
-                                                                Ver más
+                                                            <a href="'.$value["url-boton-1"].'" class="pr-3 btn btn-primary btn-slider-item mb-5  '.$value["boton-1-color"].'">
+                                                                ';
+                                                                if (isset($value['boton-1-texto'])and $value['boton-2-texto'] != '' ){
+                                                                    echo $value['boton-1-texto'];
+                                                                }else
+                                                                {
+                                                                    echo "Ver Más";
+                                                                }
+                                                            echo'
+                                                                
+                                                            </a>
+                                                            <a href="'.$value["url-boton-2"].'" class="pr-3 btn btn-primary btn-slider-item mb-5  '.$value["boton-2-color"].'">
+                                                                ';
+                                                                if (isset($value['boton-2-texto'] )and $value['boton-2-texto'] != ''){
+                                                                    echo $value['boton-2-texto'];
+                                                                }else
+                                                                {
+                                                                    echo "Ver Más";
+                                                                }
+                                                                echo'
                                                             </a>
                                                             
                                                         </div>

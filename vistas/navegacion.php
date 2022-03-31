@@ -1,7 +1,7 @@
 <?php if(isset($_GET["pagina"])){
     ?> <header id="topnav" class="defaultscroll fixed-top navbar-sticky darkheader" style="background-color: #152452 !important";> <?php
 }else{
-    ?> <header id="topnav" class="defaultscroll fixed-top navbar-sticky"> <?php
+    ?> <header id="topnav" class="defaultscroll fixed-top navbar-sticky darkheader"> <?php
 } ?>
 
     <div class="container">
