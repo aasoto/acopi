@@ -9,7 +9,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Consultar Usuarios</h1>
+          <h1>Gestión Usuarios</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -47,12 +47,17 @@
           <!--==============================
           =            Cuerpo            =
           ==============================-->
-          
+
           <div class="card-body">
             <div class="col-md-12 text-center">
-              <button class="btn btn-success col-md-6" data-toggle="modal" data-target="#crearUsuario">
-                <i class="fas fa-user-plus"></i> Agregar nuevo
-              </button>
+              {{--<button class="btn btn-success col-md-5" data-toggle="modal" data-target="#crearUsuario">
+                <i class="fas fa-user-plus"></i> Agregar nuevo 1
+              </button>--}}
+              <a href="{{ url('usuarios/agregarUser') }}">
+                <button class="btn btn-success col-md-5">
+                  <i class="fas fa-user-plus"></i> Agregar nuevo
+                </button>
+              </a>
             </div>
             <table id="tablaUsuarios" class="table table-bordered table-striped dt-responsive">
               <thead>
@@ -90,7 +95,7 @@
                           <i class="fas fa-pencil-alt text-white"></i>
                         </a>
                         <button class="btn btn-danger btn-sm eliminarRegistro" action="{{url('/')}}/usuarios/consultarUser/{{$value["id"]}}" method="DELETE" pagina="usuarios/consultarUser">
-                          @csrf 
+                          @csrf
                           <i class="fas fa-trash-alt"></i>
                         </button>--}}
                         {{--<form method="post" action="{{url('/')}}/usuarios/consultarUser/{{$value["id"]}}">
@@ -99,7 +104,7 @@
                           <button class="btn btn-danger btn-sm">
                             <i class="fas fa-trash-alt text-white"></i>
                           </button>
-                        </form>--}} 
+                        </form>--}}
                       {{--</div>
                     </td>
                   </tr>
@@ -117,22 +122,22 @@
               </tfoot>
             </table>
           </div>
-          
+
           <!--=====  End of Cuerpo  ======-->
-          
+
           <!--=====================================
           =            Pie de pagina            =
           =====================================-->
-          
-          <div class="card-footer">
-            
-          </div>
-          
-          <!--====  End of Pie de pagina  ======-->
-          
-          
 
-          
+          <div class="card-footer">
+
+          </div>
+
+          <!--====  End of Pie de pagina  ======-->
+
+
+
+
         </div>
       </form>
     </div>
@@ -144,14 +149,14 @@
 =====================================-->
 
 <div class="modal" id="crearUsuario">
- 
+
   <div class="modal-dialog">
-   
+
     <div class="modal-content">
       <form method="POST" action="{{ route('register') }}">
-        @csrf 
+        @csrf
 
-        <div class="modal-header bg-success">          
+        <div class="modal-header bg-success">
           <h4 class="modal-title">Crear Usuario</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
@@ -159,8 +164,8 @@
         <div class="modal-body">
 
           {{-- Nombre --}}
-          <div class="input-group mb-3">              
-            <div class="input-group-append input-group-text">               
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
                <i class="fas fa-user"></i>
             </div>
             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Nombre">
@@ -172,8 +177,8 @@
           </div>
 
           {{-- Email --}}
-          <div class="input-group mb-3">              
-            <div class="input-group-append input-group-text">               
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
                <i class="fas fa-envelope"></i>
             </div>
             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
@@ -185,8 +190,8 @@
           </div>
 
           {{-- Password --}}
-          <div class="input-group mb-3">              
-            <div class="input-group-append input-group-text">               
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
                <i class="fas fa-key"></i>
             </div>
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Contraseña mínimo de 8 caracteres">
@@ -198,23 +203,23 @@
           </div>
 
           {{-- Confirmar Password --}}
-          <div class="input-group mb-3">              
-            <div class="input-group-append input-group-text">               
+          <div class="input-group mb-3">
+            <div class="input-group-append input-group-text">
                <i class="fas fa-key"></i>
             </div>
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Confirmar contraseña">
           </div>
         </div>
 
-        <div class="modal-footer d-flex justify-content-between">          
-          
+        <div class="modal-footer d-flex justify-content-between">
+
             <button type="button" class="btn btn-danger col-md-5" data-dismiss="modal"><i class="fas fa-window-close"></i> Cerrar</button>
             <button type="submit" class="btn btn-success col-md-5"><i class="fas fa-save"></i> Guardar</button>
-          
+
         </div>
       </form>
-    </div> 
-  </div> 
+    </div>
+  </div>
 </div>
 
 <!--=====  End of Crear usuario  ======-->
@@ -226,7 +231,7 @@
 @if (isset($status))
   @if ($status == 200)
     @foreach ($usuario as $key => $value)
-      
+
       <div class="modal" id="editarUsuario">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -241,8 +246,8 @@
               <div class="modal-body">
                   {{-- Nombre --}}
                   <div class="input-group mb-3">
-                    
-                    <div class="input-group-append input-group-text">               
+
+                    <div class="input-group-append input-group-text">
                        <i class="fas fa-user"></i>
                     </div>
 
@@ -258,7 +263,7 @@
 
                   {{-- Email --}}
                   <div class="input-group mb-3">
-                    <div class="input-group-append input-group-text">               
+                    <div class="input-group-append input-group-text">
                        <i class="fas fa-envelope"></i>
                     </div>
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $value["email"] }}" required autocomplete="email" placeholder="Email">
@@ -270,8 +275,8 @@
                   </div>
 
                   {{-- Password --}}
-                  <div class="input-group mb-3">                    
-                    <div class="input-group-append input-group-text">               
+                  <div class="input-group mb-3">
+                    <div class="input-group-append input-group-text">
                        <i class="fas fa-key"></i>
                     </div>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="Contraseña mínimo de 8 caracteres">
@@ -284,8 +289,8 @@
 
                   <input type="hidden" name="password_actual" value="{{$value["password"]}}">
 
-                  {{-- Rol --}}                  
-                  <div class="input-group mb-3">                    
+                  {{-- Rol --}}
+                  <div class="input-group mb-3">
                     <div class="input-group-append input-group-text">
                       <i class="fas fa-list-ul"></i>
                     </div>
@@ -301,7 +306,7 @@
                           <option value='{{$rol["rol"]}}'>{{$rol["rol"]}}</option>
                         @endforeach
                       @endif
-                      
+
 
                       {{--@if ($value["rol"] == "administrador" || $value["rol"] == "")
 
@@ -312,30 +317,30 @@
 
                         <option value="editor">editor</option>
                         <option value="administrador">administrador</option>
-                        
+
                       @endif--}}
 
                     </select>
                   </div>
-                  
+
                   {{-- Foto --}}
                   <hr class="pb-2">
-                  <div class="form-group my-2 text-center">                  
-                    <div class="btn btn-default btn-file">                      
+                  <div class="form-group my-2 text-center">
+                    <div class="btn btn-default btn-file">
                       <i class="fas fa-paperclip"></i> Adjuntar Foto
                       <input type="file" name="foto">
-                    </div> 
+                    </div>
                     <br>
                     @if ($value["foto"] == null)
-                     <img src="{{url('/')}}/vistas/images/usuarios/admin.png" class="previsualizarImg_foto img-fluid py-2 w-25 rounded-circle">                      
-                    @else 
+                     <img src="{{url('/')}}/vistas/images/usuarios/admin.png" class="previsualizarImg_foto img-fluid py-2 w-25 rounded-circle">
+                    @else
                      <img src="{{url('/')}}/{{$value["foto"]}}" class="previsualizarImg_foto img-fluid py-2 w-25 rounded-circle">
                     @endif
                     <input type="hidden" value="{{$value["foto"]}}" name="imagen_actual">
                     <p class="help-block small">Dimensiones: 200px * 200px | Peso Max. 2MB | Formato: JPG o PNG</p>
-                  </div>   
+                  </div>
               </div>
-              <div class="modal-footer d-flex justify-content-between">                
+              <div class="modal-footer d-flex justify-content-between">
                 <div>
                   <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                 </div>
@@ -344,12 +349,12 @@
                 </div>
               </div>
             </form>
-          </div> 
-        </div> 
+          </div>
+        </div>
       </div>
     @endforeach
 
-    <script>  
+    <script>
      $("#editarUsuario").modal();
     </script>
 
@@ -358,7 +363,7 @@
     {{$status}}
 
   @endif
- 
+
 @endif
 
 <!--=====  End of Editar administrador  ======-->

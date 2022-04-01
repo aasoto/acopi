@@ -509,6 +509,8 @@ Preguntar antes de Eliminar Registro
 
 $(document).on("click", ".eliminarRegistro", function(){
 
+	var foto = $(this).attr("foto");
+
 	var action = $(this).attr("action");
   	var method = $(this).attr("method");
   	var pagina = $(this).attr("pagina");
@@ -528,6 +530,20 @@ $(document).on("click", ".eliminarRegistro", function(){
   	}).then(function(result){
 
   		if(result.value){
+
+  			/*var datos = "foto="+foto;
+  			$.ajax({
+				url: ruta+"/ajax/usuarios.php",
+				method: "POST",
+				data: datos,
+
+			}).done(function(respuesta){
+				console.log("Hecho");
+			}).fail(function(){
+				console.log("Error");
+			}).always(function(){
+				console.log("Completado");
+			});*/
 
   			var datos = new FormData();
   			datos.append("_method", method);
@@ -2096,6 +2112,90 @@ $(document).on("click", ".eliminarEmpleado", function(){
 })
 
 /*=====  End of Eliminar Empleado  ======*/
+
+/*=======================================
+=            Agregar usuario            =
+=======================================*/
+
+$(document).on("click", ".crearUsuario", function(){
+
+	var num_documento = $(this).attr("num_documento");
+	var email = $(this).attr("email");
+	var nombre = $(this).attr("nombre");
+	var id_rol = $(this).attr("id_rol");
+
+	var action = $(this).attr("action");
+  	var method = $(this).attr("method");
+  	var pagina = $(this).attr("pagina");
+  	var token = $(this).attr("token");
+
+
+  	swal({
+  		 title: '¿Está seguro de generar este usuario?',
+  		 text: "¡Si no lo está puede cancelar la acción!",
+  		 type: 'warning',
+  		 showCancelButton: true,
+  		 confirmButtonColor: '#3085d6',
+  		 cancelButtonColor: '#d33',
+  		 cancelButtonText: 'Cancelar',
+  		 confirmButtonText: 'Sí, generar usuario!'
+  	}).then(function(result){
+
+  		if(result.value){
+
+  			var datos = new FormData();
+  			datos.append("num_documento", num_documento);
+  			datos.append("email", email);
+  			datos.append("nombre", nombre);
+  			datos.append("id_rol", id_rol);
+  			datos.append("_method", method);
+  			datos.append("_token", token);
+
+  			$.ajax({
+
+  				url: action,
+  				method: "POST",
+  				data: datos,
+  				cache: false,
+  				contentType: false,
+        		processData: false,
+        		success:function(respuesta){
+
+        			 if(respuesta == "ok"){
+
+    			 		swal({
+		                    type:"success",
+		                    title: "¡Usuario generado correctamente!",
+		                    showConfirmButton: true,
+		                    confirmButtonText: "Cerrar"
+
+			             }).then(function(result){
+
+			             	if(result.value){
+
+			             		window.location = ruta+'/'+pagina;
+
+			             	}
+
+
+			             })
+
+        			 }
+
+        		},
+		        error: function (jqXHR, textStatus, errorThrown) {
+		            console.error(textStatus + " " + errorThrown);
+		        }
+
+  			})
+
+  		}
+
+  	})
+
+})
+
+/*=====  End of Agregar usuario  ======*/
 
 
 /*=====================================

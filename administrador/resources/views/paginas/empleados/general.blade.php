@@ -165,6 +165,12 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
+                        <label>Correo electronico</label>
+                        <input type="email" class="form-control" name="email" required>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
                         <label>Rol</label>
                         <select class="form-control select2bs4" name="id_rol" id="id_rol" style="width: 100%;" required>
                           <option selected="selected" value="">Seleccionar... </option>
@@ -174,6 +180,9 @@
                         </select>
                       </div>
                     </div>
+                    
+                  </div>
+                  <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Estado</label>
@@ -314,6 +323,12 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
+                    <label>Correo electronico</label>
+                    <input type="email" class="form-control" name="email" value="{{$value["email"]}}" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
                     <label>Genero</label>
                     <select class="form-control select2bs4" name="genero" id="genero" style="width: 100%;" required>
                       
@@ -327,14 +342,14 @@
                     </select>
                   </div>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Fecha de nacimiento</label>
                     <input type="date" class="form-control datetimepicker-input" name="fecha_nacimiento" id="fecha_nacimiento" value="{{$value["fecha_nacimiento"]}}" required>
                   </div>
                 </div>
-              </div>
-              <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Rol</label>
@@ -349,6 +364,8 @@
                     </select>
                   </div>
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Estado</label>

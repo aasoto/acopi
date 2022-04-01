@@ -1369,6 +1369,91 @@ tablaDocumentacionEmpleados.on('order.dt search.dt', function(){
 
 /*=====  End of DataTable Documentos empleados o pasantes  ======*/
 
+/*===============================================
+=            Datatable Crear usuario            =
+===============================================*/
+
+var tablaEmpleadosUsuario = $("#tablaEmpleadosUsuario").DataTable({
+	processing: true,
+  	serverSide: true,
+
+  	ajax:{
+  		url: ruta+"/usuarios/agregarUser"		
+  	},
+
+  	"columnDefs":[{
+  		"searchable": true,
+  		"orderable": true,
+  		"targets": 0
+  	}],
+
+  	"order":[[0, "desc"]],
+
+  	columns: [
+	  	{
+	    	data: 'id',
+	    	name: 'id'
+	  	},
+	  	{
+	  		data: 'type_document',
+	    	name: 'type_document'
+	  	},
+	  	{
+	  		data: 'num_documento',
+	    	name: 'num_documento'
+	  	},
+	  	{
+	  		data: 'nombre',
+	    	name: 'nombre'
+	  	},
+	  	{
+	  		data: 'rol',
+	    	name: 'rol'
+	  	},
+	  	{
+	  		data: 'procedimientos',
+	    	name: 'procedimientos'
+	  	}
+
+	],
+	"responsive": true, "lengthChange": true, "autoWidth": false,
+	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+	"language": {
+
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		},
+	    "oAria": {
+	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+	}
+});
+
+tablaEmpleadosUsuario.on('order.dt search.dt', function(){
+
+	tablaEmpleadosUsuario.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+
+
+}).draw();
+
+/*=====  End of Datatable Crear usuario  ======*/
+
 
 /*var tablaAfiliados = $("#tablaAfiliados").DataTable({
 	processing: true,

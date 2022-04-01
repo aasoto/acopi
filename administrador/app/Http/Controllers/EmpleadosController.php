@@ -101,6 +101,7 @@ class EmpleadosController extends Controller
     		'segundo_apellido' => $request->input("segundo_apellido"),
     		'genero' => $request->input("genero"),
     		'fecha_nacimiento' => $request->input("fecha_nacimiento"),
+            'email' => $request->input("email"),
     		'id_rol' => $request->input("id_rol"),
     		'estado' => $request->input("estado"),
             'foto' => $request->file("foto"),
@@ -121,6 +122,7 @@ class EmpleadosController extends Controller
     			"segundo_apellido" => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
     			"genero" => 'required|regex:/^[a-zA-Z]+$/i',
     			"fecha_nacimiento" => 'required|date',
+                'email' => 'required|regex:/^[-\\_\\:\\.\\@\\0-9a-zA-Z]+$/i',
     			"id_rol" => 'required|regex:/^[0-9]+$/i',
     			"estado" => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'
     		]);
@@ -217,6 +219,7 @@ class EmpleadosController extends Controller
     			$empleado->segundo_apellido = $datos["segundo_apellido"];
     			$empleado->sexo = $datos["genero"];
     			$empleado->fecha_nacimiento = $datos["fecha_nacimiento"];
+                $empleado->email = $datos["email"];
     			$empleado->id_rol = $datos["id_rol"];
     			$empleado->estado = $datos["estado"];
                 $empleado->foto = $rutaFoto;
@@ -268,6 +271,7 @@ class EmpleadosController extends Controller
     		'segundo_apellido' => $request->input("segundo_apellido"),
     		'genero' => $request->input("genero"),
     		'fecha_nacimiento' => $request->input("fecha_nacimiento"),
+            'email' => $request->input("email"),
     		'id_rol' => $request->input("id_rol"),
     		'estado' => $request->input("estado"),
             'foto_actual' => $request->input("foto_actual"),
@@ -291,6 +295,7 @@ class EmpleadosController extends Controller
     			"segundo_apellido" => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
     			"genero" => 'required|regex:/^[a-zA-Z]+$/i',
     			"fecha_nacimiento" => 'required|date',
+                'email' => 'required|regex:/^[-\\_\\:\\.\\@\\0-9a-zA-Z]+$/i',
     			"id_rol" => 'required|regex:/^[0-9]+$/i',
     			"estado" => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i'
     		]);
@@ -395,6 +400,7 @@ class EmpleadosController extends Controller
     				'segundo_apellido' => $datos["segundo_apellido"],
     				'sexo' => $datos["genero"],
     				'fecha_nacimiento' => $datos["fecha_nacimiento"],
+                    'email' => $datos["email"],
     				'id_rol' => $datos["id_rol"],
     				'estado' => $datos["estado"],
                     'foto' => $rutaFoto_Nueva,

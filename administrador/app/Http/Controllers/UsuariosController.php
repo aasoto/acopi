@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\UsuariosModel;
 use App\RolesModel;
+use App\PaginaWebModel;
+use App\EmpleadosModel;
+use App\TipoDocumentoModel;
+use App\GeneroModel;
 use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
@@ -15,32 +19,93 @@ class UsuariosController extends Controller
 	
 	public function index(){
 
-    	/*return view("paginas.usuarios.consultarUser", array("usuarios" => $usuarios));*/
-    	if (request()->ajax()) {
-    		return datatables()->of(UsuariosModel::all()) 
-    		->addColumn('acciones', function($data){
+    	$paginaweb = PaginaWebModel::all();
+        foreach ($paginaweb as $key => $web) {}
 
-			$acciones = '<div class="btn-group">
-									
-							<a href="'.url()->current().'/'.$data->id.'" class="btn btn-warning btn-sm">
-								<i class="fas fa-pencil-alt text-white"></i>
+    	if (url()->current() == ($web["servidor"]."usuarios/consultarUser")) {
+    		if (request()->ajax()) {
+	    		return datatables()->of(UsuariosModel::all()) 
+	    		->addColumn('acciones', function($data){
+
+				$acciones = '<div class="btn-group">
+										
+								<a href="'.url()->current().'/'.$data->id.'" class="btn btn-warning btn-sm">
+									<i class="fas fa-pencil-alt text-white"></i>
+								</a>
+
+								<button class="btn btn-danger btn-sm eliminarRegistro" foto="'.$data->foto.'" action="'.url()->current().'/'.$data->id.'" method="DELETE" pagina="usuarios/consultarUser" token="'.csrf_token().'">
+								<i class="fas fa-trash-alt"></i>
+								</button>
+
+			  				</div>';
+
+					return $acciones;
+				})
+				  ->rawColumns(['acciones'])
+				  -> make(true);
+
+			}
+
+	    	return view("paginas.usuarios.consultarUser");
+    	}
+
+    	if (url()->current() == ($web["servidor"]."usuarios/agregarUser")) {
+
+	    	if (request()->ajax()) {
+	    		return datatables()->of(EmpleadosModel::where("id_usuario", null)->get()) 
+
+	    		->addColumn('type_document', function($data){
+
+	    				$validar_type_document = TipoDocumentoModel::where("codigo_doc", $data->tipo_documento)->get();
+	    			
+	    				if(!empty($validar_type_document)){
+	    					$type_document = $validar_type_document[0]["nombre_doc"];
+	    				} else {
+	    					$type_document = "Sin verficar";
+	    				}
+
+					return $type_document;
+				})
+
+	    		->addColumn('nombre', function($data){
+	    			
+	    				$nombre = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre;
+
+					return $nombre;
+				})
+
+	    		->addColumn('rol', function($data){
+
+	    				$validar_rol = RolesModel::where("id", $data->id_rol)->get();
+	    			
+	    				if(!empty($validar_rol)){
+	    					$rol = $validar_rol[0]["rol"]." - ".$data->estado;
+	    				} else {
+	    					$rol = "Sin verficar - ".$data->estado;
+	    				}
+
+					return $rol;
+				})
+
+				->addColumn('procedimientos', function($data){
+	    				$procedimientos = '
+	    				<div class="btn-group">
+							<a title="Crear usuario" class="btn btn-primary btn-sm crearUsuario" num_documento="'.$data->num_documento.'" email="'.$data->email.'" nombre="'.$data->primer_nombre.' '.$data->segundo_nombre.' '.$data->primer_apellido.' '.$data->segundo_apellido.'" id_rol="'.$data->id_rol.'" action="'.url()->current().'" method="POST" pagina="usuarios/agregarUser" token="'.csrf_token().'">
+								<i class="fas fa-user-plus"></i>
 							</a>
-
-							<button class="btn btn-danger btn-sm eliminarRegistro" action="'.url()->current().'/'.$data->id.'" method="DELETE" pagina="usuarios/consultarUser" token="'.csrf_token().'">
-							<i class="fas fa-trash-alt"></i>
-							</button>
-
 		  				</div>';
+	    			
+					return $procedimientos;
+				})
 
-				return $acciones;
-			})
-			  ->rawColumns(['acciones'])
-			  -> make(true);
+				  ->rawColumns(['type_document', 'nombre', 'rol', 'procedimientos'])
+				  -> make(true);
 
-		}
-    	//$roles = RolesModel::all();
-    	$usuarios = UsuariosModel::all();
-    	return view("paginas.usuarios.consultarUser");
+			}
+
+	    	return view("paginas.usuarios.agregarUser", array());
+    	}
+    	
     }
 	
 	/*=====  End of Mostrar todos los registros en la tabla  ======*/
@@ -66,6 +131,59 @@ class UsuariosController extends Controller
 	}
 	
 	/*=====  End of Mostra un solo registro de la tabla  ======*/
+
+	/*=======================================
+	=            Agregar usuario            =
+	=======================================*/
+	
+	public function store(Request $request) {
+		$datos = array(
+			'num_documento' => $_POST["num_documento"],
+			'email' => $_POST["email"],
+			'nombre' => $_POST["nombre"],
+			'id_rol' => $_POST["id_rol"]
+		);
+
+		/*echo '<pre>'; print_r($datos); echo '</pre>';
+		return;*/
+
+		if(!empty($datos)){
+
+    		$validar = \Validator::make($datos,[
+    			"num_documento" => 'required|regex:/^[-\\.\\0-9a-zA-Z]+$/i',
+    			"nombre" => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i',
+                'email' => 'required|regex:/^[-\\_\\:\\.\\@\\0-9a-zA-Z]+$/i'
+    		]);
+
+    		if($validar->fails()){
+    			return redirect("/empleados/general")->with("no-validacion", "");
+    		}else{
+
+    			$rol = RolesModel::where("id", $datos["id_rol"])->get();
+
+    			$usuario = new UsuariosModel();
+
+    			$usuario->name = $datos["nombre"];
+    			$usuario->email = $datos["email"];
+    			$usuario->password = Hash::make($datos["num_documento"]);
+    			$usuario->foto = "vistas/images/usuarios/unknown.png";
+    			$usuario->rol = $rol[0]["rol"];
+
+    			$usuario->save();
+
+    			$usuario_guardado = UsuariosModel::where("email", $datos["email"])->get();
+
+    			$actualizar = array('id_usuario' => $usuario_guardado[0]["id"]);
+
+    			$empleado = EmpleadosModel::where('num_documento', $datos["num_documento"])->update($actualizar);
+    			return "ok";
+    		}
+    	}
+
+	}
+	
+	/*=====  End of Agregar usuario  ======*/
+	
 
 	/*======================================
 	=            Editar usuario            =
@@ -126,13 +244,13 @@ class UsuariosController extends Controller
 
 		 		if($foto["foto"] != ""){
 		 			if(!empty($datos["imagen_actual"])){
-		 				if($datos["imagen_actual"] != "/vistas/images/usuarios/admin.png"){	
+		 				if($datos["imagen_actual"] != "vistas/images/usuarios/admin.png"){	
 		 					unlink($datos["imagen_actual"]);
 		 				} 			
 
 		 			} 
 		 			
-		 			$aleatorio = mt_rand(100,999);	
+		 			$aleatorio = mt_rand(10000,99999);	
 
 		 			$ruta = "vistas/images/usuarios/".$aleatorio.".".$foto["foto"]->guessExtension();
 

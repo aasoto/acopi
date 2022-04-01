@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('plantilla');
 });
 
-Route::view('/', 'paginas.inicio');
+//Route::view('/', 'paginas.inicio');
 Route::view('/pagina_web/inicio', 'paginas.pagina_web.inicio');
 Route::view('/afiliados/inicio', 'paginas.afiliados.inicio');
 Route::view('/documentos/inicio', 'paginas.documentos.inicio');
@@ -96,7 +96,9 @@ Route::resource('/pagina_web/info/redes', 'PaginaWebController');
 
 /*----------  Usuarios  ----------*/
 Route::resource('/usuarios/consultarUser', 'UsuariosController');
+Route::resource('/usuarios/agregarUser', 'UsuariosController');
 Route::resource('/usuarios/perfil', 'PerfilController');
+Route::resource('/', 'PerfilController');
 
 /*----------  Afiliados  ----------*/
 Route::resource('/afiliados/general', 'AfiliadosController');
