@@ -1,7 +1,7 @@
 @extends('plantilla')
 
 @section('content')
-
+@auth
 @if (Auth::user()->rol == 'Administrador')
   <div class="content-wrapper" style="min-height: 243px;">
     <!-- Content Header (Page header) -->
@@ -64,7 +64,10 @@
       </div>
     </section>
   </div>
+@else
+    @include('paginas/errores/401')
 @endif
+@endauth
 @if (Session::has("no-validacion"))
 <script>
   swal({

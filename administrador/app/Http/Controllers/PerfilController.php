@@ -111,7 +111,7 @@ class PerfilController extends Controller
                     } else {
 
                         if(!empty($datos["foto_actual"])){
-                            if($datos["foto_actual"] != "vistas/images/usuarios/admin.png"){
+                            if($datos["foto_actual"] != "vistas/images/usuarios/unknown.png"){
                                 unlink($datos["foto_actual"]);
                             }
                         }

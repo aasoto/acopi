@@ -1,6 +1,8 @@
 @extends('plantilla')
 
 @section('content')
+@auth
+@if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial'))
 <div class="content-wrapper" style="min-height: 243px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -67,7 +69,7 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-                
+
               </div>
               <!-- /.card-footer-->
             </div>
@@ -78,6 +80,11 @@
     </section>
     <!-- /.content -->
   </div>
+
+@else
+    @include('paginas/errores/401')
+@endif
+@endauth
 
 
 @if (Session::has("ok-editar"))

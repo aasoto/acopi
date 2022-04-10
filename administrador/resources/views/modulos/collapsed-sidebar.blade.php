@@ -46,13 +46,13 @@
           =            Sección de botones del menú            =
           ===================================================-->
 
-          
 
-            
+
+
             <!--======================================
             =            Menú Afiliados            =
             ======================================-->
-            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Asistente de dirección') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial') || (Auth::user()->rol == 'Subdirector administrativo y financiero') || (Auth::user()->rol == 'Director ejecutivo'))
+            @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Asistente de dirección') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial') || (Auth::user()->rol == 'Subdirector administrativo y financiero') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector juridico'))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon fas fa-address-card"></i>
@@ -77,11 +77,11 @@
                 </ul>
               </li>
             @endif
-            
-            
-            
+
+
+
             <!--=====  End of Menú Afiliados  ======-->
-            
+
             <!--======================================
             =            Menú Usuarios            =
             ======================================-->
@@ -95,8 +95,8 @@
                 </a>
               </li>
             @endif
-            
-            
+
+
             <!--=====  End of Menú Usuarios  ======-->
 
             <!--=====================================
@@ -112,8 +112,8 @@
                 </a>
               </li>
             @endif
-            
-            
+
+
             <!--=====  End of Menú de pagos  ======-->
 
             <!--=====================================
@@ -129,8 +129,8 @@
                 </a>
               </li>
             @endif
-            
-            
+
+
             <!--=====  End of Menú de Citas  ======-->
 
             <!--=====================================
@@ -146,10 +146,10 @@
                 </a>
               </li>
             @endif
-            
-            
+
+
             <!--=====  End of Menú de Empleados y pasantes  ======-->
-            
+
             <!--=====================================
             =            Menú de Eventos            =
             =====================================-->
@@ -163,8 +163,8 @@
                 </a>
               </li>
             @endif
-            
-            
+
+
             <!--=====  End of Menú de Eventos  ======-->
 
             <!--=====================================
@@ -180,13 +180,13 @@
                 </a>
               </li>
             @endif
-            
+
             <!--=====  End of Menú de Documentos  ======-->
 
             <!--=============================================
           =            Menú página web            =
           =============================================-->
-          
+
           @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Asistente de dirección') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial') || (Auth::user()->rol == 'Director ejecutivo'))
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -261,7 +261,7 @@
                   <!--=============================================
                   =            Submenú Información           =
                   =============================================-->
-                  
+
                     <ul class="nav nav-treeview">
                       <li class="nav-item">
                         <a href="{{ url('pagina_web/info/gremio') }}" class="nav-link">
@@ -294,9 +294,9 @@
                         </a>
                       </li>
                     </ul>
-                  
+
                   <!--=====  End of Submenú Información  ======-->
-                  
+
                 </li>
                 <li class="nav-item">
                   <a href="{{ substr(url(""),0,-21) }}" class="nav-link">
@@ -307,14 +307,14 @@
               </ul>
             </li>
           @endif
-          
+
           <!--=====  End of Menú página web  ======-->
-          
+
 
           </li>
 
           <!--=====  End of Sección de botones del menú  ======-->
-          
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

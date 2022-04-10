@@ -1,6 +1,8 @@
 @extends('plantilla')
 
 @section('content')
+@auth
+@if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Asistente de dirección') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector administrativo y financiero') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial') || (Auth::user()->rol == 'Subdirector juridico'))
 <div class="content-wrapper" style="min-height: 243px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -69,13 +71,14 @@
             </table>
           </div>
           <div class="card-footer">
-            
+
           </div>
         </div>
       </div>
     </section>
 </div>
-
-
-
+@else
+    @include('paginas/errores/401')
+@endif
+@endauth
 @endsection

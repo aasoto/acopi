@@ -1,6 +1,8 @@
 @extends('plantilla')
 
 @section('content')
+@auth
+@if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo'))
 <div class="content-wrapper" style="min-height: 243px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -229,7 +231,7 @@
                             </div>
                           </div>
                         </div>
-                        
+
                       </div>
                       <div class="card-footer">
                         <div class="col-md-12 text-center">
@@ -260,6 +262,10 @@
     bsCustomFileInput.init();
   })
 </script>
+@else
+    @include('paginas/errores/401')
+@endif
+@endauth
 @if (isset($empresa_existe))
   @if ($empresa_existe == "si")
   <script>

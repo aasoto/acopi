@@ -1,6 +1,10 @@
 @extends('plantilla')
 
 @section('content')
+@auth
+@if (url()->current() != url('/').'/usuarios/perfil/'.Auth::user()->id)
+    @include('/paginas/errores/511')
+@else
 <div class="content-wrapper" style="min-height: 243px;">
 	<section class="content">
     	<div class="container-fluid">
@@ -188,6 +192,8 @@
 
   </section>
 </div>
+@endif
+@endauth
 
 @if (Session::has("no-validacion"))
 <script>

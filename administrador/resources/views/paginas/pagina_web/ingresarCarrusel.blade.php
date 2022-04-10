@@ -1,6 +1,8 @@
 @extends('plantilla')
 
 @section('content')
+@auth
+@if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Asistente de dirección'))
 <div class="content-wrapper" style="min-height: 243px;">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -30,16 +32,16 @@
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">
-							
+
 
 							<!--=========================================
 							=            Actualizar Carrusel            =
 							==========================================-->
-							
+
 							<!--========================================================================
 				            =            Sección amigable del carrusel de evento y noticias            =
 				            =========================================================================-->
-		            
+
 		            		<div class="editarCarrusel" id="editarCarrusel" name="editarCarrusel" style="visibility: '';">
 		            			<div class="card card-primary" id="tarjetaEditarCarrusel">
 				            	<div class="card-header">
@@ -156,7 +158,7 @@
 										            							<div class="form-group">
 										            								<input type="text" class="form-control" name="url-boton-1-'.$indice.'" id="url-boton-1-'.$indice.'" value="'.$value["url-boton-1"].'" placeholder="URL Botón número 1">
 																							</div>
-										            							
+
 					            											</div>
 												            				<div class="form-group my-2 text-center">
 												            					<label for="exampleInputPassword1">Botón número 2</label><br>
@@ -200,7 +202,7 @@
 												            					<div class="form-group">
 																					<input type="text" class="form-control" name="url-boton-2-'.$indice.'" id="url-boton-2-'.$indice.'" value="'.$value["url-boton-2"].'" placeholder="URL Botón número 2">
 																				</div>
-												            					
+
 												            				</div>
 												            			</div>
 
@@ -243,9 +245,9 @@
 												            						echo '<img src="'.$servidor.''.$value["fondo"].'" class="img-fluid py-2 bg-secondary previsualizarImg_fondo-'.$indice.'" width="200px" height="133px">';
 												            					}
 												            					echo '<p class="help-block small mt-3">Dimensiones: 2000px * 1333px | Peso Max. 2MB | Formato: JPG o PNG</p>
-													            				
+
 													            			</div>
-													            		</div>	
+													            		</div>
 													            		<div class="col-md-1">
 													            		</div>
 													            	</div>
@@ -469,19 +471,19 @@
 												</button>
 											</div>
 				            			</div>
-				            			
+
 									</div>
 								<div class="card-footer">
-									
+
 								</div>
 							</div>
 		            		</div>
-				            
-		            
+
+
 		            		<!--====  End of Sección amigable del carrusel de evento y noticias  ====-->
-							
+
 							<!--====  End of Actualizar Carrusel  ====-->
-							
+
 							<!--==================================================
 							=            Tarjeta de ingresar carrusel            =
 							===================================================-->
@@ -625,7 +627,7 @@
 																	<input type="text" class="form-control" name="url-boton-2-'.$id_nuevo.'" id="url-boton-2-'.$id_nuevo.'" placeholder="URL Botón Número 2">
 																</div>
 															</div>
-														</div> 
+														</div>
 													</div>
 													<div class="row">
 														<div class="col-md-12">
@@ -644,35 +646,39 @@
 												</ul>
 											</li>
 										</ul>
-										
-										
-						                
+
+
+
 									</div>';
 									@endphp
-									
-								
+
+
 									<div class="card-footer">
 										<div class="col-md-12 text-center">
 											<button type="submit" class="btn btn-success col-md-6 actualizarCarrusel">
 							                  	<i class="fas fa-check"></i> Guardar todo
 							                </button>
 										</div>
-										
-									</div>							
+
+									</div>
 								</div>
 							</div>
-							
+
 							<!--====  End of Tarjeta de ingresar carrusel  ====-->
 
-							
-							
+
+
 						</div>
 					</div>
-				</div>		
-			</form>	
-		
+				</div>
+			</form>
+
 	</section>
 </div>
+@else
+    @include('paginas/errores/401')
+@endif
+@endauth
 
   @if (Session::has("no-validacion"))
     <script>
@@ -713,9 +719,8 @@
 
 @endsection
 
-					
-					
-					
-						
-					
-					
+
+
+
+
+

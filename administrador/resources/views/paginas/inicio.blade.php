@@ -1,6 +1,7 @@
 @extends('plantilla')
 
 @section('content')
+@auth
 <div class="content-wrapper" style="min-height: 243px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -337,7 +338,20 @@
             @endif
             @if (Auth::user()->rol == 'Subdirector juridico')
                 <div class="row">
-
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>Afiliados</h3>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-address-card"></i>
+                        </div>
+                        <a href="{{ url('afiliados/inicio') }}" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
                 </div>
             @endif
             @if (Auth::user()->rol == 'Subdirector de comunicaciones y eventos')
@@ -432,6 +446,7 @@
                     </div>
                 </div>
             @endif
+
             <div class="row">
 
                 {{--<div class="col-lg-3 col-6">
@@ -596,7 +611,7 @@
     </section>
     <!-- /.content -->
   </div>
-
+  @endauth
 @if (Session::has("no-editar"))
 
 <script>

@@ -4,7 +4,7 @@
 <!--============================================
 =            Autenticación de rol            =
 ============================================-->
-
+@auth
 @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Asistente de dirección') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial') || (Auth::user()->rol == 'Director ejecutivo'))
 
   <div class="content-wrapper" style="min-height: 243px;">
@@ -36,7 +36,7 @@
           @method('PUT')
           @csrf
 
-          @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo'))
+          @if (Auth::user()->rol == 'Administrador')
             <!--=============================================
             =            Sección Información General            =
             =============================================-->
@@ -47,8 +47,8 @@
                 echo '<div class="card card-primary collapsed-card">';
               }
             @endphp
-            
-            
+
+
               <!--==============================================
               =            Card header - cabecera            =
               ==============================================-->
@@ -134,7 +134,7 @@
             </div>
             <!--=====  End of Sección Información General  ======-->
           @endif
-          
+
           @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo'))
             <!--===============================================
             =            Sección cambio de logos            =
@@ -203,8 +203,8 @@
             </div>
             <!--=====  End of Sección cambio de logos  ======-->
           @endif
-          
-          
+
+
           @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos'))
             <!--======================================
             =            Sección footer            =
@@ -374,16 +374,18 @@
               <!--=====  End of Botón del final del formulario  ======-->
             </div>
             <!--=====  End of Sección footer  ======-->
-          @endif          
+          @endif
 
-          
+
         </form>
       </div>
     </section>
     <!-- /.content -->
   </div>
-
+@else
+    @include('paginas/errores/401')
 @endif
+@endauth
 
 <!--=====  End of Autenticación de rol  ======-->
 

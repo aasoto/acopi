@@ -12,7 +12,7 @@ class ReactivarEmpresaController extends Controller
 {
 
 	public function index() {
-        $join = DB::table('representante_empresa')->join('empresas','representante_empresa.cc_rprt_legal','=','empresas.cc_rprt_legal')->select('representante_empresa.*','empresas.*')->where("estado_afiliacion_empresa", "inactiva")->get(); 
+        $join = DB::table('representante_empresa')->join('empresas','representante_empresa.cc_rprt_legal','=','empresas.cc_rprt_legal')->select('representante_empresa.*','empresas.*')->where("estado_afiliacion_empresa", "inactiva")->get();
         if(request()->ajax()){
 
             return datatables()->of($join)
@@ -20,7 +20,7 @@ class ReactivarEmpresaController extends Controller
             ->addColumn('representante', function($data){
 
                 $representante = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre;
-               
+
                 return $representante;
 
             })
@@ -28,23 +28,33 @@ class ReactivarEmpresaController extends Controller
             ->addColumn('telefonos', function($data){
 
                 $telefonos = $data->telefono_empresa.' - '.$data->celular_empresa;
-               
+
                 return $telefonos;
 
             })
-            
-            ->addColumn('procedimientos', function($data){
 
-                $procedimientos = '
-                    <div class="text-center">
-                        <div class="btn-group">
-                            <a href="'.url()->current().'/'.$data->id_empresa.'" class="btn btn-warning btn-sm text-white">
-                                <i class="far fa-life-ring"></i> Rescatar
-                            </a>
+            ->addColumn('procedimientos', function($data){
+                if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector administrativo y financiero') || (Auth::user()->rol == 'Director ejecutivo')) {
+                    $procedimientos = '
+                        <div class="text-center">
+                            <div class="btn-group">
+                                <a href="'.url()->current().'/'.$data->id_empresa.'" class="btn btn-warning btn-sm text-white">
+                                    <i class="far fa-life-ring"></i> Rescatar
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                ';
-               
+                    ';
+                } else {
+                    $procedimientos = '
+                        <div class="text-center">
+                            <div class="btn-group">
+
+                            </div>
+                        </div>
+                    ';
+                }
+
+
                 return $procedimientos;
 
             })
@@ -55,7 +65,7 @@ class ReactivarEmpresaController extends Controller
 
 
         return view("paginas.afiliados.empresasInactivas");
-        
+
 	}
 
 	public function show($id){
@@ -74,10 +84,10 @@ class ReactivarEmpresaController extends Controller
                 'estado' => 'pagado'
             );
             $pagado = PagosModel::where("id", $_POST["recibo"])->update($actualizar);
-            
+
             $recibos_vencidos = PagosModel::where("id_empresa", $id)->get();
             $total_recibos = count($recibos_vencidos);
-            for ($i=0; $i < $total_recibos; $i++) { 
+            for ($i=0; $i < $total_recibos; $i++) {
                 if ($recibos_vencidos[$i]["estado"] == "vencido") {
                     $actualizar = array(
                         'estado' => 'negoceado'

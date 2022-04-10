@@ -10,6 +10,7 @@ use App\SectorEmpresaModel;
 use App\PaginaWebModel;
 //Libería para hacer inner join
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AfiliadosController extends Controller
 {
@@ -18,15 +19,16 @@ class AfiliadosController extends Controller
 	===============================================================*/
 
 	public function index() {
+
 		if (request()->ajax()) {
-    		return datatables()->of(RepresentanteEmpresaModel::all()) 
+    		return datatables()->of(RepresentanteEmpresaModel::all())
     		->addColumn('nombre', function($data){
-    			
+
     			$nombre = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre.' ';
 
 				$empresas = EmpresasModel::where("cc_rprt_legal", $data->cc_rprt_legal)->get();
 				$total_empresas = count($empresas);
-				for ($i=0; $i < $total_empresas; $i++) { 
+				for ($i=0; $i < $total_empresas; $i++) {
 					$nombre = $nombre.'<i class="fas fa-check-circle" style="color: #28A745;"></i>';
 				}
 				return $nombre;
@@ -34,12 +36,13 @@ class AfiliadosController extends Controller
 
 
 			->addColumn('acciones', function($data){
-    				$acciones = '
+                if ((Auth::user()->rol == "Administrador") || (Auth::user()->rol == "Director ejecutivo") || (Auth::user()->rol == "Asistente de dirección") || (Auth::user()->rol == "Subdirector de comunicaciones y eventos")) {
+                    $acciones = '
     				<div class="btn-group">
 						<a estoy="'.url()->current().'/" tipo_documento_rprt="'.$data->tipo_documento_rprt.'" cc_rprt_legal="'.$data->cc_rprt_legal.'" primer_nombre="'.$data->primer_nombre.'" segundo_nombre="'.$data->segundo_nombre.'" primer_apellido="'.$data->primer_apellido.'" segundo_apellido="'.$data->segundo_apellido.'" fecha_nacimiento="'.$data->fecha_nacimiento.'" sexo_rprt="'.$data->sexo_rprt.'" email_rprt="'.$data->email_rprt.'" telefono_rprt="'.$data->telefono_rprt.'" foto_rprt="'.$data->foto_rprt.'" title="Ver más" class="btn btn-primary btn-sm verMasAfiliado">
 							<i class="fas fa-eye"></i>
 						</a>
-						<a href="http://localhost/acopi/administrador/public/afiliados/empresas/'.$data->id_rprt_legal.'" title="Agregar nueva empresa" class="btn btn-success btn-sm">
+						<a href="'.url('/').'/afiliados/empresas/'.$data->id_rprt_legal.'" title="Agregar nueva empresa" class="btn btn-success btn-sm">
 							<i class="fas fa-plus"></i>
 						</a>
 						<a href="'.url()->current().'/'.$data->id_rprt_legal.'" title="Editar" class="btn btn-warning btn-sm editarAfiliado">
@@ -50,7 +53,16 @@ class AfiliadosController extends Controller
 						</button>
 
 	  				</div>';
-    			
+                } else {
+                    $acciones = '
+    				<div class="btn-group">
+						<a estoy="'.url()->current().'/" tipo_documento_rprt="'.$data->tipo_documento_rprt.'" cc_rprt_legal="'.$data->cc_rprt_legal.'" primer_nombre="'.$data->primer_nombre.'" segundo_nombre="'.$data->segundo_nombre.'" primer_apellido="'.$data->primer_apellido.'" segundo_apellido="'.$data->segundo_apellido.'" fecha_nacimiento="'.$data->fecha_nacimiento.'" sexo_rprt="'.$data->sexo_rprt.'" email_rprt="'.$data->email_rprt.'" telefono_rprt="'.$data->telefono_rprt.'" foto_rprt="'.$data->foto_rprt.'" title="Ver más" class="btn btn-primary btn-sm verMasAfiliado">
+							<i class="fas fa-eye"></i>
+						</a>
+	  				</div>';
+                }
+
+
 				return $acciones;
 			})
 
@@ -63,83 +75,13 @@ class AfiliadosController extends Controller
     	$pagina_web = PaginaWebModel::all();
     	return view("paginas.afiliados.general", array("afiliados"=>$afiliados, "pagina_web"=>$pagina_web));
 	}
-	
-	/* public function index(){
 
-		$join = DB::table('empresas')->join('representante_empresa','empresas.cc_rprt_legal','=','representante_empresa.cc_rprt_legal')->select('empresas.razon_social','representante_empresa.*')->get();   
-
-    	if (request()->ajax()) {
-    		return datatables()->of(RepresentanteEmpresaModel::all()) 
-    		->addColumn('nombre', function($data){
-    			
-    				$nombre = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre;
-
-			
-
-				return $nombre;
-			})
-
-    		->addColumn('sexo_rprt', function($data){
-    			if ($data->sexo_rprt == "m") {
-    				$sexo_rprt = "Masculino";
-    			} elseif ($data->sexo_rprt == "f") {
-    				$sexo_rprt = "Femenino";
-    			} else {
-    				$sexo_rprt = "sin verficar";
-    			}
-				return $sexo_rprt;
-			})
-
-    		->addColumn('empresas', function($data){
-    			
-    			$empresas = " ";
-    				//$empresas = $id->razon_social;
-
-			
-
-				return $empresas;
-			})
-
-			->addColumn('acciones', function($data){
-    				$acciones = '
-    				<div class="btn-group">
-								
-						<a href="'.url()->current().'/'.$data->id_rprt_legal.'" class="btn btn-warning btn-sm">
-							<i class="fas fa-pencil-alt text-white"></i>
-						</a>
-
-						<button class="btn btn-danger btn-sm eliminarAfiliado" action="'.url()->current().'/'.$data->id_rprt_legal.'" method="DELETE" foto="'.$data->foto_rprt.'" cedula="'.$data->foto_cedula_rprt.'" pagina="afiliados/general" token="'.csrf_token().'">
-						<i class="fas fa-trash-alt"></i>
-						</button>
-
-	  				</div>';
-    			
-				return $acciones;
-			})
-
-			->addColumn('nueva_empresa', function($data){
-    				$nueva_empresa = '
-						<a href="http://localhost/acopi/administrador/public/afiliados/empresas/'.$data->id_rprt_legal.'" class="btn btn-success">
-							<i class="fas fa-plus"></i> Agregar empresa
-						</a>';
-    			
-				return $nueva_empresa;
-			})
-			  ->rawColumns(['nombre','sexo_rprt','empresas','acciones', 'nueva_empresa'])
-			  -> make(true);
-
-		}
-
-    	$afiliados = RepresentanteEmpresaModel::all();
-    	return view("paginas.afiliados.general");
-    } */
-	
 	/*=====  End of Mostrar todos los registros de la tabla  ======*/
 
 	/*===============================================
 	=            Ingresar nuevo afiliado            =
 	===============================================*/
-	
+
 	public function store(Request $request) {
 		$datos = array(
 			'tipo_documento' => $request->input("tipo_documento"),
@@ -198,7 +140,7 @@ class AfiliadosController extends Controller
 					if ($validar_Foto->fails()) {
 						return redirect("/afiliados/general")->with("no-validacion", "");
 					} else {
-						$aleatorio = mt_rand(10000,99999);	
+						$aleatorio = mt_rand(10000,99999);
 
 			 			$rutaFoto = "vistas/images/afiliados/fotos/".$aleatorio.".".$datos["foto"]->guessExtension();
 
@@ -221,14 +163,14 @@ class AfiliadosController extends Controller
 
 	                        $origen = imagecreatefrompng($datos["foto"]);
 	                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-	                        imagealphablending($destino, FALSE); 
+	                        imagealphablending($destino, FALSE);
 	                        imagesavealpha($destino, TRUE);
 	                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 	                        imagepng($destino, $rutaFoto);
-	                        
+
 	                    }
 					}
-					
+
 				} else {
 					$rutaFoto =  "";
 				}
@@ -238,7 +180,7 @@ class AfiliadosController extends Controller
 					$validar_Archivo_Documento = \Validator::make($datos, ['archivo_documento' => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
 					if ($validar_Archivo_Documento->fails()) {
 						if ($datos["archivo_documento"]->guessExtension() == "pdf") {
-							$aleatorio = mt_rand(10000,99999);	
+							$aleatorio = mt_rand(10000,99999);
 		 					$rutaDocumento = "vistas/images/afiliados/documentos/".$aleatorio.".".$datos["archivo_documento"]->guessExtension();
 		 					move_uploaded_file($datos["archivo_documento"], $rutaDocumento);
 						} else {
@@ -246,7 +188,7 @@ class AfiliadosController extends Controller
 						}
 
 					} else {
-						$aleatorio = mt_rand(10000,99999);	
+						$aleatorio = mt_rand(10000,99999);
 
 			 			$rutaDocumento = "vistas/images/afiliados/documentos/".$aleatorio.".".$datos["archivo_documento"]->guessExtension();
 
@@ -284,19 +226,19 @@ class AfiliadosController extends Controller
 			return redirect("/afiliados/general")->with("error", "");
 		}
 	}
-	
+
 	/*=====  End of Ingresar nuevo afiliado  ======*/
 
 	/*===========================================================
     =            Mostra un solo registro de la tabla            =
     ===========================================================*/
-    
+
     public function show($id){
 
         $afiliado = RepresentanteEmpresaModel::where("id_rprt_legal", $id)->get();
         $afiliados = RepresentanteEmpresaModel::all();
         $pagina_web = PaginaWebModel::all();
-        
+
         $pdf = strpos($afiliado[0]["foto_cedula_rprt"], "pdf");
         if ($pdf !== false) {
         	$tipo_cedula = "pdf";
@@ -306,19 +248,19 @@ class AfiliadosController extends Controller
         if(count($afiliado) != 0){
 
             return view("paginas.afiliados.general", array("status"=>200, "afiliado"=>$afiliado, "afiliados"=>$afiliados, "pagina_web"=>$pagina_web, "tipo_cedula"=>$tipo_cedula));
-        
-        }else{ 
+
+        }else{
 
             return view("paginas.afiliados.general", array("status"=>404, "afiliados"=>$afiliados, "pagina_web"=>$pagina_web));
         }
     }
-    
+
     /*=====  End of Mostra un solo registro de la tabla  ======*/
 
     /*===========================================
     =            Actualizar afiliado            =
     ===========================================*/
-    
+
     public function update($id, Request $request) {
     	$datos = array(
 			'tipo_documento' => $request->input("tipo_documento"),
@@ -342,7 +284,7 @@ class AfiliadosController extends Controller
 		);
 
 		if (!empty($datos)) {
-			
+
 			$validar = \Validator::make($datos, [
 				'tipo_documento' => 'required|regex:/^[a-z]+$/i',
 				'numero_documento' => 'required|regex:/^[0-9]+$/i',
@@ -355,28 +297,28 @@ class AfiliadosController extends Controller
 			]);
 
 			if ($validar->fails()) {
-				
+
 				return redirect("/afiliados/general")->with("no-validacion", "");
 			} else {
 
 				if (!empty($datos["segundo_nombre"])) {
 					$validar_Segundo_Nombre = \Validator::make($datos, ['segundo_nombre' => 'required|regex:/^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i']);
 					if ($validar_Segundo_Nombre->fails()) {
-						
+
 						return redirect("/afiliados/general")->with("no-validacion", "");
 					}
 				}
 				if (!empty($datos["correo_electronico"])) {
 					$validar_Correo_Electronico = \Validator::make($datos, ['correo_electronico' => 'required|regex:/^[-\\_\\:\\.\\@\\0-9a-zA-Z]+$/i']);
 					if ($validar_Correo_Electronico->fails()) {
-						
+
 						return redirect("/afiliados/general")->with("no-validacion", "");
 					}
 				}
 				if (!empty($datos["telefono"])) {
 					$validar_Telefono = \Validator::make($datos, ['telefono' => 'required|regex:/^[+\\0-9]+$/i']);
 					if ($validar_Telefono->fails()) {
-						
+
 						return redirect("/afiliados/general")->with("no-validacion", "");
 					}
 				}
@@ -384,13 +326,13 @@ class AfiliadosController extends Controller
 				if (!empty($archivos["foto"])) {
 					$validar_Foto = \Validator::make($archivos, ['foto' => 'required|image|mimes:jpg,jpeg,png|max:2000000']);
 					if ($validar_Foto->fails()) {
-						
+
 						return redirect("/afiliados/general")->with("no-validacion", "");
 					} else {
 						if (!empty($datos["foto"])) {
 							unlink($datos["foto"]);
 						}
-						$aleatorio = mt_rand(10000,99999);	
+						$aleatorio = mt_rand(10000,99999);
 
 			 			$rutaFoto = "vistas/images/afiliados/fotos/".$aleatorio.".".$archivos["foto"]->guessExtension();
 
@@ -413,14 +355,14 @@ class AfiliadosController extends Controller
 
 	                        $origen = imagecreatefrompng($archivos["foto"]);
 	                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-	                        imagealphablending($destino, FALSE); 
+	                        imagealphablending($destino, FALSE);
 	                        imagesavealpha($destino, TRUE);
 	                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
 	                        imagepng($destino, $rutaFoto);
-	                        
+
 	                    }
 					}
-					
+
 				} else {
 					$rutaFoto =  $datos["foto"];
 				}
@@ -432,7 +374,7 @@ class AfiliadosController extends Controller
 							if (!empty($datos["archivo_documento"])) {
 								unlink($datos["archivo_documento"]);
 							}
-							$aleatorio = mt_rand(10000,99999);	
+							$aleatorio = mt_rand(10000,99999);
 		 					$rutaDocumento = "vistas/images/afiliados/documentos/".$aleatorio.".".$archivos["cedula"]->guessExtension();
 		 					move_uploaded_file($archivos["cedula"], $rutaDocumento);
 						} else {
@@ -442,7 +384,7 @@ class AfiliadosController extends Controller
 						if (!empty($datos["archivo_documento"])) {
 							unlink($datos["archivo_documento"]);
 						}
-						$aleatorio = mt_rand(10000,99999);	
+						$aleatorio = mt_rand(10000,99999);
 
 			 			$rutaDocumento = "vistas/images/afiliados/documentos/".$aleatorio.".".$archivos["cedula"]->guessExtension();
 
@@ -452,7 +394,7 @@ class AfiliadosController extends Controller
 			 				return redirect("/afiliados/general")->with("no-validacion", "");
 			 			}
 					}
-					
+
 				} else {
 					$rutaDocumento = $datos["archivo_documento"];
 				}
@@ -481,25 +423,25 @@ class AfiliadosController extends Controller
 			return redirect("/afiliados/general")->with("error", "");
 		}
     }
-    
+
     /*=====  End of Actualizar afiliado  ======*/
 
     /*=========================================
     =            Eliminar Afiliado            =
     =========================================*/
-    
+
     public function destroy($id, Request $request){
 
-    	$validar = RepresentanteEmpresaModel::where("id_rprt_legal", $id)->get();    	
+    	$validar = RepresentanteEmpresaModel::where("id_rprt_legal", $id)->get();
     	if(!empty($validar)){
     		$afiliado = RepresentanteEmpresaModel::where("id_rprt_legal",$validar[0]["id_rprt_legal"])->delete();
-    		return "ok";   	
+    		return "ok";
     	}else{
     		return redirect("/afiliados/general")->with("no-borrar", "");
     	}
     }
-    
+
     /*=====  End of Eliminar Afiliado  ======*/
-    
-	
+
+
 }
