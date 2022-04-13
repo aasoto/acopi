@@ -10,12 +10,26 @@
                         {
                             if ($active)
                             {
-                                echo    '
+                                if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined')
+                                {
+                                    echo '
                                             <div 
                                                 class="carousel-item active" 
-                                                style="background-image: url(administrador/public/'.$value["fondo"].');
-                                                background-position: center center;"
-                                            >
+                                                style="background-image: url(administrador/public/' . $value["fondo"] . ');
+                                                background-position: center center; min-height:80vh;';
+                                    echo '">';
+                                }
+
+                                        if ($value["categoria"] == 'undefined' && $value["titulo"] == 'undefined' && $value["texto"] == 'undefined'){
+                                            echo '
+                                            <a href="'.$value['url-boton-1'].'"
+                                                class="carousel-item active" 
+                                                style="background-image: url(administrador/public/' . $value["fondo"] . ');
+                                                background-position: center center; min-height:80vh; min-width:100vw';
+                                            echo '">';
+
+                                        }
+                                       echo'
                                                 <div class="home-center">
                                                     <div class="home-desc-center">
                                         ';
@@ -43,41 +57,57 @@
 
                                                                             echo '<div class="mt-4 ">
                                                                                  ';
+                                                                                if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined')
+                                                                                {
 
 
-                                                                                    if (isset($value['url-boton-1']) && $value['url-boton-1'] != "" )
-                                                                                    {
+                                                                                    if (isset($value['url-boton-1']) && $value['url-boton-1'] != "") {
                                                                                         //si boton1 tiene la url definida dibujarlo
-                                                                                        echo'   
-                                                                                                <a  href="'.$value["url-boton-1"].'" 
-                                                                                                    class="pr-3 btn btn-primary btn-slider-item mb-5  '.$value["boton-1-color"].'"
+                                                                                        echo '   
+                                                                                                <a  href="' . $value["url-boton-1"] . '" 
+                                                                                                    class="pr-3 btn btn-primary btn-slider-item mb-5  ' . $value["boton-1-color"] . '"
                                                                                                 >
                                                                                              ';
-                                                                                                    if (isset($value['boton-1-texto'] )and $value['boton-1-texto'] != ''){
-                                                                                                        echo $value['boton-1-texto'];
-                                                                                                    }else
-                                                                                                    {
-                                                                                                        echo "Ver Más";
-                                                                                                    }
+                                                                                        if (isset($value['boton-1-texto']) and $value['boton-1-texto'] != '') {
+                                                                                            echo $value['boton-1-texto'];
+                                                                                        } else {
+                                                                                            echo "Ver Más";
+                                                                                        }
                                                                                         echo '  </a>
                                                                                              ';
                                                                                     }
-                                                                                    if (isset($value['url-boton-2']) && $value['url-boton-2'] != "" )
-                                                                                    {
+                                                                                    if (isset($value['url-boton-2']) && $value['url-boton-2'] != "") {
                                                                                         //si boton2 tiene la url definida dibujarlo
                                                                                         echo '
-                                                                                                <a  href="'.$value["url-boton-2"].'" 
-                                                                                                    class="pr-3 btn btn-primary btn-slider-item mb-5  '.$value["boton-2-color"].'"
+                                                                                                <a  href="' . $value["url-boton-2"] . '" 
+                                                                                                    class="pr-3 btn btn-primary btn-slider-item mb-5  ' . $value["boton-2-color"] . '"
                                                                                                 >
                                                                                              ';
-                                                                                                    if (isset($value['boton-2-texto'] )and $value['boton-2-texto'] != ''){
-                                                                                                        echo $value['boton-2-texto'];
-                                                                                                    }else
-                                                                                                    {
-                                                                                                        echo "Ver Más";
-                                                                                                    }
+                                                                                        if (isset($value['boton-2-texto']) and $value['boton-2-texto'] != '') {
+                                                                                            echo $value['boton-2-texto'];
+                                                                                        } else {
+                                                                                            echo "Ver Más";
+                                                                                        }
                                                                                         echo '  </a>';
                                                                                     }
+                                                                                    //boton de relleno cuando ambos botones estan vacios
+
+                                                                                   /* if ((!(isset($value['url-boton-1']) && $value['url-boton-1'] != ""))and (!(isset($value['url-boton-2']) && $value['url-boton-2'] != "")))
+                                                                                    {
+
+                                                                                        echo '
+                                                                                            <a  href="' . $value["url-boton-1"] . '"
+                                                                                                class="pr-3 btn btn-primary btn-slider-item mb-5  ' . $value["boton-1-color"] . '"
+                                                                                            >
+                                                                                        ';
+                                                                                        if (isset($value['boton-1-texto']) and $value['boton-2-texto'] != '') {
+                                                                                            echo $value['boton-1-texto'];
+                                                                                        } else {
+                                                                                            echo "Ver Más";
+                                                                                        }
+                                                                                        echo ' </a>';
+                                                                                    }*/
+                                                                                }
                                                         echo    '
                                                                                 </div>
                                                                         </div>
@@ -93,8 +123,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            
                                 ';
+                                if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined'){
+                                    echo '</div>';
+                                }
+                                if ($value["categoria"] == 'undefined' && $value["titulo"] == 'undefined' && $value["texto"] == 'undefined'){
+                                    echo '</a >';
+                                }
+
 //                                                   row vertical-content
 //                                                 container
                                                 //home-desc-center
@@ -103,22 +140,52 @@
                                 $active = false;
                             }else
                             {
-                                echo '
+
+
+                                if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined')
+                                {
+                                    echo '
                                         <div class="carousel-item" 
                                             style="background-image: url(administrador/public/'.$value["fondo"].');
-                                            background-position: center center;"
-                                        >
+                                            background-position: center center;min-height:80vh;';
+
+                                    echo'   ">';
+                                }
+
+                                if ($value["categoria"] == 'undefined' && $value["titulo"] == 'undefined' && $value["texto"] == 'undefined'){
+//                                    echo '
+//                                            <a href="'.$value['url-boton-1'].'"
+//                                                class="carousel-item active"
+//                                                style="background-image: url(administrador/public/' . $value["fondo"] . ');
+//                                                background-position: center center; min-height:80vh; min-width:100vw';
+//                                    echo '">';
+
+                                    echo '
+                                        <a href="'.$value['url-boton-1'].'" class="carousel-item" 
+                                            style="background-image: url(administrador/public/'.$value["fondo"].');
+                                            background-position: center center;min-height:80vh;';
+
+                                    echo'   ">';
+
+
+                                }
+
+
+                                echo'
                                             <div class="home-center">
                                                 <div class="home-desc-center">
                                     ';
                                                     if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
                                                         echo '<div class="bg-overlay-color"></div>';
                                                     }
-                                                    echo '<div class="container">
+                                                    echo '<div class="container">';
+
+                                                    echo'
+                    
                                                             <div class="row vertical-content">
                 
                                                                 <div class="col-lg-7">
-                                                                    <div class="home-content mt-4 slider-principal">
+                                                                    <div class="home-content mt-2 slider-principal">
                                                          ';
                                                                         /*if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined')
                                                                         {
@@ -131,7 +198,7 @@
 
                                                                         if ($value["categoria"] != 'undefined' )
                                                                         {
-                                                                            echo '<h4 class="home-subtitle">'.$value["categoria"].'</h4>';
+                                                                            echo '<h4 class="home-subtitle ">'.$value["categoria"].'</h4>';
                                                                         }
                                                                         if ($value["titulo"] != 'undefined'){
                                                                             echo '<h2 class="home-title my-4">'.$value["titulo"].'</h2>' ;
@@ -146,8 +213,9 @@
                                                                                         echo 'asa '.$value['boton-1-texto'];
 
                                                                                     }*/
-                                                                                    if (isset($value['url-boton-1']) && $value['url-boton-1'] != "" )
-                                                                                    {
+                                                                                if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
+
+                                                                                    if (isset($value['url-boton-1']) && $value['url-boton-1'] != "") {
 
                                                                                         echo '
                                                                                             <a  href="' . $value["url-boton-1"] . '" 
@@ -161,8 +229,7 @@
                                                                                         }
                                                                                         echo ' </a>';
                                                                                     }
-                                                                                    if (isset($value['url-boton-2']) && $value['url-boton-2'] != "" )
-                                                                                    {
+                                                                                    if (isset($value['url-boton-2']) && $value['url-boton-2'] != "") {
                                                                                         echo '
                                                                                             <a href="' . $value["url-boton-2"] . '" 
                                                                                             class="pr-3 btn btn-primary btn-slider-item mb-5  ' . $value["boton-2-color"] . '"
@@ -175,6 +242,23 @@
                                                                                         }
                                                                                         echo '</a>';
                                                                                     }
+                                                                                   //boton de relleno cuando el boton1 y boton2 no tienen nada
+                                                                                    /*if ((!(isset($value['url-boton-1']) && $value['url-boton-1'] != ""))and (!(isset($value['url-boton-2']) && $value['url-boton-2'] != "")))
+                                                                                    {
+
+                                                                                        echo '
+                                                                                            <a  href="' . $value["url-boton-1"] . '" 
+                                                                                                class="pr-3 btn btn-primary btn-slider-item mb-5  ' . $value["boton-1-color"] . '"
+                                                                                            >
+                                                                                        ';
+                                                                                        if (isset($value['boton-1-texto']) and $value['boton-2-texto'] != '') {
+                                                                                            echo $value['boton-1-texto'];
+                                                                                        } else {
+                                                                                            echo "Ver Más";
+                                                                                        }
+                                                                                        echo ' </a>';
+                                                                                    }*/
+                                                                                }
                                 echo'
                                                                         
                                                                             </div>
@@ -190,20 +274,27 @@
                                                         </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        
                                     ';
+                                if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined'){
+                                    echo '</div>';
+                                }
+                                if ($value["categoria"] == 'undefined' && $value["titulo"] == 'undefined' && $value["texto"] == 'undefined'){
+                                    echo '</a >';
+                                    echo'<!--XAQUI </A>-->';
+                                }
                             }
 
 
                         }
                     ?>
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" >
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="outline: 2px solid #00000060;"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next" >
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="outline: 2px solid #00000060;" ></span>
                     <span class="sr-only">Next</span>
                 </a>
             </div>
