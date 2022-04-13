@@ -30,8 +30,8 @@
         <div id="navigation">
             <!-- Navigation Menu-->
             <ul class="navigation-menu">
-                <li class="has-submenu active">
-                    <a href="../acopi">Inicio</a>
+                <li class="has-submenu ">
+                    <a href="/acopi">Inicio</a>
                 </li>
                 <li class="has-submenu">
                     <a href="#features">Acerca de nosotros</a>

@@ -1081,6 +1081,44 @@ textarea.form-control {
     transition: all .3s ease;
 }
 
+view-more-button{
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    box-sizing: border-box;
+    text-rendering: optimizeLegibility;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    outline: none;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 100;
+    text-decoration: none;
+    position: relative;
+    color: white;
+    transition: opacity .4s ease;
+}
+view-more-button:hover {
+    opacity: .7;
+    transition: opacity .4s ease;
+}
+
+
+view-more-button:after {
+    content: "<i class='fa-regular fa-arrow-right-long'></i>";
+    font-family: "Ionicons";
+    position: absolute;
+    display: block;
+    position: absolute;
+    right: -25px;
+    top: -1px;
+    transition: right .4s ease;
+}
+
+
 .read-more:hover {
     color: #918bca;
 }
