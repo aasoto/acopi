@@ -177,11 +177,12 @@ button:focus {
 
 .btn-custom {
     color: #fffcff;
+
     border: 2px solid #918bca;
     font-size: 14px;
     transition: all 0.5s;
     border-radius: 3px;
-    background-color: #918bca;
+    background-color: #918bca !important;
     letter-spacing: 1px;
 }
 
@@ -194,7 +195,7 @@ button:focus {
 .btn-custom:focus,
 .btn-custom:hover,
 .open>.dropdown-toggle .btn-custom {
-    color: #918bca;
+    color: #fffcff;
     outline: none;
     background-color: transparent;
     text-decoration: none;
