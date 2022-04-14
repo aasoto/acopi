@@ -37,14 +37,14 @@ CONTENIDO REPOSITORIO DE NOTICIAS
         <?php //echo $total_paginas;  ?>
         <div class="row">
             <!-- COLUMNA IZQUIERDA -->
-            <div class="col-12 col-md-8 col-lg-12 p-0 pr-lg-5">
+            <div class="col-12 col-md-12 col-lg-12 p-0 pr-lg-5">
                 <?php foreach ($noticias_todas as $key => $value) { ?>
                 <!-- Inicio Noticia -->
                 <div class="row">
-                    <div class="col-12 col-lg-5">
+                    <div class="col-12  ">
 
                         <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>">
-                            <h5 class="d-block d-lg-none py-3"><?php echo $value["titulo"]; ?></h5>
+                            <h3 class="d-block  py-3"><?php echo $value["titulo"]; ?></h3>
                         </a>
                         <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>">
                             <div class="position-relative">
@@ -69,8 +69,11 @@ CONTENIDO REPOSITORIO DE NOTICIAS
                         </a>
                     </div>
                     <div class="col-12 col-lg-7 introArticulo">
-                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>">
-                            <h4 class="title-heading d-sm-none d-lg-block" style="display: none"><?php echo $value["titulo"]; ?></h4></a>
+<!--                        <a href="index.php?pagina=contenido_noticia&id=--><?php //echo $value["id"]; ?><!--">-->
+<!--                            <h3 class="d-none d-lg-block ">-->
+<!--                                --><?php //echo $value["titulo"]; ?>
+<!--                            </h3>-->
+<!--                        </a>-->
                         <p class="title-desc text-muted mt-4"><?php echo $value["descripcion_noticia"]; ?></p>
                         <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>" class="float-right read-more font-weight-bold">Leer Más</a>
 <!--                        <div class="fecha">--><?php //echo str_replace('.','/',$value["fecha_noticia"]); ?><!--</div>-->

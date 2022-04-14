@@ -32,11 +32,14 @@ CONTENIDO NOTICIAS
                 <!-- ARTÍCULO 01 -->
                 <div class="row">
 
-                    <div class="col-12 col-lg-5">
+                    <div class="col-12 ">
 
 
-                        <a href="articulos.html"><h4 class="d-block d-lg-none py-3"><?php echo $value["titulo"]; ?></h4></a>
-                        <a href="articulos.html" >
+
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>">
+                            <h3 class="d-block  d-md-block py-3"><?php echo $value["titulo"]; ?></h3>
+                        </a>
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>" >
 
                             <div class="position-relative">
                                 <div class="blog-lable">
@@ -58,9 +61,13 @@ CONTENIDO NOTICIAS
                             </div>
                         </a>
                     </div>
-                    <div class="col-12 col-lg-7 introArticulo">
+                    <div class="col-12 col-lg-10 introArticulo">
 
-                        <a href="articulos.html"><h4 class="title-heading d-none d-lg-block"><?php echo $value["titulo"]; ?></h4></a>
+<!--                        <a href="index.php?pagina=contenido_noticia&id=--><?php //echo $value["id"]; ?><!--">-->
+<!--                            <h3 class="title-heading d-none d-lg-block d-md-none ">-->
+<!--                                --><?php //echo $value["titulo"]; ?>
+<!--                            </h3>-->
+<!--                        </a>-->
                         <p class="title-desc text-muted mt-4"><?php echo $value["descripcion_noticia"]; ?></p>
                         <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>" class="read-more font-weight-bold">Leer Más</a>
 
