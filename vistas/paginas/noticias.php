@@ -33,24 +33,30 @@ CONTENIDO NOTICIAS
                 <div class="row">
 
                     <div class="col-12 col-lg-5">
-                        <div class="blog-lable">
-                            <p class="date mb-0">
-                                <?php
-                                    $date=explode(".", $value['fecha_noticia']);
-                                    echo $date[0];
-                                ?>
-                            </p>
-                            <p class="month mb-0">
-                                <?php
-                                    $mesNum  = $date[1];
-                                    $meses = array("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic");
-                                    echo $meses[$mesNum-1];
-                                ?>
-                            </p>
-                        </div>
+
 
                         <a href="articulos.html"><h4 class="d-block d-lg-none py-3"><?php echo $value["titulo"]; ?></h4></a>
-                        <a href="articulos.html"><img src="<?php echo $pagina_web["servidor"]; echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+                        <a href="articulos.html" >
+
+                            <div class="position-relative">
+                                <div class="blog-lable">
+                                    <p class="date mb-0">
+                                        <?php
+                                        $date=explode(".", $value['fecha_noticia']);
+                                        echo $date[0];
+                                        ?>
+                                    </p>
+                                    <p class="month mb-0">
+                                        <?php
+                                        $mesNum  = $date[1];
+                                        $meses = array("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic");
+                                        echo $meses[$mesNum-1];
+                                        ?>
+                                    </p>
+                                </div>
+                                <img src="<?php echo $pagina_web["servidor"]; echo $value["portada_noticia"]; ?>" alt="portada <?php echo $value["descripcion_noticia"];  ?>" class="img-fluid" width="100%">
+                            </div>
+                        </a>
                     </div>
                     <div class="col-12 col-lg-7 introArticulo">
 

@@ -42,26 +42,35 @@ CONTENIDO REPOSITORIO DE NOTICIAS
                 <!-- Inicio Noticia -->
                 <div class="row">
                     <div class="col-12 col-lg-5">
-                        <div class="blog-lable">
-                            <p class="date mb-0">
-                                <?php
-                                $date=explode(".", $value['fecha_noticia']);
-                                echo $date[0];
-                                ?>
-                            </p>
-                            <p class="month mb-0">
-                                <?php
-                                $mesNum  = $date[1];
-                                $meses = array("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic");
-                                echo $meses[$mesNum-1];
-                                ?>
-                            </p>
-                        </div>
-                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><h5 class="d-block d-lg-none py-3"><?php echo $value["titulo"]; ?></h5></a>
-                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><img src="<?php echo $pagina_web["servidor"]; echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>">
+                            <h5 class="d-block d-lg-none py-3"><?php echo $value["titulo"]; ?></h5>
+                        </a>
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>">
+                            <div class="position-relative">
+                                <div class="blog-lable">
+                                    <p class="date mb-0">
+                                        <?php
+                                        $date=explode(".", $value['fecha_noticia']);
+                                        echo $date[0];
+                                        ?>
+                                    </p>
+                                    <p class="month mb-0">
+                                        <?php
+                                        $mesNum  = $date[1];
+                                        $meses = array("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic");
+                                        echo $meses[$mesNum-1];
+                                        ?>
+                                    </p>
+                                </div>
+                                <img src="<?php echo $pagina_web["servidor"]; echo $value["portada_noticia"]; ?>" alt="portada <?php echo $value["descripcion_noticia"];  ?>" width="100%">
+                            </div>
+
+                        </a>
                     </div>
                     <div class="col-12 col-lg-7 introArticulo">
-                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><h4 class="title-heading d-sm-none d-lg-block" style="display: none"><?php echo $value["titulo"]; ?></h4></a>
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>">
+                            <h4 class="title-heading d-sm-none d-lg-block" style="display: none"><?php echo $value["titulo"]; ?></h4></a>
                         <p class="title-desc text-muted mt-4"><?php echo $value["descripcion_noticia"]; ?></p>
                         <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>" class="float-right read-more font-weight-bold">Leer Más</a>
 <!--                        <div class="fecha">--><?php //echo str_replace('.','/',$value["fecha_noticia"]); ?><!--</div>-->
