@@ -81,9 +81,9 @@ CONTENIDO REPOSITORIO DE NOTICIAS
                 <?php } ?>
 
                 <!--Aquí empieza la paginación-->
-                <div class="justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
+                <div class="justify-content-center row">
+                    <nav aria-label="Page navigation example col-10">
+                        <ul class="pagination flex-wrap">
                             <li class="page-item <?php echo $_GET['pestana']<=1 ? 'disabled' : '' ?>"><a class="page-link" href="index.php?pagina=noticias&pestana=<?php echo $_GET['pestana']-1; ?>">Anterior</a></li>
                             <?php for ($i=0; $i < $total_paginas; $i++): ?>
                             <li class="page-item <?php echo $_GET['pestana']==$i+1 ? 'active' : '' ?>"><a class="page-link" href="index.php?pagina=noticias&pestana=<?php echo $i+1; ?>"><?php echo $i+1; ?></a></li>
