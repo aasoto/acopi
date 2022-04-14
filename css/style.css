@@ -61,10 +61,15 @@ button:focus {
     outline: none !important;
 }
 
+.card-header .btn:focus{
+    border: 1px transparent ;
+    box-shadow:none ;
+}
 
-/*******************************
-       1.  HELPER
-*******************************/
+
+    /*******************************
+           1.  HELPER
+    *******************************/
 
 .section {
     padding-bottom: 80px;
@@ -1239,4 +1244,13 @@ view-more-button:after {
 .mision-desc {
     color: #000000;
 }
+
+
+
+/*Products*/
+
+
+
+
+
 
