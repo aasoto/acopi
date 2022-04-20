@@ -37,19 +37,46 @@ CONTENIDO REPOSITORIO DE NOTICIAS
         <?php //echo $total_paginas;  ?>
         <div class="row">
             <!-- COLUMNA IZQUIERDA -->
-            <div class="col-12 col-md-8 col-lg-12 p-0 pr-lg-5">
+            <div class="col-12 col-md-12 col-lg-12 p-0 pr-lg-5">
                 <?php foreach ($noticias_todas as $key => $value) { ?>
                 <!-- Inicio Noticia -->
                 <div class="row">
-                    <div class="col-12 col-lg-5">
-                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><h5 class="d-block d-lg-none py-3"><?php echo $value["titulo"]; ?></h5></a>
-                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><img src="<?php echo $pagina_web["servidor"]; echo $value["portada_noticia"]; ?>" alt="Lorem ipsum dolor sit amet" class="img-fluid" width="100%"></a>
+                    <div class="col-12  ">
+
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>">
+                            <h3 class="d-block  py-3"><?php echo $value["titulo"]; ?></h3>
+                        </a>
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>">
+                            <div class="position-relative">
+                                <div class="blog-lable">
+                                    <p class="date mb-0">
+                                        <?php
+                                        $date=explode(".", $value['fecha_noticia']);
+                                        echo $date[0];
+                                        ?>
+                                    </p>
+                                    <p class="month mb-0">
+                                        <?php
+                                        $mesNum  = $date[1];
+                                        $meses = array("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic");
+                                        echo $meses[$mesNum-1];
+                                        ?>
+                                    </p>
+                                </div>
+                                <img src="<?php echo $pagina_web["servidor"]; echo $value["portada_noticia"]; ?>" alt="portada <?php echo $value["descripcion_noticia"];  ?>" width="100%">
+                            </div>
+
+                        </a>
                     </div>
                     <div class="col-12 col-lg-7 introArticulo">
-                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>"><h4 class="title-heading d-sm-none d-lg-block" style="display: none"><?php echo $value["titulo"]; ?></h4></a>
+<!--                        <a href="index.php?pagina=contenido_noticia&id=--><?php //echo $value["id"]; ?><!--">-->
+<!--                            <h3 class="d-none d-lg-block ">-->
+<!--                                --><?php //echo $value["titulo"]; ?>
+<!--                            </h3>-->
+<!--                        </a>-->
                         <p class="title-desc text-muted mt-4"><?php echo $value["descripcion_noticia"]; ?></p>
-                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>" class="float-right">Leer Más</a>
-                        <div class="fecha"><?php echo str_replace('.','/',$value["fecha_noticia"]); ?></div>
+                        <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>" class="float-right read-more font-weight-bold">Leer Más</a>
+<!--                        <div class="fecha">--><?php //echo str_replace('.','/',$value["fecha_noticia"]); ?><!--</div>-->
                     </div>
                 </div>
                 <!-- Fin noticia -->
@@ -57,9 +84,9 @@ CONTENIDO REPOSITORIO DE NOTICIAS
                 <?php } ?>
 
                 <!--Aquí empieza la paginación-->
-                <div class="justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
+                <div class="justify-content-center row">
+                    <nav aria-label="Page navigation example col-10">
+                        <ul class="pagination flex-wrap">
                             <li class="page-item <?php echo $_GET['pestana']<=1 ? 'disabled' : '' ?>"><a class="page-link" href="index.php?pagina=noticias&pestana=<?php echo $_GET['pestana']-1; ?>">Anterior</a></li>
                             <?php for ($i=0; $i < $total_paginas; $i++): ?>
                             <li class="page-item <?php echo $_GET['pestana']==$i+1 ? 'active' : '' ?>"><a class="page-link" href="index.php?pagina=noticias&pestana=<?php echo $i+1; ?>"><?php echo $i+1; ?></a></li>

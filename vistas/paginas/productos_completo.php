@@ -31,27 +31,27 @@
                             <div class="faq-content mt-4">
                                 <div id="accordion">';
                                 if ($key <= ($contador/2)) {
-                                    echo '<div class="card mt-3">
-                                        <div class="card-header" id="heading'.$key.'">
-                                            <h5 class="mb-0">
-                                                <button class="btn btn-link collapsed p-3" data-toggle="collapse" data-target="#collapse'.$key.'" aria-expanded="false" aria-controls="collapse'.$key.'">
-                                                 <span class="text-custom pr-3">'.$value["num"].'</span>'.$value["nombre"].'
-                                                </button>
-                                          </h5>
-                                        </div>
+                                    echo '<div class="card mt-3 " style="background-color: #918bca">
+                                            <div class="card-header " id="heading'.$key.'">
+                                                <h5 class="mb-0 ">
+                                                    <button class="btn btn-link collapsed p-3" data-toggle="collapse" data-target="#collapse'.$key.'" aria-expanded="false" aria-controls="collapse'.$key.'">
+                                                     <span class="text-custom  pr-3" style="color: #444444">'.$value["num"].'</span>'.$value["nombre"].'
+                                                    </button>
+                                                </h5>
+                                            </div>
 
-                                        <div id="collapse'.$key.'" class="collapse" aria-labelledby="heading'.$key.'" data-parent="#accordion" style="">
-                                            <p class="card-body text-muted">
-                                                '.$value["descripcion"].' 
-                                            </p>
-                                        </div>
+                                            <div id="collapse'.$key.'" class="collapse" aria-labelledby="heading'.$key.'" data-parent="#accordion" style="">
+                                                <p class="card-body ">
+                                                    '.$value["descripcion"].' 
+                                                </p>
+                                            </div>
                                     </div>';
                                 } else{
-                                    echo '<div class="card mt-3">
+                                    echo '<div class="card mt-3" style="background-color: #918bca">
                                         <div class="card-header" id="heading'.$key.'">
                                             <h5 class="mb-0">
                                                 <button class="btn btn-link collapsed p-3" data-toggle="collapse" data-target="#collapse'.$key.'" aria-expanded="false" aria-controls="collapse'.$key.'">
-                                                 <span class="text-custom pr-3">'.$value["num"].'</span>'.$value["nombre"].'
+                                                 <span class="text-custom pr-3" style="color: #444444">'.$value["num"].'</span>'.$value["nombre"].'
                                                 </button>
                                           </h5>
                                         </div>
