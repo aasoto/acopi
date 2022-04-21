@@ -37,11 +37,11 @@
                     <a href="#features">Acerca de nosotros</a>
                     <span class="menu-arrow"></span>
                     <ul class="submenu">
+<!--                        <li>-->
+<!--                            <a href="vistas/paginas/info-directivos.php">Información directivos</a>-->
+<!--                        </li>-->
                         <li>
-                            <a href="vistas/paginas/info-directivos.php">Información directivos</a>
-                        </li>
-                        <li>
-                            <a href="index.php?pagina=info-directivos">Información directivos 2</a>
+                            <a href="index.php?pagina=info-directivos">Información directivos </a>
                         </li>
                         <li>
                             <a href="index.php?pagina=mision">Misión y Visión</a>

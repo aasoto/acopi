@@ -68,7 +68,7 @@ CONTENIDO NOTICIAS
 <!--                                --><?php //echo $value["titulo"]; ?>
 <!--                            </h3>-->
 <!--                        </a>-->
-                        <p class="title-desc text-muted mt-4"><?php echo $value["descripcion_noticia"]; ?></p>
+                        <p class="title-desc text-muted mt-4 ml-1"><?php echo $value["descripcion_noticia"]; ?></p>
                         <a href="index.php?pagina=contenido_noticia&id=<?php echo $value["id"]; ?>" class="read-more font-weight-bold">Leer Más</a>
 
                     </div>

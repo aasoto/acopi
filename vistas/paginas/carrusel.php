@@ -1,7 +1,7 @@
 <section class="home-slider" id="home" style="margin-top: 65px; min-height: 80%">
     <div class="container-fluid">
         <div class="row">
-            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div id="carouselExampleControls" class="carousel slide carousel-noticias" data-ride="carousel">
                 <div class="carousel-inner">
                     <?php
                         $carrusel = json_decode($pagina_web["carrusel"], true);
@@ -30,7 +30,7 @@
 
                                         }
                                        echo'
-                                                <div class="home-center">
+                                                <div class="home-center ">
                                                     <div class="home-desc-center">
                                         ';
                                                         if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined')
@@ -41,7 +41,7 @@
                                                         echo '<div class="container">
                                                                 <div class="row vertical-content">
                                                                     <div class="col-lg-6">
-                                                                        <div class="home-content mt-4 slider-principal">
+                                                                        <div class="home-content mt-4 slider-principal text-wrap text-break">
                                                             ';
                                                                             if ($value["categoria"] != 'undefined' )
                                                                             {
@@ -172,7 +172,7 @@
 
 
                                 echo'
-                                            <div class="home-center">
+                                            <div class="home-center ">
                                                 <div class="home-desc-center">
                                     ';
                                                     if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined') {
@@ -185,7 +185,7 @@
                                                             <div class="row vertical-content">
                 
                                                                 <div class="col-lg-7">
-                                                                    <div class="home-content mt-2 slider-principal">
+                                                                    <div class="home-content mt-2 slider-principal text-wrap text-break">
                                                          ';
                                                                         /*if ($value["categoria"] != 'undefined' && $value["titulo"] != 'undefined' && $value["texto"] != 'undefined')
                                                                         {
