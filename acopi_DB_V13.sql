@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-03-2022 a las 21:02:49
+-- Tiempo de generación: 23-06-2022 a las 22:02:54
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 7.4.25
 
@@ -74,7 +74,43 @@ INSERT INTO `citas` (`id`, `tipo_usuario_cita`, `id_empresa`, `cc_rprt_legal`, `
 (4, 'afiliado', 15, '49548329', NULL, NULL, '2022-02-14', '16:00:00', 'Director ejecutivo', 'pendiente', '#ffc107', '2022-02-10 03:09:16', '2022-02-12 03:04:57'),
 (5, 'afiliado', 12, '49328431', NULL, NULL, '2022-02-11', '16:00:00', 'Director ejecutivo', 'perdida', '#dc3545', '2022-02-10 07:36:02', '2022-02-12 02:52:25'),
 (6, 'interesado', NULL, NULL, '1006438450', 'Ebenezer de Jesus Hernandez de Ávila', '2022-02-18', '08:00:00', 'Director ejecutivo', 'pendiente', '#ffc107', '2022-02-10 07:37:29', '2022-02-11 02:21:30'),
-(7, 'afiliado', 1, '1065831073', NULL, NULL, '2022-02-15', '10:00:00', 'Director ejecutivo', 'pendiente', '#ffc107', '2022-02-12 18:27:45', '2022-02-12 18:27:45');
+(7, 'afiliado', 1, '1065831073', NULL, NULL, '2022-02-15', '10:00:00', 'Director ejecutivo', 'pendiente', '#ffc107', '2022-02-12 18:27:45', '2022-02-12 18:27:45'),
+(8, 'afiliado', 14, '77213845', NULL, NULL, '2022-04-04', '08:00:00', 'Subdirector administrativo y financiero', 'atendida', '#28a745', '2022-04-03 20:10:36', '2022-04-03 20:11:22'),
+(9, 'afiliado', 17, '1065873651', NULL, NULL, '2022-05-23', '12:00:00', 'Subdirector de desarrollo empresarial', 'pendiente', '#ffc107', '2022-05-20 21:17:51', '2022-05-20 21:17:51'),
+(10, 'afiliado', 3, '1065829462', NULL, NULL, '2022-06-13', '10:00:00', 'Director ejecutivo', 'pendiente', '#ffc107', '2022-06-02 04:38:17', '2022-06-02 04:39:44');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `datos`
+--
+
+CREATE TABLE `datos` (
+  `id` int(11) NOT NULL,
+  `mes` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  `empresas_activas` int(11) DEFAULT NULL,
+  `empresas_inactivas` int(11) DEFAULT NULL,
+  `empresas_nuevas` int(11) DEFAULT NULL,
+  `recibos_generados` int(11) DEFAULT NULL,
+  `recibos_pendientes` int(11) DEFAULT NULL,
+  `recibos_pagos` int(11) DEFAULT NULL,
+  `recibos_negociados` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `datos`
+--
+
+INSERT INTO `datos` (`id`, `mes`, `year`, `empresas_activas`, `empresas_inactivas`, `empresas_nuevas`, `recibos_generados`, `recibos_pendientes`, `recibos_pagos`, `recibos_negociados`, `created_at`, `updated_at`) VALUES
+(1, 1, 2022, 50, 12, 5, 50, 10, 40, 2, NULL, NULL),
+(2, 2, 2022, 52, 10, 5, 52, 8, 44, 5, NULL, NULL),
+(3, 3, 2022, 60, 5, 2, 60, 12, 48, 0, NULL, NULL),
+(4, 4, 2022, 62, 5, 8, 62, 8, 54, 2, NULL, NULL),
+(5, 5, 2022, 64, 3, 10, 64, 0, 64, 1, NULL, NULL),
+(6, 6, 2022, 17, 1, 0, 17, 9, 6, 2, '2022-06-15 07:41:56', '2022-06-22 03:58:28');
 
 -- --------------------------------------------------------
 
@@ -92,10 +128,13 @@ CREATE TABLE `empleados` (
   `segundo_apellido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `sexo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
   `fecha_nacimiento` date NOT NULL,
+  `email` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `id_rol` int(11) NOT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
-  `documentos_empleado` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `foto` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `hoja_de_vida` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cedula` text COLLATE utf8_spanish_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -104,9 +143,19 @@ CREATE TABLE `empleados` (
 -- Volcado de datos para la tabla `empleados`
 --
 
-INSERT INTO `empleados` (`id`, `tipo_documento`, `num_documento`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `sexo`, `fecha_nacimiento`, `id_rol`, `estado`, `id_usuario`, `documentos_empleado`, `created_at`, `updated_at`) VALUES
-(2, 'CC', '1065831073', 'Andrés', 'Alfredo', 'Soto', 'Suárez', 'M', '1997-02-13', 1, 'Pasante', NULL, 'vistas/images/empleados/documentos/2929178.zip', '2022-03-17 03:52:51', '2022-03-18 07:40:03'),
-(5, 'CC', '1065758329', 'Pedro', 'José', 'Hurtado', 'Hurtado', 'M', '2004-06-25', 6, 'Pasante', NULL, 'vistas/images/empleados/documentos/6329184.zip', '2022-03-22 07:39:44', '2022-03-22 07:39:44');
+INSERT INTO `empleados` (`id`, `tipo_documento`, `num_documento`, `primer_nombre`, `segundo_nombre`, `primer_apellido`, `segundo_apellido`, `sexo`, `fecha_nacimiento`, `email`, `id_rol`, `estado`, `id_usuario`, `foto`, `hoja_de_vida`, `cedula`, `created_at`, `updated_at`) VALUES
+(2, 'CC', '1065831073', 'Andrés', 'Alfredo', 'Soto', 'Suárez', 'M', '1997-02-13', 'aasoto@gmail.com', 1, 'Pasante', 17, 'vistas/documentos/empleados/fotos/8440831.jpg', 'vistas/documentos/empleados/hojas-de-vida/4124001.pdf', 'vistas/documentos/empleados/cedulas/7907716.pdf', '2022-03-17 03:52:51', '2022-04-01 01:23:52'),
+(5, 'CC', '1065758329', 'Pedro', 'José', 'Hurtado', 'Hurtado', 'M', '2004-06-25', 'pjhurtado@gmail.com', 6, 'Pasante', 16, 'vistas/documentos/empleados/fotos/4901119.jpg', 'vistas/documentos/empleados/hojas-de-vida/9069797.pdf', 'vistas/documentos/empleados/cedulas/3698473.pdf', '2022-03-22 07:39:44', '2022-04-01 01:16:55'),
+(6, 'CC', '77435859', 'María', 'Clemencia', 'Torres', 'De Alba', 'F', '1960-01-12', 'mctorres@gmail.com', 7, 'Empleado', NULL, 'vistas/documentos/empleados/fotos/9287112.jpg', 'vistas/images/empleados/documentos/6906769.pdf', 'vistas/documentos/empleados/cedulas/8963456.jpg', '2022-03-24 03:13:21', '2022-03-24 04:18:44'),
+(8, 'CC', '1065831073', 'Andrés', 'Alfredo', 'Soto', 'Suarez', 'M', '1997-02-13', 'andresalfredosotosuarez@gmail.com', 1, 'Empleado', 1, 'vistas/documentos/empleados/fotos/9118801.jpg', 'vistas/documentos/empleados/hojas-de-vida/5889636.pdf', 'vistas/documentos/empleados/cedulas/4631593.pdf', '2022-04-02 01:59:22', '2022-04-02 01:59:22'),
+(9, 'CC', '1065834328', 'Jean', 'Carlos', 'Recio', 'Caballero', 'M', '1997-05-12', 'jrecio@gmail.com', 1, 'Pasante', 4, 'vistas/documentos/empleados/fotos/4689448.jpg', 'vistas/documentos/empleados/hojas-de-vida/7087339.pdf', 'vistas/documentos/empleados/cedulas/8549545.pdf', '2022-04-02 02:15:07', '2022-04-02 02:15:07'),
+(10, 'CC', '77342845', 'Yekaterina', 'Ivanova', 'Gagarín', 'Yeltsin', 'F', '1978-12-12', 'yigagarin@vk.com', 7, 'Empleado', 18, 'vistas/documentos/empleados/fotos/3079240.jpg', 'vistas/documentos/empleados/hojas-de-vida/6336775.pdf', 'vistas/documentos/empleados/cedulas/4058425.pdf', '2022-04-02 02:22:36', '2022-04-02 02:23:13'),
+(11, 'CC', '49548506', 'Adonais', NULL, 'Fuentes', 'Argote', 'F', '1990-12-31', 'afuentes@gmail.com', 2, 'Empleado', 19, 'vistas/documentos/empleados/fotos/7651080.jpg', 'vistas/documentos/empleados/hojas-de-vida/6754971.pdf', 'vistas/documentos/empleados/cedulas/8830334.pdf', '2022-04-03 00:25:34', '2022-04-03 00:40:39'),
+(12, 'CC', '67483193', 'Hernan', 'Enrique', 'Cuevas', 'Castro', 'M', '1976-08-12', 'hecuervas@gmail.com', 3, 'Empleado', 20, 'vistas/documentos/empleados/fotos/3268649.jpg', 'vistas/documentos/empleados/hojas-de-vida/3128388.pdf', 'vistas/documentos/empleados/cedulas/2592675.pdf', '2022-04-03 00:28:18', '2022-04-03 00:40:47'),
+(13, 'CC', '77329540', 'Carlota', 'Sofía', 'Manrriquez', 'Orcasita', 'F', '1985-07-06', 'csmartinez@gmail.com', 4, 'Empleado', 21, 'vistas/documentos/empleados/fotos/7657275.jpg', 'vistas/documentos/empleados/hojas-de-vida/6558276.pdf', 'vistas/documentos/empleados/cedulas/1932432.pdf', '2022-04-03 00:34:37', '2022-04-03 00:40:52'),
+(14, 'CC', '99438549', 'Jeison', 'José', 'Zamora', 'Sotelo', 'M', '1986-03-31', 'jjzamora@gmail.com', 5, 'Empleado', 22, 'vistas/documentos/empleados/fotos/8218976.jpg', 'vistas/documentos/empleados/hojas-de-vida/3402323.pdf', 'vistas/documentos/empleados/cedulas/5982512.jpg', '2022-04-03 00:37:28', '2022-04-03 00:40:58'),
+(15, 'CC', '1065658438', 'Margarita', 'Lilomila', 'De Tormes', 'y Alcahazar', 'F', '1981-12-25', 'mldetormes@gmail.com', 6, 'Empleado', 23, 'vistas/documentos/empleados/fotos/2167913.jpg', 'vistas/documentos/empleados/hojas-de-vida/9552558.pdf', 'vistas/documentos/empleados/cedulas/6101458.jpg', '2022-04-03 00:40:09', '2022-04-03 00:41:03'),
+(16, 'CC', '1065932854', 'Ernestina', 'María', 'Herrera', 'Gómez', 'F', '1980-12-12', 'emherrara@gmail.com', 4, 'Empleado', 24, 'vistas/documentos/empleados/fotos/9348563.jpg', 'vistas/documentos/empleados/hojas-de-vida/3746950.pdf', 'vistas/documentos/empleados/cedulas/6279191.jpg', '2022-04-21 02:02:18', '2022-04-21 02:08:07');
 
 -- --------------------------------------------------------
 
@@ -178,25 +227,24 @@ CREATE TABLE `empresas` (
 --
 
 INSERT INTO `empresas` (`id_empresa`, `nit_empresa`, `razon_social`, `cc_rprt_legal`, `num_empleados`, `direccion_empresa`, `telefono_empresa`, `fax_empresa`, `celular_empresa`, `email_empresa`, `id_sector_empresa`, `productos_empresa`, `ciudad_empresa`, `estado_afiliacion_empresa`, `numero_pagos_atrasados`, `fecha_afiliacion_empresa`, `carta_bienvenida`, `acta_compromiso`, `estudio_afiliacion`, `rut`, `camara_comercio`, `fechas_birthday`, `created_at`, `updated_at`) VALUES
-(1, '475939293-5', 'CompuCell', '1065831073', 8, 'Cra 14 No. 16-35', '5724386', '5724386', '3045395221', 'info@compucell.com', 2, '[\"celulares\",\"computadores\",\"reparaci\\u00f3n de equipos\",\"venta de software\"]', 'VLL', 'activa', 0, '2021-01-01', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-11 01:43:01', '2022-03-22 02:40:59'),
-(2, '574382232-5', 'Variedades Rosita', '1065839234', 8, 'Cra 25 No. 34-45', '5824385', '5824385', '3003428574', 'info@variedadesrosita.com', 2, '[\"collares\",\"hilos\",\"agujas\",\"telas\",\"vestidos\",\"camisas\",\"botones\"]', 'LPZ', 'activa', 2, '2021-01-14', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-13 23:10:40', '2022-02-02 07:56:30'),
-(3, '5843729343-6', 'Comercializadora La Providencia', '1065829462', 40, 'Cra 4A No. 25A-03', '5739483', '4538457', '3205483295', 'comlaprovidencia@hotmail.com', 1, '[\"abonos\",\"verduras\",\"frutas\"]', 'VLL', 'activa', 2, '2021-01-03', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-16 02:01:37', '2022-02-02 07:56:31'),
-(5, '483459210-4', 'Piñatería Mi fiestecita', '49213754', 7, 'Cra 9A No. 16A-34', '5723293', '5723293', '3013284356', 'info@mifiestecita.com', 2, '[\"pi\\u00f1atas\",\"recordatorios\",\"globos\",\"decoraci\\u00f3n\"]', 'VLL', 'activa', 2, '2021-01-12', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 06:56:07', '2022-02-02 07:56:31'),
-(6, '568430438-2', 'Boutique París', '1065723941', 5, 'Calle 18 No. 12-32', '5823495', '5823495', '3005494396', 'info@boutiqueparis.com', 2, '[\"ropa de damas\",\"vestidos de noche\",\"vestidos de novia\",\"lencer\\u00eda\",\"zapatos\",\"sandalias\"]', 'AGC', 'nueva', 0, '2021-12-12', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 06:59:39', '2022-01-29 18:09:13'),
-(7, '659430459-3', 'Ferretería Las Casas', '1001234758', 12, 'Cra 35 No. 23-01', '5723485', '5723485', '3003425483', 'info@ferrelascasas.com', 2, '[\"ladrillos\",\"varillas\",\"cemetos\",\"pintura\",\"grevilla\",\"herramientas de construccion\"]', 'LPZ', 'nueva', 0, '2022-01-24', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:07:44', '2022-01-29 18:09:13'),
-(8, '342948548-4', 'Textiles Libra-Yardas', '77345213', 20, 'Calle 11 No. 9A-01', '5726593', '5726593', '3045862395', 'info@librayardas.com', 3, '[\"telas\"]', 'VLL', 'nueva', 0, '2022-01-24', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:12:01', '2022-01-29 18:09:13'),
-(9, '485328438-9', 'Restaurante Seoul', '1001438437', 10, 'Cra 18D No. 21-35', '5823245', '5823245', '3045868305', 'info@restauranteseoul.com', 2, '[\"comida coreana\",\"bebidas\"]', 'VLL', 'activa', 2, '2021-10-22', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:15:51', '2022-02-02 07:56:31'),
-(10, '595324850-4', 'Droguería La Bendición', '65327430', 4, 'Cra 23 No. 23-23', '5823256', '5823256', '3164394395', 'info@labencion.com', 2, '[\"medicamentos\",\"productos para el cuidado personal\",\"tapabocas\"]', 'CDZ', 'activa', 1, '2021-01-12', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:28:13', '2022-02-02 07:56:31'),
-(11, '548438329-4', 'Gimnasio Mundo del Fitness', '1065856913', 5, 'Cra 40 No. 8D-34', '5724395', '5724395', '3173283493', 'info@mundodelfitness.com', 2, '[\"proteinas\",\"alquiler de maquinas de musculacion\",\"entremamiento personalizado\"]', 'VLL', 'activa', 1, '2019-03-12', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:39:05', '2022-02-02 07:56:31'),
-(12, '548329453-4', 'RestoBar La esquina rosa', '49328431', 7, 'Diagona 23 No. 17-44', '5833285', '5833285', '3145485295', 'info@laesquinarosa.com', 2, '[\"cervezas\",\"comidas rapidas\",\"cenas\"]', 'VLL', 'activa', 1, '2021-01-20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:46:16', '2022-02-02 07:56:31'),
-(13, '657394758-3', 'Opticas Lunnettes', '77345723', 12, 'Cra 15 No. 13-34', '5823285', '5823285', '3208459345', 'info@opticaslunnettes', 2, '[\"gafas\",\"consulta de optometria\"]', 'VLL', 'activa', 1, '2021-01-25', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:52:09', '2022-02-02 07:56:31'),
-(14, '584439329-5', 'Electrodomesticos Nuevo Milenio', '77213845', 6, 'Cra 8A No. 16A-12', '5723232', '5723232', '3045863850', 'info@electronuevomilenio.com', 2, '[\"electrodomesticos\",\"televisores\",\"computadores\",\"celulares\"]', 'VLL', 'activa', 1, '2021-01-20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:55:59', '2022-02-02 07:56:31'),
-(15, '475954021-5', 'Motos La 12', '49548329', 8, 'Calle 12 No. 11-23', '5823487', '5823487', '3008793254', 'info@motosdoce.com', 2, '[\"motos\",\"repuestos de motos\"]', 'VLL', 'activa', 1, '2021-01-20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:58:22', '2022-02-02 07:56:32'),
-(16, '453854394-6', 'Floristería las Margaritas', '1065832953', 5, 'Cra 13 No. 24-45', '5739548', '5739548', '3194384395', 'info@lasmargaritas.com', 2, '[\"flores\",\"adornos florales\",\" decoraciones\"]', 'LPZ', 'nueva', 0, '2022-01-25', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-29 07:16:11', '2022-01-29 18:09:14'),
-(17, '596026594-2', 'Restaurante de puerta de Nankín', '1065873651', 10, 'Cra 8A No. 10-35', '5724396', '5724396', '3194385407', 'info@puertanankin.com', 2, '[\"comida china\",\"arroz chino\",\"bebidas frias\",\"domicilios\"]', 'CDZ', 'nueva', NULL, '2022-03-01', '', '', '', '', '', 'vistas/documentos/afiliados/empresas/29216233.pdf', '2022-03-21 02:55:24', '2022-03-21 02:55:24'),
-(18, '657394539-2', 'Empaquetería de la Costa', '77324956', 34, 'Calle 2 No. 13-45', '5834395', '5834395', '3209568345', 'info@empaqueriadelacosta.com', 2, '[\"empaquetes\",\"bolsas\",\"carpas\"]', 'AST', 'nueva', NULL, '2022-03-01', 'vistas/documentos/afiliados/empresas/15403055.pdf', 'vistas/documentos/afiliados/empresas/28960402.pdf', 'vistas/documentos/afiliados/empresas/28720370.pdf', 'vistas/documentos/afiliados/empresas/76844150.pdf', 'vistas/documentos/afiliados/empresas/40208453.pdf', 'vistas/documentos/afiliados/empresas/46269866.pdf', '2022-03-21 03:18:18', '2022-03-21 03:18:18'),
-(19, '5864394385-7', 'Gimnasio Cuerpo al Límite', '49520439', 7, 'Diagonal 12 No. 12-45', '5695678', '5695678', '3225469240', 'info@gymallimite.com', 2, '[\"entrenamiento personalizado\",\"suplementos multivitaminicos\",\"manuernas\",\"ropa deportiva\"]', 'BSC', 'nueva', NULL, '2022-03-02', 'vistas/documentos/afiliados/empresas/carta_bienvenida/79193744.pdf', 'vistas/documentos/afiliados/empresas/acta_compromiso/59492226.pdf', NULL, 'vistas/documentos/afiliados/empresas/rut/36959385.pdf', 'vistas/documentos/afiliados/empresas/camara_comercio/81250490.pdf', 'vistas/documentos/afiliados/empresas/fechas_birthday/86577550.pdf', '2022-03-22 01:34:48', '2022-03-22 02:33:18'),
-(20, '6874356078-3', 'Ferretería La Esperanza', '49213754', 10, 'Calle 7 No. 23-45', '5823456', '5823456', '3125484507', 'info@ferreesperanza.com', 2, '[\"ladrillos\",\"cementos\",\"varillas\",\"baldosas\",\"ba\\u00f1os\",\"cables\",\"herramientas\"]', 'VLL', 'nueva', NULL, '2020-06-02', '', '', '', '', '', '', '2022-03-22 07:31:37', '2022-03-22 07:31:37');
+(1, '475939293-5', 'CompuCell', '1065831073', 8, 'Cra 14 No. 16-35', '5724386', '5724386', '3045395221', 'info@compucell.com', 2, '[\"celulares\",\"computadores\",\"reparaci\\u00f3n de equipos\",\"venta de software\"]', 'VLL', 'activa', 0, '2021-01-01', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-11 01:43:01', '2022-06-15 01:08:59'),
+(2, '574382232-5', 'Variedades Rosita', '1065839234', 8, 'Cra 25 No. 34-45', '5824385', '5824385', '3003428574', 'info@variedadesrosita.com', 2, '[\"collares\",\"hilos\",\"agujas\",\"telas\",\"vestidos\",\"camisas\",\"botones\"]', 'LPZ', 'inactiva', 3, '2021-01-14', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-13 23:10:40', '2022-06-15 01:09:00'),
+(3, '5843729343-6', 'Comercializadora La Providencia', '1065829462', 40, 'Cra 4A No. 25A-03', '5739483', '4538457', '3205483295', 'comlaprovidencia@hotmail.com', 1, '[\"abonos\",\"verduras\",\"frutas\"]', 'VLL', 'activa', 0, '2021-01-03', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-16 02:01:37', '2022-06-15 01:09:00'),
+(6, '568430438-2', 'Boutique París', '1065723941', 5, 'Calle 18 No. 12-32', '5823495', '5823495', '3005494396', 'info@boutiqueparis.com', 2, '[\"ropa de damas\",\"vestidos de noche\",\"vestidos de novia\",\"lencer\\u00eda\",\"zapatos\",\"sandalias\"]', 'AGC', 'activa', 0, '2021-12-12', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 06:59:39', '2022-06-15 01:09:00'),
+(7, '659430459-3', 'Ferretería Las Casas', '1001234758', 12, 'Cra 35 No. 23-01', '5723485', '5723485', '3003425483', 'info@ferrelascasas.com', 2, '[\"ladrillos\",\"varillas\",\"cemetos\",\"pintura\",\"grevilla\",\"herramientas de construccion\"]', 'LPZ', 'activa', 0, '2022-01-24', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:07:44', '2022-06-15 01:09:00'),
+(8, '342948548-4', 'Textiles Libra-Yardas', '77345213', 20, 'Calle 11 No. 9A-01', '5726593', '5726593', '3045862395', 'info@librayardas.com', 3, '[\"telas\"]', 'VLL', 'activa', 0, '2022-01-24', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:12:01', '2022-06-15 01:09:01'),
+(9, '485328438-9', 'Restaurante Seoul', '1001438437', 10, 'Cra 18D No. 21-35', '5823245', '5823245', '3045868305', 'info@restauranteseoul.com', 2, '[\"comida coreana\",\"bebidas\"]', 'VLL', 'activa', 0, '2021-10-22', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:15:51', '2022-06-15 01:09:01'),
+(10, '595324850-4', 'Droguería La Bendición', '65327430', 4, 'Cra 23 No. 23-23', '5823256', '5823256', '3164394395', 'info@labencion.com', 2, '[\"medicamentos\",\"productos para el cuidado personal\",\"tapabocas\"]', 'CDZ', 'activa', 0, '2021-01-12', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:28:13', '2022-06-15 01:09:01'),
+(11, '548438329-4', 'Gimnasio Mundo del Fitness', '1065856913', 5, 'Cra 40 No. 8D-34', '5724395', '5724395', '3173283493', 'info@mundodelfitness.com', 2, '[\"proteinas\",\"alquiler de maquinas de musculacion\",\"entremamiento personalizado\"]', 'VLL', 'activa', 1, '2019-03-12', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:39:05', '2022-06-15 01:09:01'),
+(12, '548329453-4', 'RestoBar La Esquina Rosa', '49328431', 7, 'Diagona 23 No. 17-44', '5833285', '5833285', '3145485295', 'info@laesquinarosa.com', 2, '[\"cervezas\",\"comidas rapidas\",\"cenas\"]', 'VLL', 'activa', 1, '2021-01-20', 'vistas/documentos/afiliados/empresas/carta_bienvenida/94567450.pdf', NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:46:16', '2022-06-15 01:09:02'),
+(13, '657394758-3', 'Opticas Lunnettes', '77345723', 12, 'Cra 15 No. 13-34', '5823285', '5823285', '3208459345', 'info@opticaslunnettes', 2, '[\"gafas\",\"consulta de optometria\"]', 'VLL', 'activa', 1, '2021-01-25', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:52:09', '2022-06-15 01:09:02'),
+(14, '584439329-5', 'Electrodomesticos Nuevo Milenio', '77213845', 6, 'Cra 8A No. 16A-12', '5723232', '5723232', '3045863850', 'info@electronuevomilenio.com', 2, '[\"electrodomesticos\",\"televisores\",\"computadores\",\"celulares\"]', 'VLL', 'activa', 1, '2021-01-20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:55:59', '2022-06-15 01:09:02'),
+(15, '475954021-5', 'Motos La 12', '49548329', 8, 'Calle 12 No. 11-23', '5823487', '5823487', '3008793254', 'info@motosdoce.com', 2, '[\"motos\",\"repuestos de motos\"]', 'VLL', 'activa', 0, '2021-01-20', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-26 07:58:22', '2022-06-15 01:09:02'),
+(16, '453854394-6', 'Floristería las Margaritas', '1065832953', 5, 'Cra 13 No. 24-45', '5739548', '5739548', '3194384395', 'info@lasmargaritas.com', 2, '[\"flores\",\"adornos florales\",\" decoraciones\"]', 'LPZ', 'activa', 0, '2022-01-25', NULL, NULL, NULL, NULL, NULL, NULL, '2022-01-29 07:16:11', '2022-06-15 01:09:03'),
+(17, '596026594-2', 'Restaurante de puerta de Nankín', '1065873651', 10, 'Cra 8A No. 10-35', '5724396', '5724396', '3194385407', 'info@puertanankin.com', 2, '[\"comida china\",\"arroz chino\",\"bebidas frias\",\"domicilios\"]', 'CDZ', 'activa', 0, '2022-03-01', 'vistas/documentos/afiliados/empresas/carta_bienvenida/63902660.pdf', 'vistas/documentos/afiliados/empresas/acta_compromiso/57533257.pdf', 'vistas/documentos/afiliados/empresas/estudio_afiliacion/92522229.pdf', 'vistas/documentos/afiliados/empresas/rut/47095405.pdf', 'vistas/documentos/afiliados/empresas/camara_comercio/57358597.pdf', 'vistas/documentos/afiliados/empresas/fechas_birthday/38034857.pdf', '2022-03-21 02:55:24', '2022-06-15 01:09:03'),
+(18, '657394539-2', 'Empaquetería de la Costa', '77324956', 34, 'Calle 2 No. 13-45', '5834395', '5834395', '3209568345', 'info@empaqueriadelacosta.com', 2, '[\"empaquetes\",\"bolsas\",\"carpas\"]', 'AST', 'activa', 0, '2022-03-01', 'vistas/documentos/afiliados/empresas/carta_bienvenida/88219390.pdf', 'vistas/documentos/afiliados/empresas/acta_compromiso/89486847.pdf', 'vistas/documentos/afiliados/empresas/estudio_afiliacion/54568695.pdf', 'vistas/documentos/afiliados/empresas/rut/61610035.pdf', 'vistas/documentos/afiliados/empresas/camara_comercio/25324772.pdf', 'vistas/documentos/afiliados/empresas/fechas_birthday/25367311.pdf', '2022-03-21 03:18:18', '2022-06-15 01:09:03'),
+(19, '5864394385-7', 'Gimnasio Cuerpo al Límite', '49520439', 7, 'Diagonal 12 No. 12-45', '5695678', '5695678', '3225469240', 'info@gymallimite.com', 2, '[\"entrenamiento personalizado\",\"suplementos multivitaminicos\",\"manuernas\",\"ropa deportiva\"]', 'BSC', 'activa', 0, '2022-03-02', 'vistas/documentos/afiliados/empresas/carta_bienvenida/79193744.pdf', 'vistas/documentos/afiliados/empresas/acta_compromiso/59492226.pdf', 'vistas/documentos/afiliados/empresas/estudio_afiliacion/90549113.pdf', 'vistas/documentos/afiliados/empresas/rut/36959385.pdf', 'vistas/documentos/afiliados/empresas/camara_comercio/81250490.pdf', 'vistas/documentos/afiliados/empresas/fechas_birthday/86577550.pdf', '2022-03-22 01:34:48', '2022-06-15 01:09:03'),
+(20, '6874356078-3', 'Ferretería La Esperanza', '49213754', 10, 'Calle 7 No. 23-45', '5823456', '5823456', '3125484507', 'info@ferreesperanza.com', 2, '[\"ladrillos\",\"cementos\",\"varillas\",\"baldosas\",\"ba\\u00f1os\",\"cables\",\"herramientas\"]', 'VLL', 'activa', 0, '2020-06-02', 'vistas/documentos/afiliados/empresas/carta_bienvenida/97520268.pdf', 'vistas/documentos/afiliados/empresas/acta_compromiso/43796795.pdf', 'vistas/documentos/afiliados/empresas/estudio_afiliacion/40159434.pdf', 'vistas/documentos/afiliados/empresas/rut/54036122.pdf', 'vistas/documentos/afiliados/empresas/camara_comercio/81036932.pdf', 'vistas/documentos/afiliados/empresas/fechas_birthday/31463561.pdf', '2022-03-22 07:31:37', '2022-06-15 01:09:03');
 
 -- --------------------------------------------------------
 
@@ -266,7 +314,6 @@ INSERT INTO `eventos` (`id`, `nombre`, `tematica`, `ponentes`, `patrocinadores`,
 (15, 'Plenaria jornada mañana', NULL, 'Adonaís Funetes.', 'ACOPI Cesar', 30, '2022-02-14', '08:00:00', '2022-02-14', '12:00:00', '#001f3f', '#001f3f', 'false', '2022-02-08 07:40:45', '2022-02-08 07:40:45'),
 (16, 'Plenaria jornada tarde', NULL, 'Adonaís Fuente', 'ACOPI Cesar', 25, '2022-02-14', '14:00:00', '2022-02-14', '18:00:00', '#ff851b', '#ff851b', 'false', '2022-02-08 07:44:26', '2022-02-08 07:44:26'),
 (17, 'Descanso', NULL, NULL, NULL, NULL, '2022-02-04', '12:00:00', '2022-02-04', '14:00:00', '#dc3545', '#dc3545', 'false', '2022-02-09 03:06:44', '2022-02-09 03:07:24'),
-(18, 'Día de la mujer', 'Celebración del día de la mujer', 'María de los Ángeles Correa', 'ACOPI', 15, '2022-03-08', '08:00:00', '2022-03-08', '10:00:00', '#f012be', '#f012be', 'false', '2022-03-04 03:46:54', '2022-03-04 03:46:54'),
 (19, 'Revisión de estatus afiliados', 'Revisar que afiliados están inactivos y desde cuando lo están.', NULL, NULL, NULL, '2022-03-14', '08:00:00', NULL, NULL, '#ffc107', '#ffc107', 'false', '2022-03-11 02:08:22', '2022-03-11 02:09:05');
 
 -- --------------------------------------------------------
@@ -334,6 +381,37 @@ INSERT INTO `interesados` (`id`, `nombre_interesado`, `empresa_interesado`, `ema
 (4, 'Miguel Torres', 'La Casa Blanca', 'mtorres@gmail.com', '5467324', 'contactado', NULL, '2022-01-08 04:06:54'),
 (5, 'Magalis Herrera', 'Decoraciones Maga', 'mherrera@gmail.com', '5757832', 'contactado', NULL, '2022-01-08 04:01:48'),
 (6, 'Edmundo Alvarez', 'Asadero Pollo Norte', 'ealvarez@gmail.com', '5723456', 'contactado', NULL, '2022-01-08 04:08:55');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `meses`
+--
+
+CREATE TABLE `meses` (
+  `id` int(11) NOT NULL,
+  `codigo_mes` int(11) NOT NULL,
+  `nombre_mes` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre_mes_min` varchar(20) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `meses`
+--
+
+INSERT INTO `meses` (`id`, `codigo_mes`, `nombre_mes`, `nombre_mes_min`) VALUES
+(1, 1, 'Enero', 'enero'),
+(2, 2, 'Febrero', 'febrero'),
+(3, 3, 'Marzo', 'marzo'),
+(4, 4, 'Abril', 'abril'),
+(5, 5, 'Mayo', 'mayo'),
+(6, 6, 'Junio', 'junio'),
+(7, 7, 'Julio', 'julio'),
+(8, 8, 'Agosto', 'agosto'),
+(9, 9, 'Septiembre', 'septiembre'),
+(10, 10, 'Octubre', 'octubre'),
+(11, 11, 'Noviembre', 'noviembre'),
+(12, 12, 'Diciembre', 'diciembre');
 
 -- --------------------------------------------------------
 
@@ -522,7 +600,7 @@ CREATE TABLE `pagos` (
 INSERT INTO `pagos` (`id`, `codigo_recibo`, `id_empresa`, `valor_deuda`, `valor_mes`, `valor_recibo`, `mes_recibo`, `fecha_limite`, `estado`, `id_reporta`, `fecha_reporte`, `created_at`, `updated_at`) VALUES
 (1931, NULL, 1, 0, 80000, 80000, 'febrero', '2022-02-11', 'pagado', NULL, NULL, '2022-02-02 01:38:45', '2022-03-22 02:40:58'),
 (1932, NULL, 2, 0, 80000, 80000, 'febrero', '2022-02-11', 'vencido', NULL, NULL, '2022-02-02 01:38:45', '2022-02-02 01:40:20'),
-(1933, NULL, 3, 0, 80000, 80000, 'febrero', '2022-02-11', 'vencido', NULL, NULL, '2022-02-02 01:38:45', '2022-02-02 01:40:20'),
+(1933, NULL, 3, 0, 80000, 80000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-06-15 01:07:54', '2022-02-02 01:38:45', '2022-06-15 01:07:54'),
 (1934, NULL, 5, 0, 80000, 80000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-02-03 01:45:50', '2022-02-02 01:38:46', '2022-02-03 01:45:50'),
 (1935, NULL, 9, 0, 80000, 35000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-02-03 01:43:31', '2022-02-02 01:38:46', '2022-02-03 01:43:31'),
 (1936, NULL, 10, 0, 80000, 80000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-02-03 01:42:07', '2022-02-02 01:38:46', '2022-02-03 01:42:07'),
@@ -533,7 +611,7 @@ INSERT INTO `pagos` (`id`, `codigo_recibo`, `id_empresa`, `valor_deuda`, `valor_
 (1941, NULL, 15, 0, 80000, 80000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-02-02 07:56:39', '2022-02-02 01:38:46', '2022-02-02 07:56:39'),
 (1942, NULL, 1, 80000, 80000, 160000, 'febrero', '2022-02-11', 'negoceado', NULL, NULL, '2022-02-02 01:40:20', '2022-02-02 07:30:12'),
 (1943, NULL, 2, 80000, 80000, 160000, 'febrero', '2022-02-11', 'vencido', NULL, NULL, '2022-02-02 01:40:20', '2022-02-02 01:41:50'),
-(1944, NULL, 3, 80000, 80000, 160000, 'febrero', '2022-02-11', 'vencido', NULL, NULL, '2022-02-02 01:40:20', '2022-02-02 01:41:50'),
+(1944, NULL, 3, 80000, 80000, 160000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-06-15 01:07:55', '2022-02-02 01:40:20', '2022-06-15 01:07:55'),
 (1945, NULL, 5, 80000, 80000, 160000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-02-03 01:45:50', '2022-02-02 01:40:20', '2022-02-03 01:45:50'),
 (1946, NULL, 9, 35000, 80000, 56000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-02-03 01:43:31', '2022-02-02 01:40:21', '2022-02-03 01:43:31'),
 (1947, NULL, 10, 0, 80000, 80000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-02-03 01:42:07', '2022-02-02 01:40:21', '2022-02-03 01:42:07'),
@@ -557,11 +635,11 @@ INSERT INTO `pagos` (`id`, `codigo_recibo`, `id_empresa`, `valor_deuda`, `valor_
 (1965, NULL, 11, 0, 80000, 80000, 'febrero', '2022-02-11', 'vencido', NULL, NULL, '2022-02-02 01:43:12', '2022-02-02 07:56:31'),
 (1966, NULL, 12, 0, 80000, 80000, 'febrero', '2022-02-11', 'vencido', NULL, NULL, '2022-02-02 01:43:12', '2022-02-02 07:56:31'),
 (1967, NULL, 13, 0, 80000, 80000, 'febrero', '2022-02-11', 'vencido', NULL, NULL, '2022-02-02 01:43:12', '2022-02-02 07:56:31'),
-(1968, NULL, 14, 0, 80000, 80000, 'febrero', '2022-02-11', 'vencido', NULL, NULL, '2022-02-02 01:43:12', '2022-02-02 07:56:31'),
+(1968, NULL, 14, 0, 80000, 80000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-06-17 02:08:50', '2022-02-02 01:43:12', '2022-06-17 02:08:50'),
 (1969, NULL, 15, 0, 80000, 80000, 'febrero', '2022-02-11', 'negoceado', 1, '2022-02-02 07:56:39', '2022-02-02 01:43:13', '2022-02-02 07:56:39'),
-(1970, NULL, 1, 0, 80000, 80000, 'febrero', '2022-02-12', 'no pago', NULL, NULL, '2022-02-02 07:56:30', '2022-02-02 07:56:30'),
-(1971, NULL, 2, 0, 80000, 80000, 'febrero', '2022-02-12', 'no pago', NULL, NULL, '2022-02-02 07:56:30', '2022-02-02 07:56:30'),
-(1972, NULL, 3, 0, 80000, 80000, 'febrero', '2022-02-12', 'no pago', NULL, NULL, '2022-02-02 07:56:31', '2022-02-02 07:56:31'),
+(1970, NULL, 1, 0, 80000, 80000, 'febrero', '2022-02-12', 'pagado', 1, '2022-06-15 01:08:22', '2022-02-02 07:56:30', '2022-06-15 01:08:22'),
+(1971, NULL, 2, 0, 80000, 80000, 'febrero', '2022-02-12', 'vencido', NULL, NULL, '2022-02-02 07:56:30', '2022-06-15 01:08:59'),
+(1972, NULL, 3, 0, 80000, 80000, 'febrero', '2022-02-12', 'pagado', 1, '2022-06-15 01:07:53', '2022-02-02 07:56:31', '2022-06-15 01:07:53'),
 (1973, NULL, 5, 0, 80000, 80000, 'febrero', '2022-02-12', 'pagado', 1, '2022-02-03 01:45:50', '2022-02-02 07:56:31', '2022-02-03 01:45:50'),
 (1974, NULL, 9, 0, 80000, 80000, 'febrero', '2022-02-12', 'pagado', 1, '2022-02-03 01:43:31', '2022-02-02 07:56:31', '2022-02-03 01:43:31'),
 (1975, NULL, 10, 80000, 80000, 160000, 'febrero', '2022-02-12', 'negoceado', 1, '2022-02-03 01:42:07', '2022-02-02 07:56:31', '2022-02-03 01:42:07'),
@@ -569,7 +647,24 @@ INSERT INTO `pagos` (`id`, `codigo_recibo`, `id_empresa`, `valor_deuda`, `valor_
 (1977, NULL, 12, 80000, 80000, 160000, 'febrero', '2022-02-12', 'pagado', 1, '2022-02-03 01:40:00', '2022-02-02 07:56:31', '2022-02-03 01:40:00'),
 (1978, NULL, 13, 80000, 80000, 160000, 'febrero', '2022-02-12', 'pagado', 1, '2022-02-02 07:58:50', '2022-02-02 07:56:31', '2022-02-02 07:58:50'),
 (1979, NULL, 14, 80000, 80000, 160000, 'febrero', '2022-02-12', 'pagado', 1, '2022-02-02 07:58:43', '2022-02-02 07:56:32', '2022-02-02 07:58:43'),
-(1980, NULL, 15, 80000, 80000, 160000, 'febrero', '2022-02-12', 'negoceado', 1, '2022-02-02 07:56:39', '2022-02-02 07:56:32', '2022-02-02 07:56:39');
+(1980, NULL, 15, 80000, 80000, 160000, 'febrero', '2022-02-12', 'negoceado', 1, '2022-02-02 07:56:39', '2022-02-02 07:56:32', '2022-02-02 07:56:39'),
+(1981, NULL, 1, 0, 80000, 80000, 'junio', '2022-06-24', 'no pago', NULL, NULL, '2022-06-15 01:08:59', '2022-06-15 01:08:59'),
+(1982, NULL, 3, 0, 80000, 80000, 'junio', '2022-06-24', 'no pago', NULL, NULL, '2022-06-15 01:09:00', '2022-06-15 01:09:00'),
+(1983, NULL, 6, 0, 80000, 80000, 'junio', '2022-06-24', 'no pago', NULL, NULL, '2022-06-15 01:09:00', '2022-06-15 01:09:00'),
+(1984, NULL, 7, 0, 80000, 80000, 'junio', '2022-06-24', 'no pago', NULL, NULL, '2022-06-15 01:09:00', '2022-06-15 01:09:00'),
+(1985, NULL, 8, 0, 80000, 80000, 'junio', '2022-06-24', 'no pago', NULL, NULL, '2022-06-15 01:09:01', '2022-06-15 01:09:01'),
+(1986, NULL, 9, 0, 80000, 80000, 'junio', '2022-06-24', 'no pago', NULL, NULL, '2022-06-15 01:09:01', '2022-06-15 01:09:01'),
+(1987, NULL, 10, 0, 80000, 80000, 'junio', '2022-06-24', 'no pago', NULL, NULL, '2022-06-15 01:09:01', '2022-06-15 01:09:01'),
+(1988, NULL, 11, 0, 80000, 80000, 'junio', '2022-06-24', 'no pago', NULL, NULL, '2022-06-15 01:09:02', '2022-06-15 01:09:02'),
+(1989, NULL, 12, 0, 80000, 70000, 'junio', '2022-06-24', 'abonado', 1, '2022-06-15 02:42:25', '2022-06-15 01:09:02', '2022-06-15 02:42:25'),
+(1990, NULL, 13, 0, 80000, 80000, 'junio', '2022-06-24', 'no pago', NULL, NULL, '2022-06-15 01:09:02', '2022-06-15 01:09:02'),
+(1991, NULL, 14, 0, 80000, 80000, 'junio', '2022-06-24', 'pagado', 1, '2022-06-17 02:08:50', '2022-06-15 01:09:02', '2022-06-17 02:08:50'),
+(1992, NULL, 15, 0, 80000, 80000, 'junio', '2022-06-24', 'pagado', 1, '2022-06-15 02:42:12', '2022-06-15 01:09:02', '2022-06-15 02:42:12'),
+(1993, NULL, 16, 0, 80000, 80000, 'junio', '2022-06-24', 'pagado', 1, '2022-06-15 02:42:04', '2022-06-15 01:09:03', '2022-06-15 02:42:04'),
+(1994, NULL, 17, 0, 80000, 35000, 'junio', '2022-06-24', 'abonado', 1, '2022-06-15 02:41:31', '2022-06-15 01:09:03', '2022-06-15 02:41:31'),
+(1995, NULL, 18, 0, 80000, 80000, 'junio', '2022-06-24', 'pagado', 1, '2022-06-15 02:41:06', '2022-06-15 01:09:03', '2022-06-15 02:41:06'),
+(1996, NULL, 19, 0, 80000, 80000, 'junio', '2022-06-24', 'pagado', 1, '2022-06-15 02:40:58', '2022-06-15 01:09:03', '2022-06-15 02:40:58'),
+(1997, NULL, 20, 0, 80000, 80000, 'junio', '2022-06-24', 'pagado', 1, '2022-06-15 02:40:50', '2022-06-15 01:09:03', '2022-06-15 02:40:50');
 
 -- --------------------------------------------------------
 
@@ -590,7 +685,8 @@ CREATE TABLE `pagos_generados` (
 --
 
 INSERT INTO `pagos_generados` (`id`, `month`, `year`, `created_at`, `updated_at`) VALUES
-(68, '02', '2022', '2022-02-02 07:56:32', '2022-02-02 07:56:32');
+(68, '02', '2022', '2022-02-02 07:56:32', '2022-02-02 07:56:32'),
+(69, '06', '2022', '2022-06-15 01:09:04', '2022-06-15 01:09:04');
 
 -- --------------------------------------------------------
 
@@ -704,7 +800,9 @@ INSERT INTO `representante_empresa` (`id_rprt_legal`, `tipo_documento_rprt`, `cc
 (26, 'cedula', '77345213', 'Antoine', 'Paul', 'Satre', 'Foret', '1960-02-12', 'm', 'apsatre12@gmail.com', '3003216384', 'vistas/images/afiliados/fotos/68091.jpg', 'vistas/images/afiliados/documentos/18088.jpg', '2022-01-26 03:18:32', '2022-01-26 03:18:32'),
 (27, 'cedula', '1001234758', 'Antonio', 'Miguel', 'Sequeda', 'Hinojosa', '1991-08-07', 'm', 'amsequeda07@gmail.com', '3193284302', 'vistas/images/afiliados/fotos/83781.jpg', 'vistas/images/afiliados/documentos/99056.jpg', '2022-01-26 03:21:04', '2022-01-26 03:21:04'),
 (28, 'cedula', '1065723941', 'Claudia', 'Helena', 'De Sanctis', 'Isaza', '1978-06-22', 'f', 'chdesanctis22@gmail.com', '3173247328', 'vistas/images/afiliados/fotos/23559.jpg', 'vistas/images/afiliados/documentos/66967.jpg', '2022-01-26 03:26:44', '2022-01-26 03:26:44'),
-(29, 'cedula', '49213754', 'Marcina', 'Enriqueta', 'Costelo', 'Marañon', '1949-06-28', 'f', 'mecostelo28@gmail.com', '3123274385', 'vistas/images/afiliados/fotos/73893.jpg', 'vistas/images/afiliados/documentos/59680.jpg', '2022-01-26 03:28:55', '2022-01-26 03:28:55');
+(29, 'cedula', '49213754', 'Marcina', 'Enriqueta', 'Costelo', 'Marañon', '1949-06-28', 'f', 'mecostelo28@gmail.com', '3123274385', 'vistas/images/afiliados/fotos/73893.jpg', 'vistas/images/afiliados/documentos/59680.jpg', '2022-01-26 03:28:55', '2022-01-26 03:28:55'),
+(30, 'cedula', '49549560', 'Helena', 'Cristina', 'Vega', 'De la Torre', '1985-08-12', 'f', 'hcvega@gmail.com', '3214395497', 'vistas/images/afiliados/fotos/39835.jpg', 'vistas/images/afiliados/documentos/78006.pdf', '2022-03-26 02:26:55', '2022-03-26 04:23:08'),
+(31, 'cedula', '77329456', 'Pompilio', 'Armando', 'Herrera', 'Ibañez', '1990-04-04', 'm', 'paherrera@gmail.com', '3123248605', 'vistas/images/afiliados/fotos/38279.jpg', 'vistas/images/afiliados/documentos/61493.jpg', '2022-03-26 02:29:18', '2022-03-26 02:29:18');
 
 -- --------------------------------------------------------
 
@@ -805,17 +903,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `foto`, `rol`, `modo`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Andrés Soto', 'andresalfredosotosuarez@gmail.com', NULL, '$2y$10$jPmKrQ9l3Xvt8xN35BHt.OJ.NTYenPs9nHvKxAy6r6ZTKq1.sZln6', 'vistas/images/usuarios/723.jpg', 'Administrador', 'Diurno', NULL, '2021-11-17 01:34:47', '2022-03-22 07:25:24'),
+(1, 'Andrés Soto', 'andresalfredosotosuarez@gmail.com', NULL, '$2y$10$jPmKrQ9l3Xvt8xN35BHt.OJ.NTYenPs9nHvKxAy6r6ZTKq1.sZln6', 'vistas/images/usuarios/723.jpg', 'Administrador', 'Diurno', NULL, '2021-11-17 01:34:47', '2022-03-29 01:20:09'),
 (4, 'Jean Carlos Recio', 'jrecio@gmail.com', NULL, '$2y$10$TqKqyV6QZ5LHB8OO.3nkm.VmkdIuxptHz2e6MgeMCMKeCFIjleBSy', 'vistas/images/usuarios/563.jpg', 'Administrador', 'Nocturno', NULL, '2021-11-30 07:18:38', '2022-01-22 06:41:14'),
-(5, 'Jimena Castro', 'jcastro@gmail.com', NULL, '$2y$10$SBtB5gICn1uZEoxOU0TvNey5zD1dFMPvYiFfl2O20ZX9YQS0N.VkG', 'vistas/images/usuarios/138.jpg', 'Subdirector de comunicaciones y eventos', 'Diurno', NULL, '2021-12-01 07:11:36', '2021-12-02 07:07:32'),
-(6, 'Adonais Fuentes', 'afuentes@gmail.com', NULL, '$2y$10$lc1gRh.wzkdYFpvXe4jxF.WLV1L1fQdojmUSzSK2UGxr1IunW7vka', 'vistas/images/usuarios/588.png', 'Director ejecutivo', 'Diurno', NULL, '2021-12-02 02:45:34', '2021-12-03 01:42:01'),
-(7, 'Marta Alvarez', 'malvarez@gmail.com', NULL, '$2y$10$WdiSUVGfSa1axi9l8q2K4OdlRdgktWSgux0e38o2I0tXAiE46DcLG', 'vistas/images/usuarios/233.jpg', 'Subdirector administrativo y financiero', 'Diurno', NULL, '2021-12-02 21:02:17', '2021-12-02 21:10:23'),
-(8, 'Emilio Carranza', 'ecarranza@gmail.com', NULL, '$2y$10$jkHq5tSKo/ZLoMGUq3cFCO9wcw49xsXoBCv48UKqPPAcw9SJ.N.pm', 'vistas/images/usuarios/593.jpg', 'Subdirector de desarrollo empresarial', 'Diurno', NULL, '2021-12-02 21:05:09', '2021-12-02 21:11:39'),
-(9, 'Mariana De Austria', 'mdeaustria@gmail.com', NULL, '$2y$10$W3uHgkNJ3q6CUPaNbl.r9eoXY3jtTgy5bssDtIVGiCNkZqhmb.6bK', 'vistas/images/usuarios/797.jpg', 'Asistente de dirección', 'Diurno', NULL, '2021-12-02 21:06:23', '2021-12-02 21:19:37'),
-(10, 'Eugenia Rojas', 'erojas@gmail.com', NULL, '$2y$10$DEBXjXgcgQK/qFuzbYTfUeZx4G4VpkRoTx/NzZ1Y516N5olET766e', 'vistas/images/usuarios/570.jpg', 'Subdirector juridico', 'Diurno', NULL, '2021-12-02 21:07:52', '2021-12-02 21:17:01'),
-(11, 'Maria Perez', 'mperez@gmail.com', NULL, '$2y$10$nMOugiOl.Lb1ZFVHXUeeJeyUOBSFkU3UZjg.oaNwCB9mck.HK4NMu', NULL, NULL, 'Diurno', NULL, '2021-12-03 01:53:14', '2021-12-03 01:53:14'),
-(13, 'Catalina Martinez', 'cmartinez@gmail.com', NULL, '$2y$10$4b4k439EF19pJ2dsJf7fe.RqamEPs3j385RE98Ie8/j7pqgSBwyWe', NULL, NULL, 'Diurno', NULL, '2021-12-03 02:08:21', '2021-12-03 02:08:21'),
-(14, 'Cristobal Colón', 'ccolon@gmail.com', NULL, '$2y$10$zFonJQpo9FLcb0OVPAUXf.UbuEbbgiT.QGlRFVp5l9R41t.EmwlNi', NULL, NULL, 'Diurno', NULL, '2021-12-03 08:25:01', '2021-12-03 08:25:01');
+(16, 'Pedro José Hurtado Hurtado', 'pjhurtado@gmail.com', NULL, '$2y$10$8G6jVsphdsDJCQBzKzDhuu231RuCKpTQLR9HLrMtJi3LunJHPGqKa', 'vistas/images/usuarios/unknown.png', 'Subdirector de comunicaciones y eventos', 'Diurno', NULL, '2022-04-01 01:16:54', '2022-04-01 01:16:54'),
+(17, 'Andrés Alfredo Soto Suárez', 'aasoto@gmail.com', NULL, '$2y$10$tf1ZT7a/uw85xFUe3AGZ7.U4Hwdgl2kUeO1EU.ogudH5dTPr3gbxS', 'vistas/images/usuarios/unknown.png', 'Administrador', 'Diurno', NULL, '2022-04-01 01:23:52', '2022-04-02 01:28:20'),
+(18, 'Yekaterina Ivanova Gagarín Yeltsin', 'yigagarin@vk.com', NULL, '$2y$10$ZH4uRSn70nx7/CS7aA4K0eyPkU/ZfXckbdxs6VWRw7vV3mAzkuX3C', 'vistas/images/usuarios/91015.jpg', 'Asistente de dirección', 'Diurno', NULL, '2022-04-02 02:23:13', '2022-04-02 02:28:14'),
+(19, 'Adonais  Fuentes Argote', 'afuentes@gmail.com', NULL, '$2y$10$ojq8n72XDXeCAPTZ04cyUO9e4xeUbntTOvYujlFLVsvtl2xe.4ed2', 'vistas/images/usuarios/unknown.png', 'Director ejecutivo', 'Diurno', NULL, '2022-04-03 00:40:39', '2022-04-03 00:46:44'),
+(20, 'Hernan Enrique Cuevas Castro', 'hecuervas@gmail.com', NULL, '$2y$10$SybQDoduRQIxVwqzD/OVqOKx7WvCA0kLz7eo5oNEXLEzXOabEmnR2', 'vistas/images/usuarios/74055.jpg', 'Subdirector administrativo y financiero', 'Diurno', NULL, '2022-04-03 00:40:46', '2022-04-03 00:58:03'),
+(21, 'Carlota Sofía Manrriquez Orcasita', 'csmartinez@gmail.com', NULL, '$2y$10$4sGCG.P.A2EqSZ0nvoo04.A5LlV1MPPmZGLsAKZ2ct5/4MLYQyP0y', 'vistas/images/usuarios/54607.jpg', 'Subdirector de desarrollo empresarial', 'Diurno', NULL, '2022-04-03 00:40:52', '2022-04-03 00:57:13'),
+(22, 'Jeison José Zamora Sotelo', 'jjzamora@gmail.com', NULL, '$2y$10$7bIxe3YOA5ZfmRt6JzPJkuRrN8JUyS.pQHUL2qpHpPMuVQV1gkqMC', 'vistas/images/usuarios/93434.jpg', 'Subdirector juridico', 'Diurno', NULL, '2022-04-03 00:40:58', '2022-04-03 00:56:34'),
+(23, 'Margarita Lilomila De Tormes y Alcahazar', 'mldetormes@gmail.com', NULL, '$2y$10$NAwgiMQesy3bxdI0MKKqleV9oZgEleTAzgYVA1JhtzRRTcWObhdkW', 'vistas/images/usuarios/40677.jpg', 'Subdirector de comunicaciones y eventos', 'Diurno', NULL, '2022-04-03 00:41:03', '2022-04-03 00:54:36'),
+(24, 'Ernestina María Herrera Gómez', 'emherrara@gmail.com', NULL, '$2y$10$rbmij9BQUnc1dpHHk9gtzuzLB3/Zv0IU7tIZJ4VeyZy50w1h74Dlq', 'vistas/images/usuarios/68122.jpg', 'Subdirector de desarrollo empresarial', 'Diurno', NULL, '2022-04-21 02:08:07', '2022-04-21 02:12:42');
 
 --
 -- Índices para tablas volcadas
@@ -831,6 +929,12 @@ ALTER TABLE `categorias`
 -- Indices de la tabla `citas`
 --
 ALTER TABLE `citas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `datos`
+--
+ALTER TABLE `datos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -880,6 +984,12 @@ ALTER TABLE `generos`
 -- Indices de la tabla `interesados`
 --
 ALTER TABLE `interesados`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `meses`
+--
+ALTER TABLE `meses`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -983,13 +1093,19 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `datos`
+--
+ALTER TABLE `datos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados_afiliados`
@@ -1034,6 +1150,12 @@ ALTER TABLE `interesados`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT de la tabla `meses`
+--
+ALTER TABLE `meses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
@@ -1061,13 +1183,13 @@ ALTER TABLE `pagina_web`
 -- AUTO_INCREMENT de la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1981;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1998;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos_generados`
 --
 ALTER TABLE `pagos_generados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos_parametros`
@@ -1085,7 +1207,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `representante_empresa`
 --
 ALTER TABLE `representante_empresa`
-  MODIFY `id_rprt_legal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_rprt_legal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -1109,7 +1231,7 @@ ALTER TABLE `tipos_documentos`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

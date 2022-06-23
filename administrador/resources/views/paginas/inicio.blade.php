@@ -180,6 +180,20 @@
                         <a href="{{ url('documentos/inicio') }}" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-purple">
+                        <div class="inner">
+                            <h3>Indicadores</h3>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <a href="{{ url('indicadores/inicio') }}" class="small-box-footer">Gestionar <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
                 </div>
             @endif
             @if (Auth::user()->rol == 'Director ejecutivo')

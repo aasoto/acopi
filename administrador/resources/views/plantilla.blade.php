@@ -40,8 +40,8 @@
 		<link rel="stylesheet" href="{{ url('/') }}/css/plugins/summernote.css">
 		@endauth
   	@endif
-	
-	
+
+
 	<!--Slider-->
     <link rel="stylesheet" href="{{ url('/') }}/css/plugins/owl.carousel.css" />
     <link rel="stylesheet" href="{{ url('/') }}/css/plugins/owl.theme.css" />
@@ -55,8 +55,10 @@
   	<!-- Select2 -->
   	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/select2/css/select2.min.css">
   	<link rel="stylesheet" href="{{ url('/') }}/css/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-	<!--====  End of Plugins HTML  ====-->
-	
+	<!-- uPlot -->
+    <link rel="stylesheet" href="{{ url('/') }}/css/plugins/uplot/uPlot.min.css">
+    <!--====  End of Plugins HTML  ====-->
+
 	<!--==========================================
 	=            Plugins JavaScript            =
 	==========================================-->
@@ -102,8 +104,8 @@
 		<script src="{{ url('/') }}/js/plugins/sweetalert.js"></script>
 		@endauth
 	@endif
-	
-	
+
+
 	<!-- owl-carousel -->
     <script src="{{ url('/') }}/js/plugins/owl.carousel.min.js"></script>
     <!-- Moment -->
@@ -116,8 +118,12 @@
     <script src="{{ url('/') }}/js/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 	<!-- SweetAlert2 -->
 	{{--<script src="{{ url('/') }}/js/plugins/sweetalert2/sweetalert2.min.js"></script>--}}
+    <!-- ChartJS -->
+    <script src="{{ url('/') }}/js/plugins/chart.js/Chart.min.js"></script>
+    <!-- uPlot -->
+    <script src="{{ url('/') }}/js/plugins/uplot/uPlot.iife.min.js"></script>
 	<!--=====  End of Plugins JavaScript  ======-->
-	
+
 </head>
 @if (Route::has('login'))
 	@auth
@@ -125,7 +131,7 @@
 			<div class="wrapper">
 				@include('modulos.preloading')
 				@include('modulos.header')
-				@include('modulos.collapsed-sidebar')
+				@include('modulos.sidebar')
 				@yield('content')
 				@include('modulos.footer')
 			</div>
@@ -135,6 +141,8 @@
 			<script src="{{url('/')}}/js/calendarios.js"></script>
 			<script src="{{url('/')}}/js/colorPicker.js"></script>
 			<script src="{{url('/')}}/js/archivos.js"></script>
+            <script src="{{url('/')}}/js/indicadores-pagos.js"></script>
+            <script src="{{url('/')}}/js/indicadores-empresas.js"></script>
 			@if (Auth::user()->modo == 'Nocturno')
 				<script src="{{url('/')}}/js/modoNocturno.js"></script>
 			@endif
@@ -142,5 +150,5 @@
 	@else
 		@include('paginas.pagina_web.login')
 	@endauth
-@endif	
+@endif
 </html>

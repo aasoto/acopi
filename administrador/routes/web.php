@@ -132,5 +132,10 @@ Route::resource('/empleados/exportar', 'ExportarController');
 Route::resource('/documentos/empresas', 'DocumentosController');
 Route::resource('/documentos/empleados', 'DocumentosController');
 
+/*----------  Indicadores  ----------*/
+Route::resource('/indicadores/inicio', 'IndicadoresController');
+Route::resource('/indicadores/empresas', 'IndicadoresController');
+Route::resource('/indicadores/recibos', 'IndicadoresController');
+
 
 /*=====  End of Rutas que incluyen todos los metodos HTML  ======*/
