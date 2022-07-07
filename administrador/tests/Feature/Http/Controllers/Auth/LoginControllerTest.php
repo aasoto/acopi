@@ -8,13 +8,13 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 use Tests\Traits\ViewAssertions;
-use NunoMaduro\LaravelMojito\InteractsWithViews;
+//use NunoMaduro\LaravelMojito\InteractsWithViews;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class LoginControllerTest extends TestCase
 {
     use ViewAssertions;
-    use InteractsWithViews;
+   // use InteractsWithViews;
 
 
 

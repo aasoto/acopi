@@ -12,18 +12,18 @@ class EntrevistasController extends Controller
     /*===============================================================
 	=            Mostrar todos los registros en la tabla            =
 	===============================================================*/
-	
+
 	public function index(){
     	/*$entrevistas = EntrevistasModel::all();
 
     	return view("paginas.pagina_web.entrevistas", array("entrevistas" => $entrevistas));*/
 
     	if (request()->ajax()) {
-    		return datatables()->of(EntrevistasModel::all()) 
+    		return datatables()->of(EntrevistasModel::all())
     		->addColumn('acciones', function($data){
 
 			$acciones = '<div class="btn-group">
-									
+
 							<a href="'.url()->current().'/'.$data->id.'" class="btn btn-warning btn-sm">
 								<i class="fas fa-pencil-alt text-white"></i>
 							</a>
@@ -42,16 +42,16 @@ class EntrevistasController extends Controller
 		}
     	//$roles = RolesModel::all();
     	$entrevistas = EntrevistasModel::all();
-    	return view("paginas.pagina_web.entrevistas");
+    	return view("paginas.pagina_web.entrevistas", array("entrevistas" => $entrevistas));
     }
-	
+
 	/*=====  End of Mostrar todos los registros en la tabla  ======*/
 
 
 	/*===========================================
 	=            Crear nueva noticia            =
 	===========================================*/
-	
+
 	public function store(Request $request){
 		$datos = array('titulo' => $request->input("titulo_entrevista"),
 		 'descripcion' => $request->input("descripcion_entrevista"),
@@ -70,9 +70,10 @@ class EntrevistasController extends Controller
 		}elseif ($corto !== false) {
 			$datos['link'] = str_replace($link_corto, $link_nuevo, $datos['link']);
 		}else{
+            //http_response_code(404);
 			return redirect("/pagina_web/entrevistas")->with("link-no-valido", "");
 		}
-		
+
 		/*echo '<pre>'; print_r($datos["link"]); echo '</pre>';
 		return;*/
 
@@ -90,7 +91,7 @@ class EntrevistasController extends Controller
     		if($validar->fails()){
 
     			return redirect("/pagina_web/entrevistas")->with("no-validacion", "");
-    			
+
     		}else{
     			$entrevista = new EntrevistasModel();
 
@@ -109,34 +110,34 @@ class EntrevistasController extends Controller
     	}
 
 	}
-	
+
 	/*=====  End of Crear nueva noticia  ======*/
 
 	/*===========================================================
     =            Mostra un solo registro de la tabla            =
     ===========================================================*/
-    
+
     public function show($id){
 
         $entrevista = EntrevistasModel::where("id", $id)->get();
         $entrevistas = EntrevistasModel::all();
-        
+
         if(count($entrevista) != 0){
 
             return view("paginas.pagina_web.entrevistas", array("status"=>200, "entrevista"=>$entrevista, "entrevistas"=>$entrevistas));
-        
-        }else{ 
+
+        }else{
 
             return view("paginas.pagina_web.entrevistas", array("status"=>404, "entrevistas"=>$entrevistas));
         }
     }
-    
+
     /*=====  End of Mostra un solo registro de la tabla  ======*/
 
     /*=============================================
     =            Actualizar entrevista            =
     =============================================*/
-    
+
     public function update($id, Request $request){
 
     	$datos = array(
@@ -158,11 +159,11 @@ class EntrevistasController extends Controller
     		if($validar->fails()){
 
     			return redirect("/pagina_web/entrevistas")->with("no-validacion", "");
-    			
+
     		}else{
 
     			$actualizar = array(
-    				'titulo_entrevista' => $datos["titulo"], 
+    				'titulo_entrevista' => $datos["titulo"],
     				'descripcion_entrevista' => $datos["descripcion"],
     				'video_entrevista' => $datos["link"]
     			);
@@ -178,26 +179,26 @@ class EntrevistasController extends Controller
     	}
 
     }
-    
+
     /*=====  End of Actualizar entrevista  ======*/
 
     /*===========================================
     =            Eliminar entrevista            =
     ===========================================*/
-    
+
     public function destroy($id, Request $request){
 
-    	$validar = EntrevistasModel::where("id", $id)->get();    	
-    	if(!empty($validar) && $id != 1){
+    	$validar = EntrevistasModel::where("id", $id)->get();
+    	if(!empty($validar)){
     		$entrevista = EntrevistasModel::where("id",$validar[0]["id"])->delete();
-    		return "ok";   	
+    		return "ok";
     	}else{
-    		return redirect("/usuarios/consultarUser")->with("no-borrar", "");
+    		return redirect("/pagina_web/entrevistas")->with("no-borrar", "");
     	}
     }
-    
+
     /*=====  End of Eliminar entrevista  ======*/
-    
-    
-	
+
+
+
 }
