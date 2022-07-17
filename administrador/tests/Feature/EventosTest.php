@@ -8,6 +8,7 @@ use App\PaginaWebModel;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class EventosTest extends TestCase
@@ -35,13 +36,18 @@ class EventosTest extends TestCase
 
     /** @test */
     public function insertar_evento(){
+        $pagina_web = factory(PaginaWebModel::class)->create();
+        $noticia = factory(NoticiasModel::class)->create();
+        $this->assertCount(1, PaginaWebModel::all());
+        $this->assertCount(1, NoticiasModel::all());
         $response = $this->post('/eventos/general', [
         'tipo_evento' => 'evento',
+        'escenario' => 'prueba',
         'nombre' => 'Prueba 1',
-        'portada_evento' => '',
+        'portada_evento' => UploadedFile::fake()->image('imagenPrueba.jpg', 500, 500)->size(500),
         'descripcion' => 'Mauris lobortis magna erat varius enim vestibulum aliquam consequat mauris dliquam ligula faucibus imperdiet tortor.',
         'palabras_claves' => 'acopi,cesar,microempresarios,valledupar',
-        'ruta_noticia' => 'prueba-1-acopi',
+        'ruta' => 'prueba-1-acopi',
         'contenido_noticia' => 'Mauris lobortis magna erat varius enim vestibulum aliquam consequat mauris dliquam ligula faucibus imperdiet tortor.',
         'ponentes' => 'Andrés Soto',
         'patrocinadores' => 'Julio Herrera',

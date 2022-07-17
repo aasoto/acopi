@@ -22,6 +22,7 @@ class EventosController extends Controller
 
         if ($request->input("tipo_evento") == "evento") {
             $datos = array(
+                'escenario' => $request->input("escenario"),
                 'nombre' => $request->input("nombre"),
                 'portada_evento' => $request->file("portada_evento"),
                 'descripcion' => $request->input("descripcion"),
@@ -39,7 +40,7 @@ class EventosController extends Controller
                 'color' => $request->input("color")
             );
 
-            /*echo '<pre>'; print_r($datos["portada_evento"]); echo '</pre>';
+            /*echo '<pre>'; print_r($datos); echo '</pre>';
             return;*/
 
             if (!empty($datos)) {
@@ -58,7 +59,6 @@ class EventosController extends Controller
 
 
                 if ($validar->fails()) {
-
                     return redirect("/eventos/general")->with("no-validacion", "");
                 } else {
 
@@ -66,31 +66,35 @@ class EventosController extends Controller
                         $aleatorio = mt_rand(10000, 99999);
 
                         $ruta = "vistas/images/noticias/portada/" . $aleatorio . "." . $datos["portada_evento"]->guessExtension();
+                        if ($datos["escenario"] == "prueba") {
+                            move_uploaded_file($datos["portada_evento"], $ruta);
+                        }
+                        if ($datos["escenario"] == "sistema") {
+                            //Redimensionar Imágen
+                            list($ancho, $alto) = getimagesize($datos["portada_evento"]);
 
-                        //Redimensionar Imágen
+                            $nuevoAncho = 2000;
+                            $nuevoAlto = 1333;
 
-                        list($ancho, $alto) = getimagesize($datos["portada_evento"]);
+                            if (($datos["portada_evento"]->guessExtension() == "jpeg") || ($datos["portada_evento"]->guessExtension() == "jpg")) {
 
-                        $nuevoAncho = 2000;
-                        $nuevoAlto = 1333;
+                                $origen = imagecreatefromjpeg($datos["portada_evento"]);
+                                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                                imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                                imagejpeg($destino, $ruta);
+                            }
 
-                        if (($datos["portada_evento"]->guessExtension() == "jpeg") || ($datos["portada_evento"]->guessExtension() == "jpg")) {
+                            if ($datos["portada_evento"]->guessExtension() == "png") {
 
-                            $origen = imagecreatefromjpeg($datos["portada_evento"]);
-                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                            imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                            imagejpeg($destino, $ruta);
+                                $origen = imagecreatefrompng($datos["portada_evento"]);
+                                $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                                imagealphablending($destino, FALSE);
+                                imagesavealpha($destino, TRUE);
+                                imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                                imagepng($destino, $ruta);
+                            }
                         }
 
-                        if ($datos["portada_evento"]->guessExtension() == "png") {
-
-                            $origen = imagecreatefrompng($datos["portada_evento"]);
-                            $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                            imagealphablending($destino, FALSE);
-                            imagesavealpha($destino, TRUE);
-                            imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                            imagepng($destino, $ruta);
-                        }
                     } else {
 
                         return redirect("/eventos/general")->with("no-validacion-2", "");

@@ -364,6 +364,7 @@
                 @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Asistente de dirección') || (Auth::user()->rol == 'Director ejecutivo'))
                 <form action="{{url('/')}}/afiliados/general" method="post" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="escenario" id="escenario" value="sistema">
                     <div class="card card-success collapsed-card" id="tarjetaIngresarAfiliado">
                     <div class="card-header">
                         <div class="card-title">Agregar Afiliado</div>

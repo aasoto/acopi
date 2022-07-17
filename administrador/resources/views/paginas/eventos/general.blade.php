@@ -75,6 +75,7 @@
                         <form action="{{ url('/') }}/eventos/general" method="post" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="tipo_evento" id="tipo_evento" value="evento">
+                            <input type="hidden" name="escenario" id="escenario" value="sistema">
                             <div class="modal-body">
                                 <div class="form-group">
                                     <div class="row">
