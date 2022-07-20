@@ -98,6 +98,7 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
+                            <input type="hidden" name="escenario" id="escenario" value="sistema">
                             <label>Tipo de documento</label>
                             <select class="form-control select2bs4" name="tipo_documento" id="tipo_documento" style="width: 100%;" required>
                               @foreach ($tipos_documentos as $key => $tipo_documento)
@@ -275,6 +276,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
+                        <input type="hidden" name="escenario" id="escenario" value="sistema">
                         <label>Tipo de documento</label>
                         <select class="form-control select2bs4" name="tipo_documento" id="tipo_documento" style="width: 100%;" required>
                           @foreach ($tipos_documentos as $key => $tipo_documento)

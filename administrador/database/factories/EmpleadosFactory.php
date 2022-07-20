@@ -17,6 +17,9 @@ $factory->define(EmpleadosModel::class, function (Faker $faker) {
         'fecha_nacimiento' => $faker->date('Y-m-d'),
         'email' => $faker->email(),
         'id_rol' => $faker->numberBetween(1, 7),
-        'estado' => $faker->randomElement(['Empleado', 'Pasante'])
+        'estado' => $faker->randomElement(['Empleado', 'Pasante']),
+        'foto' => $faker->image('public/vistas/documentos/empleados/fotos/', 500, 500, null, false),
+        'hoja_de_vida' => $faker->image('public/vistas/documentos/empleados/fotos/', 500, 500, null, false),
+        'cedula' => $faker->image('public/vistas/documentos/empleados/fotos/', 500, 500, null, false)
     ];
 });
