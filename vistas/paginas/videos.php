@@ -1,7 +1,7 @@
-<section class="home-slider" id="videos">
+<section class="home-slider py-4" id="videos">
     <div class="container-fluid">
         <div class="row">
-            <div id="carouselExampleControls-videos" class="carousel slide" data-ride="carousel">
+            <div id="carouselExampleControls-videos" class="videos-carousel  carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <?php
                     $active = true;

@@ -57,7 +57,7 @@
                                         </div>
 
                                         <div id="collapse'.$key.'" class="collapse" aria-labelledby="heading'.$key.'" data-parent="#accordion" style="">
-                                            <p class="card-body text-muted">
+                                            <p class="card-body ">
                                                 '.$value["descripcion"].' 
                                             </p>
                                         </div>

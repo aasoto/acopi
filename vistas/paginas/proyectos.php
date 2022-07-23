@@ -25,15 +25,15 @@
             $key = null; $value = null;
             foreach ($proyectos as $key => $value) {
                 echo '<div class="col-lg-4 bg-white">
-                <div class="blog-content mt-4 ">
-                    <div class="blog-image">
+                <div class="blog-content mt-4  col-11">
+                    <div class="blog-image ">
                         <img src="'.$value["imagen"].'" class="img-fluid" alt="">
                     </div>
 
-                    <div class="blog-lable">
+                    <!--<div class="blog-lable">
                         <p class="date mb-0">'.$value["fecha_dia"].'</p>
                         <p class="month mb-0">'.$value["fecha_mes"].'</p>
-                    </div>
+                    </div>-->
 
                     <div class="blog-content bg-white p-1 pb-4 pb-lg-5">
                         <p class="text-muted f-13 mb-0">'.$value["categoria"].'</p>
@@ -43,7 +43,7 @@
                     </div>
                     
                 </div>
-                <div class="mt-4 position-absolute bottom-0 start-0" style="bottom: 10px;left: 20px">
+                <div class="mt-4 position-absolute bottom-0 start-0 col-11" style="bottom: 10px;left: 20px">
                       <a href="" class="read-more">Ver más <i class="mdi mdi-arrow-right"></i></a>
                 </div>
             </div>';
