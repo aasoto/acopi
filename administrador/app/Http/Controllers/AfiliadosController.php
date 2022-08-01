@@ -86,6 +86,7 @@ class AfiliadosController extends Controller
     {
         $datos = array(
             'escenario' => $request->input("escenario"),
+            'id_empresa' => $request->input("id-empresa"),
             'tipo_documento' => $request->input("tipo_documento"),
             'numero_documento' => $request->input("numero_documento"),
             'primer_nombre' => $request->input("primer_nombre"),
@@ -201,6 +202,12 @@ class AfiliadosController extends Controller
                 } else {
                     $rutaDocumento =  "";
                 }
+
+                $actualizar = array(
+                    'cc_rprt_legal' => $datos["numero_documento"]
+                );
+
+                $empresa = EmpresasModel::where("id_empresa", $datos["id_empresa"])->update($actualizar);
 
                 $afiliado = new RepresentanteEmpresaModel();
 

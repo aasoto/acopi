@@ -53,15 +53,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ url('afiliados/general') }}" class="nav-link">
-                                <i class="nav-icon fas fa-id-card-alt"></i>
-                                <p>Consultar afliados</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ url('afiliados/consultarEmpresas') }}" class="nav-link">
                                 <i class="nav-icon fas fa-store-alt"></i>
                                 <p>Consultar empresas</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('afiliados/general') }}" class="nav-link">
+                                <i class="nav-icon fas fa-id-card-alt"></i>
+                                <p>Consultar afiliados</p>
                             </a>
                         </li>
                     </ul>
@@ -180,15 +180,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('afiliados/general') }}" class="nav-link">
-                            <i class="nav-icon fas fa-id-card-alt"></i>
-                            <p>Consultar afliados</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ url('afiliados/consultarEmpresas') }}" class="nav-link">
                             <i class="nav-icon fas fa-store-alt"></i>
                             <p>Consultar empresas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('afiliados/general') }}" class="nav-link">
+                            <i class="nav-icon fas fa-id-card-alt"></i>
+                            <p>Consultar afiliados</p>
                         </a>
                     </li>
                 </ul>
@@ -214,15 +214,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('afiliados/general') }}" class="nav-link">
-                            <i class="nav-icon fas fa-id-card-alt"></i>
-                            <p>Consultar afliados</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ url('afiliados/consultarEmpresas') }}" class="nav-link">
                             <i class="nav-icon fas fa-store-alt"></i>
                             <p>Consultar empresas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('afiliados/general') }}" class="nav-link">
+                            <i class="nav-icon fas fa-id-card-alt"></i>
+                            <p>Consultar afiliados</p>
                         </a>
                     </li>
                 </ul>
@@ -359,15 +359,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('afiliados/general') }}" class="nav-link">
-                            <i class="nav-icon fas fa-id-card-alt"></i>
-                            <p>Consultar afliados</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ url('afiliados/consultarEmpresas') }}" class="nav-link">
                             <i class="nav-icon fas fa-store-alt"></i>
                             <p>Consultar empresas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('afiliados/general') }}" class="nav-link">
+                            <i class="nav-icon fas fa-id-card-alt"></i>
+                            <p>Consultar afiliados</p>
                         </a>
                     </li>
                 </ul>
@@ -406,15 +406,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('afiliados/general') }}" class="nav-link">
-                            <i class="nav-icon fas fa-id-card-alt"></i>
-                            <p>Consultar afliados</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ url('afiliados/consultarEmpresas') }}" class="nav-link">
                             <i class="nav-icon fas fa-store-alt"></i>
                             <p>Consultar empresas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('afiliados/general') }}" class="nav-link">
+                            <i class="nav-icon fas fa-id-card-alt"></i>
+                            <p>Consultar afiliados</p>
                         </a>
                     </li>
                 </ul>
@@ -592,22 +592,22 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('afiliados/general') }}" class="nav-link">
-                            <i class="nav-icon fas fa-id-card-alt"></i>
-                            <p>Consultar afliados</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ url('afiliados/consultarEmpresas') }}" class="nav-link">
                             <i class="nav-icon fas fa-store-alt"></i>
                             <p>Consultar empresas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('afiliados/general') }}" class="nav-link">
+                            <i class="nav-icon fas fa-id-card-alt"></i>
+                            <p>Consultar afiliados</p>
                         </a>
                     </li>
                 </ul>
             </li>
             <!--=====  End of Menú Afiliados  ======-->
 
-             <!--=====================================
+            <!--=====================================
             =            Menú de Empleados y pasantes            =
             =====================================-->
             <li class="nav-item">
@@ -740,15 +740,15 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('afiliados/general') }}" class="nav-link">
-                            <i class="nav-icon fas fa-id-card-alt"></i>
-                            <p>Consultar afliados</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ url('afiliados/consultarEmpresas') }}" class="nav-link">
                             <i class="nav-icon fas fa-store-alt"></i>
                             <p>Consultar empresas</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('afiliados/general') }}" class="nav-link">
+                            <i class="nav-icon fas fa-id-card-alt"></i>
+                            <p>Consultar afiliados</p>
                         </a>
                     </li>
                 </ul>

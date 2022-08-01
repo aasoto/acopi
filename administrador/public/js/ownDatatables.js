@@ -1692,3 +1692,86 @@ tablaPagosEmpresas.on('order.dt search.dt', function(){
 
 
 }).draw();
+
+/*============================================
+=            Datatable empresas sin afiliados            =
+============================================*/
+
+var tablaEmpresasNoAfiliados = $("#tablaEmpresasNoAfiliados").DataTable({
+	processing: true,
+  	serverSide: true,
+
+  	ajax:{
+  		url: ruta+"/afiliados/ingresarAfiliado"
+  	},
+
+  	"columnDefs":[{
+  		"searchable": true,
+  		"orderable": true,
+  		"targets": 0
+  	}],
+
+  	"order":[[0, "desc"]],
+
+  	columns: [
+	  	{
+	    	data: 'id_empresa',
+	    	name: 'id_empresa'
+	  	},
+	  	{
+	  		data: 'nit_empresa',
+	    	name: 'nit_empresa'
+	  	},
+	  	{
+	  		data: 'razon_social',
+	    	name: 'razon_social'
+	  	},
+        {
+            data: 'direccion_empresa',
+            name: 'direccion_empresa'
+        },
+        {
+            data: 'telefono_empresa',
+            name: 'telefono_empresa'
+        },
+	  	{
+	  		data: 'procedimientos',
+	    	name: 'procedimientos'
+	  	}
+
+	],
+	"responsive": true, "lengthChange": true, "autoWidth": false,
+	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+	"language": {
+
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		},
+	    "oAria": {
+	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+	}
+});
+
+tablaEmpresasNoAfiliados.on('order.dt search.dt', function(){
+
+	tablaEmpresasNoAfiliados.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+
+
+}).draw();

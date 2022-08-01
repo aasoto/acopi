@@ -70,6 +70,41 @@ class EmpresasController extends Controller
             return view("paginas.afiliados.empresasInactivas", array("paginaweb"=>$paginaweb));
         }*/
 
+        if (url()->current() == ($web["servidor"]."afiliados/empresas")) {
+            $sectores = SectorEmpresaModel::all();
+            $municipios = MunicipiosModel::all();
+            return view("paginas.afiliados.empresas", array("sectores"=>$sectores, "municipios"=>$municipios));
+        }
+
+        if (url()->current() == ($web["servidor"]."afiliados/ingresarAfiliado")) {
+            //$empresas_no_afiliado = EmpresasModel::where("cc_rprt_legal", "")->get();
+            $join = DB::table('empresas')->select('empresas.*')->where("cc_rprt_legal", null)->get();
+
+            if (request()->ajax()) {
+                return datatables()->of($join)
+                ->addColumn('procedimientos', function($data){
+                    if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial')) {
+                        $procedimientos = '
+                        <div class="btn-group">
+                            <button class="btn btn-success btn-sm crearAfiliado" title="Agregar afiliado o representante legal" id_empresa="'.$data->id_empresa.'" nit="'.$data->nit_empresa.'" razon_social="'.$data->razon_social.'">
+                            <i class="fas fa-user-plus"></i>
+                            </button>
+                        </div>';
+                    } else {
+                        $procedimientos = '
+                        <div class="btn-group">
+                        </div>';
+                    }
+                    return $procedimientos;
+                })
+                ->rawColumns(['procedimientos'])
+                -> make(true);
+            }
+            $sectores = SectorEmpresaModel::all();
+            $municipios = MunicipiosModel::all();
+            return view("paginas.afiliados.ingresarAfiliado", array("sectores"=>$sectores, "municipios"=>$municipios));
+        }
+
         if (url()->current() == ($web["servidor"]."afiliados/afiliadosEmpleados")) {
             $join = DB::table('empresas')->join('empleados_afiliados','empresas.nit_empresa','=','empleados_afiliados.nit_empresa_afiliado')->select('empresas.razon_social','empleados_afiliados.*')->get();
 
@@ -238,34 +273,6 @@ class EmpresasController extends Controller
             return view("paginas.afiliados.birthday", array("cumplimentados"=>$array));
         }
 
-        if (url()->current() == ($web["servidor"]."afiliados/empresas/".$id)) {
-            $afiliado = RepresentanteEmpresaModel::where("id_rprt_legal", $id)->get();
-            $afiliados = RepresentanteEmpresaModel::all();
-            $sectores = SectorEmpresaModel::all();
-            $municipios = MunicipiosModel::all();
-            $empresa = EmpresasModel::where("cc_rprt_legal", $afiliado[0]["cc_rprt_legal"])->get();
-
-            if (count($empresa) != 0) {
-                print_r("segunda");
-                $empresa_existe = "si";
-                if (count($afiliado) != 0) {
-                    return view("paginas.afiliados.empresas", array("status"=>200, "afiliado"=>$afiliado, "sectores"=>$sectores, "municipios"=>$municipios, "empresa_existe"=>$empresa_existe));
-                } else {
-                    return view("paginas.afiliados.general", array("status"=>404, "afiliados"=>$afiliados));
-                }
-
-            } else {
-                print_r("primera");
-                if (count($afiliado) != 0) {
-                    return view("paginas.afiliados.empresas", array("status"=>200, "afiliado"=>$afiliado, "sectores"=>$sectores, "municipios"=>$municipios));
-                } else {
-                    return view("paginas.afiliados.general", array("status"=>404, "afiliados"=>$afiliados));
-                }
-            }
-
-
-        }
-
         if (url()->current() == ($web["servidor"]."afiliados/consultarEmpresas/".$id)) {
 
             $empresa = EmpresasModel::where("id_empresa", $id)->get();
@@ -381,7 +388,6 @@ class EmpresasController extends Controller
 
         if ($request->input("accion") == "agregarEmpresaAfiliado") {
             $datos = array(
-                'cedula' => $request->input("cedula"),
                 'nit' => $request->input("nit"),
                 'razon_social' => $request->input("razon_social"),
                 'num_empleados' => $request->input("num_empleados"),
@@ -407,7 +413,6 @@ class EmpresasController extends Controller
 
             if(!empty($datos)) {
                 $validar = \Validator::make($datos,[
-                    "cedula"=> "required|regex:/^[0-9]+$/i",
                     "nit"=> "required|regex:/^[.\\-\\0-9 ]+$/i",
                     "razon_social"=> "required|regex:/^[¿\\?\\¡\\!\\(\\)\\:\\,\\;\\.\\%\\#\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i",
                     "num_empleados"=> "required|regex:/^[0-9]+$/i",
@@ -422,25 +427,25 @@ class EmpresasController extends Controller
                 if (!empty($datos["fax"])) {
                     $validar_Fax = \Validator::make($datos,["fax"=> "required|regex:/^[0-9 ]+$/i"]);
                     if($validar_Fax->fails()) {
-                        return redirect("/afiliados/general")->with("no-validacion", "");
+                        return redirect("/afiliados/empresas")->with("no-validacion", "");
                     }
                 }
                 if (!empty($datos["celular"])) {
                     $validar_Celular = \Validator::make($datos,["celular"=> "required|regex:/^[0-9]+$/i"]);
                     if($validar_Celular->fails()) {
-                        return redirect("/afiliados/general")->with("no-validacion", "");
+                        return redirect("/afiliados/empresas")->with("no-validacion", "");
                     }
                 }
                 if (!empty($datos["productos"])) {
                     $validar_Productos = \Validator::make($datos,["productos" => 'required|regex:/^[=\\(\\)\\&\\$\\;\\-\\_\\*\\"\\<\\>\\?\\¿\\!\\¡\\:\\,\\.\\0-9a-zA-ZñÑáéíóúÁÉÍÓÚ ]+$/i']);
                     if($validar_Productos->fails()) {
-                        return redirect("/afiliados/general")->with("no-validacion", "");
+                        return redirect("/afiliados/empresas")->with("no-validacion", "");
                     }
                 }
                 if (!empty($datos["fecha_afiliacion"])) {
                     $validar_Fecha_Afiliacion = \Validator::make($datos,["fecha_afiliacion" => 'required|regex:/^[-\\_\\:\\.\\0-9 ]+$/i']);
                     if($validar_Fecha_Afiliacion->fails()) {
-                        return redirect("/afiliados/general")->with("no-validacion", "");
+                        return redirect("/afiliados/empresas")->with("no-validacion", "");
                     }
                 }
 
@@ -450,7 +455,7 @@ class EmpresasController extends Controller
                         $ruta_carta_bienvenida = "vistas/documentos/afiliados/empresas/carta_bienvenida/".$aleatorio_carta_bienvenida.".".$datos["carta_bienvenida"]->guessExtension();
                         move_uploaded_file($datos["carta_bienvenida"], $ruta_carta_bienvenida);
                     } else {
-                        return redirect("/afiliados/general")->with("no-pdf", "");
+                        return redirect("/afiliados/empresas")->with("no-pdf", "");
                     }
                 } else {
                     $ruta_carta_bienvenida = "";
@@ -462,7 +467,7 @@ class EmpresasController extends Controller
                         $ruta_acta_compromiso = "vistas/documentos/afiliados/empresas/acta_compromiso/".$aleatorio_acta_compromiso.".".$datos["acta_compromiso"]->guessExtension();
                         move_uploaded_file($datos["acta_compromiso"], $ruta_acta_compromiso);
                     } else {
-                        return redirect("/afiliados/general")->with("no-pdf", "");
+                        return redirect("/afiliados/empresas")->with("no-pdf", "");
                     }
                 } else {
                     $ruta_acta_compromiso = "";
@@ -474,7 +479,7 @@ class EmpresasController extends Controller
                         $ruta_estudio_afiliacion = "vistas/documentos/afiliados/empresas/estudio_afiliacion/".$aleatorio_estudio_afiliacion.".".$datos["estudio_afiliacion"]->guessExtension();
                         move_uploaded_file($datos["estudio_afiliacion"], $ruta_estudio_afiliacion);
                     } else {
-                        return redirect("/afiliados/general")->with("no-pdf", "");
+                        return redirect("/afiliados/empresas")->with("no-pdf", "");
                     }
                 } else {
                     $ruta_estudio_afiliacion = "";
@@ -486,7 +491,7 @@ class EmpresasController extends Controller
                         $ruta_rut = "vistas/documentos/afiliados/empresas/rut/".$aleatorio_rut.".".$datos["rut"]->guessExtension();
                         move_uploaded_file($datos["rut"], $ruta_rut);
                     } else {
-                        return redirect("/afiliados/general")->with("no-pdf", "");
+                        return redirect("/afiliados/empresas")->with("no-pdf", "");
                     }
                 } else {
                     $ruta_rut = "";
@@ -498,7 +503,7 @@ class EmpresasController extends Controller
                         $ruta_camara_comercio = "vistas/documentos/afiliados/empresas/camara_comercio/".$aleatorio_camara_comercio.".".$datos["camara_comercio"]->guessExtension();
                         move_uploaded_file($datos["camara_comercio"], $ruta_camara_comercio);
                     } else {
-                        return redirect("/afiliados/general")->with("no-pdf", "");
+                        return redirect("/afiliados/empresas")->with("no-pdf", "");
                     }
                 } else {
                     $ruta_camara_comercio = "";
@@ -510,7 +515,7 @@ class EmpresasController extends Controller
                         $ruta_fechas_birthday = "vistas/documentos/afiliados/empresas/fechas_birthday/".$aleatorio_fechas_birthday.".".$datos["fechas_birthday"]->guessExtension();
                         move_uploaded_file($datos["fechas_birthday"], $ruta_fechas_birthday);
                     } else {
-                        return redirect("/afiliados/general")->with("no-pdf", "");
+                        return redirect("/afiliados/empresas")->with("no-pdf", "");
                     }
                 } else {
                     $ruta_fechas_birthday = "";
@@ -518,14 +523,13 @@ class EmpresasController extends Controller
 
                 if($validar->fails()){
 
-                    return redirect("/afiliados/general")->with("no-validacion", "");
+                    return redirect("/afiliados/empresas")->with("no-validacion", "");
 
                 } else {
                     $empresa = new EmpresasModel();
 
                     $empresa->nit_empresa = $datos["nit"];
                     $empresa->razon_social = $datos["razon_social"];
-                    $empresa->cc_rprt_legal = $datos["cedula"];
                     $empresa->num_empleados = $datos["num_empleados"];
                     $empresa->direccion_empresa = $datos["direccion"];
                     $empresa->telefono_empresa = $datos["telefono"];
@@ -546,12 +550,12 @@ class EmpresasController extends Controller
 
                     $empresa->save();
 
-                    return redirect("/afiliados/general")->with("ok-crear", "");
+                    return redirect("/afiliados/consultarEmpresas")->with("ok-crear", "");
                 }
 
             } else {
 
-                return redirect("/afiliados/general")->with("error", "");
+                return redirect("/afiliados/consultarEmpresas")->with("error", "");
 
             }
         }

@@ -1089,10 +1089,15 @@ $(document).on("click", ".eliminarInteresado", function () {
 ======================================================*/
 
 $(document).on("click", ".crearAfiliado", function () {
-
+    var id_empresa = $(this).attr("id_empresa");
+    var nit = $(this).attr("nit");
+    var razon_social = $(this).attr("razon_social");
     document.getElementById("ingresarAfiliado").style.visibility = "";
-    $(this).parent().parent().parent().parent().parent().remove();
+    $(this).parent().parent().parent().parent().parent().parent().parent().parent().parent().parent().remove();
     document.getElementById("tarjetaIngresarAfiliado").classList.remove("collapsed-card");
+    $("#id-empresa").val(id_empresa);
+    $("#nit_empresa").val(nit);
+    $("#razon_social").val(razon_social);
 })
 
 /*=====  End of Mostrar agregar nuevo afiliado  ======*/

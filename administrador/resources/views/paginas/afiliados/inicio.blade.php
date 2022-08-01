@@ -30,22 +30,22 @@
 				</div>
 				<div class="card-body">
 					<div class="row">
+                        <div class="col-md-3 col-sm-6 col-12">
+							<a href="{{ url('afiliados/consultarEmpresas') }}">
+								<div class="info-box shadow">
+									<span class="info-box-icon bg-primary"><i class="fas fa-store-alt"></i></span>
+									<div class="info-box-content">
+										<span class="info-box-number">Consultar empresas</span>
+									</div>
+								</div>
+							</a>
+						</div>
 						<div class="col-md-3 col-sm-6 col-12">
 							<a href="{{ url('afiliados/general') }}">
 								<div class="info-box shadow">
 									<span class="info-box-icon bg-primary"><i class="fas fa-id-card-alt"></i></span>
 									<div class="info-box-content">
 										<span class="info-box-number">Consultar afiliados</span>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-md-3 col-sm-6 col-12">
-							<a href="{{ url('afiliados/consultarEmpresas') }}">
-								<div class="info-box shadow">
-									<span class="info-box-icon bg-primary"><i class="fas fa-store-alt"></i></span>
-									<div class="info-box-content">
-										<span class="info-box-number">Consultar empresas</span>
 									</div>
 								</div>
 							</a>
