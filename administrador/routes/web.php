@@ -117,6 +117,7 @@ Route::resource('/afiliados/afiliadosEmpleadosEmpresa', 'EmpresasController');
 /*----------  Pagos  ----------*/
 Route::resource('/pagos/general', 'PagosController');
 Route::resource('/pagos/parametros', 'ParametrosPagosController');
+Route::resource('/pagos/ingresar', 'PagosController');
 
 /*----------  Eventos  ----------*/
 Route::resource('/eventos/general', 'EventosController');

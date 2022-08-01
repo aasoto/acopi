@@ -67,7 +67,7 @@ class EmpresasController extends Controller
             }
 
 
-            return view("paginas.afiliados.empresasInactivas");
+            return view("paginas.afiliados.empresasInactivas", array("paginaweb"=>$paginaweb));
         }*/
 
         if (url()->current() == ($web["servidor"]."afiliados/afiliadosEmpleados")) {
@@ -106,7 +106,7 @@ class EmpresasController extends Controller
                         $procedimientos = '
                         <div class="btn-group">
 
-                            <a href="'.url()->current().'" title="Editar" class="btn btn-warning btn-sm editarAfiliado">
+                            <a href="'.url()->current().'/'.$data->id_empleado_afiliado.'" title="Editar" class="btn btn-warning btn-sm editarAfiliado">
                                 <i class="fas fa-pencil-alt text-white"></i>
                             <a>
                             <button class="btn btn-danger btn-sm eliminarAfiliado" title="Eliminar" action="'.url()->current().'" method="DELETE" foto="" cedula="" pagina="afiliados/general" token="'.csrf_token().'">
@@ -125,8 +125,8 @@ class EmpresasController extends Controller
                     return $procedimientos;
                 })
 
-                  ->rawColumns(['tipo_documento', 'nombre', 'procedimientos'])
-                  -> make(true);
+                ->rawColumns(['tipo_documento', 'nombre', 'procedimientos'])
+                -> make(true);
 
             }
 
@@ -134,75 +134,76 @@ class EmpresasController extends Controller
             return view("paginas.afiliados.afiliadosEmpleados", array("empleados"=>$empleados));
         }
 
-        $sector_empresa = SectorEmpresaModel::all();
-        $municipios = MunicipiosModel::all();
+        if (url()->current() == ($web["servidor"]."afiliados/consultarEmpresas")) {
+            $sector_empresa = SectorEmpresaModel::all();
+            $municipios = MunicipiosModel::all();
 
-        $join = DB::table('representante_empresa')->join('empresas','representante_empresa.cc_rprt_legal','=','empresas.cc_rprt_legal')->select('representante_empresa.*','empresas.*')->get();
-        if (request()->ajax()) {
-            return datatables()->of($join)
-            ->addColumn('telefonos', function($data){
+            $join = DB::table('representante_empresa')->join('empresas','representante_empresa.cc_rprt_legal','=','empresas.cc_rprt_legal')->select('representante_empresa.*','empresas.*')->get();
+            if (request()->ajax()) {
+                return datatables()->of($join)
+                ->addColumn('telefonos', function($data){
 
-                    $paginaweb = PaginaWebModel::all();
-                    foreach ($paginaweb as $key => $web) {}
+                        $paginaweb = PaginaWebModel::all();
+                        foreach ($paginaweb as $key => $web) {}
 
-                    $representante = $data->primer_apellido." ".$data->segundo_apellido." ".$data->primer_nombre." ".$data->segundo_nombre;
-                    $ciudad = MunicipiosModel::where("abreviatura", $data->ciudad_empresa)->get();
-                    if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial')) {
-                        $telefonos = "<div class='btn-group'>
-                            <a type='button' title='Ver más' class='btn btn-primary btn-sm' data-toggle='dropdown'>
-                                <i class='fas fa-eye'></i>
-                            </a>
-                            <div class='dropdown-menu col-md-12' role='menu'>
-                                <a nit='".$data->nit_empresa."' razon_social='".$data->razon_social."' representante='".$representante."' num_empleados='".$data->num_empleados."' direccion='".$data->direccion_empresa."' telefono='".$data->telefono_empresa."' fax='".$data->fax_empresa."' celular='".$data->celular_empresa."' email='".$data->email_empresa."' id_sector='".$data->id_sector_empresa."' productos='".$data->productos_empresa."' ciudad='".$ciudad[0]["nombre"]."' estado_afiliacion='".$data->estado_afiliacion_empresa."' numero_pagos_atrasados='".$data->numero_pagos_atrasados."' fecha_afiliacion='".$data->fecha_afiliacion_empresa."' title='Ver más' id='verMasEmpresa' name='verMasEmpresa' class='dropdown-item verMasEmpresa'>Ver información de empresa</a>
-                                <div class='dropdown-divider'></div>
-                                <a href='".$web["servidor"]."afiliados/afiliadosEmpleadosEmpresa/".$data->id_empresa."' class='dropdown-item'>Ver información empleados</a>
-                            </div>
-                            <button title='Agregar empleado' class='btn btn-success btn-sm agregarEmpleado' id_empresa='".$data->id_empresa."' nit_empresa='".$data->nit_empresa."' razon_social='".$data->razon_social."' data-toggle='modal' data-target='#nuevoEmpleado'>
-                                <i class='fas fa-user-plus text-white'></i>
-                            </button>
-                            <a href='".url()->current()."/".$data->id_empresa."' title='Editar datos empresa' class='btn btn-warning btn-sm'>
-                                <i class='fas fa-pencil-alt text-white'></i>
-                            </a>
+                        $representante = $data->primer_apellido." ".$data->segundo_apellido." ".$data->primer_nombre." ".$data->segundo_nombre;
+                        $ciudad = MunicipiosModel::where("abreviatura", $data->ciudad_empresa)->get();
+                        if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial')) {
+                            $telefonos = "<div class='btn-group'>
+                                <a type='button' title='Ver más' class='btn btn-primary btn-sm' data-toggle='dropdown'>
+                                    <i class='fas fa-eye'></i>
+                                </a>
+                                <div class='dropdown-menu col-md-12' role='menu'>
+                                    <a nit='".$data->nit_empresa."' razon_social='".$data->razon_social."' representante='".$representante."' num_empleados='".$data->num_empleados."' direccion='".$data->direccion_empresa."' telefono='".$data->telefono_empresa."' fax='".$data->fax_empresa."' celular='".$data->celular_empresa."' email='".$data->email_empresa."' id_sector='".$data->id_sector_empresa."' productos='".$data->productos_empresa."' ciudad='".$ciudad[0]["nombre"]."' estado_afiliacion='".$data->estado_afiliacion_empresa."' numero_pagos_atrasados='".$data->numero_pagos_atrasados."' fecha_afiliacion='".$data->fecha_afiliacion_empresa."' title='Ver más' id='verMasEmpresa' name='verMasEmpresa' class='dropdown-item verMasEmpresa'>Ver información de empresa</a>
+                                    <div class='dropdown-divider'></div>
+                                    <a href='".$web["servidor"]."afiliados/afiliadosEmpleadosEmpresa/".$data->id_empresa."' class='dropdown-item'>Ver información empleados</a>
+                                </div>
+                                <button title='Agregar empleado' class='btn btn-success btn-sm agregarEmpleado' id_empresa='".$data->id_empresa."' nit_empresa='".$data->nit_empresa."' razon_social='".$data->razon_social."' data-toggle='modal' data-target='#nuevoEmpleado'>
+                                    <i class='fas fa-user-plus text-white'></i>
+                                </button>
+                                <a href='".url()->current()."/".$data->id_empresa."' title='Editar datos empresa' class='btn btn-warning btn-sm'>
+                                    <i class='fas fa-pencil-alt text-white'></i>
+                                </a>
 
-                            <button class='btn btn-danger btn-sm eliminarEmpresa' title='Eliminar empresa' action='".url()->current()."/".$data->id_empresa."' carta_bienvenida='".$data->carta_bienvenida."' acta_compromiso='".$data->acta_compromiso."' estudio_afiliacion='".$data->estudio_afiliacion."' rut='".$data->rut."' camara_comercio='".$data->camara_comercio."' fechas_birthday='".$data->fechas_birthday."'  method='DELETE' pagina='afiliados/consultarEmpresas' token='".csrf_token()."'>
-                            <i class='fas fa-trash-alt'></i>
-                            </button>
+                                <button class='btn btn-danger btn-sm eliminarEmpresa' title='Eliminar empresa' action='".url()->current()."/".$data->id_empresa."' carta_bienvenida='".$data->carta_bienvenida."' acta_compromiso='".$data->acta_compromiso."' estudio_afiliacion='".$data->estudio_afiliacion."' rut='".$data->rut."' camara_comercio='".$data->camara_comercio."' fechas_birthday='".$data->fechas_birthday."'  method='DELETE' pagina='afiliados/consultarEmpresas' token='".csrf_token()."'>
+                                    <i class='fas fa-trash-alt'></i>
+                                </button>
 
-                        </div>";
-                    } else {
-                        $telefonos = "<div class='btn-group'>
-                            <a type='button' title='Ver más' class='btn btn-primary btn-sm' data-toggle='dropdown'>
-                                <i class='fas fa-eye'></i>
-                            </a>
-                            <div class='dropdown-menu col-md-12' role='menu'>
-                                <a nit='".$data->nit_empresa."' razon_social='".$data->razon_social."' representante='".$representante."' num_empleados='".$data->num_empleados."' direccion='".$data->direccion_empresa."' telefono='".$data->telefono_empresa."' fax='".$data->fax_empresa."' celular='".$data->celular_empresa."' email='".$data->email_empresa."' id_sector='".$data->id_sector_empresa."' productos='".$data->productos_empresa."' ciudad='".$ciudad[0]["nombre"]."' estado_afiliacion='".$data->estado_afiliacion_empresa."' numero_pagos_atrasados='".$data->numero_pagos_atrasados."' fecha_afiliacion='".$data->fecha_afiliacion_empresa."' title='Ver más' id='verMasEmpresa' name='verMasEmpresa' class='dropdown-item verMasEmpresa'>Ver información de empresa</a>
-                                <div class='dropdown-divider'></div>
-                                <a href='".$web["servidor"]."afiliados/afiliadosEmpleadosEmpresa/".$data->id_empresa."' class='dropdown-item'>Ver información empleados</a>
-                            </div>
-                        </div>";
-                    }
+                            </div>";
+                        } else {
+                            $telefonos = "<div class='btn-group'>
+                                <a type='button' title='Ver más' class='btn btn-primary btn-sm' data-toggle='dropdown'>
+                                    <i class='fas fa-eye'></i>
+                                </a>
+                                <div class='dropdown-menu col-md-12' role='menu'>
+                                    <a nit='".$data->nit_empresa."' razon_social='".$data->razon_social."' representante='".$representante."' num_empleados='".$data->num_empleados."' direccion='".$data->direccion_empresa."' telefono='".$data->telefono_empresa."' fax='".$data->fax_empresa."' celular='".$data->celular_empresa."' email='".$data->email_empresa."' id_sector='".$data->id_sector_empresa."' productos='".$data->productos_empresa."' ciudad='".$ciudad[0]["nombre"]."' estado_afiliacion='".$data->estado_afiliacion_empresa."' numero_pagos_atrasados='".$data->numero_pagos_atrasados."' fecha_afiliacion='".$data->fecha_afiliacion_empresa."' title='Ver más' id='verMasEmpresa' name='verMasEmpresa' class='dropdown-item verMasEmpresa'>Ver información de empresa</a>
+                                    <div class='dropdown-divider'></div>
+                                    <a href='".$web["servidor"]."afiliados/afiliadosEmpleadosEmpresa/".$data->id_empresa."' class='dropdown-item'>Ver información empleados</a>
+                                </div>
+                            </div>";
+                        }
 
 
-                return $telefonos;
-            })
-             ->addColumn('representante', function($data){
-                    $representante = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre;
+                    return $telefonos;
+                })
+                ->addColumn('representante', function($data){
+                        $representante = $data->primer_apellido.' '.$data->segundo_apellido.' '.$data->primer_nombre.' '.$data->segundo_nombre;
 
-                return $representante;
-            })
-            ->addColumn('acciones', function($data){
-                    $botones = $data->telefono_empresa.' - '.$data->celular_empresa;
+                    return $representante;
+                })
+                ->addColumn('acciones', function($data){
+                        $botones = $data->telefono_empresa.' - '.$data->celular_empresa;
 
-                return $botones;
-            })
+                    return $botones;
+                })
 
-            ->rawColumns(['telefonos'],['representante'],['acciones'])
-            -> make(true);
+                ->rawColumns(['telefonos'],['representante'],['acciones'])
+                -> make(true);
 
+            }
+            return view("paginas.afiliados.consultarEmpresas", array("sector_empresa"=>$sector_empresa, "municipios"=>$municipios, "paginaweb"=>$paginaweb));
         }
 
-
-		return view("paginas.afiliados.consultarEmpresas", array("sector_empresa"=>$sector_empresa, "municipios"=>$municipios, "paginaweb"=>$paginaweb));
 	}
 
 	public function show($id){
@@ -221,6 +222,7 @@ class EmpresasController extends Controller
         }
 
         if (url()->current() == ($web["servidor"]."afiliados/birthday/".$id)) {
+
             $fecha_birthday = date("m-d", strtotime($id));
 
             //$sql="SELECT * FROM empleados_afiliados WHERE fecha_nacimiento LIKE '%".$fecha_birthday."%'";
@@ -244,7 +246,7 @@ class EmpresasController extends Controller
             $empresa = EmpresasModel::where("cc_rprt_legal", $afiliado[0]["cc_rprt_legal"])->get();
 
             if (count($empresa) != 0) {
-
+                print_r("segunda");
                 $empresa_existe = "si";
                 if (count($afiliado) != 0) {
                     return view("paginas.afiliados.empresas", array("status"=>200, "afiliado"=>$afiliado, "sectores"=>$sectores, "municipios"=>$municipios, "empresa_existe"=>$empresa_existe));
@@ -253,6 +255,7 @@ class EmpresasController extends Controller
                 }
 
             } else {
+                print_r("primera");
                 if (count($afiliado) != 0) {
                     return view("paginas.afiliados.empresas", array("status"=>200, "afiliado"=>$afiliado, "sectores"=>$sectores, "municipios"=>$municipios));
                 } else {
@@ -611,7 +614,7 @@ class EmpresasController extends Controller
             'camara_comercio' => $request->file("camara_comercio"),
             'fechas_birthday' => $request->file("fechas_birthday")
         );
-
+        //print_r($datos);
         if(!empty($datos)) {
             $validar = \Validator::make($datos,[
                 "cedula"=> "required|regex:/^[0-9]+$/i",

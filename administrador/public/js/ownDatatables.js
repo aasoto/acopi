@@ -8,7 +8,7 @@ var tablaUsuarios = $("#tablaUsuarios").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/usuarios/consultarUser"		
+  		url: ruta+"/usuarios/consultarUser"
   	},
 
   	"columnDefs":[{
@@ -122,7 +122,7 @@ var tablaNoticias = $("#tablaNoticias").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/pagina_web/consultarNoticia"		
+  		url: ruta+"/pagina_web/consultarNoticia"
   	},
 
   	"columnDefs":[{
@@ -225,7 +225,7 @@ var tablaEntrevistas = $("#tablaEntrevistas").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/pagina_web/entrevistas"		
+  		url: ruta+"/pagina_web/entrevistas"
   	},
 
   	"columnDefs":[{
@@ -320,7 +320,7 @@ var tablaInteresados = $("#tablaInteresados").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/pagina_web/interesados"		
+  		url: ruta+"/pagina_web/interesados"
   	},
 
   	"columnDefs":[{
@@ -405,7 +405,7 @@ var tablaAfiliados = $("#tablaAfiliados").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/afiliados/general"		
+  		url: ruta+"/afiliados/general"
   	},
 
   	"columnDefs":[{
@@ -481,19 +481,19 @@ tablaAfiliados.on('order.dt search.dt', function(){
 
 $(function () {
 	$("#example1").DataTable({
-		
+
 	      "responsive": true, "lengthChange": false, "autoWidth": false,
 	      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
 	    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
 
 	$("#tablaExportarEmpresas").DataTable({
-		
+
 	      "responsive": true, "lengthChange": false, "autoWidth": false,
 	      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
 	    }).buttons().container().appendTo('#tablaExportarEmpresas_wrapper .col-md-6:eq(0)');
 
 	$("#tablaBirthdayAfiliadosEmpleados").DataTable({
-		
+
 	      "responsive": true, "lengthChange": false, "autoWidth": false,
 	      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
 	    }).buttons().container().appendTo('#tablaBirthdayAfiliadosEmpleados_wrapper .col-md-6:eq(0)');
@@ -512,7 +512,7 @@ var tablaEmpresas = $("#tablaEmpresas").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/afiliados/consultarEmpresas"		
+  		url: ruta+"/afiliados/consultarEmpresas"
   	},
 
   	"columnDefs":[{
@@ -601,7 +601,7 @@ var tablaAfiliadosEmpleados = $("#tablaAfiliadosEmpleados").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/afiliados/afiliadosEmpleados"		
+  		url: ruta+"/afiliados/afiliadosEmpleados"
   	},
 
   	"columnDefs":[{
@@ -689,7 +689,7 @@ var tablaPagos = $("#tablaPagos").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/pagos/general"		
+  		url: ruta+"/pagos/general"
   	},
 
   	"columnDefs":[{
@@ -704,10 +704,6 @@ var tablaPagos = $("#tablaPagos").DataTable({
 	  	{
 	    	data: 'id',
 	    	name: 'id'
-	  	},
-	  	{
-	  		data: 'codigo_recibo',
-	    	name: 'codigo_recibo'
 	  	},
 	  	{
 	  		data: 'representante',
@@ -733,6 +729,10 @@ var tablaPagos = $("#tablaPagos").DataTable({
 	  		data: 'valor_mes',
 	    	name: 'valor_mes'
 	  	},
+        {
+            data: 'valor_abono',
+            name: 'valor_abono'
+        },
 	  	{
 	  		data: 'valor_recibo',
 	    	name: 'valor_recibo'
@@ -789,47 +789,85 @@ tablaPagos.on('order.dt search.dt', function(){
 =            Datatable Empresas inactivas            =
 ====================================================*/
 
-var tablaEmpresasInactivas = $("#tablaEmpresasInactivas").DataTable({
-	processing: true,
-  	serverSide: true,
+var tableEmpresasInactivas = $("#tableEmpresasInactivas").DataTable({
 
-  	ajax:{
-  		url: ruta+"/afiliados/empresasInactivas"		
-  	},
+    "columnDefs":[{
+        "searchable": true,
+        "orderable": true,
+        "targets": 0
+    }],
+    "responsive": true, "lengthChange": true, "autoWidth": false,
+	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+	"language": {
 
-  	"columnDefs":[{
-  		"searchable": true,
-  		"orderable": true,
-  		"targets": 0
-  	}],
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		},
+	    "oAria": {
+            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+	}
+});
+tableEmpresasInactivas.on('order.dt search.dt', function(){
+	tableEmpresasInactivas.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+}).draw();
+/*var tableEmpresasInactivas = $("#tableEmpresasInactivas").DataTable({
+    processing: true,
+    serverSide: true,
 
-  	"order":[[0, "desc"]],
+    ajax:{
+        url: ruta+"/afiliados/empresasInactivas"
+    },
 
-  	columns: [
-	  	{
-	    	data: 'id_empresa',
-	    	name: 'id_empresa'
-	  	},
-	  	{
-	  		data: 'nit_empresa',
-	    	name: 'nit_empresa'
-	  	},
-	  	{
-	  		data: 'razon_social',
-	    	name: 'razon_social'
-	  	},
-	  	{
-	  		data: 'representante',
-	    	name: 'representante'
-	  	},
-	  	{
-	  		data: 'telefonos',
-	    	name: 'telefonos'
-	  	},
-	  	{
-	  		data: 'procedimientos',
-	    	name: 'procedimientos'
-	  	}
+    "columnDefs":[{
+        "searchable": true,
+        "orderable": true,
+        "targets": 0
+    }],
+
+    "order":[[0, "desc"]],
+
+    columns: [
+        {
+            data: 'id_empresa',
+            name: 'id_empresa'
+        },
+        {
+            data: 'nit_empresa',
+            name: 'nit_empresa'
+        },
+        {
+            data: 'razon_social',
+            name: 'razon_social'
+        },
+        {
+            data: 'representante',
+            name: 'representante'
+        },
+        {
+            data: 'telefonos',
+            name: 'telefonos'
+        },
+        {
+            data: 'procedimientos',
+            name: 'procedimientos'
+        }
 
 	],
 	"responsive": true, "lengthChange": true, "autoWidth": false,
@@ -855,18 +893,18 @@ var tablaEmpresasInactivas = $("#tablaEmpresasInactivas").DataTable({
 			"sPrevious": "Anterior"
 		},
 	    "oAria": {
-	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
-	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
 	    }
 	}
 });
 
-tablaEmpresasInactivas.on('order.dt search.dt', function(){
+tableEmpresasInactivas.on('order.dt search.dt', function(){
 
-	tablaEmpresasInactivas.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+	tableEmpresasInactivas.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
 
 
-}).draw();
+}).draw();*/
 
 /*=====  End of Datatable Empresas inactivas  ======*/
 
@@ -879,7 +917,7 @@ var tablaMunicipios = $("#tablaMunicipios").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/afiliados/municipios"		
+  		url: ruta+"/afiliados/municipios"
   	},
 
   	"columnDefs":[{
@@ -954,7 +992,7 @@ var tablaSectoresEmpresas = $("#tablaSectoresEmpresas").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/afiliados/sectorempresas"		
+  		url: ruta+"/afiliados/sectorempresas"
   	},
 
   	"columnDefs":[{
@@ -1034,7 +1072,7 @@ var tablaAgendarCita = $("#tablaAgendarCita").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/citas/general"		
+  		url: ruta+"/citas/general"
   	},
 
   	"columnDefs":[{
@@ -1119,7 +1157,7 @@ var tablaEmpleados = $("#tablaEmpleados").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/empleados/general"		
+  		url: ruta+"/empleados/general"
   	},
 
   	"columnDefs":[{
@@ -1212,7 +1250,7 @@ var tablaDocumentacionEmpresas = $("#tablaDocumentacionEmpresas").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/documentos/empresas"		
+  		url: ruta+"/documentos/empresas"
   	},
 
   	"columnDefs":[{
@@ -1297,7 +1335,7 @@ var tablaDocumentacionEmpleados = $("#tablaDocumentacionEmpleados").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/documentos/empleados"		
+  		url: ruta+"/documentos/empleados"
   	},
 
   	"columnDefs":[{
@@ -1378,7 +1416,7 @@ var tablaEmpleadosUsuario = $("#tablaEmpleadosUsuario").DataTable({
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/usuarios/agregarUser"		
+  		url: ruta+"/usuarios/agregarUser"
   	},
 
   	"columnDefs":[{
@@ -1460,7 +1498,7 @@ tablaEmpleadosUsuario.on('order.dt search.dt', function(){
   	serverSide: true,
 
   	ajax:{
-  		url: ruta+"/afiliados/general"		
+  		url: ruta+"/afiliados/general"
   	},
 
   	"columnDefs":[{
@@ -1571,3 +1609,86 @@ tablaAfiliados.on('order.dt search.dt', function(){
 
 /*=====  End of Datatable Afiliados  =*/
 
+
+var tablaPagosEmpresas = $("#tablaPagosEmpresas").DataTable({
+	processing: true,
+  	serverSide: true,
+
+  	ajax:{
+  		url: ruta+"/pagos/ingresar"
+  	},
+
+  	"columnDefs":[{
+  		"searchable": true,
+  		"orderable": true,
+  		"targets": 0
+  	}],
+
+  	"order":[[0, "desc"]],
+
+  	columns: [
+	  	{
+	    	data: 'id_empresa',
+	    	name: 'id_empresa'
+	  	},
+	  	{
+	  		data: 'nit_empresa',
+	    	name: 'nit_empresa'
+	  	},
+	  	{
+	  		data: 'razon_social',
+	    	name: 'razon_social'
+	  	},
+	  	{
+	  		data: 'cc_rprt_legal',
+	    	name: 'cc_rprt_legal'
+	  	},
+	  	{
+	  		data: 'afiliado',
+	    	name: 'afiliado'
+	  	},
+        {
+            data: 'estado_afiliacion_empresa',
+            name: 'estado_afiliacion_empresa'
+        },
+	  	{
+	  		data: 'procedimiento',
+	    	name: 'procedimiento'
+	  	}
+
+	],
+	"responsive": true, "lengthChange": true, "autoWidth": false,
+	"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+	"language": {
+
+		"sProcessing": "Procesando...",
+		"sLengthMenu": "Mostrar _MENU_ registros",
+		"sZeroRecords": "No se encontraron resultados",
+		"sEmptyTable": "Ningún dato disponible en esta tabla",
+		"sInfo": "Mostrando registros del _START_ al _END_",
+		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfoPostFix": "",
+		"sSearch": "Buscar:",
+		"sUrl": "",
+		"sInfoThousands": ",",
+		"sLoadingRecords": "Cargando...",
+		"oPaginate": {
+			"sFirst": "Primero",
+			"sLast": "Último",
+			"sNext": "Siguiente",
+			"sPrevious": "Anterior"
+		},
+	    "oAria": {
+	      "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+	      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	    }
+	}
+});
+
+tablaPagosEmpresas.on('order.dt search.dt', function(){
+
+	tablaPagosEmpresas.column(0, {search:'applied', order:'applied'}).nodes().each(function(cell, i){ cell.innerHTML = i+1})
+
+
+}).draw();

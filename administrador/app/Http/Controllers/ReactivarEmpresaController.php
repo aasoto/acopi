@@ -13,7 +13,10 @@ class ReactivarEmpresaController extends Controller
 
 	public function index() {
         $join = DB::table('representante_empresa')->join('empresas','representante_empresa.cc_rprt_legal','=','empresas.cc_rprt_legal')->select('representante_empresa.*','empresas.*')->where("estado_afiliacion_empresa", "inactiva")->get();
-        if(request()->ajax()){
+        $empresas = json_decode(json_encode($join),TRUE);
+        /*echo '<pre>'; print_r($join); echo '</pre>';
+        return;*/
+        /*if(request()->ajax()){
 
             return datatables()->of($join)
 
@@ -54,24 +57,26 @@ class ReactivarEmpresaController extends Controller
                     ';
                 }
 
-
                 return $procedimientos;
 
             })
-            ->rawColumns(['representante','telefonos','procedimientos'])
+            ->rawColumns(['representante', 'telefonos', 'procedimientos'])
             ->make(true);
 
-        }
+        }*/
 
 
-        return view("paginas.afiliados.empresasInactivas");
+        return view("paginas.afiliados.empresasInactivas", array("empresas" => $empresas));
 
 	}
 
 	public function show($id){
+        $join = DB::table('representante_empresa')->join('empresas','representante_empresa.cc_rprt_legal','=','empresas.cc_rprt_legal')->select('representante_empresa.*','empresas.*')->where("estado_afiliacion_empresa", "inactiva")->get();
+        $empresas = json_decode(json_encode($join),TRUE);
+
 		$deuda = PagosModel::where("id_empresa", $id)->get();
         if (count($deuda) != 0) {
-            return view("paginas.afiliados.empresasInactivas", array("status"=>200, "deuda"=>$deuda));
+            return view("paginas.afiliados.empresasInactivas", array("status"=>200, "deuda"=>$deuda, "empresas"=>$empresas));
         } else {
             return view("paginas.afiliados.empresasInactivas", array("status"=>404));
         }

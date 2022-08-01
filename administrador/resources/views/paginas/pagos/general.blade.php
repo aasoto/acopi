@@ -32,9 +32,12 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="col-md-12 text-right">
-                                    <button class="btn btn-success col-md-6" data-toggle="modal" data-target="#generarPagos">
-                                        <i class="fas fa-user-plus"></i> Generar pagos de este mes
+                                <div class="col-md-12 text-center">
+                                    <a href="{{ url('pagos/ingresar') }}" class="btn btn-primary col-md-3">
+                                        <i class="fas fa-receipt"></i> Ingresar pago individual
+                                    </a>
+                                    <button class="btn btn-success col-md-3" data-toggle="modal" data-target="#generarPagos">
+                                        <i class="fas fa-receipt"></i> Generar pagos de este mes
                                     </button>
                                     <a href="{{ url('pagos/parametros') }}"
                                         title="Configurar parametros para generación de pagos" class="btn btn-default col-md-3">
@@ -46,13 +49,13 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Codigo</th>
                                             <th>Representante</th>
                                             <th>Empresa</th>
                                             <th>Mes</th>
                                             <th>Estado</th>
                                             <th>Valor deuda</th>
                                             <th>Valor mes</th>
+                                            <th>Valor abono</th>
                                             <th>Valor recibo</th>
                                             <th>Fecha limite</th>
                                             <th>Procedimientos</th>
@@ -63,13 +66,13 @@
                                     <tfoot>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Codigo</th>
                                             <th>Representante</th>
                                             <th>Empresa</th>
                                             <th>Mes</th>
                                             <th>Estado</th>
                                             <th>Valor deuda</th>
                                             <th>Valor mes</th>
+                                            <th>Valor recibo</th>
                                             <th>Valor recibo</th>
                                             <th>Fecha limite</th>
                                             <th>Procedimientos</th>
@@ -82,6 +85,50 @@
                         </div>
                     </div>
                 </section>
+            </div>
+            <div class="modal" id="ingresarPago">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <h4 class="modal-title">Generar recibo de pago individual</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <table id="tablaPagosEmpresas" class="table table-bordered table-striped dt-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Documento</th>
+                                        <th>Afiliado</th>
+                                        <th>NIT</th>
+                                        <th>Empresa</th>
+                                        <th>Estado</th>
+                                        <th>Procedimiento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Documento</th>
+                                        <th>Afiliado</th>
+                                        <th>NIT</th>
+                                        <th>Empresa</th>
+                                        <th>Estado</th>
+                                        <th>Procedimiento</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between">
+                            {{--<button type="button" class="btn btn-danger col-md-5" data-dismiss="modal"><i
+                                    class="fas fa-window-close"></i> Cerrar</button>
+                            <button type="submit" class="btn btn-success col-md-5"><i class="fas fa-save"></i>
+                                Generar</button>--}}
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal" id="generarPagos">
                 <div class="modal-dialog">

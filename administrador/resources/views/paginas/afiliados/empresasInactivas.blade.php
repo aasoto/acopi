@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table id="tablaEmpresasInactivas" class="table table-bordered table-striped dt-responsive">
+                        <table id="tableEmpresasInactivas" class="table table-bordered table-striped dt-responsive">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -46,6 +46,32 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @foreach ($empresas as $key => $value)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$value["nit_empresa"]}}</td>
+                                    <td>{{$value["razon_social"]}}</td>
+                                    <td>{{$value["primer_apellido"]." ".$value["segundo_apellido"]." ".$value["primer_nombre"]." ".$value["segundo_nombre"]}}</td>
+                                    <td>{{$value["telefono_empresa"]." - ".$value["celular_empresa"]}}</td>
+                                    <td>
+                                        @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector administrativo y financiero') || (Auth::user()->rol == 'Director ejecutivo'))
+                                        <div class="text-center">
+                                            <div class="btn-group">
+                                                <a href="{{url()->current().'/'.$value['id_empresa']}}" class="btn btn-warning btn-sm text-white">
+                                                    <i class="far fa-life-ring"></i> Rescatar
+                                                </a>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <div class="text-center">
+                                            <div class="btn-group">
+
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>

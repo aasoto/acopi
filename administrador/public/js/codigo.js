@@ -2008,6 +2008,100 @@ $(document).on("click", ".eliminarCita", function () {
 
 /*=====  End of Eliminar cita  ======*/
 
+/*=====================================
+=            Eliminar pago            =
+=====================================*/
+
+$(document).on("click", ".eliminarReciboPago", function () {
+
+    var action = $(this).attr("action");
+    var method = $(this).attr("method");
+    var pagina = $(this).attr("pagina");
+    var token = $(this).attr("token");
+
+
+    swal({
+        title: '¿Está seguro de eliminar este recibo de pago?',
+        text: "¡Si no lo está puede cancelar la acción!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Sí, eliminar recibo de pago!'
+    }).then(function (result) {
+
+        if (result.value) {
+
+            var datos = new FormData();
+            datos.append("_method", method);
+            datos.append("_token", token);
+
+            $.ajax({
+
+                url: action,
+                method: "POST",
+                data: datos,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (respuesta) {
+
+                    if (respuesta == "ok") {
+
+                        swal({
+                            type: "success",
+                            title: "¡El recibo de pago ha sido eliminado!",
+                            showConfirmButton: true,
+                            confirmButtonText: "Cerrar"
+
+                        }).then(function (result) {
+
+                            if (result.value) {
+
+                                window.location = ruta + '/' + pagina;
+
+                            }
+
+
+                        })
+
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus + " " + errorThrown);
+                }
+
+            })
+
+        }
+
+    })
+
+})
+
+/*=====  End of Eliminar pago  ======*/
+
+/*=====================================
+=            Eliminar pago            =
+=====================================*/
+
+$(document).on("click", ".infoReciboPendiente", function () {
+
+    swal({
+        type: "info",
+        title: 'Información',
+        text: "Para confirmar el pago de este recibo debe ir al módulo afiliados, sección consultar empresas, más opciones, empresas inactivas, buscar la empresa y click en rescatarla.",
+        showConfirmButton: true,
+        confirmButtonText: "Cerrar"
+
+    })
+
+})
+
+/*=====  End of Eliminar pago  ======*/
+
 /*=======================================================
 =            Ver ingresar empleado o pasante            =
 =======================================================*/
@@ -2308,6 +2402,28 @@ $(document).on("click", ".actualizarIndicadores", function () {
 })
 
 /*----------  End of Actualizar indicadores  ----------*/
+
+/*===============================================
+=            Ingresar recibo de pago            =
+===============================================*/
+
+$(document).on("click", ".ingresarRecibodePago", function () {
+
+    var nombre = $(this).attr("nombre");
+    var id_empresa = $(this).attr("id");
+    var nit = $(this).attr("nit");
+    var razon = $(this).attr("razon");
+
+    $("#id_empresa").val(id_empresa);
+    $("#nit").val(nit);
+    $("#razon_social").val(razon);
+    $("#afiliado").val(nombre);
+
+    $("#ingresarPago").modal("show");
+
+})
+
+/*=====  End of Modal Ingresar pago  ======*/
 
 /*=====================================
 =            LIMPIAR RUTAS            =
