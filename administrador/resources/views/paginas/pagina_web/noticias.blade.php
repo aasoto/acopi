@@ -1,7 +1,7 @@
 @extends('plantilla')
 
 @section('content')
-@endauth
+@auth
 @if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos'))
     <div class="content-wrapper" style="min-height: 243px;">
         <!-- Content Header (Page header) -->
@@ -40,6 +40,7 @@
                             </div>
                             <form action="{{url('/')}}/pagina_web/noticias" method="post" enctype="multipart/form-data">
                                 @csrf
+                                <input type="hidden" name="escenario" id="escenario" value="sistema">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -151,6 +152,5 @@
       });
     </script>
   @endif
-
 
   @endsection

@@ -593,6 +593,93 @@ $(document).on("click", ".eliminarRegistro", function () {
 
 })
 
+$(document).on("click", ".eliminarNoticia", function () {
+
+    var foto = $(this).attr("foto");
+
+    var action = $(this).attr("action");
+    var method = $(this).attr("method");
+    var pagina = $(this).attr("pagina");
+    //var token = $(this).children("[name='_token']").attr("value");
+    var token = $(this).attr("token");
+    var portada = $(this).attr("portada");
+
+
+    swal({
+        title: '¿Está seguro de eliminar esta noticia?',
+        text: "¡Si no lo está puede cancelar la acción!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Si, eliminar noticia!'
+    }).then(function (result) {
+
+        if (result.value) {
+            var datos = "portada="+portada;
+            $.ajax({
+                url: ruta+"/ajax/noticias.php",
+                method: "POST",
+                data: datos,
+
+            }).done(function(respuesta){
+                console.log("Hecho");
+            }).fail(function(){
+                console.log("Error");
+            }).always(function(){
+                console.log("Completado");
+            });
+
+            var datos = new FormData();
+            datos.append("_method", method);
+            datos.append("_token", token);
+
+            $.ajax({
+
+                url: action,
+                method: "POST",
+                data: datos,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (respuesta) {
+
+                    if (respuesta == "ok") {
+
+                        swal({
+                            type: "success",
+                            title: "¡La noticia ha sido eliminado!",
+                            showConfirmButton: true,
+                            confirmButtonText: "Cerrar"
+
+                        }).then(function (result) {
+
+                            if (result.value) {
+
+                                window.location = ruta + '/' + pagina;
+
+                            }
+
+
+                        })
+
+                    }
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error(textStatus + " " + errorThrown);
+                }
+
+            })
+
+        }
+
+    })
+
+})
+
+
 /*===========================================
 =            Eliminar entrevista            =
 ===========================================*/

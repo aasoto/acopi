@@ -35,7 +35,7 @@
         <form action="{{url('/')}}/pagina_web/carrusel/{{$element->id}}" method="post" enctype="multipart/form-data">
           @method('PUT')
           @csrf
-
+          <input type="hidden" id="escenario" name="escenario" value="sistema">
           @if (Auth::user()->rol == 'Administrador')
             <!--=============================================
             =            Sección Información General            =

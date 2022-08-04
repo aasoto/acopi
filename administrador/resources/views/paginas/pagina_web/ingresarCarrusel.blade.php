@@ -29,6 +29,7 @@
 				<input type="hidden" name="listaCarrusel" id="listaCarrusel" value="{{$element->carrusel}}">
           		<input type="hidden" name="eliminar" id="eliminar" value="no">
           		<input type="hidden" name="imagenExterna" id="imagenExterna" value="no">
+                <input type="hidden" name="escenario" id="escenario" value="sistema">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-12">

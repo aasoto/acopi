@@ -10,22 +10,22 @@ class ProductosController extends Controller
     /*===============================================================
 	=            Mostrar todos los registros en la tabla            =
 	===============================================================*/
-	
+
 	public function index(){
     	$paginaweb = PaginaWebModel::all();
 
     	return view("paginas.pagina_web.info.productos", array("paginaweb" => $paginaweb));
     }
-	
+
 	/*=====  End of Mostrar todos los registros en la tabla  ======*/
 
 	/*========================================================
 	=            Actualizar productos y servicios            =
 	========================================================*/
-	
+
 	public function update($id, Request $request){
-		
-		/*----------  Recibe variable eliminar y pregunta si hubo eliminación  ----------*/		
+
+		/*----------  Recibe variable eliminar y pregunta si hubo eliminación  ----------*/
 		$eliminar = array('eliminar' => $request->input("eliminar"));
 		if ($eliminar['eliminar'] == "si") {
 			$productos = array('listaProductos' => $request->input("listaProductos"));
@@ -49,16 +49,16 @@ class ProductosController extends Controller
 			if (!empty($nuevo_Num['num']) && !empty($nuevo_Nombre['nombre']) && !empty($nuevo_Descripcion['descripcion'])) {
 				$indice['indice'] = $indice['indice'] + 1; /*se incrementa la variable indice para llegar hasta el ultimo formulario*/
 			}
-			
+
 			/*----------  se obitienen los datos a actualizar del formulario  ----------*/
 			for ($i=0; $i <= $indice['indice']; $i++) {
 				${"num_".$i} = array('num-'.$i => $request->input("numero-".$i));
 				${"nombre_".$i} = array('nombre-'.$i => $request->input("nombre-".$i));
 				${"descripcion_".$i} = array('descripcion-'.$i => $request->input("descripcion-".$i));
 			}
-			
+
 			/*----------  se valida que todos lo campos estén llenos y sin caracteres no validos  ----------*/
-			
+
 			for ($i=0; $i <= $indice['indice']; $i++) {
 				if (!empty(${"num_".$i}["num-".$i])) {
 					${"validarNum_".$i} = \Validator::make(${"num_".$i}, [
@@ -100,11 +100,11 @@ class ProductosController extends Controller
 			$paginaweb = PaginaWebModel::where("id", $id)->update($actualizar);
 			return redirect("/pagina_web/info/productos")->with("ok-editar", "");
 		}
-		
+
 
 
 	}
-	
+
 	/*=====  End of Actualizar productos y servicios  ======*/
-	
+
 }

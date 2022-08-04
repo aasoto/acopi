@@ -10,18 +10,18 @@ class AliadosController extends Controller
 	/*===================================================
 	=            Mostrar todos los registros            =
 	===================================================*/
-	
+
 	public function index(){
     	$paginaweb = PaginaWebModel::all();
     	return view("paginas.pagina_web.aliados", array("paginaweb" => $paginaweb));
     }
-	
+
 	/*=====  End of Mostrar todos los registros  ======*/
 
 	/*==========================================
 	=            Actualizar aliados            =
 	==========================================*/
-	
+
 	public function update($id, Request $request) {
 		/*----------  Se recibe el valor de la variable Eliminar  ----------*/
 		$eliminar = array('eliminar' => $request->input("eliminar"));
@@ -33,7 +33,7 @@ class AliadosController extends Controller
 			$paginaweb = PaginaWebModel::where("id", $id)->update($actualizar);
 			return redirect("/pagina_web/aliados")->with("ok-editar", "");
 		}
-		
+
 
 		/*----------  se recoje el número todas de productos mostrados  ----------*/
 		$indice = array('indice' => $request->input("indice"));
@@ -63,7 +63,15 @@ class AliadosController extends Controller
 			${"logo_temporal_".$i} = array('logo-temporal-'.$i => $request->file("logo-".$i));
 		}
 
-		/*----------  se valida que todos lo campos estén llenos y sin caracteres no validos  ----------*/	
+        /*for ($i=0; $i <= $indice['indice']; $i++) {
+			print_r("nombre-".$i.": ".${"nombre_".$i}["nombre-".$i]);
+			print_r("link-".$i.": ".${"link_".$i}["link-".$i]);
+			print_r("logo_actual-".$i.": ".${"logo_actual_".$i}["logo-actual-".$i]);
+			print_r("logo-".$i.": ".${"logo_temporal_".$i}["logo-temporal-".$i]);
+		}
+        return;*/
+
+		/*----------  se valida que todos lo campos estén llenos y sin caracteres no validos  ----------*/
 		for ($i=0; $i <= $indice['indice']; $i++) {
 			if (!empty(${"nombre_".$i}["nombre-".$i])) {
 				${"validarNombre_".$i} = \Validator::make(${"nombre_".$i}, [
@@ -124,9 +132,9 @@ class AliadosController extends Controller
 		return redirect("/pagina_web/aliados")->with("ok-editar", "");
 
 	}
-	
+
 	/*=====  End of Actualizar aliados  ======*/
-	
-	
-	
+
+
+
 }

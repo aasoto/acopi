@@ -16,11 +16,11 @@ class NoticiasController extends Controller
 
     	return view("paginas.pagina_web.noticias", array("noticias" => $noticias, "categorias" => $categorias));
         /*if (request()->ajax()) {
-            return datatables()->of(NoticiasModel::all()) 
+            return datatables()->of(NoticiasModel::all())
             ->addColumn('acciones', function($data){
 
             $acciones = '<div class="btn-group">
-                                    
+
                             <a href="'.url()->current().'/'.$data->id.'" class="btn btn-warning btn-sm">
                                 <i class="fas fa-pencil-alt text-white"></i>
                             </a>
@@ -43,22 +43,25 @@ class NoticiasController extends Controller
         return view("paginas.pagina_web.noticias", array("noticias" => $noticias, "categorias" => $categorias));*/
     }
 
-    
+
 
     /*===========================================
     =            Crear nueva noticia            =
     ===========================================*/
-    
+
     public function store(Request $request){
 
     	// Regocer datos
-    	$datos = array( "titulo"=>$request->input("titulo"),
-    					"categoria"=>$request->input("categoria"),
-    					"descripcion"=>$request->input("descripcion"),
-    					"palabras_claves"=>$request->input("palabras_claves"),
-    					"ruta_noticia"=>$request->input("ruta"),
-    					"contenido_noticia"=>$request->input("contenido_noticia"),
-    					"portada_noticia"=>$request->file("portada_noticia"));
+    	$datos = array(
+            "escenario"=>$request->input("escenario"),
+            "titulo"=>$request->input("titulo"),
+            "categoria"=>$request->input("categoria"),
+            "descripcion"=>$request->input("descripcion"),
+            "palabras_claves"=>$request->input("palabras_claves"),
+            "ruta_noticia"=>$request->input("ruta"),
+            "contenido_noticia"=>$request->input("contenido_noticia"),
+            "portada_noticia"=>$request->file("portada_noticia")
+        );
 
     	// Validar datos
     	if(!empty($datos)){
@@ -86,41 +89,48 @@ class NoticiasController extends Controller
 
     			$ruta = "vistas/images/noticias/portada/".$aleatorio.".".$datos["portada_noticia"]->guessExtension();
 
-    			//Redimensionar Imágen
-
-                list($ancho, $alto) = getimagesize($datos["portada_noticia"]);
-
-                $nuevoAncho = 2000;
-                $nuevoAlto = 1333;
-
-                if(($datos["portada_noticia"]->guessExtension() == "jpeg") || ($datos["portada_noticia"]->guessExtension() == "jpg")){
-
-                    $origen = imagecreatefromjpeg($datos["portada_noticia"]);
-                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                    imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                    imagejpeg($destino, $ruta);
-
+                if ($datos["escenario"] == "prueba") {
+                    move_uploaded_file($datos["portada_noticia"], $ruta);
                 }
 
-                if($datos["portada_noticia"]->guessExtension() == "png"){
+                if ($datos["escenario"] == "sistema") {
+                    //Redimensionar Imágen
 
-                    $origen = imagecreatefrompng($datos["portada_noticia"]);
-                    $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
-                    imagealphablending($destino, FALSE); 
-                    imagesavealpha($destino, TRUE);
-                    imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
-                    imagepng($destino, $ruta);
-                    
+                    list($ancho, $alto) = getimagesize($datos["portada_noticia"]);
+
+                    $nuevoAncho = 2000;
+                    $nuevoAlto = 1333;
+
+                    if(($datos["portada_noticia"]->guessExtension() == "jpeg") || ($datos["portada_noticia"]->guessExtension() == "jpg")){
+
+                        $origen = imagecreatefromjpeg($datos["portada_noticia"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagecopyresized($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagejpeg($destino, $ruta);
+
+                    }
+
+                    if($datos["portada_noticia"]->guessExtension() == "png"){
+
+                        $origen = imagecreatefrompng($datos["portada_noticia"]);
+                        $destino = imagecreatetruecolor($nuevoAncho, $nuevoAlto);
+                        imagealphablending($destino, FALSE);
+                        imagesavealpha($destino, TRUE);
+                        imagecopyresampled($destino, $origen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+                        imagepng($destino, $ruta);
+
+                    }
                 }
+
 
                 // Mover todos los ficheros temporales de blog al destino final
-                /** 
+                /**
                  *
                  * en el substr el #19 son el número de caracteres que le restan a la ruta $origen para que pueda ajustarse a la ruta del $fichero.
                  *
                  */
-                
-                $origen = glob('vistas/images/temp/*'); 
+
+                $origen = glob('vistas/images/temp/*');
 
                 foreach($origen as $fichero){
 
@@ -140,9 +150,9 @@ class NoticiasController extends Controller
                 $noticias->portada_noticia = $ruta;
                 $noticias->contenido_noticia = str_replace('src="'.$paginaweb[0]["servidor"].'vistas/images/temp', 'src="'.$paginaweb[0]["servidor"].'vistas/images/noticias/contenido', $datos["contenido_noticia"]);
 
-                $noticias->save(); 
+                $noticias->save();
 
-                return redirect("/pagina_web/noticias")->with("ok-crear", "");   
+                return redirect("/pagina_web/noticias")->with("ok-crear", "");
 
 
     		}
@@ -155,8 +165,8 @@ class NoticiasController extends Controller
 
 
     }
-    
+
     /*=====  End of Crear nueva noticia  ======*/
-    
-    
+
+
 }

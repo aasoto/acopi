@@ -99,6 +99,7 @@
                         <form method="POST" action="{{url('/')}}/pagina_web/consultarNoticia/{{$value["id"]}}" enctype="multipart/form-data">
                             @method('PUT')
                             @csrf
+                            <input type="hidden" id="escenario" name="escenario" value="sistema">
                             <div class="modal-header bg-warning">
                                 <h4 class="modal-title">Editar Noticia</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
