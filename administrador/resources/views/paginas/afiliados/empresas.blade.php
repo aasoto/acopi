@@ -64,14 +64,14 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>NIT</label>
+                                                        <label>NIT<i style="color: red">*</i></label>
                                                         <input type="texto" class="form-control" name="nit"
                                                             required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Razón social</label>
+                                                        <label>Razón social<i style="color: red">*</i></label>
                                                         <input type="texto" class="form-control"
                                                             name="razon_social" required>
                                                     </div>
@@ -80,14 +80,14 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Número de empleados</label>
+                                                        <label>Número de empleados<i style="color: red">*</i></label>
                                                         <input type="number" class="form-control"
                                                             name="num_empleados" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Dirección</label>
+                                                        <label>Dirección<i style="color: red">*</i></label>
                                                         <input type="texto" class="form-control" name="direccion"
                                                             required>
                                                     </div>
@@ -96,7 +96,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Telefono</label>
+                                                        <label>Telefono<i style="color: red">*</i></label>
                                                         <input type="number" class="form-control" name="telefono"
                                                             required>
                                                     </div>
@@ -117,7 +117,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Correo electronico</label>
+                                                        <label>Correo electronico<i style="color: red">*</i></label>
                                                         <input type="email" class="form-control"
                                                             name="correo_electronico" required>
                                                     </div>
@@ -126,7 +126,7 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Sector empresa</label>
+                                                        <label>Sector empresa<i style="color: red">*</i></label>
                                                         <select class="form-control select2bs4"
                                                             name="sector_empresa" id="sector_empresa"
                                                             style="width: 100%;" required>

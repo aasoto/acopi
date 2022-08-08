@@ -130,7 +130,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Identificación afiliado</label>
+                                            <label>Identificación afiliado<i style="color: red">*</i></label>
                                             <input type="text" class="form-control" id="identificacion"
                                                 name="identificacion" readonly>
                                         </div>
@@ -142,19 +142,19 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Fecha</label>
+                                            <label>Fecha<i style="color: red">*</i></label>
                                             <input type="date" class="form-control" id="fecha" name="fecha"
                                                 required>
                                         </div>
                                         <div class="col-md-6">
-                                            <label>Hora</label>
+                                            <label>Hora<i style="color: red">*</i></label>
                                             <input type="time" class="form-control" id="hora" name="hora"
                                                 required>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Área</label>
+                                            <label>Área<i style="color: red">*</i></label>
                                             <select class="form-control" id="area" name="area" required>
                                                 <option value="">Seleccionar... </option>
                                                 @foreach ($roles as $key => $value)
@@ -193,30 +193,30 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Identificación</label>
+                                            <label>Identificación<i style="color: red">*</i></label>
                                             <input type="number" class="form-control" id="identificacion"
                                                 name="identificacion">
                                         </div>
                                         <div class="col-md-6">
-                                            <label>Nombres y apellidos</label>
+                                            <label>Nombres y apellidos<i style="color: red">*</i></label>
                                             <input type="text" class="form-control" id="nombres" name="nombres">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Fecha</label>
+                                            <label>Fecha<i style="color: red">*</i></label>
                                             <input type="date" class="form-control" id="fecha" name="fecha"
                                                 required>
                                         </div>
                                         <div class="col-md-6">
-                                            <label>Hora</label>
+                                            <label>Hora<i style="color: red">*</i></label>
                                             <input type="time" class="form-control" id="hora" name="hora"
                                                 required>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Área</label>
+                                            <label>Área<i style="color: red">*</i></label>
                                             <select class="form-control" id="area" name="area" required>
                                                 <option value="">Seleccionar... </option>
                                                 @foreach ($roles as $key => $value)
@@ -342,7 +342,7 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <label>Identificación afiliado</label>
+                                                            <label>Identificación afiliado<i style="color: red">*</i></label>
                                                             <input type="text" class="form-control" id="identificacion"
                                                                 name="identificacion" value="{{ $value['cc_rprt_legal'] }}"
                                                                 readonly>
@@ -362,12 +362,12 @@
                                                         value="true">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <label>Identificación</label>
+                                                            <label>Identificación<i style="color: red">*</i></label>
                                                             <input type="number" class="form-control" id="identificacion"
                                                                 name="identificacion" value="{{ $value['cc_interesado'] }}">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <label>Nombres y apellidos</label>
+                                                            <label>Nombres y apellidos<i style="color: red">*</i></label>
                                                             <input type="text" class="form-control" id="nombres"
                                                                 name="nombres" value="{{ $value['nombre_interesado'] }}">
                                                         </div>
@@ -375,19 +375,19 @@
                                                 @endif
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label>Fecha</label>
+                                                        <label>Fecha<i style="color: red">*</i></label>
                                                         <input type="date" class="form-control" id="fecha"
                                                             name="fecha" value="{{ $value['fecha_cita'] }}" required>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label>Hora</label>
+                                                        <label>Hora<i style="color: red">*</i></label>
                                                         <input type="time" class="form-control" id="hora"
                                                             name="hora" value="{{ $value['hora_cita'] }}" required>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label>Área</label>
+                                                        <label>Área<i style="color: red">*</i></label>
                                                         <select class="form-control" id="area" name="area" required>
                                                             <option value="{{ $value['area'] }}">{{ $value['area'] }}
                                                             </option>
@@ -400,7 +400,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label>Estado</label>
+                                                        <label>Estado<i style="color: red">*</i></label>
                                                         <select class="form-control" id="estado" name="estado" required>
                                                             <option value="{{ $value['estado_cita'] }}">
                                                                 {{ $value['estado_cita'] }}</option>

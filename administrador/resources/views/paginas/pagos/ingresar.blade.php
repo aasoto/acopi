@@ -81,7 +81,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Id empresa</label>
+                                            <label>Id empresa<i style="color: red">*</i></label>
                                             <input type="text" class="form-control" id="id_empresa" name="id_empresa"
                                                 readonly>
                                         </div>
@@ -103,11 +103,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Valor mes</label>
+                                            <label>Valor mes<i style="color: red">*</i></label>
                                             <input type="number" class="form-control" id="valor_mes" name="valor_mes" required>
                                         </div>
                                         <div class="col-md-6">
-                                            <label>Mes recibo</label>
+                                            <label>Mes recibo<i style="color: red">*</i></label>
                                             <select class="form-control select2bs4" name="mes" id="mes"
                                                 style="width: 100%;" required>
                                                 <option value="">Seleccionar...</option>
@@ -120,7 +120,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Fecha limite de pago</label>
+                                            <label>Fecha limite de pago<i style="color: red">*</i></label>
                                             <input type="date" class="form-control" id="fecha_limite" name="fecha_limite" required>
                                         </div>
                                     </div>

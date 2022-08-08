@@ -270,5 +270,13 @@
             @include('paginas/errores/401')
         @endif
     @endauth
-
+    @if (Session::has('ok-crear'))
+        <script>
+            swal({
+                title: "¡Bien Hecho!",
+                text: "La empresa fue agregada correctamente al sistema, ahora busquela en el siguiente listado y agregue toda la información personal del afiliado o de la persona que represente a la empresa ante la entidad.",
+                type: "success"
+            });
+        </script>
+    @endif
 @endsection

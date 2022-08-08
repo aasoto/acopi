@@ -99,7 +99,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <input type="hidden" name="escenario" id="escenario" value="sistema">
-                            <label>Tipo de documento</label>
+                            <label>Tipo de documento<i style="color: red">*</i></label>
                             <select class="form-control select2bs4" name="tipo_documento" id="tipo_documento" style="width: 100%;" required>
                               @foreach ($tipos_documentos as $key => $tipo_documento)
                                 @if ($tipo_documento["codigo_doc"] == "CC")
@@ -113,7 +113,7 @@
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Número de documento</label>
+                            <label>Número de documento<i style="color: red">*</i></label>
                             <input type="text" class="form-control" name="num_documento" required>
                           </div>
                         </div>
@@ -121,7 +121,7 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Primer nombre</label>
+                            <label>Primer nombre<i style="color: red">*</i></label>
                             <input type="text" class="form-control" name="primer_nombre" required>
                           </div>
                         </div>
@@ -135,13 +135,13 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Primer apellido</label>
+                            <label>Primer apellido<i style="color: red">*</i></label>
                             <input type="text" class="form-control" name="primer_apellido" required>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Segundo apellido</label>
+                            <label>Segundo apellido<i style="color: red">*</i></label>
                             <input type="text" class="form-control" name="segundo_apellido" required>
                           </div>
                         </div>
@@ -149,7 +149,7 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Genero</label>
+                            <label>Genero<i style="color: red">*</i></label>
                             <select class="form-control select2bs4" name="genero" id="genero" style="width: 100%;" required>
                               <option selected="selected" value="">Seleccionar... </option>
                               @foreach ($generos as $key => $genero)
@@ -160,7 +160,7 @@
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Fecha de nacimiento</label>
+                            <label>Fecha de nacimiento<i style="color: red">*</i></label>
                             <input type="date" class="form-control datetimepicker-input" name="fecha_nacimiento" id="fecha_nacimiento" required>
                           </div>
                         </div>
@@ -168,13 +168,13 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Correo electronico</label>
+                            <label>Correo electronico<i style="color: red">*</i></label>
                             <input type="email" class="form-control" name="email" required>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Rol</label>
+                            <label>Rol<i style="color: red">*</i></label>
                             <select class="form-control select2bs4" name="id_rol" id="id_rol" style="width: 100%;" required>
                               <option selected="selected" value="">Seleccionar... </option>
                               @foreach ($roles as $key => $rol)
@@ -188,7 +188,7 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Estado</label>
+                            <label>Estado<i style="color: red">*</i></label>
                             <select class="form-control select2bs4" name="estado" id="estado" style="width: 100%;" required>
                               <option selected="selected" value="Empleado">Empleado</option>
                               <option value="Pasante">Pasante</option>
@@ -277,7 +277,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <input type="hidden" name="escenario" id="escenario" value="sistema">
-                        <label>Tipo de documento</label>
+                        <label>Tipo de documento<i style="color: red">*</i></label>
                         <select class="form-control select2bs4" name="tipo_documento" id="tipo_documento" style="width: 100%;" required>
                           @foreach ($tipos_documentos as $key => $tipo_documento)
                             @if ($tipo_documento["codigo_doc"] == $value["tipo_documento"])
@@ -291,7 +291,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Número de documento</label>
+                        <label>Número de documento<i style="color: red">*</i></label>
                         <input type="text" class="form-control" name="num_documento" value="{{$value["num_documento"]}}" required>
                       </div>
                     </div>
@@ -299,7 +299,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Primer nombre</label>
+                        <label>Primer nombre<i style="color: red">*</i></label>
                         <input type="text" class="form-control" name="primer_nombre" value="{{$value["primer_nombre"]}}" required>
                       </div>
                     </div>
@@ -313,13 +313,13 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Primer apellido</label>
+                        <label>Primer apellido<i style="color: red">*</i></label>
                         <input type="text" class="form-control" name="primer_apellido" value="{{$value["primer_apellido"]}}" required>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Segundo apellido</label>
+                        <label>Segundo apellido<i style="color: red">*</i></label>
                         <input type="text" class="form-control" name="segundo_apellido" value="{{$value["segundo_apellido"]}}" required>
                       </div>
                     </div>
@@ -327,13 +327,13 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Correo electronico</label>
+                        <label>Correo electronico<i style="color: red">*</i></label>
                         <input type="email" class="form-control" name="email" value="{{$value["email"]}}" required>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Genero</label>
+                        <label>Genero<i style="color: red">*</i></label>
                         <select class="form-control select2bs4" name="genero" id="genero" style="width: 100%;" required>
 
                           @foreach ($generos as $key => $genero)
@@ -350,13 +350,13 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Fecha de nacimiento</label>
+                        <label>Fecha de nacimiento<i style="color: red">*</i></label>
                         <input type="date" class="form-control datetimepicker-input" name="fecha_nacimiento" id="fecha_nacimiento" value="{{$value["fecha_nacimiento"]}}" required>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Rol</label>
+                        <label>Rol<i style="color: red">*</i></label>
                         <select class="form-control select2bs4" name="id_rol" id="id_rol" style="width: 100%;" required>
                           @foreach ($roles as $key => $rol)
                             @if ($rol["id"] == $value["id_rol"])
@@ -372,7 +372,7 @@
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label>Estado</label>
+                        <label>Estado<i style="color: red">*</i></label>
                         <select class="form-control select2bs4" name="estado" id="estado" style="width: 100%;" required>
                           @if ($value["estado"] == "Empleado")
                             <option selected="selected" value="Empleado">Empleado</option>

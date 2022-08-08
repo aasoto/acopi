@@ -81,7 +81,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="text-center">
-                                                <label>Seleccionar un color para identificar el evento.</label>
+                                                <label>Seleccionar un color para identificar el evento.<i style="color: red">*</i></label>
                                             </div>
                                             <div class="btn-group justify-content-center"
                                                 style="width: 100%; margin-bottom: 10px;">
@@ -136,13 +136,13 @@
                                     <hr class="my-4">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label>Nombre del evento</label>
+                                            <label>Nombre del evento<i style="color: red">*</i></label>
                                             <input type="text" class="form-control" name="nombre" value=""
                                                 required>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group text-center">
-                                                <label for="exampleInputFile">Imagen de portada</label>
+                                                <label for="exampleInputFile">Imagen de portada<i style="color: red">*</i></label>
                                                 <div class="form-group my-2 text-center">
                                                     <div class="btn btn-default btn-file">
                                                         <i class="fas fa-paperclip"></i> Adjuntar Imagen de portada
@@ -159,18 +159,18 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Descripción</label>
+                                                <label for="exampleInputPassword1">Descripción<i style="color: red">*</i></label>
                                                 <textarea class="form-control" rows="6" name="descripcion" required></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Palabras claves</label>
+                                                <label for="exampleInputPassword1">Palabras claves<i style="color: red">*</i></label>
                                                 <input type="text" class="form-control" name="palabras_claves"
                                                     data-role="tagsinput" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Ruta</label>
+                                                <label for="exampleInputPassword1">Ruta<i style="color: red">*</i></label>
                                                 <input type="text" class="form-control inputRuta" name="ruta"
                                                     value="" required>
                                             </div>
@@ -179,7 +179,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label for="nameEditor">Contenido noticia</label>
+                                                <label for="nameEditor">Contenido noticia<i style="color: red">*</i></label>
                                                 <textarea class="form-control summernote-sm" name="contenido_noticia" rows="10" required></textarea>
                                             </div>
                                         </div>
@@ -212,7 +212,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Fecha inicio</label>
+                                            <label>Fecha inicio<i style="color: red">*</i></label>
                                             <input type="date" class="form-control" name="fecha-inicio" value=""
                                                 required>
                                         </div>
@@ -265,7 +265,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="text-center">
-                                                <label>Seleccionar un color para identificar la actividad.</label>
+                                                <label>Seleccionar un color para identificar la actividad.<i style="color: red">*</i></label>
                                             </div>
                                             <div class="btn-group justify-content-center"
                                                 style="width: 100%; margin-bottom: 10px;">
@@ -328,7 +328,7 @@
                                     <hr class="my-4">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Nombre de la actividad</label>
+                                            <label>Nombre de la actividad<i style="color: red">*</i></label>
                                             <input type="text" class="form-control" name="nombre" value=""
                                                 required>
                                             <label>Tematica</label>
@@ -357,7 +357,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Fecha inicio</label>
+                                            <label>Fecha inicio<i style="color: red">*</i></label>
                                             <input type="date" class="form-control" name="fecha-inicio" value=""
                                                 required>
                                         </div>
@@ -495,7 +495,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="text-center">
-                                                        <label>Seleccionar un color para identificar el evento.</label>
+                                                        <label>Seleccionar un color para identificar el evento.<i style="color: red">*</i></label>
                                                     </div>
                                                     <div class="btn-group justify-content-center"
                                                         style="width: 100%; margin-bottom: 10px;">
@@ -572,7 +572,7 @@
                                             <hr class="my-4">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <label>Nombre del evento</label>
+                                                    <label>Nombre del evento<i style="color: red">*</i></label>
                                                     <input type="text" class="form-control" name="editar-nombre"
                                                         value="{{ $value['nombre'] }}" required>
                                                     <label>Tematica</label>
@@ -612,7 +612,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <label>Fecha inicio</label>
+                                                    <label>Fecha inicio<i style="color: red">*</i></label>
                                                     <input type="date" class="form-control" name="editar-fecha-inicio"
                                                         value="{{ $value['fecha_inicio'] }}" required>
                                                 </div>

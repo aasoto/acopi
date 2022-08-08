@@ -451,7 +451,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Tipo de documento</label>
+                                                <label>Tipo de documento<i style="color: red">*</i></label>
                                                 <select class="form-control select2bs4" name="tipo_documento"
                                                     id="tipo_documento" style="width: 100%;" required>
                                                     <option selected="sin verificar"><i>Seleccionar tipo de documento...</i>
@@ -464,7 +464,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Número de documento</label>
+                                                <label>Número de documento<i style="color: red">*</i></label>
                                                 <input type="number" class="form-control" name="numero_documento" required>
                                             </div>
                                         </div>
@@ -472,7 +472,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Primer nombre</label>
+                                                <label>Primer nombre<i style="color: red">*</i></label>
                                                 <input type="texto" class="form-control" name="primer_nombre" required>
                                             </div>
                                         </div>
@@ -486,13 +486,13 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Primer apellido</label>
+                                                <label>Primer apellido<i style="color: red">*</i></label>
                                                 <input type="texto" class="form-control" name="primer_apellido" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Segundo apellido</label>
+                                                <label>Segundo apellido<i style="color: red">*</i></label>
                                                 <input type="texto" class="form-control" name="segundo_apellido" required>
                                             </div>
                                         </div>
@@ -500,13 +500,13 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Cargo del empleado</label>
+                                                <label>Cargo del empleado<i style="color: red">*</i></label>
                                                 <input type="texto" class="form-control" name="cargo_empleado" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Fecha de nacimiento</label>
+                                                <label>Fecha de nacimiento<i style="color: red">*</i></label>
                                                 <input type="date" class="form-control" name="fecha_nacimiento" required>
                                             </div>
                                         </div>
@@ -514,7 +514,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group my-2 text-center">
-                                                <label for="exampleInputPassword1">Foto de documento de identidad</label><br>
+                                                <label for="exampleInputPassword1">Foto de documento de identidad<i style="color: red">*</i></label><br>
                                                 <div class="btn btn-default btn-file mb-3">
                                                     <i class="fas fa-paperclip"></i> Adjuntar documento
                                                     <input type="file" name="archivo_documento" required>
@@ -567,7 +567,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Número de documento</label>
+                                                            <label>Número de documento<i style="color: red">*</i></label>
                                                             <input type="texto" class="form-control" name="cedula"
                                                                 value="{{ $value['cc_rprt_legal'] }}" readonly>
                                                         </div>
@@ -584,14 +584,14 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>NIT</label>
+                                                            <label>NIT<i style="color: red">*</i></label>
                                                             <input type="texto" class="form-control" name="nit"
                                                                 value="{{ $value['nit_empresa'] }}" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Razón social</label>
+                                                            <label>Razón social<i style="color: red">*</i></label>
                                                             <input type="texto" class="form-control" name="razon_social"
                                                                 value="{{ $value['razon_social'] }}" required>
                                                         </div>
@@ -600,14 +600,14 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Número de empleados</label>
+                                                            <label>Número de empleados<i style="color: red">*</i></label>
                                                             <input type="number" class="form-control" name="num_empleados"
                                                                 value="{{ $value['num_empleados'] }}" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Dirección</label>
+                                                            <label>Dirección<i style="color: red">*</i></label>
                                                             <input type="texto" class="form-control" name="direccion"
                                                                 value="{{ $value['direccion_empresa'] }}" required>
                                                         </div>
@@ -616,7 +616,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Telefono</label>
+                                                            <label>Telefono<i style="color: red">*</i></label>
                                                             <input type="number" class="form-control" name="telefono"
                                                                 value="{{ $value['telefono_empresa'] }}" required>
                                                         </div>
@@ -639,7 +639,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Correo electronico</label>
+                                                            <label>Correo electronico<i style="color: red">*</i></label>
                                                             <input type="email" class="form-control"
                                                                 name="correo_electronico"
                                                                 value="{{ $value['email_empresa'] }}" required>
@@ -649,7 +649,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Sector empresa</label>
+                                                            <label>Sector empresa<i style="color: red">*</i></label>
                                                             <select class="form-control select2bs4" name="sector_empresa"
                                                                 id="sector_empresa" style="width: 100%;" required>
                                                                 @foreach ($sector_empresa as $key => $sector)
@@ -683,7 +683,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Ciudad</label>
+                                                            <label>Ciudad<i style="color: red">*</i></label>
                                                             <select class="form-control select2bs4" name="ciudad"
                                                                 id="ciudad" style="width: 100%;">
                                                                 @foreach ($municipios as $key => $municipio)

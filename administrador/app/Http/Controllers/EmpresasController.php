@@ -550,7 +550,7 @@ class EmpresasController extends Controller
 
                     $empresa->save();
 
-                    return redirect("/afiliados/consultarEmpresas")->with("ok-crear", "");
+                    return redirect("/afiliados/ingresarAfiliado")->with("ok-crear", "");
                 }
 
             } else {

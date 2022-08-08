@@ -415,9 +415,8 @@ class EventosController extends Controller
         );
 
         /*echo '<pre>'; print_r($datos["hora-inicio"]); echo '</pre>';
-
-    			echo '<pre>'; print_r($datos["hora-final"]); echo '</pre>';
-    			return;*/
+        echo '<pre>'; print_r($datos["hora-final"]); echo '</pre>';
+        return;*/
 
         if (!empty($datos)) {
 

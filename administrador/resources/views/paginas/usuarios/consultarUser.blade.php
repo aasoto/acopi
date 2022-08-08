@@ -244,7 +244,7 @@
                         <div class="input-group mb-3">
 
                             <div class="input-group-append input-group-text">
-                            <i class="fas fa-user"></i>
+                            <i class="fas fa-user"></i><i style="color: red">*</i>
                             </div>
 
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $value["name"] }}" required autocomplete="name" autofocus placeholder="Nombre">
@@ -260,7 +260,7 @@
                         {{-- Email --}}
                         <div class="input-group mb-3">
                             <div class="input-group-append input-group-text">
-                            <i class="fas fa-envelope"></i>
+                            <i class="fas fa-envelope"></i><i style="color: red">*</i>
                             </div>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $value["email"] }}" required autocomplete="email" placeholder="Email">
                             @error('email')
