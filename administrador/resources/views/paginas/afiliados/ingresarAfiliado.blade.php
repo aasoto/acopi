@@ -91,13 +91,13 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                    <label>NIT empresa</label>
+                                                    <label>NIT empresa<i style="color: red">*</i></label>
                                                     <input type="text" class="form-control" id="nit_empresa" name="nit_empresa" required readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                    <label>Razón social</label>
+                                                    <label>Razón social<i style="color: red">*</i></label>
                                                     <input type="text" class="form-control" id="razon_social" name="razon_social" required readonly>
                                                     </div>
                                                 </div>
@@ -105,7 +105,7 @@
                                             <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                <label>Tipo de documento</label>
+                                                <label>Tipo de documento<i style="color: red">*</i></label>
                                                 <select class="form-control select2bs4" name="tipo_documento" id="tipo_documento" style="width: 100%;" required>
                                                     <option selected="sin verificar"><i>Seleccionar tipo de documento...</i></option>
                                                     <option value="cedula">Cédula de Ciudadanía</option>
@@ -116,7 +116,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                <label>Número de documento</label>
+                                                <label>Número de documento<i style="color: red">*</i></label>
                                                 <input type="number" class="form-control" name="numero_documento" required>
                                                 </div>
                                             </div>
@@ -124,7 +124,7 @@
                                             <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                <label>Primer nombre</label>
+                                                <label>Primer nombre<i style="color: red">*</i></label>
                                                 <input type="text" class="form-control" name="primer_nombre" required>
                                                 </div>
                                             </div>
@@ -138,13 +138,13 @@
                                             <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                <label>Primer apellido</label>
+                                                <label>Primer apellido<i style="color: red">*</i></label>
                                                 <input type="text" class="form-control" name="primer_apellido" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                <label>Segundo apellido</label>
+                                                <label>Segundo apellido<i style="color: red">*</i></label>
                                                 <input type="text" class="form-control" name="segundo_apellido" required>
                                                 </div>
                                             </div>
@@ -152,7 +152,7 @@
                                             <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                <label>Sexo</label>
+                                                <label>Sexo<i style="color: red">*</i></label>
                                                 <select class="form-control select2bs4" name="sexo" id="sexo" style="width: 100%;" required>
                                                     <option selected="sin verificar"><i>Seleccionar sexo...</i></option>
                                                     <option value="m">Masculino</option>
@@ -162,8 +162,10 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                <label>Fecha de nacimiento</label>
-                                                <input type="date" class="form-control" name="fecha_nacimiento" required>
+                                                <label>Fecha de nacimiento<i style="color: red">*</i></label>
+                                                <input type="date" class="form-control" name="fecha_nacimiento"
+                                                    value="@php echo date('Y-m-d'); @endphp"
+                                                    max="@php echo date('Y-m-d'); @endphp" required>
                                                 </div>
                                             </div>
                                             </div>

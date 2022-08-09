@@ -164,7 +164,9 @@
                                                     <div class="form-group">
                                                         <label>Fecha afiliación</label>
                                                         <input type="date" class="form-control"
-                                                            name="fecha_afiliacion">
+                                                            name="fecha_afiliacion"
+                                                            value="@php echo date('Y-m-d') @endphp"
+                                                            max="@php echo date('Y-m-d') @endphp">
                                                     </div>
                                                 </div>
                                             </div>

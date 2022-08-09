@@ -144,7 +144,7 @@
                                         <div class="col-md-6">
                                             <label>Fecha<i style="color: red">*</i></label>
                                             <input type="date" class="form-control" id="fecha" name="fecha"
-                                                required>
+                                            min="@php echo date('Y-m-d') @endphp" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Hora<i style="color: red">*</i></label>
@@ -206,7 +206,7 @@
                                         <div class="col-md-6">
                                             <label>Fecha<i style="color: red">*</i></label>
                                             <input type="date" class="form-control" id="fecha" name="fecha"
-                                                required>
+                                            min="@php echo date('Y-m-d') @endphp" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Hora<i style="color: red">*</i></label>
@@ -377,7 +377,7 @@
                                                     <div class="col-md-6">
                                                         <label>Fecha<i style="color: red">*</i></label>
                                                         <input type="date" class="form-control" id="fecha"
-                                                            name="fecha" value="{{ $value['fecha_cita'] }}" required>
+                                                            name="fecha" value="{{ $value['fecha_cita'] }}" min="@php echo date('Y-m-d') @endphp" required>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label>Hora<i style="color: red">*</i></label>

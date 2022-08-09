@@ -8,6 +8,7 @@ use App\RepresentanteEmpresaModel;
 use App\EmpleadosAfiliadosModel;
 use App\SectorEmpresaModel;
 use App\PaginaWebModel;
+use App\MunicipiosModel;
 //Libería para hacer inner join
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,38 @@ class AfiliadosController extends Controller
 
     public function index()
     {
+        $paginaweb = PaginaWebModel::all();
+
+        foreach ($paginaweb as $key => $web) {}
+
+        if (url()->current() == ($web["servidor"]."afiliados/ingresarAfiliado")) {
+            //$empresas_no_afiliado = EmpresasModel::where("cc_rprt_legal", "")->get();
+            $join = DB::table('empresas')->select('empresas.*')->where("cc_rprt_legal", null)->get();
+
+            if (request()->ajax()) {
+                return datatables()->of($join)
+                ->addColumn('procedimientos', function($data){
+                    if ((Auth::user()->rol == 'Administrador') || (Auth::user()->rol == 'Subdirector de comunicaciones y eventos') || (Auth::user()->rol == 'Director ejecutivo') || (Auth::user()->rol == 'Subdirector de desarrollo empresarial')) {
+                        $procedimientos = '
+                        <div class="btn-group">
+                            <button class="btn btn-success btn-sm crearAfiliado" title="Agregar afiliado o representante legal" id_empresa="'.$data->id_empresa.'" nit="'.$data->nit_empresa.'" razon_social="'.$data->razon_social.'">
+                            <i class="fas fa-user-plus"></i>
+                            </button>
+                        </div>';
+                    } else {
+                        $procedimientos = '
+                        <div class="btn-group">
+                        </div>';
+                    }
+                    return $procedimientos;
+                })
+                ->rawColumns(['procedimientos'])
+                -> make(true);
+            }
+            $sectores = SectorEmpresaModel::all();
+            $municipios = MunicipiosModel::all();
+            return view("paginas.afiliados.ingresarAfiliado", array("sectores"=>$sectores, "municipios"=>$municipios));
+        }
 
         if (request()->ajax()) {
             return datatables()->of(RepresentanteEmpresaModel::all())

@@ -103,7 +103,7 @@ Route::resource('/', 'PerfilController');
 /*----------  Afiliados  ----------*/
 Route::resource('/afiliados/general', 'AfiliadosController');
 Route::resource('/afiliados/empresas', 'EmpresasController');
-Route::resource('/afiliados/ingresarAfiliado', 'EmpresasController');
+Route::resource('/afiliados/ingresarAfiliado', 'AfiliadosController');
 Route::resource('/afiliados/exportar', 'ExportarController');
 Route::resource('/afiliados/consultarEmpresas', 'EmpresasController');
 Route::resource('/afiliados/exportarEmpresas', 'ExportarController');

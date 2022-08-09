@@ -214,7 +214,7 @@
                                         <div class="col-md-6">
                                             <label>Fecha inicio<i style="color: red">*</i></label>
                                             <input type="date" class="form-control" name="fecha-inicio" value=""
-                                                required>
+                                            min="@php echo date('Y-m-d') @endphp" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Hora inicio</label>
@@ -226,7 +226,7 @@
                                         <div class="col-md-6">
                                             <label>Fecha final</label>
                                             <input type="date" class="form-control" name="fecha-final" id="fecha-final"
-                                                value="">
+                                                value="" min="@php echo date('Y-m-d') @endphp">
                                         </div>
                                         <div class="col-md-6">
                                             <label>Hora final</label>
@@ -359,7 +359,7 @@
                                         <div class="col-md-6">
                                             <label>Fecha inicio<i style="color: red">*</i></label>
                                             <input type="date" class="form-control" name="fecha-inicio" value=""
-                                                required>
+                                            min="@php echo date('Y-m-d') @endphp" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label>Hora inicio</label>
@@ -371,7 +371,7 @@
                                         <div class="col-md-6">
                                             <label>Fecha final</label>
                                             <input type="date" class="form-control" name="fecha-final" id="fecha-final"
-                                                value="">
+                                                value="" min="@php echo date('Y-m-d') @endphp">
                                         </div>
                                         <div class="col-md-6">
                                             <label>Hora final</label>
@@ -614,7 +614,7 @@
                                                 <div class="col-md-6">
                                                     <label>Fecha inicio<i style="color: red">*</i></label>
                                                     <input type="date" class="form-control" name="editar-fecha-inicio"
-                                                        value="{{ $value['fecha_inicio'] }}" required>
+                                                        value="{{ $value['fecha_inicio'] }}" min="@php echo date('Y-m-d') @endphp" required>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Hora inicio</label>
@@ -626,7 +626,7 @@
                                                 <div class="col-md-6">
                                                     <label>Fecha final</label>
                                                     <input type="date" class="form-control" name="editar-fecha-final"
-                                                        id="editar-fecha-final" value="{{ $value['fecha_final'] }}">
+                                                        id="editar-fecha-final" value="{{ $value['fecha_final'] }}" min="@php echo date('Y-m-d') @endphp">
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Hora final</label>

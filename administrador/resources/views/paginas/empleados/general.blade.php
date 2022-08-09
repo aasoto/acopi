@@ -161,7 +161,7 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Fecha de nacimiento<i style="color: red">*</i></label>
-                            <input type="date" class="form-control datetimepicker-input" name="fecha_nacimiento" id="fecha_nacimiento" required>
+                            <input type="date" class="form-control datetimepicker-input" name="fecha_nacimiento" id="fecha_nacimiento" value="@php echo date('Y-m-d') @endphp" max="@php echo date('Y-m-d') @endphp" required>
                           </div>
                         </div>
                       </div>
@@ -351,7 +351,7 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Fecha de nacimiento<i style="color: red">*</i></label>
-                        <input type="date" class="form-control datetimepicker-input" name="fecha_nacimiento" id="fecha_nacimiento" value="{{$value["fecha_nacimiento"]}}" required>
+                        <input type="date" class="form-control datetimepicker-input" name="fecha_nacimiento" id="fecha_nacimiento" value="{{$value["fecha_nacimiento"]}}" max="@php echo date('Y-m-d') @endphp" required>
                       </div>
                     </div>
                     <div class="col-md-6">
